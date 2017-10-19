@@ -143,7 +143,7 @@ class MedicamentoController extends Controller {
     }
 
     public function autocomplete(Request $req) {
-        $term = $req->get('term');
+        $term =$req->get('term');
 
         //$data = Medicamento::where(DB::raw('LOWER(nomecomercial)'),'LIKE', '%'.strtolower($term).'%')->get();
         $sub = Substanciaativa::where(DB::raw('LOWER(nome)'),'LIKE', '%'.strtolower($term).'%')->get();

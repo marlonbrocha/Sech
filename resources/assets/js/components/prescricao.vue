@@ -164,7 +164,7 @@
 
                     $(document).ready(function() {
                         $("#relatorio").modal('show');
-                        $("#medInfe").val(ui.item.value); //pega o nome do medicamento
+                        $("#medInfe").val(ui.item.value); // pega o nome do medicamento
                     });
                 }
 
