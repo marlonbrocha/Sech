@@ -13,9 +13,13 @@ class CreateSubstanciaativasTable extends Migration
     public function up()
     {
         Schema::create('substanciaativas', function (Blueprint $table) {
-            $table->increments('id');
+            $table->int('id');
             $table->string('nome');
+            $table->text('dose');
             $table->integer('classificacao');
+            $table->string('administracao');
+            $table->string('diluicao');
+            $table->string('estabilidade');
             $table->string('contraindicacao')->nullable();
             $table->timestamps();
         });

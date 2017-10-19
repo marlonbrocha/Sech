@@ -25,6 +25,11 @@ class CreatePrescricaoMedicamentosTable extends Migration {
             $table->integer('qtdatendida')->default(0);
             $table->text('posologia');
             $table->text('obs');
+            $table->text('administracao');
+            $table->text('diluicao');
+            $table->text('estabilidade');
+            $table->text('dose');
+            $table->text('simpas');
             $table->text('outros');
             $table->timestamps();
         });

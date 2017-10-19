@@ -57,6 +57,11 @@ class PrescricaoController extends Controller {
                 $prescricaomedicamento->posologia = $medicamentos[$i]['posologia'];
                 $prescricaomedicamento->obs = $medicamentos[$i]['obs'];
                 $prescricaomedicamento->outros = $medicamentos[$i]['med'];
+                $prescricaomedicamento->dose = $medicamentos[$i]['dose'];
+                $prescricaomedicamento->diluicao = $medicamentos[$i]['diluicao'];
+                $prescricaomedicamento->administracao = $medicamentos[$i]['administracao'];
+                $prescricaomedicamento->estabilidade = $medicamentos[$i]['estabilidade'];
+                $prescricaomedicamento->simpas = $medicamentos[$i]['simpas'];
             } else {
                 $prescricaomedicamento->idprescricao = $idprescricao;              
                 $prescricaomedicamento->qtdatendida = 0;
@@ -65,6 +70,11 @@ class PrescricaoController extends Controller {
                 $prescricaomedicamento->qtdpedida = $medicamentos[$i]['qtd'];
                 $prescricaomedicamento->posologia = $medicamentos[$i]['posologia'];
                 $prescricaomedicamento->obs = $medicamentos[$i]['obs'];
+                $prescricaomedicamento->dose = $medicamentos[$i]['dose'];
+                $prescricaomedicamento->diluicao = $medicamentos[$i]['diluicao'];
+                $prescricaomedicamento->administracao = $medicamentos[$i]['administracao'];
+                $prescricaomedicamento->estabilidade = $medicamentos[$i]['estabilidade'];
+                $prescricaomedicamento->simpas = $medicamentos[$i]['simpas'];
             }
             $prescricaomedicamento->save();
         }

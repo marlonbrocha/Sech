@@ -5,17 +5,22 @@
 
         data(){
             return {
+                
                 paciente: '',
                 numeroprontuario: '',
                 clinica: '',   
                 leito: '',
                 diag: '',
+                diagInfe: '',
                 admissao: '',
                 prontuario: '',
-                qtd: '',
+                qtd:'',
                 nome:'',
                 posologia:'',
                 obs:'',
+                iniTrata:'',
+                medInfe:'',
+                duracao:'',
                 prescricao: {
                     idinternacao: '',
                     dataprescricao: '',
@@ -35,17 +40,29 @@
                 var id = $("#idmed").val()
                 this.$http.post('../simpas', {id: id}).then(response => {
                     var med = $("#med").val();
+                    var dose = $("#dose").val();
+                    var administracao = $("#administracao").val();
+                    var estabilidade = $("#estabilidade").val();
+                    var diluicao = $("#diluicao").val();
+                    
                     this.prescricao.prescricaomedicamento.push({
+                        simpas: response.data,
                         idmedicamento: id,
                         qtd: this.qtd,
                         med: med,
                         obs: this.obs,
-                        posologia: this.posologia               
+                        posologia: this.posologia,
+                        administracao: administracao,
+                        dose: dose,
+                        diluicao: diluicao,
+                        estabilidade: estabilidade
+
                     });
-                    this.qtd = '';
+                    //this.qtd = '';
+                    this.simpas = '-';
                     this.obs = '';
                     $("#med").val("");
-                    $('.qtd').css('display','none');
+                    //$('.qtd').css('display','none');
                     $('.med').removeClass("col-xs-11 col-sm-11 col-md-11");
                     $('.med').addClass("col-xs-12 col-sm-12 col-md-12");
                 }).catch(response => {
@@ -135,12 +152,28 @@
             minlength: 1,
             autoFocus:true,
             select: function(event, ui){
-                $("#med").val(ui.item.value);
+                $("#med").val(ui.item.id);
+                $("#dose").val(ui.item.dose);
+                $("#diluicao").val(ui.item.diluicao);
+                $("#administracao").val(ui.item.administracao);
+                $("#estabilidade").val(ui.item.estabilidade);
+                
                 a = ui.item.value;
+
+                if(ui.item.classificacao == 2){ 
+
+                    $(document).ready(function() {
+                        $("#relatorio").modal('show');
+                        $("#medInfe").val(ui.item.value); //pega o nome do medicamento
+                    });
+                }
+
+
                 $("#idmed").val(ui.item.id);
                 $('.qtd').css('display','block');
                 $('.med').removeClass("col-xs-12 col-sm-12 col-md-12");
                 $('.med').addClass("col-xs-11 col-sm-11 col-md-11");
+
                 $.ajax({
                     type: 'get',
                     url: '../medicamento/contraindicacao',
@@ -148,7 +181,6 @@
                         'id': ui.item.id,
                     },
                     success: function (data){
-                        console.log(data);
                         swal({
                             title: "Contraindicação",
                             text: data, 
@@ -159,6 +191,7 @@
                 });
             },
             change: function(event, ui){
+           //  alert(ui);          
                 var b = $("#med").val();
                 if(a != Trim(b)){
                     $("#idmed").val(null);
@@ -176,6 +209,10 @@
 
     $(document).on('click', '.buscar', function (){
         $("#buscar").modal('show');
+    });
+
+    $(document).on('click', '.relatorio', function (){
+        $("#relatorio").modal('show');
     });
 
 </script>
@@ -240,40 +277,74 @@
                             <textarea id="evol" type="text" name="evol" class="form-control" v-model="prescricao.evolucao"></textarea>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 med">
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <div class="form-group">
                             <label for="med">Medicamento/Outros:</label>
-                            <input id="med" type="text" name="med" class="form-control" placeholder="Pesquise pela substância ativa...">
+                            <input id="med" type="text" name="med" class="form-control" placeholder="Pesquise pela substância ativa..." >
                         </div>
                     </div>
+
+
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <label for="dose">Dose:</label>
+                            <textarea id="dose" type="text" name="dose" class="form-control"></textarea>
+                        </div>
+                    </div>
+
                     <input id="idmed" type="hidden">
-                    <div class="col-xs-1 col-sm-1 col-md-1 qtd" style="display: none;">
+                    
+                    <div class="col-xs-1 col-sm-1 col-md-1" >
                         <div class="form-group">
                             <label for="qtd">Quantidade:</label>
                             <input id="qtd" type="text" name="qtd" class="form-control" v-model="qtd">
                         </div>
                     </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                        <div class="form-group">
+                            <label for="administracao">Administração:</label>
+                            <input id="administracao" type="text" name="administracao" class="form-control">
+                        </div>
+                    </div>
+
                     
+                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                        <div class="form-group">
+                            <label for="diluicao">Diluição:</label>
+                            <input id="diluicao" type="text" name="diluicao" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                        <div class="form-group">
+                            <label for="estabilidade">Estabilidade:</label>
+                            <input id="estabilidade" type="text" name="estabilidade" class="form-control">
+                        </div>
+                    </div>
+
                     <div class="col-xs-12 col-sm-12 col-md-12 obs">
                         <div class="form-group">
-                            <label for="apr">Posologia:</label>
+                            <label for="posologia">Posologia:</label>
                             <input id="posologia" type="text" name="posologia" class="form-control" v-model="posologia" placeholder="">
                         </div>
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12 obs">
                         <div class="form-group">
-                            <label for="apr">Observações:</label>
+                            <label for="obs">Observações:</label>
                             <input id="obs" type="text" name="obs" class="form-control" v-model="obs" placeholder="Administrar por via oral a cada 12 horas, durante 7 dias...">
                         </div>
                     </div>
 
-                    <div class="col-xs-2 col-sm-2 col-md-2 bt" style="margin-left: 83%;">
-                        <div class="form-group"> 
-                            <br>
-                            <button type="button" class="btn btn-block btn-primary btn-flat" @click="addMed">Adicionar</button>
+                    <div class="row" style="margin-left: 65%;">
+                        <div class="col-sm-12 text-center"> 
+                            <button data-toggle="tooltip" style="display: inline-block; vertical-align: top;" type="button" class="btn btn-primary btn-md center-block relatorio">Relatório Antibioticoterapia</button>
+                            <button style="display: inline-block; vertical-align: top;" type="button" class="btn btn-primary btn-md center-block" @click="addMed">Adicionar</button>
                         </div>
                     </div>
+
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <br>
                         <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
@@ -283,19 +354,30 @@
                                         <table id="table" class="table table-condensed table-bordered table-hover dataTable" role="grid">
                                             <thead>
                                                 <tr>
+                                                    <th class="text-center">SIMPAS</th>
                                                     <th width="2%" class="text-center">Quantidade</th>
                                                     <th class="text-center">Medicamento</th>
                                                     <th class="text-center">Posologia</th>
                                                     <th class="text-center">Observação</th>
+                                                    <th class="text-center">Dose</th>
+                                                    <th class="text-center">Administração</th>
+                                                    <th class="text-center">Diluição</th>
+                                                    <th class="text-center">Estabilidade</th>
+
                                                     <th width="3%" class="text-center">Opções</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr v-for="medicamento in prescricao.prescricaomedicamento">
+                                                    <td>{{medicamento.simpas}}</td>
                                                     <td>{{medicamento.qtd}}</td>
                                                     <td>{{medicamento.med}}</td>
                                                     <td>{{medicamento.posologia}}</td>
                                                     <td>{{medicamento.obs}}</td>
+                                                    <td>{{medicamento.dose}}</td>
+                                                    <td>{{medicamento.administracao}}</td>
+                                                    <td>{{medicamento.diluicao}}</td>
+                                                    <td>{{medicamento.estabilidade}}</td>
                                                     <td>             
                                                         <center>
                                                         <a class="btn btn-default"  @click="removeMed(medicamento)"><i class="fa fa-trash"></i></a>
@@ -320,6 +402,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="modal fade" id="buscar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -368,6 +451,90 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="modal fade" id="relatorio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><strong>Relatório</strong></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
+                            <div class="row">
+                                <div class="box-body">
+
+                                 <div class="col-xs-12 col-sm-12 col-md-12 obs">
+                                    <div class="form-group">
+                                        <label for="paciente">NOME:</label>
+                                        <input id="posologia" v-model="paciente" type="text" name="posologia" class="form-control"  readonly="">
+                                     </div>
+                                 </div>
+
+                                 <div class="col-xs-2 col-sm-2 col-md-2">
+                                    <div class="form-group">
+                                        <label for="leito">LEITO:</label>
+                                        <input id="leito" type="text" name="leito" class="form-control" readonly="readonly" v-model="leito">
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <div class="form-group">
+                                        <label for="admissao">DATA DE ADMISSÃO:</label>
+                                        <input id="admissao" type="text" name="admissao" class="form-control" readonly="readonly" v-model="admissao">
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <div class="form-group">
+                                        <label for="iniTrata">INÍCIO DO TRATAMENTO:</label>
+                                        <input id="iniTrata" type="date" name="iniTrata" class="form-control" v-model="iniTrata">
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-5 col-sm-5 col-md-5">
+                                    <div class="form-group">
+                                        <label for="clinica">CLÍNICA:</label>
+                                        <input id="clinica" type="text" name="clinica" class="form-control" readonly="readonly" v-model="clinica">
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-12 obs">
+                                    <div class="form-group">
+                                        <label for="diagInfe">DIAGNÓSTICO INFECCIOSO:</label>
+                                        <input id="diagInfe" type="text" name="diagInfe" class="form-control" v-model="diagInfe">
+                                     </div>
+                                 </div>
+
+                                 <div class="col-xs-12 col-sm-12 col-md-12 obs">
+                                    <div class="form-group">
+                                        <label for="duracao">DURAÇÃO DO TRATAMENTO:</label>
+                                        <input id="duracao" type="text" name="duracao" class="form-control" v-model="duracao">
+                                     </div>
+                                 </div>
+
+                                 <div class="col-xs-12 col-sm-12 col-md-12 med">
+                                    <div class="form-group">
+                                        <label for="medInfe">IDENTIFICAÇÃO DO ANTIMICROBIANO:</label>
+                                        <input id="medInfe" type="text" name="medInfe" class="form-control" readonly="" >
+                                    </div>
+                                </div>
+
+                                </div>
+                         </div>
+                        </div>  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
 </template>
 

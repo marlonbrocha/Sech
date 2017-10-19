@@ -8,7 +8,7 @@ use App\Medicamento;
 use App\Formafarmaceutica;
 use App\Substanciaativa;
 use App\Medicamentosubstancia;
-
+use DB;
 class MedicamentoController extends Controller {
 
     /**
@@ -145,12 +145,24 @@ class MedicamentoController extends Controller {
     public function autocomplete(Request $req) {
         $term = $req->get('term');
 
-        $data = Medicamento::get();
+        //$data = Medicamento::where(DB::raw('LOWER(nomecomercial)'),'LIKE', '%'.strtolower($term).'%')->get();
+        $sub = Substanciaativa::where(DB::raw('LOWER(nome)'),'LIKE', '%'.strtolower($term).'%')->get();
+
+        $data = DB::table('medicamentosubstancias')
+                ->where('idsubstanciaativa','=',$sub[0]->id)
+                ->get();
+                
+       
+       $data = Medicamento::where('id',$data[0]->idmedicamento)->get();
+
+
+        //return response()->json([$data[0]->nomecomercial]);
+
         $results = array();
 
         $substancias = '';
-        foreach ($data as $key => $medicamento) {
-            foreach ($medicamento->medicamentosubstancias as $key => $medicamentosubstancia) {
+        foreach ($data as $medicamento) {
+            foreach ($medicamento->medicamentosubstancias as $medicamentosubstancia) {
                 $nomeunidade = '';
                 switch ($medicamentosubstancia->unidadedose) {
                     case 0:
@@ -191,6 +203,7 @@ class MedicamentoController extends Controller {
                         break;
                 }
                 $substancias .= $medicamentosubstancia->substanciaativa->nome.' '. $medicamentosubstancia->quantidadedose. ' '. $nomeunidade . ', ';
+                 $class = $medicamentosubstancia->substanciaativa->classificacao;
             }
             $substancias .= $medicamento->formafarmaceuticas->nome . ' ';
             $conteudo = '';
@@ -260,10 +273,17 @@ class MedicamentoController extends Controller {
                     break;
             }
             $substancias .= '' . $conteudo . ' com ' . $medicamento->quantidadeconteudo . ' '. $uc;
-            $results[] = ['id' => $medicamento->id,
-                'value' => $substancias
+            $results[] = [
+                
+                'diluicao' =>$medicamentosubstancia->substanciaativa->diluicao,
+                'dose' => $medicamentosubstancia->substanciaativa->dose,
+                'administracao' => $medicamentosubstancia->substanciaativa->administracao,
+                'estabilidade' => $medicamentosubstancia->substanciaativa->estabilidade,
+                'id' => $medicamento->id,
+                'value' => $substancias, 'classificacao' => $class
             ];
         }
+
         return response()->json($results);
     }
 
@@ -280,11 +300,11 @@ class MedicamentoController extends Controller {
     }
 
     public function getContraindicacao(Request $req) {
-
         $id = $req->id;
 
         $contraindicacoes = Medicamentosubstancia::join('substanciaativas', 'medicamentosubstancias.idsubstanciaativa', '=', 'substanciaativas.id')
                 ->join('medicamentos', 'medicamentos.id', '=', 'medicamentosubstancias.idmedicamento')
+                ->where('medicamentosubstancias.idmedicamento','=', $id)
                 ->get();
         
         $texto = '';
