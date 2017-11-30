@@ -275,6 +275,7 @@ class MedicamentoController extends Controller {
             $substancias .= '' . $conteudo . ' com ' . $medicamento->quantidadeconteudo . ' '. $uc;
             $results[] = [
                 
+                'codigo' => $medicamentosubstancia->substanciaativa->codigo,
                 'diluicao' =>$medicamentosubstancia->substanciaativa->diluicao,
                 'dose' => $medicamentosubstancia->substanciaativa->dose,
                 'administracao' => $medicamentosubstancia->substanciaativa->administracao,

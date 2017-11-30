@@ -1,4 +1,6 @@
 <script language= "text/javascript">
+   var array = new Array();
+
     export default{
 
         props: ['data', 'medico'],
@@ -37,8 +39,31 @@
         },
         methods: {
             addMed(){
+                    var cod = $("#codigo").val();
+                    
+                    
+                    array.push(cod);
+                    var i;
+
+
+                    for (i = 0; i < array.length ; i++) {
+                        if(cod == array[i]){
+                            alert('deu bom');
+
+                        }else{
+                            alert('deu ruim');
+                        }
+
+                    } 
+
+
+                    if(typeof  this.prescricao.prescricaomedicamento[0] != "undefined"){
+                        //alert(this.prescricao.prescricaomedicamento[0].diluicao);
+                    }                    
+
                 var id = $("#idmed").val()
                 this.$http.post('../simpas', {id: id}).then(response => {
+                    var codigo = $("#codigo").val();
                     var med = $("#med").val();
                     var dose = $("#dose").val();
                     var administracao = $("#administracao").val();
@@ -46,6 +71,7 @@
                     var diluicao = $("#diluicao").val();
                     
                     this.prescricao.prescricaomedicamento.push({
+                        codigo: codigo,
                         simpas: response.data,
                         idmedicamento: id,
                         qtd: this.qtd,
@@ -152,6 +178,7 @@
             minlength: 1,
             autoFocus:true,
             select: function(event, ui){
+                $("#codigo").val(ui.item.codigo);
                 $("#med").val(ui.item.id);
                 $("#dose").val(ui.item.dose);
                 $("#diluicao").val(ui.item.diluicao);
@@ -292,7 +319,8 @@
                             <textarea id="dose" type="text" name="dose" class="form-control"></textarea>
                         </div>
                     </div>
-
+                    <input id="codigo" type="text" name="codigo">
+                    
                     <input id="idmed" type="hidden">
                     
                     <div class="col-xs-1 col-sm-1 col-md-1" >
@@ -354,6 +382,7 @@
                                         <table id="table" class="table table-condensed table-bordered table-hover dataTable" role="grid">
                                             <thead>
                                                 <tr>
+                                                    <th class="text-center">codigo</th>
                                                     <th class="text-center">SIMPAS</th>
                                                     <th width="2%" class="text-center">Quantidade</th>
                                                     <th class="text-center">Medicamento</th>
@@ -369,6 +398,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr v-for="medicamento in prescricao.prescricaomedicamento">
+                                                    <td>{{medicamento.codigo}}</td>
                                                     <td>{{medicamento.simpas}}</td>
                                                     <td>{{medicamento.qtd}}</td>
                                                     <td>{{medicamento.med}}</td>

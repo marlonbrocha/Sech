@@ -14,6 +14,7 @@ class CreateSubstanciaativasTable extends Migration
     {
         Schema::create('substanciaativas', function (Blueprint $table) {
             $table->int('id');
+            $table->string('codigo');
             $table->string('nome');
             $table->text('dose');
             $table->integer('classificacao');
