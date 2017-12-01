@@ -42,12 +42,21 @@
                 ,null, array('placeholder'=>'--Selecione--','class' => 'form-control'))!!}
                 </div>
             </div>
+
+            <div class="col-xs-8 col-sm-8 col-md-8">
+                <div class="form-group">
+                     <strong>Código:</strong>
+                    {!! Form::text('codigo', null, array('placeholder' => 'Ex.: 12 ','class' => 'form-control')) !!}
+                </div>
+            </div>
+            
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Contraindicação:</strong>
                 {!! Form::textarea('contraindicacao', null, array('placeholder' => '','class' => 'form-control', 'style'=>'height:60px', 'maxlength'=>'254')) !!}
                 </div>
             </div>
+
             <!--<div class="col-xs-12 col-sm-12 col-md-12">
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </div>-->
