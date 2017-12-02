@@ -4,6 +4,18 @@
 <link rel="stylesheet" href="{{ asset('css/iziToast.min.css')}}">
 <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap.css') }}">
 
+<?php
+function data_format($format_ini, $value, $format_end)
+{
+    $d = \DateTime::createFromFormat($format_ini, $value);
+    if ($d)
+    {
+        return $d->format($format_end);
+    }
+    return null;
+}
+?>
+
 @section('main-content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -57,7 +69,9 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Data de admissão:</strong>
-                            {{$prescricao->internacao->dataadmissao}}
+                            <?php 
+                                echo data_format("Y-m-d",$prescricao->internacao->dataadmissao, "d/m/Y");
+                            ?>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -232,6 +246,16 @@
                                                 <i class="fa fa-check-square-o"> </i>
                                             </a>
                                         </center>
+                                        <td>
+                                        
+                                        @if($medicamento->idrelatorio != '')
+                                        <center>
+                                            <a class="btn btn-default" data-target="#{{$medicamento->idrelatorio}}" data-toggle="modal" title="Relatório Antimicrobiano" id="btn{{$medicamento->idprescmed}}" >
+                                                <i class="fa fa-file-text-o"> </i>
+                                            </a>
+                                        </center>
+                                        @endif
+                                        </td>
 
                                         <div class="modal fade" id="{{$medicamento->idprescmed}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                             <div class="modal-dialog" role="document">
@@ -399,6 +423,61 @@
                             </div>
                         </div>
                     </div>
+
+
+
+                                            
+                                            <div class="modal fade" id="{{$medicamento->idrelatorio}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title" id="myModalLabel"><strong>Relatório de Antibioticoterapia</strong></h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                <strong>Paciente:</strong>
+                                                                {{$medicamento->nome}}
+                                                                <br><br>
+                                                                <strong>Leito:</strong>
+                                                                {{$medicamento->leito}}
+                                                                <br><br>
+                                                                <strong>Data de admissão:</strong>
+                                                                <?php 
+                                                                    echo data_format("Y-m-d",$medicamento->data_admissao, "d/m/Y");
+                                                                ?>
+                                                                <br><br>
+                                                                <strong>Início do traamento:</strong>
+                                                                <?php 
+                                                                    echo data_format("Y-m-d",$medicamento->inicio_tratamento, "d/m/Y");
+                                                                ?>
+                                                                <br><br>
+                                                                <strong>Clínica:</strong>
+                                                                {{$medicamento->clinica}}
+                                                                <br><br>
+                                                                <strong>Diagnóstico infeccioso:</strong>
+                                                                {{$medicamento->diagnostico_infeccioso}}
+                                                                <br><br>
+                                                                <strong>Duração do tratamento:</strong>
+                                                                {{$medicamento->duracao_tratamento}}
+                                                                <br><br>
+                                                                <strong>Antimicrobiano:</strong>
+                                                                {{$medicamento->antimicrobiano}}
+                
+                                                                
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                        <button type="button" onclick='resolver({{$medicamento->idprescmed}})' class="btn btn-primary">OK</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                 </div>
             </div>
             <div class="pull-right" style="margin-right: 1%;">
