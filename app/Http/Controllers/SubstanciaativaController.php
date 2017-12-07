@@ -15,7 +15,7 @@ class SubstanciaativaController extends Controller
      */
     public function index(Request $request)
     {
-        $substanciaativas = Substanciaativa::orderBy('id','desc')->paginate(15);
+        $substanciaativas = Substanciaativa::orderBy('id','asc')->paginate(500);
         return view('substanciaativa.index', compact('substanciaativas'))
             ->with('i', ($request->input('page', 1) - 1) * 15);
     }

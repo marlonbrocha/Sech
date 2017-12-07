@@ -17,11 +17,11 @@ class CreateSubstanciaativasTable extends Migration
             $table->string('codigo')->unique();
             $table->string('nome');
             $table->text('dose');
-            $table->integer('classificacao');
-            $table->string('administracao');
-            $table->string('diluicao');
-            $table->string('estabilidade');
-            $table->string('contraindicacao')->nullable();
+            $table->text('classificacao');
+            $table->text('administracao');
+            $table->text('diluicao');
+            $table->text('estabilidade');
+            $table->text('contraindicacao')->nullable();
             $table->timestamps();
         });
     }
