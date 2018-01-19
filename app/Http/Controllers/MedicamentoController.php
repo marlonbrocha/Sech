@@ -310,7 +310,8 @@ class MedicamentoController extends Controller {
         
         $texto = '';
         foreach ($contraindicacoes as $key => $contraindicacao) {
-            $texto .= $contraindicacao->nome . ': ' . $contraindicacao->contraindicacao. '<br>';        
+            //$texto .= $contraindicacao->nome . ': ' . $contraindicacao->contraindicacao. '<br>';        
+            $texto .= $contraindicacao->contraindicacao;        
         }
 
         return response()->json($texto);

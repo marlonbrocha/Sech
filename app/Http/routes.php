@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Input;
 /*
   |--------------------------------------------------------------------------
   | Application Routes
@@ -16,8 +16,16 @@ Route::get('/', 'HomeController@index');
 Route::auth();
 
 Route::group(['middleware' => ['auth']], function() {
+    Route::get('/buscarportaria', function(){
+        $serch = urlencode(e(Input::get('buscar')));
+        $route = "portaria/buscar/$serch";
+        return redirect($route);
+    });    
+
+    Route::get('/portaria/buscar/{buscar}','RelatorioController@BuscarPortaria');
 
     Route::get('/home', 'HomeController@index');
+    //Route::get('/portaria', 'RelatorioController@portaria344');
     Route::post('/buscapaciente', 'InternacaoController@buscarPaciente');
     Route::get('/autocomplete', 'MedicamentoController@autocomplete');
     Route::post('/simpas', 'MedicamentoController@getCodigoSimpas');
@@ -214,7 +222,14 @@ Route::group(['middleware' => ['auth']], function() {
     
     //rotas para relatorios
      Route::group(['prefix' => 'relatorio', 'where' => ['id' => '[0-9]+']], function() {
-        Route::get('/{id}/prescricao', ['as' => 'relatorio.prescricao', 'uses' => 'RelatorioController@prescricao', 'middleware' => ['permission:prescricao-list']]);
+        //Route::get('/{id}/prescricao', ['as' => 'relatorio.prescricao', 'uses' => 'RelatorioController@prescricao', 'middleware' => ['permission:prescricao-list']]);
+        Route::get('/portaria', ['as' => 'relatorio.portaria', 'uses' => 'RelatorioController@portariaIndex']);
+        Route::get('/portaria/imprimir/{data}', ['as' => 'portaria.imprimir', 'uses' => 'RelatorioController@portariaImprimir']);
+        Route::get('/prescricao/{id}', ['as' => 'relatorio.prescricao', 'uses' => 'RelatorioController@prescricaoImprimir']);
+        Route::post('portaria/buscar', ['as' => 'relatorio.buscar', 'uses' => 'RelatorioController@buscarPortaria']);
+        Route::get('/antibioticoterapia/{id}', ['as' => 'relatorio.antibioticoterapia', 'uses' => 'RelatorioController@Antibioticoterapia']);
+        //Route::get('/portaria/imprimir', ['as' => 'relatorio.portaria', 'uses' => 'RelatorioController@portariaImprimir']);
+        
        
     });
     

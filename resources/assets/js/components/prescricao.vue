@@ -433,7 +433,6 @@
                         for (j = 0; j < array.length ; j++){
                             if(aux[i] == array[j]){
                                 let pos = posicao[i];
-                            alert(consequencia[pos]);
                             }    
                         }
                     }
@@ -466,8 +465,6 @@
                     var administracao = $("#administracao").val();
                     var estabilidade = $("#estabilidade").val();
                     var diluicao = $("#diluicao").val();
-                
-                    alert(classific);
 
                     this.prescricao.relatorioAntimicro.push({
                         idmedicamento: id,
@@ -510,7 +507,8 @@
             removeMed(med) {
                 var index = this.prescricao.prescricaomedicamento.indexOf(med)
                 if(index > -1){
-                    this.prescricao.prescricaomedicamento.splice(index, 1)                  
+                    this.prescricao.prescricaomedicamento.splice(index, 1);                  
+                    this.prescricao.relatorioAntimicro.splice(index, 1);              
                 }
             },
             adicionar(){
@@ -592,10 +590,10 @@
             select: function(event, ui){
                 $("#codigo").val(ui.item.codigo);
                 $("#med").val(ui.item.id);
-                $("#dose").val(ui.item.dose);
-                $("#diluicao").val(ui.item.diluicao);
-                $("#administracao").val(ui.item.administracao);
-                $("#estabilidade").val(ui.item.estabilidade);
+                $("#doseR").val(ui.item.dose);
+                $("#diluicaoR").val(ui.item.diluicao);
+                $("#administracaoR").val(ui.item.administracao);
+                $("#estabilidadeR").val(ui.item.estabilidade);
                 
                 a = ui.item.value;
 
@@ -622,12 +620,14 @@
                         'id': ui.item.id,
                     },
                     success: function (data){
+                        if(data != ''){
                         swal({
                             title: "Contraindicação",
                             text: data, 
                             type: "warning",
                             html: true,
                         });
+                    }
                     },
                 });
             },
@@ -654,6 +654,22 @@
 
     $(document).on('click', '.relatorio', function (){
         $("#relatorio").modal('show');
+    });
+				
+    $(document).on('click', '.diluicaoM', function (){
+        $("#diluicaoM").modal('show');
+    });
+
+    $(document).on('click', '.doseM', function (){
+        $("#doseM").modal('show');
+    });
+
+    $(document).on('click', '.administracaoM', function (){
+        $("#administracaoM").modal('show');
+    });
+
+    $(document).on('click', '.estabilidadeM', function (){
+        $("#estabilidadeM").modal('show');
     });
 
 </script>
@@ -729,9 +745,12 @@
 
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <label for="dose">Dose:</label>
+                            <label for="dose">Dose: 
+                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Dose" class="btn btn-primary btn-flat doseM"><i class="fa fa-search"></i></button></label>
                             <textarea id="dose" type="text" name="dose" class="form-control"></textarea>
                         </div>
+
+
                     </div>
                     
                     
@@ -747,7 +766,8 @@
 
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <div class="form-group">
-                            <label for="administracao">Administração:</label>
+                            <label for="administracao">Administração:
+                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Administração" class="btn btn-primary btn-flat administracaoM"><i class="fa fa-search"></i></button></label>
                             <input id="administracao" type="text" name="administracao" class="form-control">
                         </div>
                     </div>
@@ -755,14 +775,16 @@
                     
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <div class="form-group">
-                            <label for="diluicao">Diluição:</label>
+                            <label for="diluicao">Diluição:
+                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Diluição" class="btn btn-primary btn-flat diluicaoM"><i class="fa fa-search"></i></button></label>
                             <input id="diluicao" type="text" name="diluicao" class="form-control">
                         </div>
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <div class="form-group">
-                            <label for="estabilidade">Estabilidade:</label>
+                            <label for="estabilidade">Estabilidade:
+                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Estabilidade" class="btn btn-primary btn-flat estabilidadeM"><i class="fa fa-search"></i></button></label>
                             <input id="estabilidade" type="text" name="estabilidade" class="form-control">
                         </div>
                     </div>
@@ -806,7 +828,7 @@
                                                     <th class="text-center">Dose</th>
                                                     <th class="text-center">Administração</th>
                                                     <th class="text-center">Diluição</th>
-                                                    <th class="text-center">Estabilidade</th>
+                                                    
 
                                                     <th width="3%" class="text-center">Opções</th>
                                                 </tr>
@@ -822,7 +844,7 @@
                                                     <td>{{medicamento.dose}}</td>
                                                     <td>{{medicamento.administracao}}</td>
                                                     <td>{{medicamento.diluicao}}</td>
-                                                    <td>{{medicamento.estabilidade}}</td>
+                                                    
                                                     <td>             
                                                         <center>
                                                         <a class="btn btn-default"  @click="removeMed(medicamento)"><i class="fa fa-trash"></i></a>
@@ -978,6 +1000,119 @@
         </div>
 
 
+
+
+        <div class="modal fade" id="doseM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><strong>Dose</strong></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
+                            <div class="row">
+                                <div class="box-body">
+                                 <div class="col-xs-12 col-sm-12 col-md-12 obs">
+                                    <div class="form-group">
+                                        <textarea id="doseR" name="doseR" type="text" class="form-control" rows="8"></textarea>
+                                        
+                                     </div>
+                                 </div>
+                                </div>
+                         </div>
+                        </div>  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <div class="modal fade" id="administracaoM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><strong>Administração</strong></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
+                            <div class="row">
+                                <div class="box-body">
+                                 <div class="col-xs-12 col-sm-12 col-md-12 obs">
+                                    <div class="form-group">
+                                        <textarea id="administracaoR" name="administracaoR" type="text" class="form-control" rows="8"></textarea>
+                                        
+                                     </div>
+                                 </div>
+                                </div>
+                         </div>
+                        </div>  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="estabilidadeM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><strong>Estabilidade</strong></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
+                            <div class="row">
+                                <div class="box-body">
+                                 <div class="col-xs-12 col-sm-12 col-md-12 obs">
+                                    <div class="form-group">
+                                        <textarea id="estabilidadeR" name="estabilidadeR" type="text" class="form-control" rows="8"></textarea>
+                                        
+                                     </div>
+                                 </div>
+                                </div>
+                         </div>
+                        </div>  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="diluicaoM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><strong>Diluição</strong></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
+                            <div class="row">
+                                <div class="box-body">
+                                 <div class="col-xs-12 col-sm-12 col-md-12 obs">
+                                    <div class="form-group">
+                                        <textarea id="diluicaoR" name="diluicaoR" type="text" class="form-control" rows="8"></textarea>
+                                        
+                                     </div>
+                                 </div>
+                                </div>
+                         </div>
+                        </div>  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     </div>

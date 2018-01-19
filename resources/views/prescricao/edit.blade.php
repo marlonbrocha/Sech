@@ -36,6 +36,10 @@ function data_format($format_ini, $value, $format_end)
 </div>
 @endif
 <br>
+<div style="text-align: right; right: 20px">
+
+                                </div>
+
 {!! Form::model($prescricao, ['method' => 'PATCH','route' => ['prescricao.update', $prescricao->id]]) !!}
 <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
     <div class="row">
@@ -432,7 +436,9 @@ function data_format($format_ini, $value, $format_end)
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                        <h4 class="modal-title" id="myModalLabel"><strong>Relatório de Antibioticoterapia</strong></h4>
+                                                        <h4 class="modal-title" id="myModalLabel"><strong>Relatório de Antibioticoterapia</strong> <a class="btn btn-default" title="Imprimir" href="{{ route('relatorio.antibioticoterapia',$prescricao->id) }}">
+                                <i class="glyphicon glyphicon-print"> </i></a></h4>
+
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row">
@@ -464,9 +470,6 @@ function data_format($format_ini, $value, $format_end)
                                                                 <br><br>
                                                                 <strong>Antimicrobiano:</strong>
                                                                 {{$medicamento->antimicrobiano}}
-                
-                                                                
-                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -485,6 +488,9 @@ function data_format($format_ini, $value, $format_end)
             </div>
             <div class="pull-right" style="margin-right: 1%;">
                 <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Salvar"><i class="fa fa-save"></i></button>
+            </div>
+            <div class="pull-right" style="margin-right: 1%;">
+                <a class="btn btn-default" title="Imprimir" href="{{ route('relatorio.prescricao',$prescricao->id) }}"><i class="glyphicon glyphicon-print"></i></a>                
             </div>
         </div>
     </div>
