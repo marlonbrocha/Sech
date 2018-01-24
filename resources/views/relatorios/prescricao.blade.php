@@ -15,6 +15,14 @@ function data_format($format_ini, $value, $format_end)
         <title>Prescrição Eletrónica</title>
     </head>
     <body>
+    <div style="text-align: center">
+      <img src="{{public_path('img/governo.png')}}" width="200px">
+      <img src="{{public_path('img/sus.png')}}" width="200px">
+      <img src="{{public_path('img/sesab.png')}}" width="200px">
+    </div>
+     <div style="text-align: center; margin-top: 50px">
+        <h3>PRESCRIÇÃO MÉDICA</h3>
+      </div>
         <style type="text/css">
             .tg  {border-collapse:collapse;border-spacing:0;}
             .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}

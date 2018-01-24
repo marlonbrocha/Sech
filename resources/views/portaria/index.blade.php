@@ -54,7 +54,7 @@
                                 <th class="text-center">Quantidade</th>
                             </tr>
                         </thead>
-                        <?php $i = 0; $date = 'asd'; ?>
+                        <?php $i = 0; ?>
                         @foreach ($portarias  as $prescricao)
                         <tbody>
                             <tr>
@@ -69,11 +69,15 @@
                         @endforeach
                         </tbody> 
                     </table>
+                    @if($i >0 )
                     @permission('prescricao-edit') 
-                        <a class="btn btn-default" title="Resolver" href="{{ route('portaria.imprimir',$data) }}">
-                                <i class="fa fa-edit"> </i>
+                    <div style="text-align: right;">
+                        <a class="btn btn-default" title="Imprimir" href="{{ route('portaria.imprimir',$data) }}">
+                                <i class="glyphicon glyphicon-print"> </i>
                             </a>
+                    </div>
                     @endpermission
+                    @endif
                     @endif
                 </div>
             </div>

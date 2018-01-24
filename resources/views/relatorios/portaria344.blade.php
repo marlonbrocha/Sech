@@ -21,6 +21,15 @@
     </head>
 <body>
     <div>
+
+   	<div style="text-align: center">
+      <img src="{{public_path('img/governo.png')}}" width="200px">
+      <img src="{{public_path('img/sus.png')}}" width="200px">
+      <img src="{{public_path('img/sesab.png')}}" width="200px">
+    </div>
+    <div style="text-align: center; margin-top: 50px">
+      	<h3>RELATÓRIO DE MEDICAMENTOS - PORTARIA 344</h3>
+      </div>
 		<table class="tg">
 			<tr>
 				<th class="tg-q19q">Medicamento</th>

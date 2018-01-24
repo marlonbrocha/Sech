@@ -83,7 +83,10 @@
                     <li style="margin-left: 20px;"><a href="{{ route('internacao.index') }}"> Internações</a></li>
                     <li style="margin-left: 20px;"><a href="{{ url('prescricao') }}"></i> Relatorio prescrição</a></li>  
                     
-                    <li style="margin-left: 20px;"><a href="{{ route('cid10.index') }}"> Diagnóstico (CID 10)</a></li> 
+                    <li style="margin-left: 20px;"><a href="{{ route('cid10.index') }}"> Diagnóstico (CID 10)</a></li>
+                    
+                    <li style="margin-left: 20px;"><a href="{{ route('relatorio.portaria') }}"></i> Portaria 344</a></li>
+                     
                 </ul>
             </li>          
             <li class="treeview">

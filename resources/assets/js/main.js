@@ -6,6 +6,7 @@ Vue.use(VueResource);
 
 import VcClinica from './components/clinica.vue'
 import VcClinicaedit from './components/clinicaedit.vue'
+import VcPrescricaoedit from './components/prescricaoedit.vue'
 import VcMedicamento from './components/medicamento.vue'
 import VcMedicamentoedit from './components/medicamentoedit.vue'
 import VcPrescricao from './components/prescricao.vue'
@@ -21,7 +22,8 @@ var app = new Vue({
         VcClinicaedit,
         VcMedicamento,        
         VcMedicamentoedit,
-        VcPrescricao
+        VcPrescricao,
+        VcPrescricaoedit
     }
     
 })

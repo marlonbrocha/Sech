@@ -15,12 +15,7 @@ Route::get('/', 'HomeController@index');
 
 Route::auth();
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::get('/buscarportaria', function(){
-        $serch = urlencode(e(Input::get('buscar')));
-        $route = "portaria/buscar/$serch";
-        return redirect($route);
-    });    
+Route::group(['middleware' => ['auth']], function() {    
 
     Route::get('/portaria/buscar/{buscar}','RelatorioController@BuscarPortaria');
 
@@ -28,6 +23,7 @@ Route::group(['middleware' => ['auth']], function() {
     //Route::get('/portaria', 'RelatorioController@portaria344');
     Route::post('/buscapaciente', 'InternacaoController@buscarPaciente');
     Route::get('/autocomplete', 'MedicamentoController@autocomplete');
+    Route::get('/teste', 'PrescricaoController@teste');
     Route::post('/simpas', 'MedicamentoController@getCodigoSimpas');
 
     //rotas de users

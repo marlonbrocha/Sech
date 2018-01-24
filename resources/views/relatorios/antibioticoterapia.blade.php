@@ -11,6 +11,10 @@ function data_format($format_ini, $value, $format_end)
 ?>
 
 <style type="text/css">
+  h5{
+   font-size: 15px; 
+   margin-bottom: -5px
+  }
       .tg  {border-collapse:collapse;border-spacing:0; width: 100%;}
           .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
           .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
@@ -32,29 +36,48 @@ function data_format($format_ini, $value, $format_end)
     </head>
 <body>
     <div>
-    	<h3>SOLICITAÇÃO DE ANTIBIOTICOTERAPIA DE USO RESTRITO</h3>
-		<img src="{{public_path('img/sus.png')}}" width="200px">
 
-		@foreach($medicamentos  as $key => $medicamento)
-		<h4>DADOS DO PACIENTE</h4>	
-		<h5>Nome Completo: {{$medicamento->nome}}</h5>
-		<h5>Leito: {{$medicamento->leito}}</h5>
-		<h5>Data de Admissão: <?php 
-            echo data_format("Y-m-d",$medicamento->data_admissao, "d/m/Y");
-        ?></h5>
-        <h5>Início do traamento: 
-        <?php 
-            echo data_format("Y-m-d",$medicamento->inicio_tratamento, "d/m/Y");
-        ?></h5>
-		<h5>Clínica: {{$medicamento->clinica}}</h5>
-		<h5>Diagnóstico infeccioso: 
-        {{$medicamento->diagnostico_infeccioso}}</h5>
-        <h5>Duração do tratamento: 
-        {{$medicamento->duracao_tratamento}}</h5>
-        <h5>Antimicrobiano: 
-        {{$medicamento->antimicrobiano}}</h5>
-		@endforeach	
-		
+    <div style="text-align: center">
+      <img src="{{public_path('img/governo.png')}}" width="200px">
+      <img src="{{public_path('img/sus.png')}}" width="200px">
+      <img src="{{public_path('img/sesab.png')}}" width="200px">
+    </div>
+      <div style="text-align: center; margin-top: 50px">
+      	<h3>SOLICITAÇÃO DE ANTIBIOTICOTERAPIA DE USO RESTRITO</h3>
+      </div>
+      <table class="tg" style="margin-top: 60px;">  
+    		@foreach($medicamentos  as $key => $medicamento)
+    		<tr><td colspan="4"><h5>NOME DO PACIENTE: </h5></td></tr>
+        <tr><td class="tg-q19q" colspan="4">{{$medicamento->nome}}</td></tr>
+    		<tr><td><h5>Leito:</h5></td><td><h5>DATA DE ADMISSÃO:</h5></td> <td><h5>INÍCIO DO TRATAMENTO:</h5></td><td><h5>CLÍNICA</h5></td></tr>
+        <tr>
+        <td class="tg-q19q">{{$medicamento->leito}} </td>
+        <td><?php echo data_format("Y-m-d",$medicamento->data_admissao, "d/m/Y"); ?></td>
+        <td><?php echo data_format("Y-m-d",$medicamento->inicio_tratamento, "d/m/Y"); ?></td>
+        <td> {{$medicamento->clinica}}</td>
+    		</tr>
+      </table>   
+
+      <table class="tg" style="margin-top: 30px">
+    		<tr><td><h5>DIAGNÓSTICO INFECCIOSO:</h5></td></tr>
+        <tr><td>{{$medicamento->diagnostico_infeccioso}}</td></tr>
+      </table>
+
+      <table class="tg" style="margin-top: 30px">
+        <tr><td><h5>DURAÇÃO DO TRATAMENTO: </h5></td></tr>
+        <tr><td>{{$medicamento->duracao_tratamento}}</td></tr>
+      </table>
+
+      <table class="tg" style="margin-top: 30px">
+        <tr><td><h5>ANTIMICROBIANO:</h5></td></tr>            
+        <tr><td>{{$medicamento->antimicrobiano}}</td></tr>
+      </table>            
+    		@endforeach	
+
+        <div style="text-align: center; margin-top: 200px">
+          ___________________________________________________<br><br>
+          Médico Responsável da CCIH
+        </div>
 </div>
 </body>
 </html>
