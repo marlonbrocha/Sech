@@ -69,7 +69,7 @@ class UserController extends Controller {
                 'nascimento' => 'required',
                 'telefone' => 'required',
                 'endereco' => 'required',
-                'codigoprofissional' => 'required'
+                //'codigoprofissional' => 'required'
             ]);
         } else if ($tipo == "3") {
             $this->validate($request, [

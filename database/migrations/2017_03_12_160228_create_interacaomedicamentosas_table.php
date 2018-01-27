@@ -14,22 +14,23 @@ class CreateInteracaomedicamentosasTable extends Migration
     {
         Schema::create('interacaomedicamentosas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idsubstanciaativa1')->unsigned();
-            $table->integer('idsubstanciaativa2')->unsigned();
-            $table->integer('gravidade');
-            $table->string('consequencia');
+            $table->string('idsubstanciaativa1')->unsigned();
+            $table->string('idsubstanciaativa2')->unsigned();
+            $table->string('gravidade');
+            $table->text('consequencia');
             
             $table->unique(['idsubstanciaativa1', 'idsubstanciaativa2']);
 
-            $table->foreign('idsubstanciaativa1')->references('id')->on('substanciaativas')
+            $table->foreign('idsubstanciaativa1')->references('codigo')->on('substanciaativas')
                 ->onUpdate('restrict')
                 ->onDelete('cascade');
-            $table->foreign('idsubstanciaativa2')->references('id')->on('substanciaativas')
+            $table->foreign('idsubstanciaativa2')->references('codigo')->on('substanciaativas')
                 ->onUpdate('restrict')
                 ->onDelete('cascade');
             
             $table->timestamps();
         });
+
     }
 
     /**

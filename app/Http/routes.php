@@ -23,7 +23,6 @@ Route::group(['middleware' => ['auth']], function() {
     //Route::get('/portaria', 'RelatorioController@portaria344');
     Route::post('/buscapaciente', 'InternacaoController@buscarPaciente');
     Route::get('/autocomplete', 'MedicamentoController@autocomplete');
-    Route::get('/teste', 'PrescricaoController@teste');
     Route::post('/simpas', 'MedicamentoController@getCodigoSimpas');
 
     //rotas de users
@@ -204,6 +203,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::group(['prefix' => 'prescricao', 'where' => ['id' => '[0-9]+']], function() {
         Route::get('', ['as' => 'prescricao.index', 'uses' => 'PrescricaoController@index', 'middleware' => ['permission:prescricao-list|prescricao-create|prescricao-edit|prescricao-delete']]);
         Route::get('/create', ['as' => 'prescricao.create', 'uses' => 'PrescricaoController@create', 'middleware' => ['permission:prescricao-create']]);
+        
+        Route::get('/edit/prescricao/{id}', ['as' => 'prescricao.editar', 'uses' => 'PrescricaoController@editar', 'middleware' => ['permission:prescricao-create']]);
+        
+        Route::get('/buscar/medicamentos/{id}', 'PrescricaoController@buscaMedicamentos');
+        Route::get('/interacoesmedicamentosas', 'InteracaomedicamentosaController@getInteracoes');
+        
         Route::post('/create', ['as' => 'prescricao.store', 'uses' => 'PrescricaoController@store', 'middleware' => ['permission:prescricao-create']]);
         Route::get('/{id}', ['as' => 'prescricao.show', 'uses' => 'PrescricaoController@show']);
         Route::get('/{id}/edit', ['as' => 'prescricao.edit', 'uses' => 'PrescricaoController@edit', 'middleware' => ['permission:prescricao-edit']]);

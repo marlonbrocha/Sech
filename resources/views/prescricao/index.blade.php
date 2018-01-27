@@ -36,12 +36,16 @@
                         <td>{{ $prescricao->internacao->clinica->nome }}</td>
                         <td>{{ $prescricao->usuario->name }}</td>
                         <td>{{ $prescricao->dataprescricao }}</td>
-                        <td width="10.5%">
+                        <td width="15%">
+                             
                             <a class="btn btn-default" data-target="#{{$prescricao->id}}" data-toggle="modal" title="Visualizar">
                                 <i class="fa fa-eye"> </i>
                             </a>
                             @permission('prescricao-edit') 
-                            <a class="btn btn-default" title="Resolver" href="{{ route('prescricao.edit',$prescricao->id) }}">
+                            <a class="btn btn-default" title="Abrir" href="{{ route('prescricao.edit',$prescricao->id) }}">
+                                <i class="fa fa-folder-open"> </i>
+                            </a>
+                            <a class="btn btn-default" title="Editar" href="{{ route('prescricao.editar',$prescricao->id) }}">
                                 <i class="fa fa-edit"> </i>
                             </a>
                             @endpermission
@@ -88,11 +92,6 @@
                                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                                     <strong>Diagnóstico:</strong>
                                                     {{$prescricao->internacao->cid10->descricao}}
-                                                    <br><br> 
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                                    <strong>Histórico da doença:</strong>
-                                                    {{$prescricao->historicoatual}}
                                                     <br><br> 
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -229,11 +228,6 @@
                                             <div class="col-xs-12 col-sm-12 col-md-12">
                                                 <strong>Diagnóstico:</strong>
                                                 {{$prescricao->internacao->cid10->descricao}}
-                                                <br><br> 
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                                <strong>Histórico da doença:</strong>
-                                                {{$prescricao->historicoatual}}
                                                 <br><br> 
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-12">

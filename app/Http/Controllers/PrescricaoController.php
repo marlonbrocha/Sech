@@ -26,8 +26,8 @@ class PrescricaoController extends Controller {
                         ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
-    public function teste(){
-        $prescricao = Prescricao::find(81);
+    public function buscaMedicamentos($id){
+        $prescricao = Prescricao::find($id);
  
         $medicamentos = PrescricaoMedicamento::where('idprescricao', $prescricao->id)
                 ->join('medicamentos', 'medicamentos.id', '=', 'prescricao_medicamentos.idmedicamento')
@@ -47,7 +47,17 @@ class PrescricaoController extends Controller {
     }
 
     public function create() {
-        $prescricao = Prescricao::find(81);
+        $dataprescricao = date("d/m/Y H:i:s");
+        $id = Auth::user()->id;
+        $medico = User::find($id)->name;
+        return view('prescricao.create', compact('dataprescricao', 'medico'));
+    }
+
+
+    public function editar($id) {
+        $prescricao = Prescricao::find($id);
+
+        $idprescricao = $id;
         
         $dataprescricao = date("d/m/Y H:i:s");
         $id = Auth::user()->id;
@@ -62,14 +72,8 @@ class PrescricaoController extends Controller {
                 //->where('prescricao_medicamentos.qtdatendida', 0)
                 ->get();
          
-        return view('prescricao.create', compact('prescricao.create','prescricao', 'medicamentos','dataprescricao', 'medico'));
+        return view('prescricao.editar', compact('prescricao.create','prescricao', 'medicamentos','dataprescricao', 'medico','idprescricao'));
 
-
-        /*
-        $dataprescricao = date("d/m/Y H:i:s");
-        $id = Auth::user()->id;
-        $medico = User::find($id)->name;
-        return view('prescricao.create', compact('dataprescricao', 'medico'));*/
     }
 
     public function store(Request $request) {
@@ -114,7 +118,7 @@ class PrescricaoController extends Controller {
                 $prescricaomedicamento->idmedicamento = $medicamentos[$i]['idmedicamento'];
                 $prescricaomedicamento->qtdpedida = $medicamentos[$i]['qtd'];
                 $prescricaomedicamento->posologia = $medicamentos[$i]['posologia'];
-                $prescricaomedicamento->obs = $medicamentos[$i]['classificacao'];
+                $prescricaomedicamento->obs = $medicamentos[$i]['obs'];
                 $prescricaomedicamento->dose = $medicamentos[$i]['dose'];
                 $prescricaomedicamento->diluicao = $medicamentos[$i]['diluicao'];
                 $prescricaomedicamento->administracao = $medicamentos[$i]['administracao'];

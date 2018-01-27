@@ -16,6 +16,8 @@ class CreatePacientesTable extends Migration
             $table->increments('id');
             $table->string('nomecompleto');
             $table->string('sexo');
+            $table->string('idade');
+            $table->string('peso');
             $table->string('numeroprontuario');
             $table->timestamps();
         });

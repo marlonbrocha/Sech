@@ -11,6 +11,29 @@ function data_format($format_ini, $value, $format_end)
 ?>
 
 <style type="text/css">
+
+#tudo {
+  padding-top: 100px;
+  text-align: center;
+  padding-bottom: 50px;
+}
+#tudo1 {
+  text-align: center;
+  position:relative;
+  width: 300px;
+  float: left;
+  padding-left: 80px;
+  padding-right: 150px;
+
+}
+#tudo2 {
+  text-align: center;
+  position: relative;
+  width: 300px;
+  float: left;
+}
+
+
   h5{
    font-size: 15px; 
    margin-bottom: -5px
@@ -74,9 +97,20 @@ function data_format($format_ini, $value, $format_end)
       </table>            
     		@endforeach	
 
-        <div style="text-align: center; margin-top: 200px">
-          ___________________________________________________<br><br>
-          Médico Responsável da CCIH
+        <div id="tudo">
+  <div id="tudo1">
+    ___________________________________<br><br>
+          Farmacêutico Responsável da CCIH
+  </div>
+    <div id="tudo2">
+      ___________________________________<br><br>
+          Presidente da CCIH
+    </div>
+</div>
+<br><br><br><br>
+        <div style="text-align: center; ">
+          __________________________________ <br><br>
+              Médico Responsável da CCIH 
         </div>
 </div>
 </body>

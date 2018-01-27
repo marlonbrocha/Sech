@@ -9,6 +9,14 @@ use App\Substanciaativa;
 
 class InteracaomedicamentosaController extends Controller {
 
+    
+
+    public function getInteracoes(){
+        $interacoes = Interacaomedicamentosa::get();
+
+        return response()->json($interacoes);
+    }
+
     /**
      * Display a listing of the resource.
      *

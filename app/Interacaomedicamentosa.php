@@ -9,9 +9,10 @@ class Interacaomedicamentosa extends Model
     public $fillable = ['idsubstanciaativa1', 'idsubstanciaativa2', 'gravidade','consequencia'];
     
     public function substanciaativa1() {
-        return $this->belongsTo(Substanciaativa::class, 'idsubstanciaativa1');
+        return $this->belongsTo(Substanciaativa::class, 'idsubstanciaativa1', 'codigo');
     }
     public function substanciaativa2() {
-        return $this->belongsTo(Substanciaativa::class, 'idsubstanciaativa2');
+        return $this->belongsTo(Substanciaativa::class, 'idsubstanciaativa2', 'codigo');
     }
+
 }

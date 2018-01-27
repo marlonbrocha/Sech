@@ -125,6 +125,18 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
+                                    <strong>Idade:</strong>
+                                    {!! Form::text('idade', null, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Peso:</strong>
+                                    {!! Form::text('peso', null, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
                                     <strong>Sexo:</strong>
                                     {!!Form::radio('sexo', 'm', true)  !!}M
                                     {!!Form::radio('sexo', 'f') !!}F

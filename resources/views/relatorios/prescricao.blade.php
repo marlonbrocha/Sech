@@ -32,53 +32,51 @@ function data_format($format_ini, $value, $format_end)
         <table class="tg" style="table-layout: fixed; width: 100%">
             
             <tr>
-                <th class="tg-031e" width="10%" >Diagnóstico</th>
+                <th class="tg-031e" width="10%" rowspan="2" >Diagnóstico</th>
                 <th  colspan="4" rowspan="2" width="30%">{{$prescricao->internacao->cid10->descricao}}</th>
-                <th class="tg-baqh" rowspan="2" colspan="2">História da doença atual</th>
-                <th class="tg-yw4l" rowspan="2">{{$prescricao->historicoatual}}</th>
-                <th class="tg-031e" rowspan="2" width="8%">Evolução</th>
-                <th class="tg-031e" colspan="10" rowspan="2">{{$prescricao->evolucao}}</th>
+                <th class="tg-031e" rowspan="2" width="8%" colspan="4">Evolução</th>
+                <th class="tg-031e" colspan="11" rowspan="2">{{$prescricao->evolucao}}</th>
             </tr>
             <tr>
-                <td class="tg-031e"></td>
+                
             </tr>
             <tr>
                 <td class="tg-031e">Unidade:</td>
                 <td class="tg-yw4l" colspan="4">{{$prescricao->internacao->clinica->nome}}</td>
-                <td class="tg-yw4l">Leito: </td>
+                <td class="tg-yw4l" colspan="2">Leito: </td>
                 <td class="tg-yw4l">{{$prescricao->internacao->leito->leito}}</td>
                 <td class="tg-031e" colspan="2">Admissão</td>
-                <td class="tg-031e" colspan="3"><?php 
+                <td class="tg-031e" colspan="2"><?php 
                                 echo data_format("Y-m-d",$prescricao->internacao->dataadmissao, "d/m/Y");
                             ?></td>
-                <td class="tg-031e" colspan="7">Prescrição e evolução médica</td>
+                <td class="tg-031e" colspan="2">Prontuário</td>
+                <td class="tg-031e" colspan="2">{{$prescricao->internacao->paciente->numeroprontuario}}</td>                                                        
+                <td class="tg-031e" colspan="4">Prescrição e evolução médica</td>
             </tr>
             <tr>
                 <td class="tg-031e">Nome do paciente: </td>
                 <td class="tg-yw4l" colspan="6">{{$prescricao->internacao->paciente->nomecompleto}}</td>
-                <td class="tg-s6z2">idade</td>
-                <td class="tg-031e">{{$prescricao->internacao->paciente->nascimento}}</td>
-                <td class="tg-031e" colspan="2">hora</td>
-                <td class="tg-031e">XX:XX:XX</td>
+                <td class="tg-s6z2" colspan="2">idade</td>
+                <td class="tg-031e">{{$prescricao->internacao->paciente->idade}}</td>
+                <td class="tg-031e" colspan="2">Peso</td>
+                <td class="tg-031e">{{$prescricao->internacao->paciente->peso}}</td>
                 <td class="tg-031e">data</td>
                 <td class="tg-031e" colspan="6">XX/XX/XXXX</td>
             </tr>
             <tr>
                 <td class="tg-s6z2">SIMPAS</td>
-                <td  width="1%" >ped</td>
-                <td class="tg-yw4l" width="1px">at.</td>
-                <td class="tg-yw4l" width="1%">It</td>
-                <td class="tg-s6z2" width="30%" colspan="2">Descrição do medicamento</td>
-                <td class="tg-baqh" width="30%">Observação</td>
-                <td class="tg-baqh" colspan="12">Aprazamento</td>
+                <td>ped</td>
+                <td class="tg-yw4l">at.</td>
+                <td class="tg-s6z2" width="100%" colspan="2">Descrição do medicamento</td>
+                <td class="tg-baqh" width="30%" colspan="9">Posologia</td>
+                <td class="tg-baqh" colspan="6">Aprazamento</td>
             </tr>
             @foreach ($medicamentos  as $key => $medicamento)
             <tr>
-                <td class="tg-yw4l">{{ $medicamento->simpas }}</td>
-                <td class="tg-yw4l" width="1%">{{ $medicamento->qtdpedida }}</td>
+                <td class="tg-yw4l" style="min-width:120px">{{ $medicamento->simpas }}</td>
+                <td class="tg-yw4l">{{ $medicamento->qtdpedida }}</td>
                 <td class="tg-yw4l" width="1%"></td>
-                <td class="tg-yw4l" width="1%"></td>
-                <td class="tg-yw4l" colspan="2">
+                <td class="tg-yw4l" colspan="2" width="100%">
                     @foreach ($medicamento->medicamento->medicamentosubstancias as $key => $medicamentosubstancia)
                                                     {{$medicamentosubstancia->substanciaativa->nome}}
                                                     {{$medicamentosubstancia->quantidadedose}}
@@ -198,13 +196,7 @@ function data_format($format_ini, $value, $format_end)
                                                     echo"$uc ";
                                                     ?>
                 </td>
-                <td class="tg-yw4l">{{ $medicamento->obs}}</td>
-                <td class="tg-yw4l" width="3%"></td>
-                <td class="tg-yw4l" width="3%"></td>
-                <td class="tg-yw4l" width="3%"></td>
-                <td class="tg-yw4l" width="3%"></td>
-                <td class="tg-yw4l" width="3%"></td>
-                <td class="tg-yw4l" width="3%"></td>
+                <td class="tg-yw4l" colspan="9">{{$medicamento->posologia}}. {{ $medicamento->obs}}</td>
                 <td class="tg-yw4l" width="3%"></td>
                 <td class="tg-yw4l" width="3%"></td>
                 <td class="tg-yw4l" width="3%"></td>

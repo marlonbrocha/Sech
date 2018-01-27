@@ -19,6 +19,7 @@ class PacienteController extends Controller {
             'nomecompleto' => 'required',
             'sexo' => 'required',
             'numeroprontuario' => 'required',
+            'idade' => 'required',
         ]);       
 
         $campos = $request->all();
