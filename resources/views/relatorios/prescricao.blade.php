@@ -50,8 +50,7 @@ function data_format($format_ini, $value, $format_end)
                                 echo data_format("Y-m-d",$prescricao->internacao->dataadmissao, "d/m/Y");
                             ?></td>
                 <td class="tg-031e" colspan="2">Prontuário</td>
-                <td class="tg-031e" colspan="2">{{$prescricao->internacao->paciente->numeroprontuario}}</td>                                                        
-                <td class="tg-031e" colspan="4">Prescrição e evolução médica</td>
+                <td class="tg-031e" colspan="6">{{$prescricao->internacao->paciente->numeroprontuario}}</td>                                                        
             </tr>
             <tr>
                 <td class="tg-031e">Nome do paciente: </td>
@@ -61,22 +60,28 @@ function data_format($format_ini, $value, $format_end)
                 <td class="tg-031e" colspan="2">Peso</td>
                 <td class="tg-031e">{{$prescricao->internacao->paciente->peso}}</td>
                 <td class="tg-031e">data</td>
-                <td class="tg-031e" colspan="6">XX/XX/XXXX</td>
+                <td class="tg-031e" colspan="6"><?php echo date("d-m-Y ") ?></td>
             </tr>
-            <tr>
-                <td class="tg-s6z2">SIMPAS</td>
-                <td>ped</td>
-                <td class="tg-yw4l">at.</td>
-                <td class="tg-s6z2" width="100%" colspan="2">Descrição do medicamento</td>
-                <td class="tg-baqh" width="30%" colspan="9">Posologia</td>
-                <td class="tg-baqh" colspan="6">Aprazamento</td>
-            </tr>
+        </table>
+            <table class="tg" style="table-layout: fixed; width: 100%; margin-top: -1px">
+                <tr>
+                    <td class="tg-s6z2" width="10%">SIMPAS</td>
+                    <td width="3.5%">ped</td>
+                    <td class="tg-yw4l" width="3.5%">at.</td>
+                    <td class="tg-s6z2"  colspan="2" width="25%">Descrição do medicamento</td>
+                    <td class="tg-baqh"  colspan="10" width="40.5%">Posologia</td>
+                    <td class="tg-baqh" colspan="6">Aprazamento</td>
+                </tr>
+            </table>
+            <table class="tg" style="table-layout: fixed; width: 100%; margin-top: -1px">
             @foreach ($medicamentos  as $key => $medicamento)
             <tr>
-                <td class="tg-yw4l" style="min-width:120px">{{ $medicamento->simpas }}</td>
-                <td class="tg-yw4l">{{ $medicamento->qtdpedida }}</td>
-                <td class="tg-yw4l" width="1%"></td>
-                <td class="tg-yw4l" colspan="2" width="100%">
+                <td class="tg-s6z2" width="10%" style="font-size: 11px">{{ $medicamento->simpas }}</td>
+                <td class="tg-yw4l" width="3.5%">{{ $medicamento->qtdpedida }}</td>
+                <td class="tg-yw4l" width="3.5%"></td>
+                <td class="tg-yw4l" colspan="2" width="25%">
+
+                    @if($medicamento->idmedicamento != null)
                     @foreach ($medicamento->medicamento->medicamentosubstancias as $key => $medicamentosubstancia)
                                                     {{$medicamentosubstancia->substanciaativa->nome}}
                                                     {{$medicamentosubstancia->quantidadedose}}
@@ -195,8 +200,13 @@ function data_format($format_ini, $value, $format_end)
                                                     }
                                                     echo"$uc ";
                                                     ?>
+                @else
+
+                    {{$medicamento->outros}}
+
+                @endif                                                    
                 </td>
-                <td class="tg-yw4l" colspan="9">{{$medicamento->posologia}}. {{ $medicamento->obs}}</td>
+                <td class="tg-yw4l" colspan="9">{{$medicamento->posologia}}. {{ $medicamento->obs}}. {{$medicamento->dose}}. {{$medicamento->administracao}} . {{$medicamento->diluicao}} </td>
                 <td class="tg-yw4l" width="3%"></td>
                 <td class="tg-yw4l" width="3%"></td>
                 <td class="tg-yw4l" width="3%"></td>
@@ -205,8 +215,8 @@ function data_format($format_ini, $value, $format_end)
                 <td class="tg-yw4l" width="3%"></td>
             </tr>
             @endforeach
-        </table>
-    </table>
+            </table>
+       
 </div>
 </body>
 </html>

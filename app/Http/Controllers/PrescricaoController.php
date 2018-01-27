@@ -101,8 +101,8 @@ class PrescricaoController extends Controller {
             $prescricaomedicamento->idprescricao = $idprescricao;
 
             if ($medicamentos[$i]['idmedicamento'] == '') {
-
-                $prescricaomedicamento->qtdpedida = 0;
+                $prescricaomedicamento->qtdpedida = $medicamentos[$i]['qtd'];
+                $prescricaomedicamento->qtdatendida = 0;
                 $prescricaomedicamento->posologia = $medicamentos[$i]['posologia'];
                 $prescricaomedicamento->obs = $medicamentos[$i]['obs'];
                 $prescricaomedicamento->outros = $medicamentos[$i]['med'];
@@ -110,7 +110,6 @@ class PrescricaoController extends Controller {
                 $prescricaomedicamento->diluicao = $medicamentos[$i]['diluicao'];
                 $prescricaomedicamento->administracao = $medicamentos[$i]['administracao'];
                 $prescricaomedicamento->estabilidade = $medicamentos[$i]['estabilidade'];
-                $prescricaomedicamento->simpas = $medicamentos[$i]['simpas'];
             } else {
                 $prescricaomedicamento->idprescricao = $idprescricao;              
                 $prescricaomedicamento->qtdatendida = 0;
@@ -124,25 +123,27 @@ class PrescricaoController extends Controller {
                 $prescricaomedicamento->administracao = $medicamentos[$i]['administracao'];
                 $prescricaomedicamento->estabilidade = $medicamentos[$i]['estabilidade'];
                 $prescricaomedicamento->simpas = $medicamentos[$i]['simpas'];
+
+
+                if($medicamentos[$i]['classificacao'] == 2){
+                    $RelatorioAntimicrobiano = new RelatorioAntimicrobiano();
+                    $RelatorioAntimicrobiano->idprescricao_medicamento = $prescricaomedicamento->id;
+                    $RelatorioAntimicrobiano->nome = $relatorio[$i]['paciente'];
+                    $RelatorioAntimicrobiano->leito = $relatorio[$i]['leito'];
+                    $RelatorioAntimicrobiano->data_admissao = $relatorio[$i]['dataadmissao'];
+                    $RelatorioAntimicrobiano->inicio_tratamento = $relatorio[$i]['iniTrata'];
+                    $RelatorioAntimicrobiano->clinica = $relatorio[$i]['clinica'];
+                    $RelatorioAntimicrobiano->diagnostico_infeccioso = $relatorio[$i]['diagInfe'];
+                    $RelatorioAntimicrobiano->duracao_tratamento = $relatorio[$i]['duracao'];
+                    $RelatorioAntimicrobiano->antimicrobiano = $relatorio[$i]['medInfe'];
+                    
+                    $RelatorioAntimicrobiano->save();
+                }
             }
 
             $prescricaomedicamento->save();
 
-            if($medicamentos[$i]['classificacao'] == 2){
-
-                $RelatorioAntimicrobiano = new RelatorioAntimicrobiano();
-                $RelatorioAntimicrobiano->idprescricao_medicamento = $prescricaomedicamento->id;
-                $RelatorioAntimicrobiano->nome = $relatorio[$i]['paciente'];
-                $RelatorioAntimicrobiano->leito = $relatorio[$i]['leito'];
-                $RelatorioAntimicrobiano->data_admissao = $relatorio[$i]['dataadmissao'];
-                $RelatorioAntimicrobiano->inicio_tratamento = $relatorio[$i]['iniTrata'];
-                $RelatorioAntimicrobiano->clinica = $relatorio[$i]['clinica'];
-                $RelatorioAntimicrobiano->diagnostico_infeccioso = $relatorio[$i]['diagInfe'];
-                $RelatorioAntimicrobiano->duracao_tratamento = $relatorio[$i]['duracao'];
-                $RelatorioAntimicrobiano->antimicrobiano = $relatorio[$i]['medInfe'];
-                
-                $RelatorioAntimicrobiano->save();
-            }
+            
         }
 
         
@@ -162,15 +163,22 @@ class PrescricaoController extends Controller {
     public function edit($id) {
         $prescricao = Prescricao::find($id);
         
+        
+
         $medicamentos = PrescricaoMedicamento::where('idprescricao', $prescricao->id)
-                ->join('medicamentos', 'medicamentos.id', '=', 'prescricao_medicamentos.idmedicamento')
+                ->leftjoin('medicamentos', 'medicamentos.id', '=', 'prescricao_medicamentos.idmedicamento')
                 ->leftjoin('relatorio_antimicrobianos', 'relatorio_antimicrobianos.idprescricao_medicamento', '=', 'prescricao_medicamentos.id')
                 ->where('idmedicamento', '!=', null)
                 ->select('medicamentos.id', 'medicamentos.idformafarmaceutica', 'medicamentos.nomeconteudo', 'medicamentos.quantidadeconteudo', 'medicamentos.unidadeconteudo', 'medicamentos.codigosimpas', 'prescricao_medicamentos.id as idprescmed', 'prescricao_medicamentos.idprescricao', 'prescricao_medicamentos.idmedicamento', 'prescricao_medicamentos.qtdpedida', 'prescricao_medicamentos.qtdatendida', 'prescricao_medicamentos.posologia','relatorio_antimicrobianos.diagnostico_infeccioso', 'relatorio_antimicrobianos.id as idrelatorio'
                    ,'relatorio_antimicrobianos.nome','relatorio_antimicrobianos.leito','relatorio_antimicrobianos.data_admissao','relatorio_antimicrobianos.inicio_tratamento','relatorio_antimicrobianos.clinica','relatorio_antimicrobianos.duracao_tratamento','relatorio_antimicrobianos.antimicrobiano')
                 //->where('prescricao_medicamentos.qtdatendida', 0)
                 ->get();
-         
+                
+        if($medicamentos == '[]'){
+            $medicamentos = PrescricaoMedicamento::where('idprescricao', $prescricao->id)->get();               
+        }
+
+
         return view('prescricao.edit', compact('prescricao', 'medicamentos'));
     }
 
