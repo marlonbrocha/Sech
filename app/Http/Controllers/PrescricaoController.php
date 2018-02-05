@@ -104,26 +104,29 @@ class PrescricaoController extends Controller {
                 $prescricaomedicamento->qtdpedida = $medicamentos[$i]['qtd'];
                 $prescricaomedicamento->qtdatendida = 0;
                 $prescricaomedicamento->posologia = $medicamentos[$i]['posologia'];
-                $prescricaomedicamento->obs = $medicamentos[$i]['obs'];
                 $prescricaomedicamento->outros = $medicamentos[$i]['med'];
-                $prescricaomedicamento->dose = $medicamentos[$i]['dose'];
-                $prescricaomedicamento->diluicao = $medicamentos[$i]['diluicao'];
-                $prescricaomedicamento->administracao = $medicamentos[$i]['administracao'];
-                $prescricaomedicamento->estabilidade = $medicamentos[$i]['estabilidade'];
+                $prescricaomedicamento->obs = (!isset($medicamentos[$i]['obs'])) ? '' : $medicamentos[$i]['obs'];
+                $prescricaomedicamento->dose = (!isset($medicamentos[$i]['dose'])) ? '' : $medicamentos[$i]['dose'];
+                $prescricaomedicamento->diluicao = (!isset($medicamentos[$i]['diluicao'])) ? '' : $medicamentos[$i]['diluicao'];
+                $prescricaomedicamento->administracao = (!isset($medicamentos[$i]['administracao'])) ? '' : $medicamentos[$i]['administracao'];
+                $prescricaomedicamento->estabilidade = (!isset($medicamentos[$i]['estabilidade'])) ? '' : $medicamentos[$i]['estabilidade'];
+
+                $prescricaomedicamento->save();
             } else {
                 $prescricaomedicamento->idprescricao = $idprescricao;              
                 $prescricaomedicamento->qtdatendida = 0;
                 $prescricaomedicamento->outros = '';
                 $prescricaomedicamento->idmedicamento = $medicamentos[$i]['idmedicamento'];
-                $prescricaomedicamento->qtdpedida = $medicamentos[$i]['qtd'];
+                $prescricaomedicamento->qtdpedida =  (!isset($medicamentos[$i]['qtd'])) ? 0 : $medicamentos[$i]['qtd'];
                 $prescricaomedicamento->posologia = $medicamentos[$i]['posologia'];
-                $prescricaomedicamento->obs = $medicamentos[$i]['obs'];
-                $prescricaomedicamento->dose = $medicamentos[$i]['dose'];
-                $prescricaomedicamento->diluicao = $medicamentos[$i]['diluicao'];
-                $prescricaomedicamento->administracao = $medicamentos[$i]['administracao'];
-                $prescricaomedicamento->estabilidade = $medicamentos[$i]['estabilidade'];
+                $prescricaomedicamento->obs = (!isset($medicamentos[$i]['obs'])) ? '' : $medicamentos[$i]['obs'];
+                $prescricaomedicamento->dose = (!isset($medicamentos[$i]['dose'])) ? '' : $medicamentos[$i]['dose'];
+                $prescricaomedicamento->diluicao = (!isset($medicamentos[$i]['diluicao'])) ? '' : $medicamentos[$i]['diluicao'];
+                $prescricaomedicamento->administracao = (!isset($medicamentos[$i]['administracao'])) ? '' : $medicamentos[$i]['administracao'];
+                $prescricaomedicamento->estabilidade = (!isset($medicamentos[$i]['estabilidade'])) ? '' : $medicamentos[$i]['estabilidade'];
                 $prescricaomedicamento->simpas = $medicamentos[$i]['simpas'];
 
+                $prescricaomedicamento->save();
 
                 if($medicamentos[$i]['classificacao'] == 2){
                     $RelatorioAntimicrobiano = new RelatorioAntimicrobiano();
@@ -140,9 +143,6 @@ class PrescricaoController extends Controller {
                     $RelatorioAntimicrobiano->save();
                 }
             }
-
-            $prescricaomedicamento->save();
-
             
         }
 

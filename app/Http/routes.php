@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/home', 'HomeController@index');
     //Route::get('/portaria', 'RelatorioController@portaria344');
     Route::post('/buscapaciente', 'InternacaoController@buscarPaciente');
+    Route::get('/autocomplete2', 'InternacaoController@buscarPaciente');
     Route::get('/autocomplete', 'MedicamentoController@autocomplete');
     Route::post('/simpas', 'MedicamentoController@getCodigoSimpas');
 

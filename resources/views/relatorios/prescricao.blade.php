@@ -16,6 +16,7 @@ function data_format($format_ini, $value, $format_end)
     </head>
     <body>
     <div style="text-align: center">
+      <img src="{{public_path('img/prado.png')}}" width="460px">
       <img src="{{public_path('img/governo.png')}}" width="200px">
       <img src="{{public_path('img/sus.png')}}" width="200px">
       <img src="{{public_path('img/sesab.png')}}" width="200px">
@@ -24,6 +25,35 @@ function data_format($format_ini, $value, $format_end)
         <h3>PRESCRIÇÃO MÉDICA</h3>
       </div>
         <style type="text/css">
+        html {
+          height: 100%;
+          box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+          box-sizing: inherit;
+        }
+
+        body {
+          position: relative;
+          margin: 0;
+          padding-bottom: 6rem;
+          min-height: 100%;
+          font-family: "Helvetica Neue", Arial, sans-serif;
+        }
+
+
+        .footer {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          padding: 1rem;
+          text-align: center;
+        }
+
             .tg  {border-collapse:collapse;border-spacing:0;}
             .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
             .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
@@ -69,7 +99,7 @@ function data_format($format_ini, $value, $format_end)
                     <td width="3.5%">ped</td>
                     <td class="tg-yw4l" width="3.5%">at.</td>
                     <td class="tg-s6z2"  colspan="2" width="25%">Descrição do medicamento</td>
-                    <td class="tg-baqh"  colspan="10" width="40.5%">Posologia</td>
+                    <td class="tg-baqh"  colspan="10" width="40.35%">Posologia</td>
                     <td class="tg-baqh" colspan="6">Aprazamento</td>
                 </tr>
             </table>
@@ -217,6 +247,8 @@ function data_format($format_ini, $value, $format_end)
             @endforeach
             </table>
        
-</div>
+<div class="footer">Rua São Cristóvão, S/n - Centro, Jequié - BA, 45203-110</div>
+
+
 </body>
 </html>

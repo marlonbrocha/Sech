@@ -79,10 +79,13 @@ class InternacaoController extends Controller {
     }
 
     public function buscarPaciente(Request $req) {
+        $nome = $req->get('term');
 
-        $nome = $req->nome;
+        //$nome = $req->nome;
 
-        if($req['nome'] != ''){
+        $results = array();
+
+        if($nome != ''){
         $paciente = DB::table('internacaos')
                 ->where('internacaos.saida', NULL)
                 ->join('pacientes', 'pacientes.id', '=', 'internacaos.idpaciente')
@@ -103,7 +106,18 @@ class InternacaoController extends Controller {
                 ->where('pacientes.numeroprontuario',$req['prontuario'])->select('pacientes.nomecompleto','pacientes.numeroprontuario', 'internacaos.id', 'clinicas.nome', 'leitos.leito', 'cid10s.descricao', 'internacaos.dataadmissao')
                 ->get();
         }
-        return response()->json($paciente);
+
+        $results[] = [
+                'value' => $paciente[0]->nomecompleto,
+                'clinica'=> $paciente[0]->nome,
+                'dataadmissao' => $paciente[0]->dataadmissao,
+                'id' => $paciente[0]->id,
+                'leito' => $paciente[0]->leito,
+                'descricao' => $paciente[0]->descricao,
+                'numeroprontuario' => $paciente[0]->numeroprontuario
+            ];
+
+        return response()->json($results);
 /*
 
 $paciente = Internacao::where('internacaos.saida', NULL)

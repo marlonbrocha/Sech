@@ -1,12 +1,13 @@
 <script language= "text/javascript">
-   var array = new Array();
-   var sub1 = new Array();
-   var sub2 = new Array();
-   var consequencia = new Array();
-   var classific;
-   
-   
-
+    var array = new Array();
+    var sub1 = new Array();
+    var sub2 = new Array();
+    var consequencia = new Array();
+    var classific;
+    var direita = new Array();
+    var codigos = new Array();
+    var posicoes = new Array();   
+    var idinter = '';
     export default{
 
         props: ['data', 'medico'],
@@ -46,54 +47,47 @@
         },
         methods: {
             addMed(){
+                    
                     var cod = $("#codigo").val();
-                    var aux = new Array();
-                    var aux_pai = new Array();
-                    var posicao = new Array();
-                    var posicao2 = new Array();
-
-                    array.push(cod);
                     var i;
                     var j;
+                    var verifica = false;
+                    codigos.push(cod);
+
+                    if(direita.length > 0){ //vefifica se ja tem interacaoes inseridas
+                        for (i = 0; i < direita.length ; i++){ 
+                            if(cod == direita[i]){  //comparação do codigo inserido com o vetor existente 
+                                for(j = 0; j < codigos.length ; j++){  
+                                    if(direita[i] == codigos[j]){ //verifica se o codigo comparado ainda existe na lista de medicamentos prescritos                                  
+                                        verifica = true;
+                                    }
+                                }
+                                if(verifica == true && codigos.length > 1){
+                                    let pos = posicoes[i];
+                                    swal({
+                                        title: "Interação Medicamentosa",
+                                        text: consequencia[pos], 
+                                        type: "warning",
+                                        html: true,
+                                    });    
+                                }    
+                            }
+                        }
+                    }                    
 
                     for (i = 0; i < sub1.length ; i++){
                         if(cod == sub1[i]){
-                            aux.push(sub2[i]);
-                            posicao.push(i);
+                            direita.push(sub2[i]);
+                            posicoes.push(i);
                         }
                     }
 
                     for (i = 0; i < sub2.length ; i++){
                         if(cod == sub2[i]){
-                            aux_pai.push(sub1[i]);
-                            posicao2.push(i);
-                        }
-                    } 
-
-                    for (i = 0; i < aux.length ; i++) {
-                        //alert(aux[i]);
-                        for (j = 0; j < array.length ; j++){
-                            if(aux[i] == array[j]){
-                                let pos = posicao[i];
-                            }    
+                            direita.push(sub1[i]);
+                            posicoes.push(i);
                         }
                     }
-
-                    for (i = 0; i < aux_pai.length ; i++) {
-                        //alert(aux[i]);
-                        for (j = 0; j < array.length ; j++){
-                            if(aux_pai[i] == array[j]){
-                                let pos = posicao2[i];
-                                swal({
-                                    title: "Interação Medicamentosa",
-                                    text: consequencia[pos], 
-                                    type: "warning",
-                                    html: true,
-                                });
-                            }    
-                        }
-                    } 
-
 
                 if(typeof  this.prescricao.prescricaomedicamento[0] != "undefined"){
                     //alert(this.prescricao.prescricaomedicamento[0].diluicao);
@@ -149,11 +143,13 @@
             removeMed(med) {
                 var index = this.prescricao.prescricaomedicamento.indexOf(med)
                 if(index > -1){
+                    codigos.splice(index,1);
                     this.prescricao.prescricaomedicamento.splice(index, 1);                  
                     this.prescricao.relatorioAntimicro.splice(index, 1);              
                 }
             },
             adicionar(){
+                this.prescricao.idinternacao = idinter;
                 this.$http.post('/prescricao/create', this.prescricao).then(response => {
                     swal({
                         title: "Salvo!",
@@ -198,13 +194,13 @@
                 this.$http.post('../buscapaciente', {prontuario: prontuario}).then(response => {
                    
                     $("#buscar").modal('hide')
-                    this.paciente = response.data[0].nomecompleto;  
-                    this.clinica = response.data[0].nome;
+                    this.nome = response.data[0].value;  
+                    this.clinica = response.data[0].clinica;
                     this.numeroprontuario = response.data[0].numeroprontuario;
                     this.leito = response.data[0].leito;
                     this.diag = response.data[0].descricao;
                     this.admissao = response.data[0].dataadmissao;
-                    this.prescricao.idinternacao = response.data[0].id; 
+                    idinter = response.data[0].id; 
           
                 }).catch(response => {
                    console.log(response);
@@ -296,7 +292,7 @@
                     },
                     success: function (data){
                         if(data != ''){
-                        swal({
+                        swal({ 
                             title: "Contraindicação",
                             text: data, 
                             type: "warning",
@@ -318,6 +314,36 @@
             }
         });
     });
+
+
+
+    $(document).ready(function(){
+        var a;
+        $('#nome').autocomplete({
+            source: '/autocomplete2',
+            minlength: 1,
+            autoFocus:true,
+            select: function(event, ui){
+                $("#clinica").val(ui.item.clinica);
+                $("#numeroprontuario").val(ui.item.numeroprontuario);
+                $("#leito").val(ui.item.leito);
+                $("#diag").val(ui.item.descricao);
+                $("#admissao").val(ui.item.dataadmissao);
+                idinter = ui.item.id; 
+                $("#nome").val(ui.item.value);
+                $('.nome').removeClass("col-xs-12 col-sm-12 col-md-12");
+                $('.nome').addClass("col-xs-11 col-sm-11 col-md-11");
+            },
+            change: function(event, ui){   
+                    $('.nome').removeClass("col-xs-11 col-sm-11 col-md-11");
+                    $('.nome').addClass("col-xs-12 col-sm-12 col-md-12");
+            }
+        });
+    });
+
+
+
+
 
     function Trim(str){
         return str.replace(/^\s+|\s+$/g,"");
@@ -363,10 +389,10 @@
                         <div class="form-group">
                             <label for="paciente">Paciente:</label>
                             <div class="input-group input-group-sm">
-                                <input id="paciente" type="text" name="paciente" class="form-control" readonly="readonly" v-model="paciente">
+                                <input id="nome" type="text" name="nome" class="form-control" v-model="nome">
                                 
                                 <span class="input-group-btn">
-                                  <button type="button" data-toggle="tooltip" title="Buscar paciente internado" class="btn btn-primary btn-flat buscar"><i class="fa fa-search"></i></button>
+                                  <button type="button" data-toggle="tooltip" title="Buscar paciente por prontuário" class="btn btn-primary btn-flat buscar"><i class="fa fa-search"></i></button>
                                 </span>
                             </div>
                         </div>
@@ -420,7 +446,7 @@
 
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <label for="dose">Dose: 
+                            <label for="dose">Dose por administração: 
                             	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Dose" class="btn btn-primary btn-flat doseM"><i class="fa fa-search"></i></button></label>
                             <textarea id="dose" type="text" name="dose" class="form-control"></textarea>
                         </div>
@@ -556,19 +582,6 @@
                         <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
                             <div class="row">
                                 <div class="box-body">
-                                    <div class="col-xs-10 col-sm-10 col-md-10">
-                                        <div class="form-group">
-                                            <label for="paciente">Nome:</label>
-                                            <div class="input-group input-group-sm">
-                                                <input type="text" name="nome" id="nome" class="form-control" v-model="nome">
-                                                
-                                                <span class="input-group-btn">
-                                                  <button type="submit" class="btn btn-primary" @click="buscarnome" data-toggle="tooltip" title="Digite o nome do paciente" class="btn btn-primary btn-flat buscar"><i class="fa fa-search"></i></button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <div class="col-xs-10 col-sm-10 col-md-10">
                                         <div class="form-group">
                                             <label for="paciente">Prontuário:</label>
