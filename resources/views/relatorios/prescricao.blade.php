@@ -99,7 +99,7 @@ function data_format($format_ini, $value, $format_end)
                     <td width="3.5%">ped</td>
                     <td class="tg-yw4l" width="3.5%">at.</td>
                     <td class="tg-s6z2"  colspan="2" width="25%">Descrição do medicamento</td>
-                    <td class="tg-baqh"  colspan="10" width="40.35%">Posologia</td>
+                    <td class="tg-baqh"  colspan="10" width="40.35%" >Posologia</td>
                     <td class="tg-baqh" colspan="6">Aprazamento</td>
                 </tr>
             </table>
