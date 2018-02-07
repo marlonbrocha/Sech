@@ -343,6 +343,9 @@
                                 case 11:
                                     nomeunidade = 'mEq';
                                     break;
+                                case 12:
+                                    nomeunidade = 'mg/ml';
+                                    break;
                             }
 
                             switch (med_array[i]['nomeconteudo']) {
@@ -408,6 +411,9 @@
                                     break;
                                 case 11:
                                     uc = 'mEq';
+                                    break;
+                                case 12:
+                                    uc = 'mg/ml';
                                     break;
                             }
 

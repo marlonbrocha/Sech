@@ -17,7 +17,7 @@ class CreateMedicamentosTable extends Migration
             $table->increments('id');
             $table->integer('idformafarmaceutica');
             $table->integer('nomeconteudo');
-            $table->double('quantidadeconteudo');
+            $table->string('quantidadeconteudo');
             $table->integer('unidadeconteudo');
             $table->string('codigosimpas')->unique();            
             $table->string('nomecomercial');              
@@ -30,7 +30,7 @@ class CreateMedicamentosTable extends Migration
             $table->increments('id');
             $table->integer('idmedicamento')->unsigned();;
             $table->integer('idsubstanciaativa')->unsigned();;
-            $table->double('quantidadedose');
+            $table->string('quantidadedose');
             $table->integer('unidadedose');              
             $table->timestamps();
             

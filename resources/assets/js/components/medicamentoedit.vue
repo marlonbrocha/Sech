@@ -128,6 +128,7 @@
                             <option value="9">mcg/mL</option>
                             <option value="10">UI/mL</option>
                             <option value="11">mEq</option>
+                            <option value="12">mg/ml</option>
                         </select>
                     </div>
                 </div>
@@ -224,6 +225,7 @@
                                                 <option value="9">mcg/mL</option>
                                                 <option value="10">UI/mL</option>
                                                 <option value="11">mEq</option>
+                                                <option value="12">mg/ml</option>
                                             </select>
                                         </div>
                                     </div>    

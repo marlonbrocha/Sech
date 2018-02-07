@@ -85,6 +85,9 @@
                                 case 11:
                                     $nomeunidade = 'mEq';
                                     break;
+                                case 12:
+                                    $nomeunidade = 'mg/ml';
+                                    break;
                                 }
                                 echo"$nomeunidade, ";
                             ?>
@@ -157,6 +160,9 @@
                                     break;
                                 case 11:
                                     $uc = 'mEq';
+                                    break;
+                                case 12:
+                                    $uc = 'mg/ml';
                                     break;
                                 }
                                 echo"$uc, ";
@@ -287,7 +293,13 @@
                                                         case 11:
                                                             $uc = 'mEq';
                                                             break;
+                                                        case 12:
+                                                            $uc = 'mg/ml';
+                                                            break;
+                                                            
                                                         }
+
+
                                                         echo"$uc, ";
                                                     ?>
 
@@ -351,6 +363,9 @@
                                                                                 break;
                                                                             case 11:
                                                                                 $nomeunidade = 'mEq';
+                                                                                break;
+                                                                            case 12:
+                                                                                $nomeunidade = 'mg/ml';
                                                                                 break;
                                                                             }
                                                                             echo"$nomeunidade";

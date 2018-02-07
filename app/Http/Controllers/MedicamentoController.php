@@ -201,6 +201,9 @@ class MedicamentoController extends Controller {
                     case 11:
                         $nomeunidade = 'mEq';
                         break;
+                    case 12:
+                        $nomeunidade = 'mg/ml';
+                        break;
                 }
                 $substancias .= $medicamentosubstancia->substanciaativa->nome.' '. $medicamentosubstancia->quantidadedose. ' '. $nomeunidade . ', ';
                  $class = $medicamentosubstancia->substanciaativa->classificacao;
@@ -270,6 +273,9 @@ class MedicamentoController extends Controller {
                     break;
                 case 11:
                     $uc = 'mEq';
+                    break;
+                case 12:
+                    $uc = 'mg/ml';
                     break;
             }
             $substancias .= '' . $conteudo . ' com ' . $medicamento->quantidadeconteudo . ' '. $uc;
