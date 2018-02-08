@@ -72,6 +72,12 @@
                 case 11:
                     $nomeunidade = 'mEq';
                     break;
+                case 12:
+                    $nomeunidade = 'mg/mL';
+                    break;
+                case 13:
+                    $nomeunidade = 'mL';
+                    break;                   
                 }
                 echo"<td>$nomeunidade</td>";
             ?>

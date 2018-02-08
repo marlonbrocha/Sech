@@ -50,7 +50,11 @@ class MedicamentoController extends Controller {
         $medicamento->idformafarmaceutica = $request->get('formafarmaceutica');
         $medicamento->nomeconteudo = $request->get('conteudo');
         $medicamento->quantidadeconteudo = $request->get('quantidade');
-        $medicamento->unidadeconteudo = $request->get('unidade');
+        if($request->get('unidade') == ''){
+            $medicamento->unidadeconteudo = 99;
+        }else{
+            $medicamento->unidadeconteudo = $request->get('unidade');
+        }
         $medicamento->codigosimpas = $request->get('simpas');
         $medicamento->nomecomercial = $request->get('nomecomercial');
 
@@ -202,8 +206,11 @@ class MedicamentoController extends Controller {
                         $nomeunidade = 'mEq';
                         break;
                     case 12:
-                        $nomeunidade = 'mg/ml';
+                        $nomeunidade = 'mg/mL';
                         break;
+                     case 13:
+                        $nomeunidade = 'mL';
+                        break;    
                 }
                 $substancias .= $medicamentosubstancia->substanciaativa->nome.' '. $medicamentosubstancia->quantidadedose. ' '. $nomeunidade . ', ';
                  $class = $medicamentosubstancia->substanciaativa->classificacao;
@@ -275,10 +282,17 @@ class MedicamentoController extends Controller {
                     $uc = 'mEq';
                     break;
                 case 12:
-                    $uc = 'mg/ml';
+                    $uc = 'mg/mL';
+                    break;
+                case 13:
+                    $uc = 'mL';
+                    break;
+                default:
+                    $uc = '';       
                     break;
             }
             $substancias .= '' . $conteudo . ' com ' . $medicamento->quantidadeconteudo . ' '. $uc;
+            //$substancias .= '' . $conteudo;
             $results[] = [
                 
                 'codigo' => $medicamentosubstancia->substanciaativa->codigo,

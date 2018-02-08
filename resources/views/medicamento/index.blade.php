@@ -165,7 +165,7 @@
                                     $uc = 'mg/ml';
                                     break;
                                 }
-                                echo"$uc, ";
+                                echo"$uc ";
                             ?>
                             
                         </td>

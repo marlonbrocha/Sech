@@ -45,7 +45,9 @@
                                                      8 => 'mg/gota', 
                                                      9 => 'mcg/mL', 
                                                      10 => 'UI/mL', 
-                                                     11 => 'mEq'
+                                                     11 => 'mEq',
+                                                     12 => 'mg/mL',
+                                                     13 => 'mL'
                                                      )
                     ,null, array('placeholder'=>'--Selecione--','class' => 'form-control'))!!}</div>
     </div>

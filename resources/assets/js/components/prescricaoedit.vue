@@ -344,8 +344,11 @@
                                     nomeunidade = 'mEq';
                                     break;
                                 case 12:
-                                    nomeunidade = 'mg/ml';
+                                    nomeunidade = 'mg/mL';
                                     break;
+                                case 13:
+                                	nomeunidade = 'mL';
+                             		break;
                             }
 
                             switch (med_array[i]['nomeconteudo']) {
@@ -413,8 +416,11 @@
                                     uc = 'mEq';
                                     break;
                                 case 12:
-                                    uc = 'mg/ml';
+                                    uc = 'mg/mL';
                                     break;
+                                case 13:
+                                    uc = 'mL';
+                                    break;    
                             }
 
                         this.prescricao.prescricaomedicamento.push({
