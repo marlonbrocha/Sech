@@ -236,7 +236,7 @@ function data_format($format_ini, $value, $format_end)
 
                 @endif                                                    
                 </td>
-                <td class="tg-yw4l" colspan="9">{{$medicamento->posologia}}. {{ $medicamento->obs}}. {{$medicamento->dose}}. {{$medicamento->administracao}} . {{$medicamento->diluicao}} </td>
+                <td class="tg-yw4l" colspan="9">{{$medicamento->dose}}. {{$medicamento->administracao}}. {{$medicamento->posologia}}. {{ $medicamento->obs}}. {{$medicamento->diluicao}} </td>
                 <td class="tg-yw4l" width="3%"></td>
                 <td class="tg-yw4l" width="3%"></td>
                 <td class="tg-yw4l" width="3%"></td>

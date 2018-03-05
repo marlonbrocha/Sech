@@ -17,7 +17,7 @@ class MedicamentoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        $medicamentos = Medicamento::orderBy('id', 'desc')->paginate(15);
+        $medicamentos = Medicamento::orderBy('id', 'desc')->paginate(600);
         return view('medicamento.index', compact('medicamentos'))
                         ->with('i', ($request->input('page', 1) - 1) * 15);
     }
@@ -61,12 +61,15 @@ class MedicamentoController extends Controller {
         $medicamento->save();
         $fk_medicamento = $medicamento->id;
         //substancias
+
+
+
         $substancias = $request->get('substancias');
         for ($i = 0; $i < sizeof($substancias); $i++) {
             $medicamentoSubstancia = new Medicamentosubstancia();
             $medicamentoSubstancia->idsubstanciaativa = $substancias[$i]['substancia'];
-            $medicamentoSubstancia->quantidadedose = $substancias[$i]['quantidadedose'];
-            $medicamentoSubstancia->unidadedose = $substancias[$i]['unidadedose'];
+            $medicamentoSubstancia->quantidadedose = (!isset($substancias[$i]['quantidadedose'])) ? 0 : $substancias[$i]['quantidadedose'];
+            $medicamentoSubstancia->unidadedose = (!isset($substancias[$i]['unidadedose'])) ? 99 : $substancias[$i]['unidadedose'];
             $medicamentoSubstancia->idmedicamento = $fk_medicamento;
             $medicamentoSubstancia->save();
         }
@@ -121,8 +124,9 @@ class MedicamentoController extends Controller {
 
         $medicamento->save();
         $fk_medicamento = $medicamento->id;
+        
         //substancias
-        $substancias = $request->get('substancias');
+       /* $substancias = $request->get('substancias');
         for ($i = 0; $i < sizeof($substancias); $i++) {
             $medicamentoSubstancia = new Medicamentosubstancia();
             $medicamentoSubstancia->idsubstanciaativa = $substancias[$i]['substancia'];
@@ -131,6 +135,7 @@ class MedicamentoController extends Controller {
             $medicamentoSubstancia->idmedicamento = $id;
             $medicamentoSubstancia->save();
         }
+        */
     }
 
     /**
@@ -208,9 +213,18 @@ class MedicamentoController extends Controller {
                     case 12:
                         $nomeunidade = 'mg/mL';
                         break;
-                     case 13:
+                    case 13:
                         $nomeunidade = 'mL';
-                        break;    
+                        break;
+                    case 14:
+                        $nomeunidade = 'Seringa Pré-enchida';
+                    break;
+                    case 15:
+                        $nomeunidade = 'Kcal/L';
+                    break;    
+                    default:
+                        $nomeunidade = '';       
+                    break;        
                 }
                 $substancias .= $medicamentosubstancia->substanciaativa->nome.' '. $medicamentosubstancia->quantidadedose. ' '. $nomeunidade . ', ';
                  $class = $medicamentosubstancia->substanciaativa->classificacao;
@@ -286,7 +300,7 @@ class MedicamentoController extends Controller {
                     break;
                 case 13:
                     $uc = 'mL';
-                    break;
+                    break;      
                 default:
                     $uc = '';       
                     break;

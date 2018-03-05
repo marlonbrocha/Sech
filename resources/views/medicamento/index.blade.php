@@ -88,6 +88,15 @@
                                 case 12:
                                     $nomeunidade = 'mg/ml';
                                     break;
+                                 case 13:
+                                    $nomeunidade = 'mL';
+                                    break;    
+                                case 14:
+                                    $nomeunidade = 'Seringa Pré-enchida';
+                                break;
+                                case 15:
+                                    $nomeunidade = 'Kcal/L';
+                                break;    
                                 }
                                 echo"$nomeunidade, ";
                             ?>
@@ -164,6 +173,9 @@
                                 case 12:
                                     $uc = 'mg/ml';
                                     break;
+                                case 13:
+                                    $uc = 'mL';
+                                    break;    
                                 }
                                 echo"$uc ";
                             ?>

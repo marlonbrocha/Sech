@@ -224,6 +224,8 @@
                                                 <option value="11">mEq</option>
                                                 <option value="12">mg/ml</option>
                                                 <option value="13">mL</option>
+                                                <option value="14">Seringa Pré-enchida</option>
+                                                <option value="15">Kcal/L</option>
                                             </select>
                                         </div>
                                     </div>    

@@ -5,6 +5,10 @@
 
    var consequencia = new Array();
    var classific = 7;
+   var direita = new Array();
+   var codigos = new Array();
+   var posicoes = new Array();   
+   var idinter = '';
 
     export default{
 
@@ -52,57 +56,46 @@
         },
         methods: {
 	            	addMed(){
-	                    var cod = $("#codigo").val();
-	                    var aux = new Array();
-	                    var aux_pai = new Array();
-	                    var posicao = new Array();
-	                    var posicao2 = new Array();
+	                var cod = $("#codigo").val();
+                    var i;
+                    var j;
+                    var verifica = false;
+                    codigos.push(cod);
 
-	                    array.push(cod);
-	                    var i;
-	                    var j;
+                    if(direita.length > 0){ //vefifica se ja tem interacaoes inseridas
+                        for (i = 0; i < direita.length ; i++){ 
+                            if(cod == direita[i]){  //comparação do codigo inserido com o vetor existente 
+                                for(j = 0; j < codigos.length ; j++){  
+                                    if(direita[i] == codigos[j]){ //verifica se o codigo comparado ainda existe na lista de medicamentos prescritos                                  
+                                        verifica = true;
+                                    }
+                                }
+                                if(verifica == true && codigos.length > 1){
+                                    let pos = posicoes[i];
+                                    swal({
+                                        title: "Interação Medicamentosa",
+                                        text: consequencia[pos], 
+                                        type: "warning",
+                                        html: true,
+                                    });    
+                                }    
+                            }
+                        }
+                    }                    
 
-	                    for (i = 0; i < sub1.length ; i++){
-	                        alert(sub1[i]);
-	                        alert(sub2[i]);
-	                        alert(consequencia[i]);
+                    for (i = 0; i < sub1.length ; i++){
+                        if(cod == sub1[i]){
+                            direita.push(sub2[i]);
+                            posicoes.push(i);
+                        }
+                    }
 
-	                        if(cod == sub1[i]){
-	                            aux.push(sub2[i]);
-	                            posicao.push(i);
-	                        }
-	                    }
-
-	                    for (i = 0; i < sub2.length ; i++){
-	                        if(cod == sub2[i]){
-	                            aux_pai.push(sub1[i]);
-	                            posicao2.push(i);
-	                        }
-	                    } 
-
-	                    for (i = 0; i < aux.length ; i++) {
-	                        //alert(aux[i]);
-	                        for (j = 0; j < array.length ; j++){
-	                            if(aux[i] == array[j]){
-	                                let pos = posicao[i];
-	                            }    
-	                        }
-	                    }
-
-	                    for (i = 0; i < aux_pai.length ; i++) {
-	                        //alert(aux[i]);
-	                        for (j = 0; j < array.length ; j++){
-	                            if(aux_pai[i] == array[j]){
-	                                let pos = posicao2[i];
-	                                swal({
-	                                    title: "Interação Medicamentosa",
-	                                    text: consequencia[pos], 
-	                                    type: "warning",
-	                                    html: true,
-	                                });
-	                            }    
-	                        }
-	                    } 
+                    for (i = 0; i < sub2.length ; i++){
+                        if(cod == sub2[i]){
+                            direita.push(sub1[i]);
+                            posicoes.push(i);
+                        }
+                    }
 
 
 	                if(typeof  this.prescricao.prescricaomedicamento[0] != "undefined"){
@@ -349,6 +342,12 @@
                                 case 13:
                                 	nomeunidade = 'mL';
                              		break;
+                                case 14:
+                                    nomeunidade = 'Seringa Pré-enchida';
+                                    break;
+                                case 15:
+                                    nomeunidade = 'Kcal/L';
+                                    break;  
                             }
 
                             switch (med_array[i]['nomeconteudo']) {
@@ -375,7 +374,7 @@
                                     break;
                                 case 7:
                                     conteudo = 'Pote';
-                                    break;
+                                    break;   
                             }
 
                             switch (med_array[i]['unidadeconteudo']) {
@@ -420,7 +419,7 @@
                                     break;
                                 case 13:
                                     uc = 'mL';
-                                    break;    
+                                    break;             
                             }
 
                         this.prescricao.prescricaomedicamento.push({
@@ -438,7 +437,7 @@
 	                        classificacao: med_array[i]['classificacao']
 	                    });
 
-                        if(med_array[i]['classificacao'] == 2){
+                        /*if(med_array[i]['classificacao'] == 2){
 	                        this.prescricao.relatorioAntimicro.push({
 		                        idmedicamento: med_array[i]['idmedicamento'],
 		                        medInfe: med_array[i]['antimicrobiano'],
@@ -450,7 +449,7 @@
 		                        clinica: med_array[i]['clinica'],
 		                        diagInfe: med_array[i]['diagnostico_infeccioso']
 		                    });
-                    	}
+                    	}*/
 
                     }
 
