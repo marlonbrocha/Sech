@@ -114,7 +114,8 @@ function data_format($format_ini, $value, $format_end)
                                         <tbody>
                                             @foreach ($medicamentos  as $key => $medicamento)
                                             <tr>
-                                                <td> @if($medicamento->idmedicamento  != null)
+                                                <td> 
+                                                    @if($medicamento->idmedicamento  != '')
                                                     @foreach ($medicamento->medicamento->medicamentosubstancias as $key => $medicamentosubstancia)
                                                     {{$medicamentosubstancia->substanciaativa->nome}}
                                                     {{$medicamentosubstancia->quantidadedose}}
@@ -161,6 +162,7 @@ function data_format($format_ini, $value, $format_end)
                                                     echo"$nomeunidade, ";
                                                     ?>
                                                     @endforeach
+
                                                     {{ $medicamento->medicamento->formafarmaceuticas->nome}}
                                                     <?php
                                                     $conteudo = '';
@@ -253,19 +255,11 @@ function data_format($format_ini, $value, $format_end)
                                             </a>
                                         </center>
                                         @endif
+                                    </td>
                                         </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
 
-
-                                            
-                                            <div class="modal fade" id="{{$medicamento->idrelatorio}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal fade" id="{{$medicamento->idrelatorio}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -312,12 +306,26 @@ function data_format($format_ini, $value, $format_end)
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                                                         
                                                     </div>
+                                        
                                                 </div>
                                             </div>
                                         </div>
 
+                                        
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                                            
+                                            
                 </div>
+
             </div>
+
             <div class="pull-right" style="margin-right: 1%;">
                 <a class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Voltar" href="{{ route('prescricao.index') }}"><i class="fa fa-reply"></i></a>
             </div>

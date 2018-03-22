@@ -16,15 +16,15 @@
             return {
                 
                 paciente: '',
-                numeroprontuario: '',
-                clinica: '',   
-                leito: '',
-                diag: '',
+                //numeroprontuario: '',
+                //clinica: '',   
+                //leito: '',
+                //diag: '',
                 diagInfe: '',
-                admissao: '',
+                //admissao: '',
                 prontuario: '',
                 qtd:'',
-                nome:'',
+                //nome:'',
                 posologia:'',
                 obs:'',
                 iniTrata:'',
@@ -101,16 +101,19 @@
                     var administracao = $("#administracao").val();
                     var estabilidade = $("#estabilidade").val();
                     var diluicao = $("#diluicao").val();
-
+                    
+                    //console.log(document.getElementById("nome_a").value);
+                    
                     this.prescricao.relatorioAntimicro.push({
+                        
                         idmedicamento: id,
                         medInfe: med,
                         duracao: this.duracao,
-                        leito: this.leito,
-                        paciente: this.paciente,
-                        dataadmissao: this.admissao,
+                        leito: document.getElementById("leito_a").value,
+                        paciente: document.getElementById("nome_a").value,
+                        dataadmissao: document.getElementById("admissao_a").value,
                         iniTrata: this.iniTrata,
-                        clinica: this.clinica,
+                        clinica: document.getElementById("clinica_a").value,
                         diagInfe: this.diagInfe
                     });
 
@@ -192,14 +195,20 @@
             buscarprontuario(){
                 var prontuario = $("#prontuario").val();
                 this.$http.post('../buscapaciente', {prontuario: prontuario}).then(response => {
-                   
                     $("#buscar").modal('hide')
-                    this.nome = response.data[0].value;  
-                    this.clinica = response.data[0].clinica;
-                    this.numeroprontuario = response.data[0].numeroprontuario;
-                    this.leito = response.data[0].leito;
-                    this.diag = response.data[0].descricao;
-                    this.admissao = response.data[0].dataadmissao;
+
+                  document.getElementById("nome").value =  response.data[0].value;
+                  document.getElementById("clinica").value =  response.data[0].clinica;
+                  document.getElementById("numeroprontuario").value =  response.data[0].numeroprontuario;
+                  document.getElementById("leito").value =  response.data[0].leito;
+                  document.getElementById("diag").value =  response.data[0].descricao;
+                  document.getElementById("admissao").value =  response.data[0].dataadmissao;
+
+                  document.getElementById("clinica_a").value =  response.data[0].clinica;
+                  document.getElementById("nome_a").value =  response.data[0].value;
+                  document.getElementById("leito_a").value =  response.data[0].leito;
+                  document.getElementById("admissao_a").value =  response.data[0].dataadmissao;
+
                     idinter = response.data[0].id; 
           
                 }).catch(response => {
@@ -329,8 +338,14 @@
                 $("#leito").val(ui.item.leito);
                 $("#diag").val(ui.item.descricao);
                 $("#admissao").val(ui.item.dataadmissao);
+
+                $("#clinica_a").val(ui.item.clinica);
+                $("#nome_a").val(ui.item.value);
+                $("#leito_a").val(ui.item.leito);
+                $("#admissao_a").val(ui.item.dataadmissao);
+
                 idinter = ui.item.id; 
-                $("#nome").val(ui.item.value);
+                //$("#nome").val(ui.item.value);
                 $('.nome').removeClass("col-xs-12 col-sm-12 col-md-12");
                 $('.nome').addClass("col-xs-11 col-sm-11 col-md-11");
             },
@@ -389,7 +404,7 @@
                         <div class="form-group">
                             <label for="paciente">Paciente:</label>
                             <div class="input-group input-group-sm">
-                                <input id="nome" type="text" name="nome" class="form-control" v-model="nome">
+                                <input id="nome" type="text" name="nome" class="form-control">
                                 
                                 <span class="input-group-btn">
                                   <button type="button" data-toggle="tooltip" title="Buscar paciente por prontuário" class="btn btn-primary btn-flat buscar"><i class="fa fa-search"></i></button>
@@ -400,31 +415,31 @@
                     <div class="col-xs-2 col-sm-2 col-md-2">
                         <div class="form-group">
                             <label for="numeroprontuario">Nº Prontuário:</label>
-                            <input id="numeroprontuario" type="text" name="numeroprontuario" class="form-control" readonly="readonly" v-model="numeroprontuario">
+                            <input id="numeroprontuario" type="text" name="numeroprontuario" class="form-control" readonly="readonly">
                         </div>
                     </div>
                     <div class="col-xs-5 col-sm-5 col-md-5">
                         <div class="form-group">
                             <label for="clinica">Clínica:</label>
-                            <input id="clinica" type="text" name="clinica" class="form-control" readonly="readonly" v-model="clinica">
+                            <input id="clinica" type="text" name="clinica" class="form-control" readonly="readonly">
                         </div>
                     </div>
                     <div class="col-xs-1 col-sm-1 col-md-1">
                         <div class="form-group">
                             <label for="leito">Leito:</label>
-                            <input id="leito" type="text" name="leito" class="form-control" readonly="readonly" v-model="leito">
+                            <input id="leito" type="text" name="leito" class="form-control" readonly="readonly">
                         </div>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4">
                         <div class="form-group">
                             <label for="diag">Diagnóstico:</label>
-                            <input id="diag" type="text" name="diag" class="form-control" readonly="readonly" v-model="diag">
+                            <input id="diag" type="text" name="diag" class="form-control" readonly="readonly">
                         </div>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2">
                         <div class="form-group">
                             <label for="admissao">Data de admissão:</label>
-                            <input id="admissao" type="text" name="admissao" class="form-control" readonly="readonly" v-model="admissao">
+                            <input id="admissao" type="text" name="admissao" class="form-control" readonly="readonly" >
                         </div>
                     </div>
                     
@@ -520,7 +535,6 @@
                                         <table id="table" class="table table-condensed table-bordered table-hover dataTable" role="grid">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">codigo</th>
                                                     <th class="text-center">SIMPAS</th>
                                                     <th width="2%" class="text-center">Quantidade</th>
                                                     <th class="text-center">Medicamento</th>
@@ -536,7 +550,6 @@
                                             </thead>
                                             <tbody>
                                                 <tr v-for="medicamento in prescricao.prescricaomedicamento">
-                                                    <td>{{medicamento.codigo}}</td>
                                                     <td>{{medicamento.simpas}}</td>
                                                     <td>{{medicamento.qtd}}</td>
                                                     <td>{{medicamento.med}}</td>
@@ -623,21 +636,21 @@
                                  <div class="col-xs-12 col-sm-12 col-md-12 obs">
                                     <div class="form-group">
                                         <label for="paciente">NOME:</label>
-                                        <input id="posologia" v-model="paciente" type="text" name="posologia" class="form-control"  readonly="">
+                                        <input id="nome_a"  type="text" name="nome_a" class="form-control"  readonly="">
                                      </div>
                                  </div>
 
                                  <div class="col-xs-2 col-sm-2 col-md-2">
                                     <div class="form-group">
                                         <label for="leito">LEITO:</label>
-                                        <input id="leito" type="text" name="leito" class="form-control" readonly="readonly" v-model="leito">
+                                        <input id="leito_a" type="text" name="leito_a" class="form-control" readonly="readonly">
                                     </div>
                                 </div>
 
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <label for="admissao">DATA DE ADMISSÃO:</label>
-                                        <input id="admissao" type="text" name="admissao" class="form-control" readonly="readonly" v-model="admissao">
+                                        <input id="admissao_a" type="text" name="admissao_a" class="form-control" readonly="readonly">
                                     </div>
                                 </div>
 
@@ -651,8 +664,8 @@
                                 <div class="col-xs-5 col-sm-5 col-md-5">
                                     <div class="form-group">
                                         <label for="clinica">CLÍNICA:</label>
-                                        <input id="clinica" type="text" name="clinica" class="form-control" readonly="readonly" v-model="clinica">
-                                    </div>
+                                        <input id="clinica_a" type="text" name="clinica_a" class="form-control" readonly="readonly">
+                                    </div>  
                                 </div>
 
                                 <div class="col-xs-12 col-sm-12 col-md-12 obs">

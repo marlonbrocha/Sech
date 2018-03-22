@@ -24,7 +24,7 @@ class CreatePrescricaosTable extends Migration
                     ->onDelete('cascade');
             $table->text('dataprescricao');
             $table->text('dataaprovacao')->nullable();
-            //$table->text('historicoatual');
+            $table->integer('id_pai')->nullable();
             $table->text('evolucao');
             $table->text('observacoesmedicas')->nullable();
             $table->integer('status')->default(0);

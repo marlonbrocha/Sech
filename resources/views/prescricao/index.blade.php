@@ -120,7 +120,13 @@
                                                                     @foreach ($prescricao->medicamentos  as $key => $prescmed)
                                                                     <tr>
                                                                         <td>{{$prescmed->qtdpedida}}</td>
-                                                                        <td>{{$prescmed->medicamento->nomecomercial or ''}}</td>
+                                                                        <td>
+                                                                            @if($prescmed->idmedicamento  != null)
+                                                                            {{$prescmed->medicamento->nomecomercial or ''}}
+                                                                            @else
+                                                                            {{$prescmed->outros}}
+                                                                            @endif
+                                                                        </td>
                                                                         <td>{{$prescmed->posologia}}</td>
                                                                     </tr>
                                                                     @endforeach  

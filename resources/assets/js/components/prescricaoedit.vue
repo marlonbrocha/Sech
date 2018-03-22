@@ -17,6 +17,7 @@
             return {
             	evol:'',
             	ind: '',
+                ind_rela:'',
             	nomeEdit:'',
                 quantidadeEdit: '',
                 posologiaEdit:'',
@@ -102,7 +103,7 @@
 	                    //alert(this.prescricao.prescricaomedicamento[0].diluicao);
 	                }                    
 
-	                var id = $("#idmed").val()
+	                var id = $("#idmed").val();
 	                this.$http.post('../simpas', {id: id}).then(response => {
 	                    var codigo = $("#codigo").val();
 	                    var med = $("#med").val();
@@ -146,7 +147,28 @@
 	                    $('.med').removeClass("col-xs-11 col-sm-11 col-md-11");
 	                    $('.med').addClass("col-xs-12 col-sm-12 col-md-12");
 	                }).catch(response => {
-	                     console.log('erro');
+                        var codigo = $("#codigo").val();
+                        var med = $("#med").val();
+                        var dose = $("#dose").val();
+                        var administracao = $("#administracao").val();
+                        var estabilidade = $("#estabilidade").val();
+                        var diluicao = $("#diluicao").val();
+
+                         this.prescricao.prescricaomedicamento.push({
+                            codigo: cod,
+                            simpas: '',
+                            idmedicamento: '',
+                            qtd: this.qtd,
+                            med: med,
+                            obs: this.obs,
+                            posologia: this.posologia,
+                            administracao: administracao,
+                            dose: dose,
+                            diluicao: diluicao,
+                            estabilidade: estabilidade,
+                            classificacao: classific
+                        });                            
+	                     console.log('erro push medicamento');
 	                });
 	            },
 	            removeMed(med) {
@@ -156,6 +178,39 @@
 	                    this.prescricao.relatorioAntimicro.splice(index, 1);              
 	                }
 	            },
+
+                adicionarRelatorio(med) {
+                    var index = this.prescricao.prescricaomedicamento.indexOf(med)
+                    console.log(this.prescricao.prescricaomedicamento[index].med);
+                    this.ind_rela = index;
+
+                    if(this.prescricao.prescricaomedicamento[index].classificacao == 2){
+                        classific = this.prescricao.prescricaomedicamento[index].classificacao;
+                        console.log('aasoidoasdnsa');
+                        document.getElementById("medInfe").value =  this.prescricao.prescricaomedicamento[index].med;
+                        $(document).ready(function() {
+                            $("#relatorio").modal('show');
+                        });
+                    }
+
+                },
+                salveRelatorio() {
+
+                    this.prescricao.relatorioAntimicro[this.ind_rela].idmedicamento = this.prescricao.prescricaomedicamento[this.ind_rela].idmedicamento;
+                    this.prescricao.relatorioAntimicro[this.ind_rela].medInfe =   this.prescricao.prescricaomedicamento[this.ind_rela].med;
+                    this.prescricao.relatorioAntimicro[this.ind_rela].duracao = this.duracao;
+                    this.prescricao.relatorioAntimicro[this.ind_rela].leito = this.leito;
+                    this.prescricao.relatorioAntimicro[this.ind_rela].paciente = this.paciente;
+                    this.prescricao.relatorioAntimicro[this.ind_rela].dataadmissao = this.admissao;
+                    this.prescricao.relatorioAntimicro[this.ind_rela].iniTrata = this.iniTrata;
+                    this.prescricao.relatorioAntimicro[this.ind_rela].clinica = this.clinica;
+                    this.prescricao.relatorioAntimicro[this.ind_rela].diagInfe = this.diagInfe;   
+
+                    console.log(this.prescricao.relatorioAntimicro[this.ind_rela]);
+
+                },
+
+
 	            abreEditMed(med) {
 					var b = $("#teste").val();
 		
@@ -184,16 +239,29 @@
 	            },
 	            adicionar(){
 	                this.$http.post('/prescricao/create', this.prescricao).then(response => {
-	                    swal({
-	                        title: "Salvo!",
-	                        text: "Prescrição cadastrada com sucesso!",
-	                        confirmButtonColor: "#66BB6A",
-	                        type: "success",
-	                        showLoaderOnConfirm: true
-	                   },
-	                   function(){
-	                        location.href = "../../";
-	                   }); 
+	                    console.log(response);
+                        if(response.status == 202){
+                            alert('entrou');
+                            
+                            swal({
+                            title: "Erro",
+                            text: 'É necessário fazer um novo relatório antimicrobiano para a substância '+response.statusText,
+                            confirmButtonColor: "#66BB6A",
+                            type: "error",
+                            showLoaderOnConfirm: true
+                           });     
+                        }else{
+                            swal({
+    	                        title: "Salvooo!",
+    	                        text: "Prescrição cadastrada com sucesso!",
+    	                        confirmButtonColor: "#66BB6A",
+    	                        type: "success",
+    	                        showLoaderOnConfirm: true
+    	                   },
+    	                   function(){
+    	                        location.href = "../../";
+    	                   }); 
+                        }
 	                }).catch(response => {
 	                    console.log('Erro:' + response);
 	                });
@@ -279,7 +347,8 @@
 	            });
 
         			this.evol = this.evolu;
-        			this.prescricao.evolucao = this.evolu;
+                    this.prescricao.evolucao = this.evolu;
+        			this.prescricao.idprescricaopai = this.idprescricao;
         			this.prescricao.idinternacao = this.idinter;
         			this.diag = this.diagnostic;
         			this.clinica = this.clinic;
@@ -421,35 +490,51 @@
                                     uc = 'mL';
                                     break;             
                             }
+                        
+                        if(med_array[i]['outros'] != ''){
+                            this.prescricao.prescricaomedicamento.push({
+                                codigo: med_array[i]['codigo'],
+                                simpas: med_array[i]['codigosimpas'],
+                                idmedicamento: med_array[i]['idmedicamento'],
+                                qtd: med_array[i]['qtdpedida'],
+                                med: med_array[i]['outros'],
+                                obs: med_array[i]['obs'],
+                                posologia: med_array[i]['posologia'],
+                                administracao: med_array[i]['administracao'],
+                                dose: med_array[i]['dosemed'],
+                                diluicao: med_array[i]['diluicao'],
+                                estabilidade: med_array[i]['estabilidade'],
+                                classificacao: med_array[i]['classificacao']
+                            });    
+                        }else{
+                            this.prescricao.prescricaomedicamento.push({
+                                codigo: med_array[i]['codigo'],
+                                simpas: med_array[i]['codigosimpas'],
+                                idmedicamento: med_array[i]['idmedicamento'],
+                                qtd: med_array[i]['qtdpedida'],
+                                med: med_array[i]['nomesubstancia'] + med_array[i]['quantidadedose'] + ' ' + nomeunidade +', '+  med_array[i]['nomeforma'] + ' ' +conteudo + 'com ' + med_array[i]['quantidadeconteudo'] + uc,
+                                obs: med_array[i]['obs'],
+                                posologia: med_array[i]['posologia'],
+                                administracao: med_array[i]['administracao'],
+                                dose: med_array[i]['dosemed'],
+                                diluicao: med_array[i]['diluicao'],
+                                estabilidade: med_array[i]['estabilidade'],
+                                classificacao: med_array[i]['classificacao']
+                            });
+                        }
 
-                        this.prescricao.prescricaomedicamento.push({
-	                        codigo: med_array[i]['codigo'],
-	                        simpas: med_array[i]['codigosimpas'],
-	                        idmedicamento: med_array[i]['idmedicamento'],
-	                        qtd: med_array[i]['qtdpedida'],
-	                        med: med_array[i]['nomesubstancia'] + med_array[i]['quantidadedose'] + ' ' + nomeunidade +', '+  med_array[i]['nomeforma'] + ' ' +conteudo + 'com ' + med_array[i]['quantidadeconteudo'] + uc,
-	                        obs: med_array[i]['obs'],
-	                        posologia: med_array[i]['posologia'],
-	                        administracao: med_array[i]['administracao'],
-	                        dose: med_array[i]['dosemed'],
-	                        diluicao: med_array[i]['diluicao'],
-	                        estabilidade: med_array[i]['estabilidade'],
-	                        classificacao: med_array[i]['classificacao']
+                        
+                        this.prescricao.relatorioAntimicro.push({
+	                        idmedicamento: '',
+	                        medInfe: '',
+	                        duracao: '',
+	                        leito: '',
+	                        paciente: '',
+	                        dataadmissao: '',
+	                        iniTrata: '',
+	                        clinica: '',
+	                        diagInfe: ''
 	                    });
-
-                        /*if(med_array[i]['classificacao'] == 2){
-	                        this.prescricao.relatorioAntimicro.push({
-		                        idmedicamento: med_array[i]['idmedicamento'],
-		                        medInfe: med_array[i]['antimicrobiano'],
-		                        duracao: med_array[i]['duracao_tratamento'],
-		                        leito: med_array[i]['leito'],
-		                        paciente: med_array[i]['nome'],
-		                        dataadmissao: med_array[i]['data_admissao'],
-		                        iniTrata: med_array[i]['inicio_tratamento'],
-		                        clinica: med_array[i]['clinica'],
-		                        diagInfe: med_array[i]['diagnostico_infeccioso']
-		                    });
-                    	}*/
 
                     }
 
@@ -711,7 +796,6 @@
                                         <table id="table" class="table table-condensed table-bordered table-hover dataTable" role="grid">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">codigo</th>
                                                     <th class="text-center">SIMPAS</th>
                                                     <th width="2%" class="text-center">Quantidade</th>
                                                     <th class="text-center">Medicamento</th>
@@ -727,7 +811,6 @@
                                             </thead>
                                             <tbody>
                                                 <tr v-for="medicamento in prescricao.prescricaomedicamento">
-                                                    <td>{{medicamento.codigo}}</td>
                                                     <td>{{medicamento.simpas}}</td>
                                                     <td>{{medicamento.qtd}}</td>
                                                     <td>{{medicamento.med}}</td>
@@ -741,6 +824,9 @@
                                                         <a class="btn btn-default"  @click="removeMed(medicamento)"><i class="fa fa-trash"></i></a>
 
                                                         <a data-toggle="tooltip" @click="abreEditMed(medicamento)"  class="btn btn-default editmed"><i class="fa fa-pencil"></i></a>
+                                                        </center>
+
+                                                        <a data-toggle="tooltip" @click="adicionarRelatorio(medicamento)"  class="btn btn-default editme"><i class="fa fa-pencil"></i></a>
                                                         </center>
                                                         
                                                     </td>
@@ -887,6 +973,9 @@
                         </div>  
                     </div>
                     <div class="modal-footer">
+                        <span class="input-group-btn">
+                                                  <button type="submit" class="btn btn-primary" @click="salveRelatorio()" data-toggle="tooltip" title="Digite o prontuário do paciente" class="btn btn-primary btn-flat buscar"><i class="fa fa-search"></i></button>
+                                                </span>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                     </div>
                 </div>
