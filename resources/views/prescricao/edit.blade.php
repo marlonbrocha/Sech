@@ -54,8 +54,8 @@ function data_format($format_ini, $value, $format_end)
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Data de nascimento:</strong>
-                            {{$prescricao->internacao->paciente->nascimento}}
+                            <strong>Idade:</strong>
+                            {{$prescricao->internacao->paciente->idade}}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -106,7 +106,6 @@ function data_format($format_ini, $value, $format_end)
                                             <tr>
                                                 <th class="text-center">Medicamento</th>
                                                 <th class="text-center">Quantidade pedida</th>
-                                                <th class="text-center">Quantidade aprovada</th>
                                                 <th class="text-center">Posologia</th>
                                                 <th class="text-center">Opções</th>
                                             </tr>
@@ -244,7 +243,6 @@ function data_format($format_ini, $value, $format_end)
 
                                                 </td>
                                                 <td>{{ $medicamento->qtdpedida }}</td>
-                                                <td id="qtd{{$medicamento->idprescmed}}">{{ $medicamento->qtdatendida }}</td>
                                                 <td>{{ $medicamento->posologia}}</td>
                                                 <td>
                                                                             
@@ -293,7 +291,7 @@ function data_format($format_ini, $value, $format_end)
                                                                 {{$medicamento->diagnostico_infeccioso}}
                                                                 <br><br>
                                                                 <strong>Duração do tratamento:</strong>
-                                                                {{$medicamento->duracao_tratamento}}
+                                                                {{$medicamento->quantidade}} {{$medicamento->duracao_tratamento}}
                                                                 <br><br>
                                                                 <strong>Antimicrobiano:</strong>
                                                                 {{$medicamento->antimicrobiano}}

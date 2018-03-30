@@ -34,7 +34,7 @@ class InteracaomedicamentosaController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {        
-        $substanciaativas = Substanciaativa::lists('nome', 'id'); 
+        $substanciaativas = Substanciaativa::lists('nome', 'codigo'); 
         return view('interacaomedicamentosa.create', compact('substanciaativas'));
     }
 
@@ -78,8 +78,9 @@ class InteracaomedicamentosaController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
+        $substanciaativas = Substanciaativa::lists('nome', 'codigo'); 
         $interacaomedicamentosa = Interacaomedicamentosa::find($id);
-        return view('intercaomedicamentosa.edit',compact('interacaomedicamentosa'));
+        return view('interacaomedicamentosa.edit',compact('interacaomedicamentosa','substanciaativas'));
     }
 
     /**

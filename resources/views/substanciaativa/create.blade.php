@@ -50,26 +50,51 @@
                 </div>
             </div>
             
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-8 col-sm-8 col-md-8">
                 <div class="form-group">
                     <strong>Contraindicação:</strong>
                 {!! Form::textarea('contraindicacao', null, array('placeholder' => '','class' => 'form-control', 'style'=>'height:60px', 'maxlength'=>'254')) !!}
                 </div>
             </div>
 
-            <!--<div class="col-xs-12 col-sm-12 col-md-12">
-                <button type="submit" class="btn btn-primary">Salvar</button>
-            </div>-->
-            <div class="pull-right" style="margin-right: 1%;">
+            <div class="col-xs-8 col-sm-8 col-md-8">
+                <div class="form-group">
+                     <strong>Dose:</strong>
+                    {!! Form::textarea('dose', null, array('class' => 'form-control', 'style'=>'height:60px', 'maxlength'=>'254')) !!}
+                </div>
+            </div>
+
+            <div class="col-xs-8 col-sm-8 col-md-8">
+                <div class="form-group">
+                     <strong>Administração:</strong>
+                    {!! Form::textarea('administracao', null, array('class' => 'form-control', 'style'=>'height:60px', 'maxlength'=>'254')) !!}
+                </div>
+            </div>
+
+            <div class="col-xs-8 col-sm-8 col-md-8">
+                <div class="form-group">
+                     <strong>Diluição:</strong>
+                    {!! Form::textarea('diluicao', null, array('class' => 'form-control', 'style'=>'height:60px', 'maxlength'=>'254')) !!}
+                </div>
+            </div>
+
+            <div class="col-xs-8 col-sm-8 col-md-8">
+                <div class="form-group">
+                     <strong>Estabilidade:</strong>
+                    {!! Form::textarea('estabilidade', null, array('class' => 'form-control', 'style'=>'height:60px', 'maxlength'=>'254')) !!}
+                </div>
+            </div>
+            
+        </div>
+        <div class="pull-right" style="margin-right: 1%;">
                 <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Salvar" @click="adicionar"><i class="fa fa-save"></i></button>
             </div>
+            
             <div class="pull-right" style="margin-right: 1%;">
                 <a class="btn btn-default" href="{{ route('substanciaativa.index') }}"> 
                     <i class="fa  fa-mail-reply"></i>
                 </a>
             </div>
-            
-        </div>
     </div>
 </div>
 {!! Form::close() !!}

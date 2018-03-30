@@ -13,18 +13,12 @@
         props: ['data', 'medico'],
 
         data(){
-            return {
-                
+            return {  
                 paciente: '',
-                //numeroprontuario: '',
-                //clinica: '',   
-                //leito: '',
-                //diag: '',
+                quantidade:'',
                 diagInfe: '',
-                //admissao: '',
                 prontuario: '',
                 qtd:'',
-                //nome:'',
                 posologia:'',
                 obs:'',
                 iniTrata:'',
@@ -109,6 +103,7 @@
                         idmedicamento: id,
                         medInfe: med,
                         duracao: this.duracao,
+                        quantidade: this.quantidade,
                         leito: document.getElementById("leito_a").value,
                         paciente: document.getElementById("nome_a").value,
                         dataadmissao: document.getElementById("admissao_a").value,
@@ -295,7 +290,7 @@
 
                 $.ajax({
                     type: 'get',
-                    url: '../medicamento/contraindicacao',
+                    url: '../../../medicamento/contraindicacao',
                     data: {
                         'id': ui.item.id,
                     },
@@ -675,12 +670,23 @@
                                      </div>
                                  </div>
 
-                                 <div class="col-xs-12 col-sm-12 col-md-12 obs">
+                                <div class="col-xs-3 col-sm-3 col-md-3">
                                     <div class="form-group">
-                                        <label for="duracao">DURAÇÃO DO TRATAMENTO:</label>
-                                        <input id="duracao" type="text" name="duracao" class="form-control" v-model="duracao">
+                                        <label for="duracao">QUANTIDADE:</label>
+                                        <input id="quantidade" type="number" name="quantidade" class="form-control" v-model="quantidade">
                                      </div>
                                  </div>
+
+                                <div class="col-xs-5 col-sm-5 col-md-5">
+                                    <div class="form-group">
+                                        <label for="duracao">DURAÇÃO DO TRATAMENTO:</label>
+                                        <select id="duracao" type="text" name="duracao" class="form-control" v-model="duracao">
+                                            <option>Dia(s)</option>
+                                            <option>Semana(s)</option>
+                                            <option>Mês(es)</option>
+                                        </select>        
+                                     </div>
+                                </div> 
 
                                  <div class="col-xs-12 col-sm-12 col-md-12 med">
                                     <div class="form-group">

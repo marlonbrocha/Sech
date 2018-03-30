@@ -4,7 +4,7 @@
    var sub2 = new Array();
 
    var consequencia = new Array();
-   var classific = 7;
+   var classific;
    var direita = new Array();
    var codigos = new Array();
    var posicoes = new Array();   
@@ -15,6 +15,7 @@
         props: ['data', 'medico', 'medicamentos', 'pacient','admissa','prontua','leit','clinic', 'diagnostic', 'evolu','idinter','idprescricao'],
         data(){
             return {
+                verifica_relatorio: false,
             	evol:'',
             	ind: '',
                 ind_rela:'',
@@ -40,6 +41,7 @@
                 iniTrata:'',
                 medInfe:'',
                 duracao:'',
+                quantidade:'',
                 prescricao: {
                     idinternacao: '',
                     dataprescricao: '',
@@ -104,7 +106,7 @@
 	                }                    
 
 	                var id = $("#idmed").val();
-	                this.$http.post('../simpas', {id: id}).then(response => {
+	                this.$http.post('../../../simpas', {id: id}).then(response => {
 	                    var codigo = $("#codigo").val();
 	                    var med = $("#med").val();
 	                    var dose = $("#dose").val();
@@ -115,6 +117,7 @@
 	                    this.prescricao.relatorioAntimicro.push({
 	                        idmedicamento: id,
 	                        medInfe: med,
+                            quantidade: this.quantidade,
 	                        duracao: this.duracao,
 	                        leito: this.leito,
 	                        paciente: this.paciente,
@@ -181,12 +184,11 @@
 
                 adicionarRelatorio(med) {
                     var index = this.prescricao.prescricaomedicamento.indexOf(med)
-                    console.log(this.prescricao.prescricaomedicamento[index].med);
                     this.ind_rela = index;
 
                     if(this.prescricao.prescricaomedicamento[index].classificacao == 2){
+                        this.verifica_relatorio = true;
                         classific = this.prescricao.prescricaomedicamento[index].classificacao;
-                        console.log('aasoidoasdnsa');
                         document.getElementById("medInfe").value =  this.prescricao.prescricaomedicamento[index].med;
                         $(document).ready(function() {
                             $("#relatorio").modal('show');
@@ -195,9 +197,10 @@
 
                 },
                 salveRelatorio() {
-
+                    this.verifica_relatorio = false;
                     this.prescricao.relatorioAntimicro[this.ind_rela].idmedicamento = this.prescricao.prescricaomedicamento[this.ind_rela].idmedicamento;
                     this.prescricao.relatorioAntimicro[this.ind_rela].medInfe =   this.prescricao.prescricaomedicamento[this.ind_rela].med;
+                    this.prescricao.relatorioAntimicro[this.ind_rela].quantidade = this.quantidade;
                     this.prescricao.relatorioAntimicro[this.ind_rela].duracao = this.duracao;
                     this.prescricao.relatorioAntimicro[this.ind_rela].leito = this.leito;
                     this.prescricao.relatorioAntimicro[this.ind_rela].paciente = this.paciente;
@@ -205,9 +208,6 @@
                     this.prescricao.relatorioAntimicro[this.ind_rela].iniTrata = this.iniTrata;
                     this.prescricao.relatorioAntimicro[this.ind_rela].clinica = this.clinica;
                     this.prescricao.relatorioAntimicro[this.ind_rela].diagInfe = this.diagInfe;   
-
-                    console.log(this.prescricao.relatorioAntimicro[this.ind_rela]);
-
                 },
 
 
@@ -239,17 +239,20 @@
 	            },
 	            adicionar(){
 	                this.$http.post('/prescricao/create', this.prescricao).then(response => {
-	                    console.log(response);
                         if(response.status == 202){
-                            alert('entrou');
-                            
-                            swal({
-                            title: "Erro",
-                            text: 'É necessário fazer um novo relatório antimicrobiano para a substância '+response.statusText,
-                            confirmButtonColor: "#66BB6A",
-                            type: "error",
-                            showLoaderOnConfirm: true
-                           });     
+                            this.verifica_relatorio = true;
+                            var i;
+                            var t = response.data.length;
+                            //for( i = 0 ; i < t ; i++){
+                                console.log(i);
+                                swal({
+                                    title: "Erro",
+                                    text: 'É necessário um novo relatório antimicrobiano para: '+response.data,
+                                    confirmButtonColor: "#66BB6A",
+                                    type: "error",
+                                    showLoaderOnConfirm: false
+                               }); 
+                          // }    
                         }else{
                             swal({
     	                        title: "Salvooo!",
@@ -494,7 +497,7 @@
                         if(med_array[i]['outros'] != ''){
                             this.prescricao.prescricaomedicamento.push({
                                 codigo: med_array[i]['codigo'],
-                                simpas: med_array[i]['codigosimpas'],
+                                simpas: '-',
                                 idmedicamento: med_array[i]['idmedicamento'],
                                 qtd: med_array[i]['qtdpedida'],
                                 med: med_array[i]['outros'],
@@ -527,6 +530,7 @@
                         this.prescricao.relatorioAntimicro.push({
 	                        idmedicamento: '',
 	                        medInfe: '',
+                            quantidade: '',
 	                        duracao: '',
 	                        leito: '',
 	                        paciente: '',
@@ -562,10 +566,12 @@
     $(document).ready(function(){
         var a;
         $('#med').autocomplete({
+
             source: '/autocomplete',
             minlength: 1,
             autoFocus:true,
             select: function(event, ui){
+                $(this.verifica_relatorio).val(true);
                 $("#codigo").val(ui.item.codigo);
                 $("#med").val(ui.item.id);
                 $("#doseR").val(ui.item.dose);
@@ -574,9 +580,9 @@
                 $("#estabilidadeR").val(ui.item.estabilidade);
                 
                 a = ui.item.value;
-
                 if(ui.item.classificacao == 2){
                     classific = ui.item.classificacao;
+                    alert('asdasda');
                     $(document).ready(function() {
                         $("#relatorio").modal('show');
                         $("#medInfe").val(ui.item.value); // pega o nome do medicamento
@@ -597,7 +603,9 @@
                     data: {
                         'id': ui.item.id,
                     },
+
                     success: function (data){
+
                         if(data != ''){
                         swal({
                             title: "Contraindicação",
@@ -819,14 +827,12 @@
                                                     <td>{{medicamento.dose}}</td>
                                                     <td>{{medicamento.administracao}}</td>
                                                     <td>{{medicamento.diluicao}}</td>
-                                                    <td width="10%">             
+                                                    <td width="15%">             
                                                         <center>
                                                         <a class="btn btn-default"  @click="removeMed(medicamento)"><i class="fa fa-trash"></i></a>
 
                                                         <a data-toggle="tooltip" @click="abreEditMed(medicamento)"  class="btn btn-default editmed"><i class="fa fa-pencil"></i></a>
-                                                        </center>
-
-                                                        <a data-toggle="tooltip" @click="adicionarRelatorio(medicamento)"  class="btn btn-default editme"><i class="fa fa-pencil"></i></a>
+                                                        <a data-toggle="tooltip" v-if="verifica_relatorio == true && medicamento.simpas != '-'" @click="adicionarRelatorio(medicamento)"  class="btn btn-default editme"><i class="fa fa-file-text-o"></i></a>
                                                         </center>
                                                         
                                                     </td>
@@ -954,10 +960,22 @@
                                      </div>
                                  </div>
 
-                                 <div class="col-xs-12 col-sm-12 col-md-12 obs">
+                                 <div class="col-xs-3 col-sm-3 col-md-3">
+                                    <div class="form-group">
+                                        <label for="duracao">QUANTIDADE:</label>
+                                        <input id="quantidade" type="number" name="quantidade" class="form-control" v-model="quantidade">
+                                     </div>
+                                 </div>
+
+                                 <div class="col-xs-5 col-sm-5 col-md-5">
                                     <div class="form-group">
                                         <label for="duracao">DURAÇÃO DO TRATAMENTO:</label>
-                                        <input id="duracao" type="text" name="duracao" class="form-control" v-model="duracao">
+                                        <select id="duracao" type="text" name="duracao" class="form-control" v-model="duracao">
+                                            <option>Dia(s)</option>
+                                            <option>Semana(s)</option>
+                                            <option>Mês(es)</option>
+                                        </select>
+                                        
                                      </div>
                                  </div>
 
@@ -973,10 +991,8 @@
                         </div>  
                     </div>
                     <div class="modal-footer">
-                        <span class="input-group-btn">
-                                                  <button type="submit" class="btn btn-primary" @click="salveRelatorio()" data-toggle="tooltip" title="Digite o prontuário do paciente" class="btn btn-primary btn-flat buscar"><i class="fa fa-search"></i></button>
-                                                </span>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button v-if="verifica_relatorio" @click="salveRelatorio()" type="button" class="btn btn-default" data-dismiss="modal">Salvar</button>                                                    
+                        <button v-if="!verifica_relatorio" type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                     </div>
                 </div>
             </div>

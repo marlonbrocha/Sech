@@ -50,6 +50,35 @@
         </div>
     </div>
 
+    <div class="col-xs-8 col-sm-8 col-md-8">
+                <div class="form-group">
+                     <strong>Dose:</strong>
+                    {!! Form::textarea('dose', null, array('class' => 'form-control', 'style'=>'height:60px', 'maxlength'=>'254')) !!}
+                </div>
+            </div>
+
+            <div class="col-xs-8 col-sm-8 col-md-8">
+                <div class="form-group">
+                     <strong>Administração:</strong>
+                    {!! Form::textarea('administracao', null, array('class' => 'form-control', 'style'=>'height:60px', 'maxlength'=>'254')) !!}
+                </div>
+            </div>
+
+            <div class="col-xs-8 col-sm-8 col-md-8">
+                <div class="form-group">
+                     <strong>Diluição:</strong>
+                    {!! Form::textarea('diluicao', null, array('class' => 'form-control', 'style'=>'height:60px', 'maxlength'=>'254')) !!}
+                </div>
+            </div>
+
+            <div class="col-xs-8 col-sm-8 col-md-8">
+                <div class="form-group">
+                     <strong>Estabilidade:</strong>
+                    {!! Form::textarea('estabilidade', null, array('class' => 'form-control', 'style'=>'height:60px', 'maxlength'=>'254')) !!}
+                </div>
+            </div>
+            
+
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <button type="submit" class="btn btn-primary">Salvar</button>
     </div>

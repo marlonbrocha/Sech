@@ -96,21 +96,66 @@ class PrescricaoController extends Controller {
         $medicamentos = $request->get('prescricaomedicamento');
         $relatorio = $request->get('relatorioAntimicro');
 
+
         if($request->get('idprescricaopai')){
             $id = $request->get('idprescricaopai');
-            $prescricao->id_pai = $id;
-
+            
             $busca_pai = Prescricao::find($id);
-            $data  = $busca_pai->created_at;
+            $id_pai_maior = 0 ;
+
+            if($busca_pai->id_pai != null){// se for null ele pega o id da primeira prescrição
+                $prescricao->id_pai = $busca_pai->id_pai;
+                $id_pai_maior = $busca_pai->id_pai; 
+
+            }else{//pega o id da segunda prescrição que já tem outro pai
+                $prescricao->id_pai = $id;
+                $id_pai_maior = $id;
+            }
+
+
+            $busca_pai = PrescricaoMedicamento::where('idprescricao', $id_pai_maior)
+                ->join('medicamentos', 'medicamentos.id', '=', 'prescricao_medicamentos.idmedicamento')
+                ->leftjoin('relatorio_antimicrobianos', 'relatorio_antimicrobianos.idprescricao_medicamento', '=', 'prescricao_medicamentos.id')
+                ->where('idmedicamento', '!=', null)
+                ->select('relatorio_antimicrobianos.inicio_tratamento', 'relatorio_antimicrobianos.antimicrobiano','relatorio_antimicrobianos.quantidade','relatorio_antimicrobianos.duracao_tratamento')
+                ->get();
+            
             $data_atual = date("Y/m/d 23:59:59");
 
-            $data1 = new DateTime($data);
-            $data2 = new DateTime($data_atual);
+            $vet ='';
+            $x = 0;
+            $verifica = false;
+            $dias = 0;
+            for ($i = 0; $i < sizeof($busca_pai); $i++) {               
+                $dd = $busca_pai[$i]->inicio_tratamento;
+                $dd = $dd." 23:59:59";
+                
+                if($busca_pai[$i]->duracao_tratamento == "Dia(s)"){
+                    $dias = $busca_pai[$i]->quantidade;
+                }else if($busca_pai[$i]->duracao_tratamento == "Semana(s)"){
+                    $dias = $busca_pai[$i]->quantidade * 7;
+                }else if($busca_pai[$i]->duracao_tratamento == "Mês(es)"){
+                    $dias = $busca_pai[$i]->quantidade * 30;
+                } 
 
-            $x = $data1->diff($data2);
-            
-            if($x->days > 0){ //compara se a data atual é maior que(8) a primeira prescriação para emitir um novo relatório antimi 
-                $medic = PrescricaoMedicamento::where('idprescricao', $busca_pai->id)
+                $data = date('Y-m-d H:i:s', strtotime("+".$dias."days",strtotime($dd)));
+
+                $cont = $i;
+                if($relatorio[$i]['medInfe'] == ''){
+                    if( strtotime($data) >= strtotime($data_atual) ){
+                        $vet .= ' '.$cont.' - '.$busca_pai[$i]->antimicrobiano; 
+                        $verifica = true;
+                    }
+                }
+            }
+          
+            if($verifica){ //compara se a data atual é maior que a primeira prescriação, para emitir um novo relatório antimi 
+                
+                return response::create($vet,202);
+                /*$response = new Response();
+                            return $response->setStatusCode(202, $vet);*/
+
+                /*$medic = PrescricaoMedicamento::where('idprescricao', $id_pai_maior)
                 ->leftjoin('medicamentos', 'medicamentos.id', '=', 'prescricao_medicamentos.idmedicamento')
                 ->leftjoin('medicamentosubstancias' ,'medicamentosubstancias.idmedicamento','=','medicamentos.id')
                 ->leftjoin('substanciaativas' ,'substanciaativas.id','=','medicamentosubstancias.idsubstanciaativa')
@@ -124,8 +169,13 @@ class PrescricaoController extends Controller {
                             $response = new Response();
                             return $response->setStatusCode(202, $medic[$i]['nomesubstancia']);
                         }
+                    }else{
+                        $prescricao->id_pai = null;
                     }
-                }
+                }*/
+            
+            }else{
+                 $prescricao->id_pai = null;
             }
         }
 
@@ -155,7 +205,7 @@ class PrescricaoController extends Controller {
                 $prescricaomedicamento->qtdatendida = 0;
                 $prescricaomedicamento->outros = '';
                 $prescricaomedicamento->idmedicamento = $medicamentos[$i]['idmedicamento'];
-                $prescricaomedicamento->qtdpedida =  (!isset($medicamentos[$i]['qtd'])) ? 0 : $medicamentos[$i]['qtd'];
+                $prescricaomedicamento->qtdpedida =  (!isset($medicamentos[$i]['qtd'])) ? $medicamentos[$i]['qtd'] : 0;
                 $prescricaomedicamento->posologia = $medicamentos[$i]['posologia'];
                 $prescricaomedicamento->obs = (!isset($medicamentos[$i]['obs'])) ? '' : $medicamentos[$i]['obs'];
                 $prescricaomedicamento->dose = (!isset($medicamentos[$i]['dose'])) ? '' : $medicamentos[$i]['dose'];
@@ -166,7 +216,7 @@ class PrescricaoController extends Controller {
 
                 $prescricaomedicamento->save();
 
-                if($medicamentos[$i]['classificacao'] == 2 && $relatorio[$i]['medInfe'] != ''){
+                if($relatorio[$i]['medInfe'] != ''){
                     $RelatorioAntimicrobiano = new RelatorioAntimicrobiano();
                     $RelatorioAntimicrobiano->idprescricao_medicamento = $prescricaomedicamento->id;
                     $RelatorioAntimicrobiano->nome = $relatorio[$i]['paciente'];
@@ -177,6 +227,7 @@ class PrescricaoController extends Controller {
                     $RelatorioAntimicrobiano->diagnostico_infeccioso = $relatorio[$i]['diagInfe'];
                     $RelatorioAntimicrobiano->duracao_tratamento = $relatorio[$i]['duracao'];
                     $RelatorioAntimicrobiano->antimicrobiano = $relatorio[$i]['medInfe'];
+                    $RelatorioAntimicrobiano->quantidade = $relatorio[$i]['quantidade'];
                     
                     $RelatorioAntimicrobiano->save();
                 }
@@ -201,7 +252,7 @@ class PrescricaoController extends Controller {
                 ->leftjoin('relatorio_antimicrobianos', 'relatorio_antimicrobianos.idprescricao_medicamento', '=', 'prescricao_medicamentos.id')
                 //->where('idmedicamento', '!=', null)
                 ->select('medicamentos.id', 'medicamentos.idformafarmaceutica', 'medicamentos.nomeconteudo', 'medicamentos.quantidadeconteudo', 'medicamentos.unidadeconteudo', 'medicamentos.codigosimpas', 'prescricao_medicamentos.id as idprescmed', 'prescricao_medicamentos.idprescricao', 'prescricao_medicamentos.idmedicamento', 'prescricao_medicamentos.qtdpedida','prescricao_medicamentos.outros', 'prescricao_medicamentos.qtdatendida', 'prescricao_medicamentos.posologia','relatorio_antimicrobianos.diagnostico_infeccioso', 'relatorio_antimicrobianos.id as idrelatorio'
-                   ,'relatorio_antimicrobianos.nome','relatorio_antimicrobianos.leito','relatorio_antimicrobianos.data_admissao','relatorio_antimicrobianos.inicio_tratamento','relatorio_antimicrobianos.clinica','relatorio_antimicrobianos.duracao_tratamento','relatorio_antimicrobianos.antimicrobiano')
+                   ,'relatorio_antimicrobianos.nome','relatorio_antimicrobianos.leito','relatorio_antimicrobianos.data_admissao','relatorio_antimicrobianos.inicio_tratamento','relatorio_antimicrobianos.clinica','relatorio_antimicrobianos.duracao_tratamento','relatorio_antimicrobianos.antimicrobiano','relatorio_antimicrobianos.quantidade')
                 //->where('prescricao_medicamentos.qtdatendida', 0)
                 ->get();
                 
