@@ -27,7 +27,7 @@
     <div class="row ls-clearfix">
             <div class="col-xs-3 col-sm-3 col-md-3">
                         <div class="form-group">
-                            <label for="data">Período</label>
+                            <label for="data">Data</label>
                             <div class="input-group input-group-sm">
                             <input type="date" name="date" class="form-control">
                             

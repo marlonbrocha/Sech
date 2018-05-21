@@ -81,7 +81,7 @@
                     <li style="margin-left: 20px;"><a href="{{ route('internacao.create') }}"> Cadastrar Paciente</a></li>
                     <li style="margin-left: 20px;"><a href="{{ route('internacao.index') }}"> Internações</a></li>
                     <li style="margin-left: 20px;"><a href="{{ route('prescricao.create') }}"></i>Criar Prescrição</a></li>  
-                    <li style="margin-left: 20px;"><a href="{{ url('prescricao') }}"></i> Prescrição Realizadas</a></li>  
+                    <li style="margin-left: 20px;"><a href="{{ url('prescricao') }}"></i> Prescrições Realizadas</a></li>  
                     <li style="margin-left: 20px;"><a href="{{ route('cid10.index') }}"> Diagnóstico (CID 10)</a></li>
                      
                 </ul>
