@@ -45,7 +45,7 @@
                             <td>
                             <?php 
                                     switch ($substanciaativa->classificacao) {
-                                        case 0:
+                                        case 0: 
                                             echo "<span class='label label-danger'>Controlado da portaria 344/98</span>";
                                             break;
                                         case 1:

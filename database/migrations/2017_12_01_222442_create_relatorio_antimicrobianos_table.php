@@ -24,6 +24,7 @@ class CreateRelatorioAntimicrobianosTable extends Migration
             $table->date('inicio_tratamento');
             $table->string('clinica');
             $table->string('diagnostico_infeccioso');
+            $table->integer('quantidade');
             $table->string('duracao_tratamento');
             $table->string('antimicrobiano');
             $table->timestamps();
