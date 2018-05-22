@@ -8,7 +8,7 @@
     <div class="col-lg-12 margin-tb">
         @section('contentheader_title')
         <div class="pull-left">
-            <h2>Prescrições não atendidas</h2>
+            <h2>Prescrições realizadas</h2>
         </div>
         @endsection
     </div>

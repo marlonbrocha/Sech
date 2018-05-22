@@ -21,7 +21,7 @@ function data_format($format_ini, $value, $format_end)
     <div class="col-lg-12 margin-tb">
         @section('contentheader_title')
         <div class="pull-left">
-            Atender prescrição
+            Prescrição
         </div>
         @endsection 
     </div>
