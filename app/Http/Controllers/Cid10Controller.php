@@ -11,7 +11,7 @@ class Cid10Controller extends Controller
 {
     public function index(Request $request)
     {
-        $cids = Cid10::orderBy('id','DESC');
+        $cids = Cid10::orderBy('id','DESC')->paginate(500);
         return view('cid10.index',compact('cids'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
