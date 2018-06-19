@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Input;
 
 Route::get('/', 'HomeController@index');
 
+
+Route::get('/med', 'MedicamentoController@autocomplete');
+
 Route::auth();
 
 Route::group(['middleware' => ['auth']], function() {    

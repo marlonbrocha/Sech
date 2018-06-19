@@ -155,14 +155,16 @@ class MedicamentoController extends Controller {
         $term =$req->get('term');
 
         //$data = Medicamento::where(DB::raw('LOWER(nomecomercial)'),'LIKE', '%'.strtolower($term).'%')->get();
-        $sub = Substanciaativa::where(DB::raw('LOWER(nome)'),'LIKE', '%'.strtolower($term).'%')->get();
+        /*$sub = Substanciaativa::where(DB::raw('LOWER(nome)'),'LIKE', '%'.strtolower($term).'%')->get();
 
         $data = DB::table('medicamentosubstancias')
                 ->where('idsubstanciaativa','=',$sub[0]->id)
                 ->get();
                 
        
-       $data = Medicamento::where('id',$data[0]->idmedicamento)->get();
+       $data = Medicamento::where('id',$data[0]->idmedicamento)->get();*/
+       
+       $data = Medicamento::all();
 
 
         //return response()->json([$data[0]->nomecomercial]);

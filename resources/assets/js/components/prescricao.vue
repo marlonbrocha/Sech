@@ -10,20 +10,21 @@
     var idinter = '';
     export default{
 
-        props: ['data', 'medico'],
+        props: ['data', 'medico','medicamentosss'],
 
         data(){
-            return {  
+            return { 
+                value: '', 
                 paciente: '',
                 quantidade:'',
                 diagInfe: '',
                 prontuario: '',
-                qtd:'',
                 posologia:'',
                 obs:'',
                 iniTrata:'',
                 medInfe:'',
                 duracao:'',
+                meds: [],
                 prescricao: {
                     idinternacao: '',
                     dataprescricao: '',
@@ -33,6 +34,7 @@
                     observacoesmedicas: '',
                     prescricaomedicamento: [],
                     relatorioAntimicro: [],
+                    medicamentos_all: []
                 },
             }
         },
@@ -41,6 +43,17 @@
         },
         methods: {
             addMed(){
+
+                if(classific == 2 && this.iniTrata == '' || classific == 2 && this.diagInfe == '' 
+                    || classific ==  2 && this.duracao == '' || classific == 2 && this.quantidade == ''
+                    ){
+                        swal({
+                            title: "Campos vazios",
+                            text: 'Preencha todos os campos do relatório antimicrobiano', 
+                            type: "warning",
+                            html: true,
+                        });
+                    }else{
                     
                     var cod = $("#codigo").val();
                     var i;
@@ -63,7 +76,7 @@
                                         text: consequencia[pos], 
                                         type: "warning",
                                         html: true,
-                                    });    
+                                    }); 
                                 }    
                             }
                         }
@@ -81,13 +94,10 @@
                             direita.push(sub1[i]);
                             posicoes.push(i);
                         }
-                    }
+                    }               
 
-                if(typeof  this.prescricao.prescricaomedicamento[0] != "undefined"){
-                    //alert(this.prescricao.prescricaomedicamento[0].diluicao);
-                }                    
-
-                var id = $("#idmed").val()
+                var id = $("#idmed").val();
+                
                 this.$http.post('../simpas', {id: id}).then(response => {
                     var codigo = $("#codigo").val();
                     var med = $("#med").val();
@@ -95,11 +105,10 @@
                     var administracao = $("#administracao").val();
                     var estabilidade = $("#estabilidade").val();
                     var diluicao = $("#diluicao").val();
+                    var qtd = $("#qtd").val();
                     
-                    //console.log(document.getElementById("nome_a").value);
-                    
-                    this.prescricao.relatorioAntimicro.push({
-                        
+
+                    this.prescricao.relatorioAntimicro.push({  
                         idmedicamento: id,
                         medInfe: med,
                         duracao: this.duracao,
@@ -116,7 +125,7 @@
                         codigo: codigo,
                         simpas: response.data,
                         idmedicamento: id,
-                        qtd: this.qtd,
+                        qtd: qtd,
                         med: med,
                         obs: this.obs,
                         posologia: this.posologia,
@@ -127,16 +136,14 @@
                         classificacao: classific
                     });
 
-                    //this.qtd = '';
                     this.simpas = '-';
-                    this.obs = '';
                     $("#med").val("");
-                    //$('.qtd').css('display','none');
                     $('.med').removeClass("col-xs-11 col-sm-11 col-md-11");
                     $('.med').addClass("col-xs-12 col-sm-12 col-md-12");
-                }).catch(response => {
-                     console.log('erro');
-                });
+                    }).catch(response => {
+                         console.log('erro');
+                    });
+                }
             },
             removeMed(med) {
                 var index = this.prescricao.prescricaomedicamento.indexOf(med)
@@ -145,6 +152,48 @@
                     this.prescricao.prescricaomedicamento.splice(index, 1);                  
                     this.prescricao.relatorioAntimicro.splice(index, 1);              
                 }
+            },
+            adicionar_medicamento(med){
+                var index = this.meds.indexOf(med);
+                document.getElementById("med").value = this.meds[index].value;
+                document.getElementById("codigo").value = this.meds[index].codigo;
+                document.getElementById("idmed").value = this.meds[index].id;
+                document.getElementById("doseR").value = this.meds[index].dose;
+                document.getElementById("diluicaoR").value = this.meds[index].diluicaoR;
+                document.getElementById("administracaoR").value = this.meds[index].administracaoR;
+                document.getElementById("estabilidadeR").value = this.meds[index].estabilidadeR;
+                document.getElementById("med").value = this.meds[index].value;
+
+                var medic = this.meds[index].value;
+                
+                if(this.meds[index].classificacao == 2){
+                    classific = this.meds[index].classificacao;
+                    $(document).ready(function() {
+                        $("#relatorio").modal('show');
+                        $("#medInfe").val(medic); // pega o nome do medicamento
+                    });
+                }else{
+                    classific = 7;
+                }
+
+                $.ajax({
+                    type: 'get',
+                    url: '../../../medicamento/contraindicacao',
+                    data: {
+                        'id': this.meds[index].id,
+                    },
+                    success: function (data){
+                        if(data != ''){
+                        swal({ 
+                            title: "Contraindicação",
+                            text: data, 
+                            type: "warning",
+                            html: true,
+                        });
+                    }
+                    },
+                });             
+                
             },
             adicionar(){
                 this.prescricao.idinternacao = idinter;
@@ -219,6 +268,16 @@
 
         },
         beforeMount(){
+                var all_medicamentos = new Array();
+
+                var i;
+                var obj = jQuery.parseJSON(this.medicamentosss);
+                console.log( obj);
+                
+                for (i = 0; i < obj.length ; i++){
+                    this.meds.push(obj[i]);
+                }
+
 	            var aux = new Array();
 
                 this.$http.get('/prescricao/interacoesmedicamentosas').then(response => {
@@ -248,7 +307,7 @@
 	                   });
 	            });
 
-	}
+	   }
     }
 
     
@@ -256,69 +315,6 @@
         $("#rg").mask("99.999.999-99");
     });
     
-    $(document).ready(function(){
-        var a;
-        $('#med').autocomplete({
-            source: '/autocomplete',
-            minlength: 1,
-            autoFocus:true,
-            select: function(event, ui){
-                $("#codigo").val(ui.item.codigo);
-                $("#med").val(ui.item.id);
-                $("#doseR").val(ui.item.dose);
-                $("#diluicaoR").val(ui.item.diluicao);
-                $("#administracaoR").val(ui.item.administracao);
-                $("#estabilidadeR").val(ui.item.estabilidade);
-                
-                a = ui.item.value;
-
-                if(ui.item.classificacao == 2){
-                    classific = ui.item.classificacao;
-                    $(document).ready(function() {
-                        $("#relatorio").modal('show');
-                        $("#medInfe").val(ui.item.value); // pega o nome do medicamento
-                    });
-                }else{
-                    classific = 7;
-                }
-
-
-                $("#idmed").val(ui.item.id);
-                $('.qtd').css('display','block');
-                $('.med').removeClass("col-xs-12 col-sm-12 col-md-12");
-                $('.med').addClass("col-xs-11 col-sm-11 col-md-11");
-
-                $.ajax({
-                    type: 'get',
-                    url: '../../../medicamento/contraindicacao',
-                    data: {
-                        'id': ui.item.id,
-                    },
-                    success: function (data){
-                        if(data != ''){
-                        swal({ 
-                            title: "Contraindicação",
-                            text: data, 
-                            type: "warning",
-                            html: true,
-                        });
-                    }
-                    },
-                });
-            },
-            change: function(event, ui){
-           //  alert(ui);          
-                var b = $("#med").val();
-                if(a != Trim(b)){
-                    $("#idmed").val(null);
-                    $('.qtd').css('display','none');
-                    $('.med').removeClass("col-xs-11 col-sm-11 col-md-11");
-                    $('.med').addClass("col-xs-12 col-sm-12 col-md-12");
-                }
-            }
-        });
-    });
-
 
 
     $(document).ready(function(){
@@ -453,6 +449,24 @@
                         </div>
                     </div>
 
+                    <div class="col-md-12 ">
+                        <div class="form-group">
+                            <div class="table-responsive col-md-12" style="margin-bottom: 20px;border-style: solid;border-color: #d2d6de;border-width: 1px;padding: 2;overflow-x: hidden;">
+                                        <table id="table" class="table table-bordered table-hover dataTable" role="grid">
+                                            <thead>
+                                                <tr>
+                                                    <th>Medicamentos</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                            <tr v-for="med in meds">
+                                <td><a href="#!" @click="adicionar_medicamento(med)">{{ med.value }}</a></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
 
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
@@ -460,8 +474,6 @@
                             	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Dose" class="btn btn-primary btn-flat doseM"><i class="fa fa-search"></i></button></label>
                             <textarea id="dose" type="text" name="dose" class="form-control"></textarea>
                         </div>
-
-
                     </div>
                     
                     
@@ -471,7 +483,7 @@
                     <div class="col-xs-1 col-sm-1 col-md-1" >
                         <div class="form-group">
                             <label for="qtd">Quantidade:</label>
-                            <input id="qtd" type="text" name="qtd" class="form-control" v-model="qtd">
+                            <input id="qtd" type="text" name="qtd" class="form-control">
                         </div>
                     </div>
 
@@ -673,7 +685,7 @@
                                 <div class="col-xs-3 col-sm-3 col-md-3">
                                     <div class="form-group">
                                         <label for="duracao">QUANTIDADE:</label>
-                                        <input id="quantidade" type="number" name="quantidade" class="form-control" v-model="quantidade">
+                                        <input id="quantidade" type="number" min="1" name="quantidade" class="form-control" v-model="quantidade">
                                      </div>
                                  </div>
 

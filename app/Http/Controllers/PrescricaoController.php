@@ -9,7 +9,11 @@ use App\Prescricao;
 use App\PrescricaoMedicamento;
 use App\User;
 use App\RelatorioAntimicrobiano;
-use DB;        
+use DB;
+use App\Medicamento;
+use App\Formafarmaceutica;
+use App\Substanciaativa;
+use App\Medicamentosubstancia;        
 class PrescricaoController extends Controller {
 
     public function index(Request $request) {
@@ -57,14 +61,323 @@ class PrescricaoController extends Controller {
     }
 
     public function create() {
+        $data = Medicamento::all();
+
+        $results = array();
+
+        foreach ($data as $medicamento) {
+            $substancias = '';
+            foreach ($medicamento->medicamentosubstancias as $medicamentosubstancia) {
+                $nomeunidade = '';
+                switch ($medicamentosubstancia->unidadedose) {
+                    case 0:
+                        $nomeunidade = 'mcg';
+                        break;
+                    case 1:
+                        $nomeunidade = 'mg';
+                        break;
+                    case 2:
+                        $nomeunidade = 'g';
+                        break;
+                    case 3:
+                        $nomeunidade = 'UI';
+                        break;
+                    case 4:
+                        $nomeunidade = 'unidades';
+                        break;
+                    case 5:
+                        $nomeunidade = 'mg/g';
+                        break;
+                    case 6:
+                        $nomeunidade = 'UI/g';
+                        break;
+                    case 7:
+                        $nomeunidade = 'mEq/mL';
+                        break;
+                    case 8:
+                        $nomeunidade = 'mg/gota';
+                        break;
+                    case 9:
+                        $nomeunidade = 'mcg/mL';
+                        break;
+                    case 10:
+                        $nomeunidade = 'UI/mL';
+                        break;
+                    case 11:
+                        $nomeunidade = 'mEq';
+                        break;
+                    case 12:
+                        $nomeunidade = 'mg/mL';
+                        break;
+                    case 13:
+                        $nomeunidade = 'mL';
+                        break;
+                    case 14:
+                        $nomeunidade = 'Seringa Pré-enchida';
+                    break;
+                    case 15:
+                        $nomeunidade = 'Kcal/L';
+                    break;    
+                    default:
+                        $nomeunidade = '';       
+                    break;        
+                }
+                $substancias .= $medicamentosubstancia->substanciaativa->nome.' '. $medicamentosubstancia->quantidadedose. ' '. $nomeunidade . ', ';
+                 $class = $medicamentosubstancia->substanciaativa->classificacao;
+            }
+            $substancias .= $medicamento->formafarmaceuticas->nome . ' ';
+            $conteudo = '';
+            switch ($medicamento->nomeconteudo) {
+                case 0:
+                    $conteudo = 'Frasco';
+                    break;
+                case 1:
+                    $conteudo = 'FA (frasco ampola)';
+                    break;
+                case 2:
+                    $conteudo = 'AMP (ampola)';
+                    break;
+                case 3:
+                    $conteudo = 'Caixa';
+                    break;
+                case 4:
+                    $conteudo = 'Envelope';
+                    break;
+                case 5:
+                    $conteudo = 'Tubo';
+                    break;
+                case 6:
+                    $conteudo = 'Bolsa';
+                    break;
+                case 7:
+                    $conteudo = 'Pote';
+                    break;
+            }
+            
+            switch ($medicamento->unidadeconteudo) {
+                case 0:
+                    $uc = 'mcg';
+                    break;
+                case 1:
+                    $uc = 'mg';
+                    break;
+                case 2:
+                    $uc = 'g';
+                    break;
+                case 3:
+                    $uc = 'UI';
+                    break;
+                case 4:
+                    $uc = 'unidades';
+                    break;
+                case 5:
+                    $uc = 'mg/g';
+                    break;
+                case 6:
+                    $uc = 'UI/g';
+                    break;
+                case 7:
+                    $uc = 'mEq/mL';
+                    break;
+                case 8:
+                    $uc = 'mg/gota';
+                    break;
+                case 9:
+                    $uc = 'mcg/mL';
+                    break;
+                case 10:
+                    $uc = 'UI/mL';
+                    break;
+                case 11:
+                    $uc = 'mEq';
+                    break;
+                case 12:
+                    $uc = 'mg/mL';
+                    break;
+                case 13:
+                    $uc = 'mL';
+                    break;      
+                default:
+                    $uc = '';       
+                    break;
+            }
+            $substancias .= '' . $conteudo . ' com ' . $medicamento->quantidadeconteudo . ' '. $uc;
+            //$substancias .= '' . $conteudo;
+            $results[] = [
+                
+                'codigo' => $medicamentosubstancia->substanciaativa->codigo,
+                'diluicao' =>$medicamentosubstancia->substanciaativa->diluicao,
+                'dose' => $medicamentosubstancia->substanciaativa->dose,
+                'administracao' => $medicamentosubstancia->substanciaativa->administracao,
+                'estabilidade' => $medicamentosubstancia->substanciaativa->estabilidade,
+                'id' => $medicamento->id,
+                'value' => $substancias, 'classificacao' => $class
+            ];
+        }
+
+
         $dataprescricao = date("d/m/Y H:i:s");
         $id = Auth::user()->id;
         $medico = User::find($id)->name;
-        return view('prescricao.create', compact('dataprescricao', 'medico'));
+        return view('prescricao.create', compact('dataprescricao', 'medico', 'results'));
     }
 
 
     public function editar($id) {
+        $data = Medicamento::all();
+
+        $results = array();
+
+        foreach ($data as $medicamento) {
+            $substancias = '';
+            foreach ($medicamento->medicamentosubstancias as $medicamentosubstancia) {
+                $nomeunidade = '';
+                switch ($medicamentosubstancia->unidadedose) {
+                    case 0:
+                        $nomeunidade = 'mcg';
+                        break;
+                    case 1:
+                        $nomeunidade = 'mg';
+                        break;
+                    case 2:
+                        $nomeunidade = 'g';
+                        break;
+                    case 3:
+                        $nomeunidade = 'UI';
+                        break;
+                    case 4:
+                        $nomeunidade = 'unidades';
+                        break;
+                    case 5:
+                        $nomeunidade = 'mg/g';
+                        break;
+                    case 6:
+                        $nomeunidade = 'UI/g';
+                        break;
+                    case 7:
+                        $nomeunidade = 'mEq/mL';
+                        break;
+                    case 8:
+                        $nomeunidade = 'mg/gota';
+                        break;
+                    case 9:
+                        $nomeunidade = 'mcg/mL';
+                        break;
+                    case 10:
+                        $nomeunidade = 'UI/mL';
+                        break;
+                    case 11:
+                        $nomeunidade = 'mEq';
+                        break;
+                    case 12:
+                        $nomeunidade = 'mg/mL';
+                        break;
+                    case 13:
+                        $nomeunidade = 'mL';
+                        break;
+                    case 14:
+                        $nomeunidade = 'Seringa Pré-enchida';
+                    break;
+                    case 15:
+                        $nomeunidade = 'Kcal/L';
+                    break;    
+                    default:
+                        $nomeunidade = '';       
+                    break;        
+                }
+                $substancias .= $medicamentosubstancia->substanciaativa->nome.' '. $medicamentosubstancia->quantidadedose. ' '. $nomeunidade . ', ';
+                 $class = $medicamentosubstancia->substanciaativa->classificacao;
+            }
+            $substancias .= $medicamento->formafarmaceuticas->nome . ' ';
+            $conteudo = '';
+            switch ($medicamento->nomeconteudo) {
+                case 0:
+                    $conteudo = 'Frasco';
+                    break;
+                case 1:
+                    $conteudo = 'FA (frasco ampola)';
+                    break;
+                case 2:
+                    $conteudo = 'AMP (ampola)';
+                    break;
+                case 3:
+                    $conteudo = 'Caixa';
+                    break;
+                case 4:
+                    $conteudo = 'Envelope';
+                    break;
+                case 5:
+                    $conteudo = 'Tubo';
+                    break;
+                case 6:
+                    $conteudo = 'Bolsa';
+                    break;
+                case 7:
+                    $conteudo = 'Pote';
+                    break;
+            }
+            
+            switch ($medicamento->unidadeconteudo) {
+                case 0:
+                    $uc = 'mcg';
+                    break;
+                case 1:
+                    $uc = 'mg';
+                    break;
+                case 2:
+                    $uc = 'g';
+                    break;
+                case 3:
+                    $uc = 'UI';
+                    break;
+                case 4:
+                    $uc = 'unidades';
+                    break;
+                case 5:
+                    $uc = 'mg/g';
+                    break;
+                case 6:
+                    $uc = 'UI/g';
+                    break;
+                case 7:
+                    $uc = 'mEq/mL';
+                    break;
+                case 8:
+                    $uc = 'mg/gota';
+                    break;
+                case 9:
+                    $uc = 'mcg/mL';
+                    break;
+                case 10:
+                    $uc = 'UI/mL';
+                    break;
+                case 11:
+                    $uc = 'mEq';
+                    break;
+                case 12:
+                    $uc = 'mg/mL';
+                    break;
+                case 13:
+                    $uc = 'mL';
+                    break;      
+                default:
+                    $uc = '';       
+                    break;
+            }
+            $substancias .= '' . $conteudo . ' com ' . $medicamento->quantidadeconteudo . ' '. $uc;
+            //$substancias .= '' . $conteudo;
+            $results[] = [
+                
+                'codigo' => $medicamentosubstancia->substanciaativa->codigo,
+                'diluicao' =>$medicamentosubstancia->substanciaativa->diluicao,
+                'dose' => $medicamentosubstancia->substanciaativa->dose,
+                'administracao' => $medicamentosubstancia->substanciaativa->administracao,
+                'estabilidade' => $medicamentosubstancia->substanciaativa->estabilidade,
+                'id' => $medicamento->id,
+                'value' => $substancias, 'classificacao' => $class
+            ];
+        }
+
         $prescricao = Prescricao::find($id);
 
         $idprescricao = $id;
@@ -82,7 +395,7 @@ class PrescricaoController extends Controller {
                 //->where('prescricao_medicamentos.qtdatendida', 0)
                 ->get();
          
-        return view('prescricao.editar', compact('prescricao.create','prescricao', 'medicamentos','dataprescricao', 'medico','idprescricao'));
+        return view('prescricao.editar', compact('prescricao.create','prescricao', 'medicamentos','dataprescricao', 'medico','idprescricao', 'results'));
 
     }
 
@@ -141,9 +454,9 @@ class PrescricaoController extends Controller {
                 $data = date('Y-m-d H:i:s', strtotime("+".$dias."days",strtotime($dd)));
 
                 $cont = $i;
-                if($relatorio[$i]['medInfe'] == ''){
+                if($relatorio[$i]['medInfe'] != ''){
                     if( strtotime($data) >= strtotime($data_atual) ){
-                        $vet .= ' '.$cont.' - '.$busca_pai[$i]->antimicrobiano; 
+                        $vet .= ' '.$cont.' - '.$busca_pai[$i]->antimicrobiano; // pega os relatorios pra informar quais estao vencidos
                         $verifica = true;
                     }
                 }
@@ -151,28 +464,7 @@ class PrescricaoController extends Controller {
           
             if($verifica){ //compara se a data atual é maior que a primeira prescriação, para emitir um novo relatório antimi 
                 
-                return response::create($vet,202);
-                /*$response = new Response();
-                            return $response->setStatusCode(202, $vet);*/
-
-                /*$medic = PrescricaoMedicamento::where('idprescricao', $id_pai_maior)
-                ->leftjoin('medicamentos', 'medicamentos.id', '=', 'prescricao_medicamentos.idmedicamento')
-                ->leftjoin('medicamentosubstancias' ,'medicamentosubstancias.idmedicamento','=','medicamentos.id')
-                ->leftjoin('substanciaativas' ,'substanciaativas.id','=','medicamentosubstancias.idsubstanciaativa')
-                ->select('medicamentos.id','substanciaativas.nome as nomesubstancia')
-                ->get();
-
-
-                for ($i = 0; $i < sizeof($medicamentos); $i++) {
-                    if($medicamentos[$i]['classificacao'] == 2 && $relatorio[$i]['medInfe'] == ''){
-                        if($medic[$i]->id == $medicamentos[$i]['idmedicamento']){
-                            $response = new Response();
-                            return $response->setStatusCode(202, $medic[$i]['nomesubstancia']);
-                        }
-                    }else{
-                        $prescricao->id_pai = null;
-                    }
-                }*/
+            return response::create($vet,202);
             
             }else{
                  $prescricao->id_pai = null;
@@ -205,7 +497,7 @@ class PrescricaoController extends Controller {
                 $prescricaomedicamento->qtdatendida = 0;
                 $prescricaomedicamento->outros = '';
                 $prescricaomedicamento->idmedicamento = $medicamentos[$i]['idmedicamento'];
-                $prescricaomedicamento->qtdpedida =  (!isset($medicamentos[$i]['qtd'])) ? $medicamentos[$i]['qtd'] : 0;
+                $prescricaomedicamento->qtdpedida =  (!isset($medicamentos[$i]['qtd'])) ? 0 : $medicamentos[$i]['qtd'];
                 $prescricaomedicamento->posologia = $medicamentos[$i]['posologia'];
                 $prescricaomedicamento->obs = (!isset($medicamentos[$i]['obs'])) ? '' : $medicamentos[$i]['obs'];
                 $prescricaomedicamento->dose = (!isset($medicamentos[$i]['dose'])) ? '' : $medicamentos[$i]['dose'];
@@ -216,7 +508,7 @@ class PrescricaoController extends Controller {
 
                 $prescricaomedicamento->save();
 
-                if($relatorio[$i]['medInfe'] != ''){
+                if($relatorio[$i]['medInfe'] != '' && $relatorio[$i]['iniTrata'] != ''){
                     $RelatorioAntimicrobiano = new RelatorioAntimicrobiano();
                     $RelatorioAntimicrobiano->idprescricao_medicamento = $prescricaomedicamento->id;
                     $RelatorioAntimicrobiano->nome = $relatorio[$i]['paciente'];
