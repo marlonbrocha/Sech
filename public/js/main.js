@@ -20239,6 +20239,15 @@ exports.default = {
 
                     _this.simpas = '-';
                     $("#med").val("");
+                    $("#dose").val("");
+                    $("#diluicao").val("");
+                    $("#estabilidade").val("");
+                    $("#administracao").val("");
+                    $("#qtd").val("");
+
+                    _this.posologia = '';
+                    _this.obs = '';
+
                     $('.med').removeClass("col-xs-11 col-sm-11 col-md-11");
                     $('.med').addClass("col-xs-12 col-sm-12 col-md-12");
                 }).catch(function (response) {
@@ -20263,7 +20272,6 @@ exports.default = {
             document.getElementById("diluicaoR").value = this.meds[index].diluicaoR;
             document.getElementById("administracaoR").value = this.meds[index].administracaoR;
             document.getElementById("estabilidadeR").value = this.meds[index].estabilidadeR;
-            document.getElementById("med").value = this.meds[index].value;
 
             var medic = this.meds[index].value;
 

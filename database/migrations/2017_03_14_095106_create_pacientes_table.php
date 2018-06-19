@@ -18,7 +18,7 @@ class CreatePacientesTable extends Migration
             $table->string('sexo');
             $table->string('idade');
             $table->string('peso');
-            $table->string('numeroprontuario');
+            $table->string('numeroprontuario')->unique();
             $table->timestamps();
         });
     }
