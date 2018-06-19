@@ -2,7 +2,11 @@
 
 @section('main-content')
 <div class="row">
-    
+    <style type="text/css">
+        .content-wrapper{
+            min-height: 0px;
+        }
+    </style>
     <div class="col-lg-12 margin-tb">  
         <div class="pull-left">
             @section('contentheader_title')
@@ -81,3 +85,8 @@ $('a').on('click', function(){
     @endif
 </script>
 
+<style type="text/css">
+        .content-wrapper{
+            min-height: 0px;
+        }
+</style>
