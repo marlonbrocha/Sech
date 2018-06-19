@@ -43,7 +43,7 @@ desired effect
     @include('layouts.partials.sidebar')
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="background-color: white;">
+    <div class="content-wrapper" style="background-color: white; min-height: 0px;">
 
         @include('layouts.partials.contentheader')
 
