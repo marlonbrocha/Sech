@@ -815,7 +815,7 @@
                             <h4><center><b>Descrição da prescrição</b></center></h4>
                                 <div class="box-body">
                                     <div class="table-responsive col-lg-12 col-md-12 col-sm-12">
-                                        <table id="table" class="table table-condensed table-bordered table-hover dataTable" role="grid">
+                                        <table class="table table-condensed table-bordered table-hover dataTable" role="grid">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">SIMPAS</th>
