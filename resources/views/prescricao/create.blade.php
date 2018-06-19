@@ -1,6 +1,5 @@
 @extends('layouts.app')
-<link href="{{ asset('js/jquery-ui-themes-1.12.0/themes/base/jquery-ui.css') }}" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap.css') }}">
+
 @section('main-content')
 <div class="row">
     
