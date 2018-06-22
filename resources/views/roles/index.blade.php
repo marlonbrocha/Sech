@@ -49,11 +49,6 @@
                                 <i class="fa fa-edit"> </i>
                             </a>
                             @endpermission
-                            @permission('role-delete')
-                            <a class="btn btn-default" data-toggle="modal" data-target="#e{{$role->id}}" title="Excluir">
-                                <i class="fa fa-trash"> </i>
-                            </a>
-                            @endpermission
                             
                             @if(!empty($role))
                             <div class="modal fade" id="e{{$role->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

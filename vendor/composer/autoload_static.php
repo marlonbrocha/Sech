@@ -361,7 +361,7 @@ class ComposerStaticInitce5cb524b2f569cab0ae4fe4112c5540
         'CreateInternacaosTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_14_100152_create_internacaos_table.php',
         'CreateLeitosTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_01_112355_create_leitos_table.php',
         'CreateMedicamentosTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_10_234245_create_medicamentos_table.php',
-        'CreateMigrationInteracao' => __DIR__ . '/../..' . '/database/migrations/2018_01_25_110310_create_migration_interacao.php',
+        'CreateMigrationInternacaoCid' => __DIR__ . '/../..' . '/database/migrations/2018_06_20_134132_create_migration_internacao_cid.php',
         'CreatePacientesTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_14_095106_create_pacientes_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreatePedidoTransferenciasTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_15_221753_create_pedido_transferencias_table.php',

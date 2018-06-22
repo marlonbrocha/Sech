@@ -94,11 +94,19 @@ class RelatorioController extends Controller {
                 //->where('prescricao_medicamentos.qtdatendida', 0)
                 ->get();
 
+        $diagnosticos = DB::table('internacaos')
+            ->join('prescricaos','prescricaos.idinternacao','=','internacaos.id')
+            ->join('internacao_cids','internacao_cids.idinternacao','=','internacaos.id')
+            ->join('cid10s','cid10s.id','=','internacao_cids.idcid10')
+            ->where('prescricaos.id',$prescricao->id)
+            ->select('internacaos.id','cid10s.descricao')
+            ->get();        
+
         if($medicamentos == '[]'){
             $medicamentos = PrescricaoMedicamento::where('idprescricao', $prescricao->id)->get();               
         }        
 
-   		$pdf = SnappyPDF::loadView('relatorios.prescricao', compact('prescricao', 'medicamentos'))->setPaper('a4', 'landscape');
+   		$pdf = SnappyPDF::loadView('relatorios.prescricao', compact('prescricao', 'medicamentos','diagnosticos'))->setPaper('a4', 'landscape');
 		return $pdf->stream();
     }
 
@@ -109,9 +117,13 @@ class RelatorioController extends Controller {
                 ->join('medicamentos', 'medicamentos.id', '=', 'prescricao_medicamentos.idmedicamento')
                 ->leftjoin('relatorio_antimicrobianos', 'relatorio_antimicrobianos.idprescricao_medicamento', '=', 'prescricao_medicamentos.id')
                 ->where('idmedicamento', '!=', null)
+                ->where('relatorio_antimicrobianos.antimicrobiano','!=', null)
                 ->select('medicamentos.id', 'medicamentos.idformafarmaceutica', 'medicamentos.nomeconteudo', 'medicamentos.quantidadeconteudo', 'medicamentos.unidadeconteudo', 'medicamentos.codigosimpas', 'prescricao_medicamentos.id as idprescmed', 'prescricao_medicamentos.idprescricao', 'prescricao_medicamentos.idmedicamento', 'prescricao_medicamentos.qtdpedida', 'prescricao_medicamentos.qtdatendida', 'prescricao_medicamentos.posologia','relatorio_antimicrobianos.diagnostico_infeccioso', 'relatorio_antimicrobianos.id as idrelatorio'
                    ,'relatorio_antimicrobianos.nome','relatorio_antimicrobianos.leito','relatorio_antimicrobianos.data_admissao','relatorio_antimicrobianos.inicio_tratamento','relatorio_antimicrobianos.clinica','relatorio_antimicrobianos.duracao_tratamento','relatorio_antimicrobianos.antimicrobiano', 'relatorio_antimicrobianos.quantidade')
+
                 ->get();
+
+               // return response()->json($medicamentos);
 
         $pdf = \SnappyPDF::loadView('relatorios.antibioticoterapia', compact('prescricao', 'medicamentos'));
 		return $pdf->stream();

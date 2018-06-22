@@ -14,13 +14,9 @@ class CreatePrescricaoMedicamentosTable extends Migration {
         Schema::create('prescricao_medicamentos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idprescricao');
-            $table->foreign('idprescricao')->references('id')->on('prescricaos')
-                    ->onUpdate('restrict')
-                    ->onDelete('cascade');
+            $table->foreign('idprescricao')->references('id')->on('prescricaos');
             $table->integer('idmedicamento')->nullable();
-            $table->foreign('idmedicamento')->references('id')->on('medicamentos')
-                    ->onUpdate('restrict')
-                    ->onDelete('cascade');
+            $table->foreign('idmedicamento')->references('id')->on('medicamentos');
             $table->integer('qtdpedida');
             $table->integer('qtdatendida')->default(0);
             $table->text('posologia');

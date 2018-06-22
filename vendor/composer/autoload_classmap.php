@@ -19,7 +19,7 @@ return array(
     'CreateInternacaosTable' => $baseDir . '/database/migrations/2017_03_14_100152_create_internacaos_table.php',
     'CreateLeitosTable' => $baseDir . '/database/migrations/2017_03_01_112355_create_leitos_table.php',
     'CreateMedicamentosTable' => $baseDir . '/database/migrations/2017_03_10_234245_create_medicamentos_table.php',
-    'CreateMigrationInteracao' => $baseDir . '/database/migrations/2018_01_25_110310_create_migration_interacao.php',
+    'CreateMigrationInternacaoCid' => $baseDir . '/database/migrations/2018_06_20_134132_create_migration_internacao_cid.php',
     'CreatePacientesTable' => $baseDir . '/database/migrations/2017_03_14_095106_create_pacientes_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePedidoTransferenciasTable' => $baseDir . '/database/migrations/2017_03_15_221753_create_pedido_transferencias_table.php',

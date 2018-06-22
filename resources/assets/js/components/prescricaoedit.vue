@@ -12,9 +12,11 @@
 
     export default{
 
-        props: ['data', 'medico', 'medicamentos', 'pacient','admissa','prontua','leit','clinic', 'diagnostic', 'evolu','idinter','idprescricao', 'medicamentosss'],
+        props: ['data', 'medico', 'medicamentos', 'pacient','admissa','prontua','leit','clinic', 'evolu','idinter','idprescricao', 'medicamentosss','di','ale'],
         data(){
             return {
+                cid_all: '',
+                cids: [],
                 verifica_relatorio: false,
             	evol:'',
             	ind: '',
@@ -27,10 +29,10 @@
                 diluicaoEdit:'',
                 obsEdit:'',
                 paciente: '',
+                alergia:'',
                 numeroprontuario: '',
                 clinica: '',   
                 leito: '',
-                diag: '',
                 diagInfe: '',
                 admissao: '',
                 prontuario: '',
@@ -57,6 +59,14 @@
         },
         mounted(){
             this.prescricao.dataprescricao = this.data;
+            this.cid_all = JSON.parse(this.di);
+            console.log(this.di);
+            var i;
+            for (i = 0; i < this.cid_all.length ; i++){
+                this.cids.push(this.cid_all[i].descricao);
+            }
+            
+            console.log(this.cids);
         },
         methods: {
 	            	addMed(){
@@ -109,12 +119,7 @@
                             direita.push(sub1[i]);
                             posicoes.push(i);
                         }
-                    }
-
-
-	                if(typeof  this.prescricao.prescricaomedicamento[0] != "undefined"){
-	                    //alert(this.prescricao.prescricaomedicamento[0].diluicao);
-	                }                    
+                    }           
 
 	                var id = $("#idmed").val();
 	                this.$http.post('../../../simpas', {id: id}).then(response => {
@@ -138,6 +143,13 @@
 	                        diagInfe: this.diagInfe
 	                    });
 
+                        this.quantidade = '';
+                        this.duracao = '';
+                        this.iniTrata = '';
+                        this.diagInfe = '';
+                        document.getElementById("medInfe").value = '';
+
+
 	                    this.prescricao.prescricaomedicamento.push({
 	                        codigo: codigo,
 	                        simpas: response.data,
@@ -154,8 +166,16 @@
 	                    });
 
 	                    this.simpas = '-';
-	                    this.obs = '';
-	                    $("#med").val("");	                  
+	                    $("#med").val("");
+                        $("#dose").val("");
+                        $("#diluicao").val("");
+                        $("#estabilidade").val("");
+                        $("#administracao").val("");
+                        $("#qtd").val("");
+                        
+                        this.posologia = '';
+                        this.obs = '';	                  
+
 	                    $('.med').removeClass("col-xs-11 col-sm-11 col-md-11");
 	                    $('.med').addClass("col-xs-12 col-sm-12 col-md-12");
 	                }).catch(response => {
@@ -191,7 +211,18 @@
 	                    this.prescricao.relatorioAntimicro.splice(index, 1);              
 	                }
 	            },
+                disable(){
+                document.getElementById('med').removeAttribute('readonly');
+                document.getElementById("med").value = '';
+                document.getElementById("codigo").value = '';
+                document.getElementById("idmed").value = '';
+                document.getElementById("doseR").value = '';
+                document.getElementById("diluicaoR").value = '';
+                document.getElementById("administracaoR").value = '';
+                document.getElementById("estabilidadeR").value = '';
+                },
                 adicionar_medicamento(med){
+                document.getElementById('med').setAttribute('readonly',true);
                 var index = this.meds.indexOf(med);
                 document.getElementById("med").value = this.meds[index].value;
                 document.getElementById("codigo").value = this.meds[index].codigo;
@@ -289,13 +320,14 @@
 	            
 	            },
 	            adicionar(){
+                    document.getElementById('salvar').setAttribute('disabled',"true");
 	                this.$http.post('/prescricao/create', this.prescricao).then(response => {
                         if(response.status == 202){
                             this.verifica_relatorio = true;
                             var i;
                             var t = response.data.length;
                             //for( i = 0 ; i < t ; i++){
-                                console.log(i);
+                                
                                 swal({
                                     title: "Erro",
                                     text: 'É necessário um novo relatório antimicrobiano para: '+response.data,
@@ -317,66 +349,23 @@
     	                   }); 
                         }
 	                }).catch(response => {
-	                    console.log('Erro:' + response);
+	                    document.getElementById('salvar').removeAttribute('disabled');
+                        swal({
+                            title: "Ocorreu algum problema!",
+                            text: "Verifique todos os campos e tente novamente",
+                            confirmButtonColor: "#66BB6A",
+                            type: "warning",
+                            showLoaderOnConfirm: true
+                       });
 	                });
-	            },
-	            buscarnome(){
-	                var nome = $("#nome").val();
-	                this.$http.post('../buscapaciente', {nome: nome}).then(response => {
-	                   
-	                    $("#buscar").modal('hide')
-	                    this.paciente = response.data[0].nomecompleto;  
-	                    this.clinica = response.data[0].nome;
-	                    this.numeroprontuario = response.data[0].numeroprontuario;
-	                    this.leito = response.data[0].leito;
-	                    this.diag = response.data[0].descricao;
-	                    this.admissao = response.data[0].dataadmissao;
-	                    this.prescricao.idinternacao = response.data[0].id; 
-	          
-	                }).catch(response => {
-	                   console.log(response);
-	                     $("#buscar").modal('hide')
-	                    swal({
-	                        title: "Erro!",
-	                        text: "Não existe esse registro na base de dados",
-	                        type: "error"
-	                   });
-	                });
-	            },
-
-	            buscarprontuario(){
-	                var prontuario = $("#prontuario").val();
-	                this.$http.post('../buscapaciente', {prontuario: prontuario}).then(response => {
-	                   
-	                    $("#buscar").modal('hide')
-	                    this.paciente = response.data[0].nomecompleto;  
-	                    this.clinica = response.data[0].nome;
-	                    this.numeroprontuario = response.data[0].numeroprontuario;
-	                    this.leito = response.data[0].leito;
-	                    this.diag = response.data[0].descricao;
-	                    this.admissao = response.data[0].dataadmissao;
-	                    this.prescricao.idinternacao = response.data[0].id; 
-	          
-	                }).catch(response => {
-	                   console.log(response);
-	                     $("#buscar").modal('hide')
-	                    swal({
-	                        title: "Erro!",
-	                        text: "Não existe esse registro na base de dados",
-	                        type: "error"
-	                   });
-	                });
-            },
-           	
-
+	            }
         },
         beforeMount(){
-
                 var all_medicamentos = new Array();
 
                 var i;
                 var obj = jQuery.parseJSON(this.medicamentosss);
-                console.log( obj);
+               
                 
                 for (i = 0; i < obj.length ; i++){
                     this.meds.push(obj[i]);
@@ -415,16 +404,15 @@
                     this.prescricao.evolucao = this.evolu;
         			this.prescricao.idprescricaopai = this.idprescricao;
         			this.prescricao.idinternacao = this.idinter;
-        			this.diag = this.diagnostic;
         			this.clinica = this.clinic;
         			this.leito = this.leit;
         			this.numeroprontuario = this.prontua;
         			this.paciente = this.pacient;
 					this.admissao = this.admissa;		 
+                    this.alergia = this.ale;
 	                var med_array = new Array();
 
 	                this.$http.get('/prescricao/buscar/medicamentos/'+this.idprescricao).then(response => {
-	                  console.log(response.data);
 
 	                  med_array =  response.data;
 
@@ -657,6 +645,9 @@
     $(document).on('click', '.estabilidadeM', function (){
         $("#estabilidadeM").modal('show');
     });
+     $(document).on('click', '.diagnostico', function (){
+        $("#diagnostico").modal('show');
+    });
 
 </script>
 
@@ -670,7 +661,7 @@
                         <div class="pull-right"><small><strong>Data da prescrição:</strong>{{this.data}}</small></div>
                         <br><br>
                     </div>
-                    <div class="col-xs-15 col-sm-10 col-md-10">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <label for="paciente">Paciente:</label>
                             
@@ -683,7 +674,7 @@
                             <input id="numeroprontuario" type="text" name="numeroprontuario" class="form-control" readonly="readonly" v-model="numeroprontuario">
                         </div>
                     </div>
-                    <div class="col-xs-5 col-sm-5 col-md-5">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
                             <label for="clinica">Clínica:</label>
                             <input id="clinica" type="text" name="clinica" class="form-control" readonly="readonly" v-model="clinica">
@@ -695,10 +686,11 @@
                             <input id="leito" type="text" name="leito" class="form-control" readonly="readonly" v-model="leito">
                         </div>
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4">
+                    <div class="col-xs-1 col-sm-1 col-md-1">
                         <div class="form-group">
                             <label for="diag">Diagnóstico:</label>
-                            <input id="diag" type="text" name="diag" class="form-control" readonly="readonly" v-model="diag">
+                            <br>
+                            <button style="font-size: 20px" type="button" data-toggle="tooltip" title="Diagnóstico" class="btn btn-primary diagnostico"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2">
@@ -707,21 +699,41 @@
                             <input id="admissao" type="text" name="admissao" class="form-control" readonly="readonly" v-model="admissao">
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <label for="evol">Alergia(s):</label>
+                            <textarea readonly="" id="alergia" type="text" name="alergia" class="form-control" rows="1" v-model="alergia" ></textarea>
+                        </div>
+                    </div>
                     
 
-                    <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <label for="evol">Evolução:</label>
-                            <textarea id="evol" type="text" name="evol" class="form-control" v-model="prescricao.evolucao"></textarea>
+                            <input id="evol" type="text" name="evol" class="form-control" v-model="prescricao.evolucao">
+                            
                         </div>
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                    <div class="col-xs-10 col-sm-10 col-md-10 ">
                         <div class="form-group">
                             <label for="med">Medicamento/Outros:</label>
-                            <input id="med" type="text" name="med" class="form-control" placeholder="Pesquise pela substância ativa..." >
+                            <div class="input-group input-group-sm">
+                            <input id="med" readonly="" type="text" name="med" class="form-control">
+                            <span class="input-group-btn">
+                                  <button title="Prescrever um medicamento"  @click="disable()" type="button" class="btn btn-primary btn-flat"><i class="fa fa-pencil"></i></button>
+                                </span>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="col-xs-2 col-sm-2 col-md-2" >
+                        <div class="form-group">
+                            <label for="qtd">Quantidade:</label>
+                            <input id="qtd" type="text" name="qtd" class="form-control" v-model="qtd">
+                        </div>
+                    </div>
+
                     <div class="col-md-12 ">
                         <div class="form-group">
                                 <div class="table-responsive col-md-12" style="margin-bottom: 20px;border-style: solid;border-color: #d2d6de;border-width: 1px;padding: 2;overflow-x: hidden;">
@@ -742,31 +754,21 @@
                     </div>
 
 
-                    <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <label for="dose">Dose: 
-                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Dose" class="btn btn-primary btn-flat doseM"><i class="fa fa-search"></i></button></label>
-                            <textarea id="dose" type="text" name="dose" class="form-control"></textarea>
+                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Dose" class="btn btn-primary doseM"><i class="fa fa-search"></i></button></label>
+                                <input id="dose" type="text" name="dose" class="form-control">
                         </div>
+                    </div>    
 
-
-                    </div>
-                    
-                    
                     <input id="idmed" type="hidden">
                     <input id="codigo" type="hidden">
                     
-                    <div class="col-xs-1 col-sm-1 col-md-1" >
-                        <div class="form-group">
-                            <label for="qtd">Quantidade:</label>
-                            <input id="qtd" type="text" name="qtd" class="form-control" v-model="qtd">
-                        </div>
-                    </div>
-
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <div class="form-group">
                             <label for="administracao">Administração:
-                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Administração" class="btn btn-primary btn-flat administracaoM"><i class="fa fa-search"></i></button></label>
+                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Administração" class="btn btn-primary administracaoM"><i class="fa fa-search"></i></button></label>
                             <input id="administracao" type="text" name="administracao" class="form-control">
                         </div>
                     </div>
@@ -775,7 +777,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <div class="form-group">
                             <label for="diluicao">Diluição:
-                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Diluição" class="btn btn-primary btn-flat diluicaoM"><i class="fa fa-search"></i></button></label>
+                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Diluição" class="btn btn-primary diluicaoM"><i class="fa fa-search"></i></button></label>
                             <input id="diluicao" type="text" name="diluicao" class="form-control">
                         </div>
                     </div>
@@ -783,7 +785,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <div class="form-group">
                             <label for="estabilidade">Estabilidade:
-                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Estabilidade" class="btn btn-primary btn-flat estabilidadeM"><i class="fa fa-search"></i></button></label>
+                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Estabilidade" class="btn btn-primary estabilidadeM"><i class="fa fa-search"></i></button></label>
                             <input id="estabilidade" type="text" name="estabilidade" class="form-control">
                         </div>
                     </div>
@@ -864,7 +866,37 @@
                         </div>
                     </div>
                     <div class="pull-right" style="margin-right: 1%;">
-                        <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Salvar" @click="adicionar"><i class="fa fa-save"></i></button>
+                        <button id="salvar" type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Salvar" @click="adicionar"><i class="fa fa-save"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="diagnostico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><strong>Diagnóstico</strong></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
+                            <div class="row">
+                                <div class="box-body">
+                                 <div class="col-xs-12 col-sm-12 col-md-12 obs">
+                                    <div class="form-group">
+                                        <p v-for="cid in cids">
+                                            {{cid}}
+                                        </p>
+                                        
+                                     </div>
+                                 </div>
+                                </div>
+                         </div>
+                        </div>  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                     </div>
                 </div>
             </div>
@@ -886,10 +918,6 @@
                                               <label for="paciente">Nome:</label>
                                             <div class="input-group input-group-sm">
                                                 <input type="text" name="nome" id="nome" class="form-control" v-model="nome">
-                                                
-                                                <span class="input-group-btn">
-                                                  <button type="submit" class="btn btn-primary" @click="buscarnome" data-toggle="tooltip" title="Digite o nome do paciente" class="btn btn-primary btn-flat buscar"><i class="fa fa-search"></i></button>
-                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -899,10 +927,6 @@
                                             <label for="paciente">Prontuário:</label>
                                             <div class="input-group input-group-sm">
                                                 <input type="text" name="prontuario" id="prontuario" class="form-control" v-model="prontuario">
-                                                
-                                                <span class="input-group-btn">
-                                                  <button type="submit" class="btn btn-primary" @click="buscarprontuario" data-toggle="tooltip" title="Digite o prontuário do paciente" class="btn btn-primary btn-flat buscar"><i class="fa fa-search"></i></button>
-                                                </span>
                                             </div>
                                         </div>
                                     </div>

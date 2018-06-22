@@ -10,10 +10,12 @@
     var idinter = '';
     export default{
 
-        props: ['data', 'medico','medicamentosss'],
+        props: ['data', 'medico','medicamentosss','paciente_all','di'],
 
         data(){
             return { 
+                cid_all: '',
+                cids: [],
                 value: '', 
                 paciente: '',
                 quantidade:'',
@@ -25,6 +27,7 @@
                 medInfe:'',
                 duracao:'',
                 meds: [],
+                pacientes: [],
                 prescricao: {
                     idinternacao: '',
                     dataprescricao: '',
@@ -40,6 +43,7 @@
         },
         mounted(){
             this.prescricao.dataprescricao = this.data;
+            this.cid_all = JSON.parse(this.di);
         },
         methods: {
             addMed(){
@@ -121,6 +125,12 @@
                         diagInfe: this.diagInfe
                     });
 
+                    this.quantidade = '';
+                    this.duracao = '';
+                    this.iniTrata = '';
+                    this.diagInfe = '';
+                    document.getElementById("medInfe").value = '';
+
                     this.prescricao.prescricaomedicamento.push({
                         codigo: codigo,
                         simpas: response.data,
@@ -160,9 +170,13 @@
                     codigos.splice(index,1);
                     this.prescricao.prescricaomedicamento.splice(index, 1);                  
                     this.prescricao.relatorioAntimicro.splice(index, 1);              
+                    direita.splice(index, 1);              
+                    codigos.splice(index, 1);              
+                    posicoes.splice(index, 1);              
                 }
             },
             adicionar_medicamento(med){
+                document.getElementById('med').setAttribute('readonly',true);
                 var index = this.meds.indexOf(med);
                 document.getElementById("med").value = this.meds[index].value;
                 document.getElementById("codigo").value = this.meds[index].codigo;
@@ -172,7 +186,6 @@
                 document.getElementById("administracaoR").value = this.meds[index].administracaoR;
                 document.getElementById("estabilidadeR").value = this.meds[index].estabilidadeR;
                 
-
                 var medic = this.meds[index].value;
                 
                 if(this.meds[index].classificacao == 2){
@@ -205,6 +218,7 @@
                 
             },
             adicionar(){
+                document.getElementById('salvar').setAttribute('disabled',"true");
                 this.prescricao.idinternacao = idinter;
                 this.$http.post('/prescricao/create', this.prescricao).then(response => {
                     swal({
@@ -218,33 +232,56 @@
                         location.href = "../../prescricao";
                    }); 
                 }).catch(response => {
-                    console.log('Erro:' + response);
-                });
-            },
-            buscarnome(){
-                var nome = $("#nome").val();
-                this.$http.post('../buscapaciente', {nome: nome}).then(response => {
-                   
-                    $("#buscar").modal('hide')
-                    this.paciente = response.data[0].nomecompleto;  
-                    this.clinica = response.data[0].nome;
-                    this.numeroprontuario = response.data[0].numeroprontuario;
-                    this.leito = response.data[0].leito;
-                    this.diag = response.data[0].descricao;
-                    this.admissao = response.data[0].dataadmissao;
-                    this.prescricao.idinternacao = response.data[0].id; 
-          
-                }).catch(response => {
-                   console.log(response);
-                     $("#buscar").modal('hide')
+                    document.getElementById('salvar').removeAttribute('disabled');
                     swal({
-                        title: "Erro!",
-                        text: "Não existe esse registro na base de dados",
-                        type: "error"
+                        title: "Ocorreu algum problema!",
+                        text: "Verifique todos os campos e tente novamente",
+                        confirmButtonColor: "#66BB6A",
+                        type: "warning",
+                        showLoaderOnConfirm: true
                    });
                 });
             },
+            escolher_paciente(paciente){
+                document.getElementById("nome_a").value =  paciente.nomecompleto;
+                document.getElementById("nome").value =  paciente.nomecompleto;
+                document.getElementById("clinica").value =  paciente.nome;
+                document.getElementById("numeroprontuario").value =  paciente.numeroprontuario;
+                document.getElementById("leito").value =  paciente.leito;
+                document.getElementById("clinica_a").value =  paciente.nome;
+                document.getElementById("leito_a").value =  paciente.leito;
+                document.getElementById("alergia").value =  paciente.alergia;
+                  
+                var data;
+                data = paciente.dataadmissao.replace(/(\d{2})\-(\d{3})\-(\d{2}).*/, '$2-$3-$4');
+                document.getElementById("admissao").value =  data;
+                
+                var data2;
+                data2 = paciente.dataadmissao.replace(/(\d{4})\-(\d{3})\-(\d{2}).*/, '$3-$2-$4');
+                $("#admissao_a").val(data2);
 
+                idinter = paciente.id; 
+
+                var i;
+
+                this.cids = [];
+                for (i = 0; i < this.cid_all.length ; i++){
+                    if(this.cid_all[i].id == idinter){
+                        console.log('entrou');
+                        this.cids.push(this.cid_all[i].descricao);
+                    }    
+                }
+            },
+            disable(){
+                document.getElementById('med').removeAttribute('readonly');
+                document.getElementById("med").value = '';
+                document.getElementById("codigo").value = '';
+                document.getElementById("idmed").value = '';
+                document.getElementById("doseR").value = '';
+                document.getElementById("diluicaoR").value = '';
+                document.getElementById("administracaoR").value = '';
+                document.getElementById("estabilidadeR").value = '';
+            },
             buscarprontuario(){
                 var prontuario = $("#prontuario").val();
                 this.$http.post('../buscapaciente', {prontuario: prontuario}).then(response => {
@@ -254,15 +291,25 @@
                   document.getElementById("clinica").value =  response.data[0].clinica;
                   document.getElementById("numeroprontuario").value =  response.data[0].numeroprontuario;
                   document.getElementById("leito").value =  response.data[0].leito;
-                  document.getElementById("diag").value =  response.data[0].descricao;
-                  document.getElementById("admissao").value =  response.data[0].dataadmissao;
-
+                  let data;
+                  data = response.data[0].dataadmissao.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1');
+                  document.getElementById("admissao").value =  data;
                   document.getElementById("clinica_a").value =  response.data[0].clinica;
                   document.getElementById("nome_a").value =  response.data[0].value;
                   document.getElementById("leito_a").value =  response.data[0].leito;
-                  document.getElementById("admissao_a").value =  response.data[0].dataadmissao;
+                  let data2;
+                  data2 = response.data[0].dataadmissao.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1');
+                  $("#admissao_a").val(data2);
 
                     idinter = response.data[0].id; 
+                    var i;
+                    for (i = 0; i < this.cid_all.length ; i++){
+                        if(this.cid_all[i].id = idinter){
+                            this.cids.push(this.cid_all[i].descricao);
+                        }    
+                    }
+
+                    console.log(this.cids);
           
                 }).catch(response => {
                    console.log(response);
@@ -281,10 +328,17 @@
 
                 var i;
                 var obj = jQuery.parseJSON(this.medicamentosss);
-                console.log( obj);
                 
                 for (i = 0; i < obj.length ; i++){
                     this.meds.push(obj[i]);
+                }
+
+                var i;
+                var obj_paciente = jQuery.parseJSON(this.paciente_all);
+                console.log(obj_paciente);
+
+                for (i = 0; i < obj_paciente.length ; i++){
+                    this.pacientes.push(obj_paciente[i]);
                 }
 
 	            var aux = new Array();
@@ -318,47 +372,10 @@
 
 	   }
     }
-
     
     jQuery(function ($) {
         $("#rg").mask("99.999.999-99");
     });
-    
-
-
-    $(document).ready(function(){
-        var a;
-        $('#nome').autocomplete({
-            source: '/autocomplete2',
-            minlength: 1,
-            autoFocus:true,
-            select: function(event, ui){
-                $("#clinica").val(ui.item.clinica);
-                $("#numeroprontuario").val(ui.item.numeroprontuario);
-                $("#leito").val(ui.item.leito);
-                $("#diag").val(ui.item.descricao);
-                $("#admissao").val(ui.item.dataadmissao);
-
-                $("#clinica_a").val(ui.item.clinica);
-                $("#nome_a").val(ui.item.value);
-                $("#leito_a").val(ui.item.leito);
-                $("#admissao_a").val(ui.item.dataadmissao);
-
-                idinter = ui.item.id; 
-                //$("#nome").val(ui.item.value);
-                $('.nome').removeClass("col-xs-12 col-sm-12 col-md-12");
-                $('.nome').addClass("col-xs-11 col-sm-11 col-md-11");
-            },
-            change: function(event, ui){   
-                    $('.nome').removeClass("col-xs-11 col-sm-11 col-md-11");
-                    $('.nome').addClass("col-xs-12 col-sm-12 col-md-12");
-            }
-        });
-    });
-
-
-
-
 
     function Trim(str){
         return str.replace(/^\s+|\s+$/g,"");
@@ -387,6 +404,9 @@
     $(document).on('click', '.estabilidadeM', function (){
         $("#estabilidadeM").modal('show');
     });
+    $(document).on('click', '.diagnostico', function (){
+        $("#diagnostico").modal('show');
+    });
 
 </script>
 
@@ -400,11 +420,11 @@
                         <div class="pull-right"><small><strong>Data da prescrição: </strong>{{this.data}}</small></div>
                         <br><br>
                     </div>
-                    <div class="col-xs-10 col-sm-10 col-md-10">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <label for="paciente">Paciente:</label>
                             <div class="input-group input-group-sm">
-                                <input id="nome" type="text" name="nome" class="form-control">
+                                <input readonly="" id="nome" type="text" name="nome" class="form-control">
                                 
                                 <span class="input-group-btn">
                                   <button type="button" data-toggle="tooltip" title="Buscar paciente por prontuário" class="btn btn-primary btn-flat buscar"><i class="fa fa-search"></i></button>
@@ -412,13 +432,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-2 col-sm-2 col-md-2">
+                    <div class="col-md-12 ">
+                        <div class="form-group">
+                            <div class="table-responsive col-md-12" style="margin-bottom: 20px;border-style: solid;border-color: #d2d6de;border-width: 1px;padding: 2;overflow-x: hidden;">
+                                        <table id="table" class="table table-bordered table-hover dataTable" role="grid">
+                                            <thead>
+                                                <tr>
+                                                    <th>Pacientes internados</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                            <tr v-for="paci in pacientes">
+                                <td><a href="#!" @click="escolher_paciente(paci)">{{ paci.nomecompleto }}</a></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2">
                         <div class="form-group">
                             <label for="numeroprontuario">Nº Prontuário:</label>
                             <input id="numeroprontuario" type="text" name="numeroprontuario" class="form-control" readonly="readonly">
                         </div>
                     </div>
-                    <div class="col-xs-5 col-sm-5 col-md-5">
+
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
                             <label for="clinica">Clínica:</label>
                             <input id="clinica" type="text" name="clinica" class="form-control" readonly="readonly">
@@ -430,10 +469,11 @@
                             <input id="leito" type="text" name="leito" class="form-control" readonly="readonly">
                         </div>
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4">
+                    <div class="col-xs-1 col-sm-1 col-md-1">
                         <div class="form-group">
                             <label for="diag">Diagnóstico:</label>
-                            <input id="diag" type="text" name="diag" class="form-control" readonly="readonly">
+                            <br>
+                            <button style="font-size: 20px" type="button" data-toggle="tooltip" title="Diagnóstico" class="btn btn-primary diagnostico"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2">
@@ -443,25 +483,43 @@
                         </div>
                     </div>
                     
-
-                    <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <label for="evol">Evolução:</label>
-                            <textarea id="evol" type="text" name="evol" class="form-control" v-model="prescricao.evolucao"></textarea>
+                            <label for="evol">Alergia(s):</label>
+                            <textarea readonly="" id="alergia" type="text" name="alergia" class="form-control" rows="1" ></textarea>
                         </div>
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <label for="evol">Evolução:</label>
+                            <input id="evol" type="text" name="evol" class="form-control" v-model="prescricao.evolucao">
+                        </div>
+                    </div>                    
+
+                    <div class="col-xs-10 col-sm-10 col-md-10 ">
                         <div class="form-group">
                             <label for="med">Medicamento/Outros:</label>
-                            <input id="med" type="text" name="med" class="form-control" placeholder="Pesquise pela substância ativa..." >
+                            <div class="input-group input-group-sm">
+                            <input id="med" readonly="" type="text" name="med" class="form-control">
+                            <span class="input-group-btn">
+                                  <button title="Prescrever um medicamento"  @click="disable()" type="button" class="btn btn-primary btn-flat"><i class="fa fa-pencil"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-2 col-sm-2 col-md-2" >
+                        <div class="form-group">
+                            <label for="qtd">Quantidade:</label>
+                            <input id="qtd" type="text" name="qtd" class="form-control">
                         </div>
                     </div>
 
                     <div class="col-md-12 ">
                         <div class="form-group">
                             <div class="table-responsive col-md-12" style="margin-bottom: 20px;border-style: solid;border-color: #d2d6de;border-width: 1px;padding: 2;overflow-x: hidden;">
-                                        <table id="table" class="table table-bordered table-hover dataTable" role="grid">
+                                        <table id="table2" class="table table-bordered table-hover dataTable" role="grid">
                                             <thead>
                                                 <tr>
                                                     <th>Medicamentos</th>
@@ -477,29 +535,21 @@
                     </div>
                 </div>
 
-                    <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <label for="dose">Dose por administração: 
-                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Dose" class="btn btn-primary btn-flat doseM"><i class="fa fa-search"></i></button></label>
-                            <textarea id="dose" type="text" name="dose" class="form-control"></textarea>
+                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Dose" class="btn btn-primary doseM"><i class="fa fa-search"></i></button></label>
+                            <input id="dose" type="text" name="dose" class="form-control">
                         </div>
                     </div>
-                    
                     
                     <input id="idmed" type="hidden">
                     <input id="codigo" type="hidden">
-                    
-                    <div class="col-xs-1 col-sm-1 col-md-1" >
-                        <div class="form-group">
-                            <label for="qtd">Quantidade:</label>
-                            <input id="qtd" type="text" name="qtd" class="form-control">
-                        </div>
-                    </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <div class="form-group">
                             <label for="administracao">Administração:
-                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Administração" class="btn btn-primary btn-flat administracaoM"><i class="fa fa-search"></i></button></label>
+                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Administração" class="btn btn-primary administracaoM"><i class="fa fa-search"></i></button></label>
                             <input id="administracao" type="text" name="administracao" class="form-control">
                         </div>
                     </div>
@@ -508,7 +558,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <div class="form-group">
                             <label for="diluicao">Diluição:
-                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Diluição" class="btn btn-primary btn-flat diluicaoM"><i class="fa fa-search"></i></button></label>
+                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Diluição" class="btn btn-primary diluicaoM"><i class="fa fa-search"></i></button></label>
                             <input id="diluicao" type="text" name="diluicao" class="form-control">
                         </div>
                     </div>
@@ -516,7 +566,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <div class="form-group">
                             <label for="estabilidade">Estabilidade:
-                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Estabilidade" class="btn btn-primary btn-flat estabilidadeM"><i class="fa fa-search"></i></button></label>
+                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Estabilidade" class="btn btn-primary estabilidadeM"><i class="fa fa-search"></i></button></label>
                             <input id="estabilidade" type="text" name="estabilidade" class="form-control">
                         </div>
                     </div>
@@ -594,7 +644,7 @@
                         </div>
                     </div>
                     <div class="pull-right" style="margin-right: 1%;">
-                        <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Salvar" @click="adicionar"><i class="fa fa-save"></i></button>
+                        <button id="salvar" type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Salvar" @click="adicionar"><i class="fa fa-save"></i></button>
                     </div>
                 </div>
             </div>
@@ -727,7 +777,35 @@
             </div>
         </div>
 
-
+        <div class="modal fade" id="diagnostico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><strong>Diagnóstico</strong></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
+                            <div class="row">
+                                <div class="box-body">
+                                 <div class="col-xs-12 col-sm-12 col-md-12 obs">
+                                    <div class="form-group">
+                                        <p v-for="cid in cids">
+                                            {{cid}}
+                                        </p>
+                                        
+                                     </div>
+                                 </div>
+                                </div>
+                         </div>
+                        </div>  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <div class="modal fade" id="doseM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

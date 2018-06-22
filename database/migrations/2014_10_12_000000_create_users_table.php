@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('telefone');
             $table->string('endereco')->nullable(true)->default(NULL);
             $table->binary('assinatura')->nullable(true)->default(NULL);
-            $table->integer('idespecialidade')->nullable(true)->default(NULL);;            
+            $table->integer('idespecialidade')->nullable(true)->default(NULL);          
             $table->foreign('idespecialidade')->references('id')-> on('especialidades'); 
             $table->rememberToken();
             $table->timestamps();

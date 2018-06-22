@@ -9,11 +9,12 @@ use App\Paciente;
 use App\Clinica;
 use App\Cid10;
 use App\Leito;
+use App\InternacaoCid;
 use DB;
 class InternacaoController extends Controller {
 
     public function index(Request $request) {
-        $internacoes = Internacao::orderBy('id', 'DESC')->paginate(5);
+        $internacoes = Internacao::orderBy('id', 'DESC')->paginate(500);
         return view('internacao.index', compact('internacoes'))
                         ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -22,26 +23,47 @@ class InternacaoController extends Controller {
 
         $pacientes = Paciente::orderBy('id', 'DESC')->select('id', 'nomecompleto', 'numeroprontuario')->get();
         //dd($pacientes);
-        $clinicas = Clinica::lists('nome', 'id');
-        $cid10s = Cid10::lists('descricao', 'id');
-        $leitos = Leito::lists('leito', 'id');
+        $clinicas = Clinica::all();
+        $cid10s = Cid10::all();
+        $leitos = Leito::all();
         $dataadmissao = date("d-m-Y");
         return view('internacao.create', compact('pacientes', 'clinicas', 'cid10s', 'dataadmissao', 'leitos'));
     }
 
     public function store(Request $request) {
+        $inter = DB::table('internacaos')->where('idpaciente', '=',$request->get('idpaciente'))->get();
+        
+        if($inter != []){
+            if($inter[0]->saida == ''){
+                return response()->json('error');
+            }    
+        }
         $this->validate($request, [
             'idpaciente' => 'required',
             'idclinica' => 'required',
-            'idleito' => 'required',
-            'idcid10' => 'required',
+            'idleito' => 'required',    
         ]);
 
-        $campos = $request->all();
-        //dd($campos);
-        Internacao::create($campos);
+        $data = date('Y-m-d');
+        $internacao = new Internacao();
+        $internacao->idpaciente = $request->get('idpaciente');
+        $internacao->idclinica = $request->get('idclinica');
+        $internacao->idleito = $request->get('idleito');
+        //$internacao->idcid10 = 4;
+        $internacao->dataadmissao = $data;
+        $internacao->save();
+        $idInternacao = $internacao->id;
+        $cids = $request->get('cids');
+        
+        for ($i = 0; $i < sizeof($cids); $i++) {
+            $internacaoCid = new InternacaoCid();
+            $internacaoCid->idinternacao = $idInternacao;
+            $internacaoCid->idcid10 = $cids[$i]['idcid10'];
+            $internacaoCid->save();
 
-        return redirect()->route('internacao.index')
+        }
+
+        return redirect()->route('internacao.create')
                         ->with('success', 'Paciente internado com sucesso!');
     }
 
@@ -81,19 +103,30 @@ class InternacaoController extends Controller {
     public function buscarPaciente(Request $req) {
         $nome = $req->get('term');
 
-        //$nome = $req->nome;
-
         $results = array();
 
         if($nome != ''){
+        
         $paciente = DB::table('internacaos')
                 ->where('internacaos.saida', NULL)
                 ->join('pacientes', 'pacientes.id', '=', 'internacaos.idpaciente')
                 ->join('clinicas', 'clinicas.id', '=', 'internacaos.idclinica')
                 ->join('leitos', 'leitos.id', '=', 'internacaos.idleito')
                 ->join('cid10s', 'cid10s.id', '=', 'internacaos.idcid10')
-                ->where(DB::raw('LOWER(pacientes.nomecompleto)'), 'LIKE', '%'.strtolower($nome).'%' )->select('pacientes.nomecompleto','pacientes.numeroprontuario', 'internacaos.id', 'clinicas.nome', 'leitos.leito', 'cid10s.descricao', 'internacaos.dataadmissao')
+                ->select('pacientes.nomecompleto','pacientes.numeroprontuario', 'internacaos.id', 'clinicas.nome','leitos.leito', 'cid10s.descricao', 'internacaos.dataadmissao')
                 ->get();
+                foreach ($paciente as $value) {
+                    $results[] = [
+                    'value' => $paciente[0]->nomecompleto,
+                    'clinica'=> $paciente[0]->nome,
+                    'dataadmissao' => $paciente[0]->dataadmissao,
+                    'id' => $paciente[0]->id,
+                    'leito' => $paciente[0]->leito,
+                    'descricao' => $paciente[0]->descricao,
+                    'numeroprontuario' => $paciente[0]->numeroprontuario
+                    ];
+                }
+            
         }
 
         if($req['prontuario'] != ''){
@@ -105,9 +138,8 @@ class InternacaoController extends Controller {
                 ->join('cid10s', 'cid10s.id', '=', 'internacaos.idcid10')
                 ->where('pacientes.numeroprontuario',$req['prontuario'])->select('pacientes.nomecompleto','pacientes.numeroprontuario', 'internacaos.id', 'clinicas.nome', 'leitos.leito', 'cid10s.descricao', 'internacaos.dataadmissao')
                 ->get();
-        }
 
-        $results[] = [
+                $results[] = [
                 'value' => $paciente[0]->nomecompleto,
                 'clinica'=> $paciente[0]->nome,
                 'dataadmissao' => $paciente[0]->dataadmissao,
@@ -116,6 +148,7 @@ class InternacaoController extends Controller {
                 'descricao' => $paciente[0]->descricao,
                 'numeroprontuario' => $paciente[0]->numeroprontuario
             ];
+        }
 
         return response()->json($results);
 /*

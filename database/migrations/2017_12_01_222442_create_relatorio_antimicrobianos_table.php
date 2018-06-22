@@ -15,9 +15,7 @@ class CreateRelatorioAntimicrobianosTable extends Migration
         Schema::create('relatorio_antimicrobianos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idprescricao_medicamento');
-            $table->foreign('idprescricao_medicamento')->references('id')->on('prescricao_medicamentos')
-                    ->onUpdate('restrict')
-                    ->onDelete('cascade');
+            $table->foreign('idprescricao_medicamento')->references('id')->on('prescricao_medicamentos');
             $table->string('nome');
             $table->string('leito');
             $table->date('data_admissao');

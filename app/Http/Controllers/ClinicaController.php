@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Clinica;
 use App\Leito;
@@ -60,7 +59,7 @@ class ClinicaController extends Controller
     
     public function update(Request $request, $id)
     {
-       //dd($request->all()) and die();
+
         $this->validate($request, [
             'nome' => 'required',
             'descricao' => 'required',
@@ -73,17 +72,18 @@ class ClinicaController extends Controller
         $clinica->save();
         
         //atualizando os leitos
-        Leito::where('idclinica', '=', $id)->delete();
         $leitos = $request->get('leitos');
         for($i=0; $i<sizeof($leitos); $i++){
-            $leito = new Leito();
-            $leito->leito = $leitos[$i]['leito'];
-            $leito->observacao = $leitos[$i]['observacao'];
-            $leito->idclinica = $id;
-            $leito->save();
+            if(!isset($leitos[$i]['id'])){
+                $leito = new Leito();
+                $leito->leito = $leitos[$i]['leito'];
+                $leito->observacao = $leitos[$i]['observacao'];
+                $leito->idclinica = $id;
+                $leito->save();
+            }
         }
-//        return redirect()->route('clinica.index')
-//                        ->with('success','Clínica atualizada com sucesso!');
+        //return redirect()->route('clinica.index')
+          //              ->with('success','Clínica atualizada com sucesso!');
     }
     
     public function destroy($id)

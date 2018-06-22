@@ -13,6 +13,13 @@
             <h2>Leitos</h2>
         </div>
         @endsection
+        <div class="pull-right" style="margin-right: 1%;">
+            @permission('leito-create')
+            <a class="btn btn-default" href="{{ route('leito.create') }}" title="Cadastrar" data-toggle="tooltip"> 
+                <i class="fa  fa-plus"></i>
+            </a>
+            @endpermission
+        </div>
     </div>
 </div>
 <br>

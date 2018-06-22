@@ -39,7 +39,7 @@
                         <td>{{ ++$i }}</td>
                         <td>{{ $clinica->nome }}</td>
                         <td>{{ $clinica->descricao }}</td>
-                        <td width="14.5%">
+                        <td width="14.5%" style="text-align: center;">
                             <a class="btn btn-default" data-target="#{{$clinica->id}}" data-toggle="modal" title="Visualizar">
                                 <i class="fa fa-eye"> </i>
                             </a>
@@ -48,33 +48,9 @@
                                 <i class="fa fa-edit"> </i>
                             </a>
                             @endpermission
-                            @permission('clinica-delete')
-                            <a class="btn btn-default" data-toggle="modal" data-target="#e{{$clinica->id}}" title="Excluir">
-                                <i class="fa fa-trash"> </i>
-                            </a>
-                            @endpermission
+                            
 
-                            @if(!empty($clinica))
-                            <div class="modal fade" id="e{{$clinica->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">Excluir</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            Tem certeza que deseja excluir?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                            {!! Form::open(['method' => 'DELETE','route' => ['clinica.destroy', $clinica->id],'style'=>'display:inline']) !!}
-                                            {!! Form::submit('OK', ['class' => 'btn btn-primary']) !!}
-                                            {!! Form::close() !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endif 
+                             
 
                             <div class="modal fade" id="{{$clinica->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">

@@ -28,18 +28,16 @@ class CreateMedicamentosTable extends Migration
         // Create table for associating medicamentos e substanciaativas (Many-to-Many)
         Schema::create('medicamentosubstancias', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idmedicamento')->unsigned();;
-            $table->integer('idsubstanciaativa')->unsigned();;
+            $table->integer('idmedicamento')->unsigned();
+            $table->integer('idsubstanciaativa')->unsigned();
             $table->string('quantidadedose');
             $table->integer('unidadedose');              
             $table->timestamps();
             
             $table->unique(['idsubstanciaativa', 'idmedicamento']);
 
-            $table->foreign('idsubstanciaativa')->references('id')->on('substanciaativas')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('idmedicamento')->references('id')->on('medicamentos')
-                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('idsubstanciaativa')->references('id')->on('substanciaativas');
+            $table->foreign('idmedicamento')->references('id')->on('medicamentos');
 
         });
 

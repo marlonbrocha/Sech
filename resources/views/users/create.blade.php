@@ -93,9 +93,8 @@
             <!-------- dados de farmacêutico -------->
             <div id="far">
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>CRF:</strong>
-                        {!! Form::text('codigoprofissional', null, array('placeholder' => 'Digite seu CRF','class' => 'form-control')) !!}
+                    <strong>CRF:</strong>
+                        {!! Form::text('codigoprofissional', null, array('placeholder' => 'Digite seu CRFF','class' => 'form-control')) !!}
                     </div>
                 </div>
             </div>
@@ -121,17 +120,11 @@
                 </div>   
             </div>
             <!-------- dados de dentista -------->
-            <div id="den">
+            <div id="fisio">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                        <strong>CRO:</strong>
-                        {!! Form::text('codigoprofissional', null, array('placeholder' => 'Digite seu CRO','class' => 'form-control')) !!}
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <strong>Especialidade:</strong>                    
-                        {!! Form::select('idespecialidade', $especialidades, null, array('class' => 'form-control')) !!}
+                        <strong>CREFITO:</strong>
+                        {!! Form::text('codigoprofissional', null, array('placeholder' => 'Digite seu CREFITO','class' => 'form-control')) !!}
                     </div>
                 </div>
             </div>
@@ -161,27 +154,31 @@ $(document).ready(function () {
     $("#enf").hide();
     $("#papel").change(function () {
         var funcao = document.getElementById('papel').value;
-        if (funcao == '2') { //farmaceutico
-            $("#med").hide();
-            $("#den").hide();
-            $("#far").show();
-            $("#enf").hide();
-        } else if (funcao == '3') { //médico
+        if (funcao == '2') { //médico
             $("#med").show();
             $("#den").hide();
             $("#far").hide();
             $("#enf").hide();
-        } else if (funcao == '4') { //dentista
+        }
+        else if (funcao == '3') { //farmaceutico
             $("#med").hide();
-            $("#den").show();
-            $("#far").hide();
+            $("#den").hide();
+            $("#far").show();
             $("#enf").hide();
-        } else if (funcao == '5') { //enfermeiro
+        } 
+        else if (funcao == '4') { //enfermeiro
+            $("#enf").show();
             $("#med").hide();
             $("#den").hide();
             $("#far").hide();
             $("#enf").show();
-        } else {
+        }
+        else if (funcao == '5') { //fisio
+            $("#med").hide();
+            $("#fisio").show();
+            $("#far").hide();
+            $("#enf").hide();
+        }  else {
             $("#med").hide();
             $("#den").hide();
             $("#far").hide();

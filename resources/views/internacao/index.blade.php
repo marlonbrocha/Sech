@@ -30,7 +30,7 @@
                         <th class="text-center">Paciente</th>
                         <th class="text-center">Clínica</th>
                         <th class="text-center">Leito</th>
-                        <th class="text-center">Diagnóstico</th>
+                        
                         <th class="text-center" width="10%">Situação</th>
                         <th class="text-center no-sort" width="14%">Ação</th>
                     </tr>
@@ -42,13 +42,13 @@
                         <td>{{ $internacao->paciente->nomecompleto }}</td>
                         <td>{{ $internacao->leito->clinica->nome}}</td>
                         <td>{{ $internacao->leito->leito }}</td>
-                        <td>{{ $internacao->cid10->descricao}}</td>
+                        
                         @if(empty($internacao->saida))
                         <td><span class="label label-warning">Internado</span></td>
                         @else
                         <td><span class="label label-success">Liberado</span></td>
                         @endif
-                        <td width="14.5%">
+                        <td width="14.5%" style="text-align: center;">
                             <a class="btn btn-default" data-target="#{{$internacao->id}}" data-toggle="modal" title="Visualizar">
                                 <i class="fa fa-eye"> </i>
                             </a>
@@ -63,32 +63,9 @@
                             </a>
                             @endif
                             @endpermission
-                            @permission('internacao-delete')
-                            <a class="btn btn-default" data-toggle="modal" data-target="#e{{$internacao->id}}" title="Excluir">
-                                <i class="fa fa-trash"> </i>
-                            </a>
-                            @endpermission
+                            
 
                             @if(!empty($internacao))
-                            <div class="modal fade" id="e{{$internacao->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">Excluir</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            Tem certeza que deseja excluir?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                            {!! Form::open(['method' => 'DELETE','route' => ['internacao.destroy', $internacao->id],'style'=>'display:inline']) !!}
-                                            {!! Form::submit('OK', ['class' => 'btn btn-primary']) !!}
-                                            {!! Form::close() !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="modal fade" id="a{{$internacao->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -119,11 +96,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
-                                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                                    <strong>Diagnóstico:</strong>
-                                                    {{$internacao->cid10->descricao}}
-                                                    <br><br>
-                                                </div>
+                                                
                                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                                     <strong>Clínica:</strong>
                                                     {{$internacao->clinica->nome}}

@@ -10,6 +10,7 @@ import VcPrescricaoedit from './components/prescricaoedit.vue'
 import VcMedicamento from './components/medicamento.vue'
 import VcMedicamentoedit from './components/medicamentoedit.vue'
 import VcPrescricao from './components/prescricao.vue'
+import VcInternacao from './components/internacao.vue'
 
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('content');
@@ -23,7 +24,8 @@ var app = new Vue({
         VcMedicamento,        
         VcMedicamentoedit,
         VcPrescricao,
-        VcPrescricaoedit
+        VcPrescricaoedit,
+        VcInternacao
     }
     
 })

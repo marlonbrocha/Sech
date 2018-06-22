@@ -63,7 +63,12 @@ function data_format($format_ini, $value, $format_end)
             
             <tr>
                 <th class="tg-031e" width="10%" rowspan="2" >Diagnóstico</th>
-                <th  colspan="4" rowspan="2" width="30%">{{$prescricao->internacao->cid10->descricao}}</th>
+                <th  colspan="4" rowspan="2" width="30%" style="text-align: left;">
+                    
+                    @foreach($diagnosticos as $key=> $diag)
+                    <div>{{++$key}} - {{$diag->descricao}}</div>
+                    @endforeach
+                </th>
                 <th class="tg-031e" rowspan="2" width="8%" colspan="4">Evolução</th>
                 <th class="tg-031e" colspan="11" rowspan="2">{{$prescricao->evolucao}}</th>
             </tr>

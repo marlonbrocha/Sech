@@ -15,13 +15,9 @@ class CreatePrescricaosTable extends Migration
         Schema::create('prescricaos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idusuario')->unsigned();
-            $table->foreign('idusuario')->references('id')->on('users')
-                    ->onUpdate('restrict')
-                    ->onDelete('cascade');
+            $table->foreign('idusuario')->references('id')->on('users');
             $table->integer('idinternacao')->unsigned();
-            $table->foreign('idinternacao')->references('id')->on('internacaos')
-                    ->onUpdate('restrict')
-                    ->onDelete('cascade');
+            $table->foreign('idinternacao')->references('id')->on('internacaos');
             $table->text('dataprescricao');
             $table->text('dataaprovacao')->nullable();
             $table->integer('id_pai')->nullable();

@@ -1,12 +1,8 @@
 @extends('layouts.app')
 
 @section('main-content')
+
 <div class="row">
-    <style type="text/css">
-        .content-wrapper{
-            min-height: 0px;
-        }
-    </style>
     <div class="col-lg-12 margin-tb">  
         <div class="pull-left">
             @section('contentheader_title')
@@ -16,6 +12,17 @@
         </div>
     </div>
 </div>
+<?php
+function data_format($format_ini, $value, $format_end)
+{
+    $d = \DateTime::createFromFormat($format_ini, $value);
+    if ($d)
+    {
+        return $d->format($format_end);
+    }
+    return null;
+}
+?>
 
 @if (count($errors) > 0)
 <div class="alert alert-danger">
@@ -29,7 +36,7 @@
 <br>
 <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
     <div class="row">
-     <vc-prescricao data="{{$dataprescricao}}" medico="{{$medico}}"  medicamentosss="{{ json_encode($results)}}" ></vc-prescricao>
+     <vc-prescricao data="{{$dataprescricao}}" medico="{{$medico}}"  medicamentosss="{{ json_encode($results)}}" paciente_all="{{ json_encode($paciente)}}" di="{{json_encode($diagnosticos)}}"></vc-prescricao>
     </div>
 </div>
 @endsection
@@ -40,10 +47,32 @@
 <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}" type = "text/javascript"></script>
 <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+
 
 <script>
 $(function ($) {
     $('#table').DataTable({
+        "paging": false,
+
+        "search": true,
+        "ordering": true,
+        "info": false,
+        "autoWidth": true,
+        "iDisplayLength": 10,
+        "scrollY": "100px",
+        "bInfo" : false,
+        "bSort" : false,
+        "columnDefs": [{
+                "targets": 'no-sort',
+                "orderable": false,
+            }]
+    });
+});
+
+$(function ($) {
+    $('#table2').DataTable({
         "paging": false,
 
         "search": true,
@@ -84,9 +113,3 @@ $('a').on('click', function(){
             });
     @endif
 </script>
-
-<style type="text/css">
-        .content-wrapper{
-            min-height: 0px;
-        }
-</style>

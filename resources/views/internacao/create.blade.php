@@ -4,7 +4,6 @@
 <script src = "{{ asset('js/jquery.maskedinput.js') }}" type = "text/javascript" ></script>
 <script src = "{{ asset('js/jquery-ui-1.12.0/jquery-ui.js') }}" type = "text/javascript" ></script>
 <link href="{{ asset('js/jquery-ui-themes-1.12.0/themes/base/jquery-ui.css') }}" rel="stylesheet">
-
 @section('main-content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -24,87 +23,16 @@
     </ul>
 </div>
 @endif
-{!! Form::open(array('route' => 'internacao.store','method'=>'POST')) !!}
+
 <br>
 <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
     <div class="row">
         <div class="box-body">
-            <div class="col-xs-11 col-sm-11 col-md-11">
-                <div class="form-group">
-                    <strong>Paciente:</strong>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-user"></i>
-                        </span>
-                        <select name="idpaciente" id="idpaciente" style="width: 100%" class="form-control">
-
-                        @foreach($pacientes as $paciente)       
-                        <option value="{{$paciente->id}}">{{$paciente->numeroprontuario}} - {{$paciente->nomecompleto}}</option>
-                        @endforeach
-                      </select>
-                       
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-1 col-sm-1 col-md-1">
-                <div class="form-group">
-                    <br>
-                    <a class="add btn btn-primary" data-toggle="tooltip" title="Adicionar paciente"><i class="fa fa-plus" style="color: #fff;"></i></a>
-                </div>
-            </div>
-            <div class="col-xs-9 col-sm-9 col-md-9">
-                <div class="form-group">
-                    <strong>Clínica:</strong>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="fa fa-hospital-o"></i>
-                        </span>
-                        {!! Form::select('idclinica', $clinicas, null, array('class' => 'form-control')) !!}
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
-                <div class="form-group">
-                    <strong>Leito:</strong>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="fa fa-hotel"></i>
-                        </span>
-                        {!! Form::select('idleito', $leitos , null, array('class' => 'form-control')) !!}
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-8 col-sm-8 col-md-8">
-                <div class="form-group">
-                    <strong>Diagnóstico:</strong>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="fa fa-paste"></i>
-                        </span>
-                        {!! Form::select('idcid10', $cid10s , null, array('class' => 'form-control')) !!}
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-4">
-                <div class="form-group">
-                    <strong>Data de admissão:</strong>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                        {!! Form::text('dataadmissao', $dataadmissao, array('class' => 'form-control', 'id' => 'dataadmissao')) !!}
-                    </div>
-                </div>
-            </div>
-            <div class="pull-right" style="margin-right: 1%;">
-                <br>
-                <a class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Voltar" href="{{ route('internacao.index') }}"><i class="fa fa-mail-reply"></i></a>
-                <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Salvar"><i class="fa fa-save"></i></button>
-            </div>
+            <vc-internacao pa="{{$pacientes}}" le="{{$leitos}}" cli="{{$clinicas}}" ci="{{json_encode($cid10s)}}"></vc-internacao>            
         </div>
     </div>
 </div>
-{!! Form::close() !!}
+
 <div class="modal fade" id="paciente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -133,6 +61,12 @@
                                 <div class="form-group">
                                     <strong>Peso:</strong>
                                     {!! Form::text('peso', null, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Alergia:</strong>
+                                    {!! Form::textarea('alergia', null, array('class' => 'form-control','rows' => 4)) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -184,4 +118,18 @@ jQuery(function ($) {
 $(document).on('click', '.add', function () {
     $("#paciente").modal('show');
 });
+</script>
+<script>
+    @if (Session::get('error'))
+            $(function () {
+                var msg = "{{Session::get('error')}}"
+                swal({
+                    title: '',
+                    text: msg,
+                    confirmButtonColor: "#66BB6A",
+                    type: "warning",
+                    html: true
+                });
+            });
+            @endif
 </script>

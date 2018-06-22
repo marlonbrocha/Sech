@@ -19,6 +19,7 @@ class CreatePacientesTable extends Migration
             $table->string('idade');
             $table->string('peso');
             $table->string('numeroprontuario')->unique();
+            $table->string('alergia')->nullable();
             $table->timestamps();
         });
     }

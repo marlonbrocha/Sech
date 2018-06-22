@@ -60,6 +60,15 @@ function data_format($format_ini, $value, $format_end)
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
+                            <strong>Diagnóstico:</strong>
+                            <br>
+                            @foreach ($diagnosticos as $diag)
+                                {{$diag->descricao}}</p>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
                             <strong>Clínica:</strong>
                             {{$prescricao->internacao->clinica->nome}}
                         </div>
@@ -82,12 +91,6 @@ function data_format($format_ini, $value, $format_end)
                         <div class="form-group">
                             <strong>Data e hora da prescrição:</strong>
                             {{$prescricao->dataprescricao}}
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>Diagnóstico:</strong>
-                            {{$prescricao->internacao->cid10->descricao}}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -299,7 +302,7 @@ function data_format($format_ini, $value, $format_end)
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <a class="btn btn-default" title="Imprimir" href="{{ route('relatorio.antibioticoterapia',$prescricao->id) }}">
+                                                        <a class="btn btn-default" target="_blank" title="Imprimir" href="{{ route('relatorio.antibioticoterapia',$prescricao->id) }}">
                                                         <i class="glyphicon glyphicon-print"> </i></a>
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                                                         
@@ -316,10 +319,7 @@ function data_format($format_ini, $value, $format_end)
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                                            
-                                            
+                    </div>                                                              
                 </div>
 
             </div>
@@ -328,10 +328,7 @@ function data_format($format_ini, $value, $format_end)
                 <a class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Voltar" href="{{ route('prescricao.index') }}"><i class="fa fa-reply"></i></a>
             </div>
             <div class="pull-right" style="margin-right: 1%;">
-                <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Salvar"><i class="fa fa-save"></i></button>
-            </div>
-            <div class="pull-right" style="margin-right: 1%;">
-                <a class="btn btn-default" title="Imprimir" href="{{ route('relatorio.prescricao',$prescricao->id) }}"><i class="glyphicon glyphicon-print"></i></a>                
+                <a class="btn btn-default" target="_blank" title="Imprimir" href="{{ route('relatorio.prescricao',$prescricao->id) }}"><i class="glyphicon glyphicon-print"></i></a>                
             </div>
         </div>
     </div>

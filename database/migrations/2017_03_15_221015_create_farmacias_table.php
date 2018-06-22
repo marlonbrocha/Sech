@@ -14,9 +14,7 @@ class CreateFarmaciasTable extends Migration {
         Schema::create('farmacias', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idClinica')->unsigned();
-            $table->foreign('idClinica')->references('id')->on('clinicas')
-                    ->onUpdate('restrict')
-                    ->onDelete('cascade');
+            $table->foreign('idClinica')->references('id')->on('clinicas');
             $table->string('nome');
             $table->string('codigo');
             $table->boolean('central'); //Imagem?

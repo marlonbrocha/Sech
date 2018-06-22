@@ -72,7 +72,7 @@
                     @if($i >0 )
                     @permission('prescricao-edit') 
                     <div style="text-align: right;">
-                        <a class="btn btn-default" title="Imprimir" href="{{ route('portaria.imprimir',$data) }}">
+                        <a class="btn btn-default"  target="_blank" title="Imprimir" href="{{ route('portaria.imprimir',$data) }}">
                                 <i class="glyphicon glyphicon-print"> </i>
                             </a>
                     </div>

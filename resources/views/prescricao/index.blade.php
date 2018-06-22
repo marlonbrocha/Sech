@@ -2,6 +2,17 @@
 
 <link href="{{ asset('js/jquery-ui-themes-1.12.0/themes/base/jquery-ui.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap.css') }}">
+<?php
+function data_format($format_ini, $value, $format_end)
+{
+    $d = \DateTime::createFromFormat($format_ini, $value);
+    if ($d)
+    {
+        return $d->format($format_end);
+    }
+    return null;
+}
+?>
 
 @section('main-content')
 <div class="row">
@@ -75,13 +86,15 @@
                                                     <br><br> 
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                                    <strong>Data de nascimento:</strong>
-                                                    {{$prescricao->internacao->paciente->nascimento}}
+                                                    <strong>Idade:</strong>
+                                                    {{$prescricao->internacao->paciente->idade}}
                                                     <br><br> 
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                                     <strong>Admissão:</strong>
-                                                    {{$prescricao->internacao->dataadmissao}}
+                                                    <?php 
+                                                        echo data_format("Y-m-d",$prescricao->internacao->dataadmissao, "d/m/Y");
+                                                    ?>
                                                     <br><br> 
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -89,11 +102,7 @@
                                                     {{$prescricao->dataprescricao}}
                                                     <br><br> 
                                                 </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                                    <strong>Diagnóstico:</strong>
-                                                    {{$prescricao->internacao->cid10->descricao}}
-                                                    <br><br> 
-                                                </div>
+                                                
                                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                                     <strong>Evolução:</strong>
                                                     {{$prescricao->evolucao}}

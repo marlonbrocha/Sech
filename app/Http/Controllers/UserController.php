@@ -43,6 +43,7 @@ class UserController extends Controller {
     public function store(Request $request) {
 
         //dd($request->input('fk_role'));
+        //return response()->json($request->codigoprofissional);
 
         $tipo = $request->input('fk_role');
 
@@ -69,22 +70,20 @@ class UserController extends Controller {
                 'nascimento' => 'required',
                 'telefone' => 'required',
                 'endereco' => 'required',
-                //'codigoprofissional' => 'required'
             ]);
         } else if ($tipo == "3") {
             $this->validate($request, [
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
-                'password' => 'required|same:confirm-password',
+                
                 'fk_role' => 'required',
                 'cpf' => 'required',
                 'rg' => 'required',
                 'nascimento' => 'required',
                 'telefone' => 'required',
                 'endereco' => 'required',
-                'codigoprofissional' => 'required',
-                'idespecialidade' => 'required',
-                'assinatura' => 'required'
+                //'codigoprofissional' => 'required',
+                
             ]);
         } else if ($tipo == "4") {
             $this->validate($request, [
@@ -97,8 +96,8 @@ class UserController extends Controller {
                 'nascimento' => 'required',
                 'telefone' => 'required',
                 'endereco' => 'required',
-                'codigoprofissional' => 'required',
-                'idespecialidade' => 'required'
+                //'codigoprofissional' => 'required',
+                //'idespecialidade' => 'required'
             ]);
         } else if ($tipo == "5") {
             $this->validate($request, [
@@ -111,7 +110,7 @@ class UserController extends Controller {
                 'nascimento' => 'required',
                 'telefone' => 'required',
                 'endereco' => 'required',
-                'codigoprofissional' => 'required',
+                //'codigoprofissional' => 'required',
             ]);
         } else {
             $this->validate($request, [

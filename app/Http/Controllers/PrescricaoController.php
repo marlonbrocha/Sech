@@ -13,7 +13,10 @@ use DB;
 use App\Medicamento;
 use App\Formafarmaceutica;
 use App\Substanciaativa;
-use App\Medicamentosubstancia;        
+use App\Internacao;
+use App\InternacaoCid;
+use App\Medicamentosubstancia;   
+
 class PrescricaoController extends Controller {
 
     public function index(Request $request) {
@@ -215,11 +218,27 @@ class PrescricaoController extends Controller {
             ];
         }
 
+            $diagnosticos = DB::table('internacaos')
+                ->where('internacaos.saida', NULL)
+                ->join('internacao_cids','internacao_cids.idinternacao','=','internacaos.id')
+                ->join('cid10s','cid10s.id','=','internacao_cids.idcid10')
+                ->select('internacaos.id','cid10s.descricao')
+                ->get();
+
+            $paciente = DB::table('internacaos')
+                ->where('internacaos.saida', NULL)
+                ->join('pacientes', 'pacientes.id', '=', 'internacaos.idpaciente')
+                ->join('clinicas', 'clinicas.id', '=', 'internacaos.idclinica')
+                ->join('leitos', 'leitos.id', '=', 'internacaos.idleito')
+                ->select('pacientes.nomecompleto','pacientes.numeroprontuario', 'internacaos.id', 'clinicas.nome','leitos.leito', 'internacaos.dataadmissao', 'pacientes.alergia')
+                ->get();
 
         $dataprescricao = date("d/m/Y H:i:s");
         $id = Auth::user()->id;
         $medico = User::find($id)->name;
-        return view('prescricao.create', compact('dataprescricao', 'medico', 'results'));
+        return view('prescricao.create', compact('dataprescricao', 'medico', 'results', 'paciente','diagnosticos'));
+
+
     }
 
 
@@ -394,12 +413,33 @@ class PrescricaoController extends Controller {
                    ,'relatorio_antimicrobianos.nome','relatorio_antimicrobianos.leito','relatorio_antimicrobianos.data_admissao','relatorio_antimicrobianos.inicio_tratamento','relatorio_antimicrobianos.clinica','relatorio_antimicrobianos.duracao_tratamento','relatorio_antimicrobianos.antimicrobiano')
                 //->where('prescricao_medicamentos.qtdatendida', 0)
                 ->get();
+
+            $diagnosticos = DB::table('internacaos')
+            ->join('prescricaos','prescricaos.idinternacao','=','internacaos.id')
+            ->join('internacao_cids','internacao_cids.idinternacao','=','internacaos.id')
+            ->join('cid10s','cid10s.id','=','internacao_cids.idcid10')
+            ->where('prescricaos.id',$prescricao->id)
+            ->select('internacaos.id','cid10s.descricao')
+            ->get();
+
          
-        return view('prescricao.editar', compact('prescricao.create','prescricao', 'medicamentos','dataprescricao', 'medico','idprescricao', 'results'));
+        return view('prescricao.editar', compact('prescricao.create','prescricao', 'medicamentos','dataprescricao', 'medico','idprescricao', 'results', 'diagnosticos'));
 
     }
 
+    function data_format($format_ini, $value, $format_end)
+    {
+        $d = \DateTime::createFromFormat($format_ini, $value);
+        if ($d)
+        {
+            return $d->format($format_end);
+        }
+        return null;
+    }
+
     public function store(Request $request) {
+
+
         $prescricao = new Prescricao();
         $prescricao->idusuario = Auth::user()->id;
         $prescricao->idinternacao = $request->get('idinternacao');
@@ -408,8 +448,7 @@ class PrescricaoController extends Controller {
         $prescricao->observacoesmedicas = $request->get('observacoesmedicas');
         $medicamentos = $request->get('prescricaomedicamento');
         $relatorio = $request->get('relatorioAntimicro');
-
-
+        
         if($request->get('idprescricaopai')){
             $id = $request->get('idprescricaopai');
             
@@ -513,7 +552,9 @@ class PrescricaoController extends Controller {
                     $RelatorioAntimicrobiano->idprescricao_medicamento = $prescricaomedicamento->id;
                     $RelatorioAntimicrobiano->nome = $relatorio[$i]['paciente'];
                     $RelatorioAntimicrobiano->leito = $relatorio[$i]['leito'];
-                    $RelatorioAntimicrobiano->data_admissao = $relatorio[$i]['dataadmissao'];
+                    $data = PrescricaoController::data_format("d-m-Y",$relatorio[$i]['dataadmissao'], "Y-m-d");
+                    
+                    $RelatorioAntimicrobiano->data_admissao = $this->data_format("d\/m\/Y",$relatorio[$i]['dataadmissao'], "Y-m-d");
                     $RelatorioAntimicrobiano->inicio_tratamento = $relatorio[$i]['iniTrata'];
                     $RelatorioAntimicrobiano->clinica = $relatorio[$i]['clinica'];
                     $RelatorioAntimicrobiano->diagnostico_infeccioso = $relatorio[$i]['diagInfe'];
@@ -547,13 +588,22 @@ class PrescricaoController extends Controller {
                    ,'relatorio_antimicrobianos.nome','relatorio_antimicrobianos.leito','relatorio_antimicrobianos.data_admissao','relatorio_antimicrobianos.inicio_tratamento','relatorio_antimicrobianos.clinica','relatorio_antimicrobianos.duracao_tratamento','relatorio_antimicrobianos.antimicrobiano','relatorio_antimicrobianos.quantidade')
                 //->where('prescricao_medicamentos.qtdatendida', 0)
                 ->get();
+
+
+        $diagnosticos = DB::table('internacaos')
+            ->join('prescricaos','prescricaos.idinternacao','=','internacaos.id')
+            ->join('internacao_cids','internacao_cids.idinternacao','=','internacaos.id')
+            ->join('cid10s','cid10s.id','=','internacao_cids.idcid10')
+            ->where('prescricaos.id',$id)
+            ->select('internacaos.id','cid10s.descricao')
+            ->get();
                 
         if($medicamentos == '[]'){
             $medicamentos = PrescricaoMedicamento::where('idprescricao', $prescricao->id)->get();               
         }
 
 
-        return view('prescricao.edit', compact('prescricao', 'medicamentos'));
+        return view('prescricao.edit', compact('prescricao', 'medicamentos', 'diagnosticos'));
     }
 
     public function update(Request $request, $id) {

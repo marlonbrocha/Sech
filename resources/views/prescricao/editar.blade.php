@@ -35,7 +35,7 @@ function data_format($format_ini, $value, $format_end)
 <br>
 <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
     <div class="row">
-     <vc-prescricaoedit data="{{$dataprescricao}}" medico="{{$medico}}"  medicamentos="{{$medicamentos }}" pacient="{{$prescricao->internacao->paciente->nomecompleto}}" clinic="{{$prescricao->internacao->clinica->nome}}" leit="{{$prescricao->internacao->leito->leito}}" admissa="<?php echo data_format("Y-m-d",$prescricao->internacao->dataadmissao, "d/m/Y"); ?>" diagnostic="{{$prescricao->internacao->cid10->descricao}}" prontua="{{$prescricao->internacao->paciente->numeroprontuario}}" idinter="{{$prescricao->idinternacao}}" evolu="{{$prescricao->evolucao}}" idprescricao={{$idprescricao}} medicamentosss="{{ json_encode($results)}}" ></vc-prescricaoedit>
+     <vc-prescricaoedit data="{{$dataprescricao}}" medico="{{$medico}}"  medicamentos="{{$medicamentos }}" pacient="{{$prescricao->internacao->paciente->nomecompleto}}" clinic="{{$prescricao->internacao->clinica->nome}}" leit="{{$prescricao->internacao->leito->leito}}" admissa="<?php echo data_format("Y-m-d",$prescricao->internacao->dataadmissao, "d/m/Y"); ?>" prontua="{{$prescricao->internacao->paciente->numeroprontuario}}" idinter="{{$prescricao->idinternacao}}" evolu="{{$prescricao->evolucao}}" idprescricao={{$idprescricao}} medicamentosss="{{ json_encode($results)}}" di="{{json_encode($diagnosticos)}}" ale="{{$prescricao->internacao->paciente->alergia}}" ></vc-prescricaoedit>
     </div>
 </div>
 @endsection
