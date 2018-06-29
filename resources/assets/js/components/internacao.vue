@@ -25,8 +25,8 @@
             this.leito_all = JSON.parse(this.le);
             this.clinicas = JSON.parse(this.cli);
 
-            var obj = jQuery.parseJSON(this.ci);
-            this.cid_all = obj;                
+           // var obj = jQuery.parseJSON(this.ci);
+            this.cid_all = JSON.parse(this.ci);;                
         },
         methods: {
             addCid(){
@@ -49,6 +49,12 @@
                     }
                 }
             },
+            escolher_paciente(paciente){
+                document.getElementById("paciente").value =  paciente.nomecompleto;
+                
+                this.paciente.idpaciente = paciente.id;
+                console.log(this.paciente.idpaciente);
+            },
             adicionar(){
                 if(this.paciente.cids == ''){
                     swal({
@@ -58,8 +64,10 @@
                             type: "warning"
                         });    
                 }else{
+                    document.getElementById('salvar').setAttribute('disabled',"true");
                     this.$http.post('/internacao/create', this.paciente).then(response => {
                         if(response.body == 'error'){
+                            document.getElementById('salvar').removeAttribute('disabled');
                             swal({
                                 title: "Erro!",
                                 text: "Paciente já se encontra internado!",
@@ -78,6 +86,8 @@
                            }); 
                         }
                     }).catch(response => {
+                        document.getElementById('salvar').removeAttribute('disabled');
+
                             swal({
                                 title: "Ocorreu algum problema!",
                                 text: "Verifique todos os campos e tente novamente!",
@@ -102,9 +112,7 @@
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-user"></i>
                         </span>
-                        <select id="idpaciente" name="idpaciente" class="form-control" v-model="paciente.idpaciente">
-                            <option v-for = "paci in pacientes" v-bind:value=paci.id>{{paci.nomecompleto}}</option>
-                        </select>
+                        <input  name="paciente" class="form-control" id="paciente" readonly="">
                     </div>
                 </div>
             </div>
@@ -114,6 +122,26 @@
                     <a class="add btn btn-primary" data-toggle="tooltip" title="Adicionar paciente"><i class="fa fa-plus" style="color: #fff;"></i></a>
                 </div>
             </div>
+
+            <div class="col-md-12 ">
+                        <div class="form-group">
+                            <div class="table-responsive col-md-12" style="margin-bottom: 20px;border-style: solid;border-color: #d2d6de;border-width: 1px;padding: 2;overflow-x: hidden;">
+                                        <table id="table" class="table table-bordered table-hover dataTable" role="grid">
+                                            <thead>
+                                                <tr>
+                                                    <th>Pacientes</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                            <tr v-for="paci in pacientes">
+                                <td><a href="#!" @click="escolher_paciente(paci)">{{ paci.nomecompleto }}</a></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+
             <div class="col-xs-9 col-sm-9 col-md-9">
                 <div class="form-group">
                     <strong>Clínica:</strong>
@@ -182,7 +210,7 @@
                         </div> 
                 </div>
                 <div class="pull-right" style="margin-right: 1%;">
-                    <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Salvar" @click="adicionar"><i class="fa fa-save"></i></button>
+                    <button id="salvar" type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Salvar" @click="adicionar"><i class="fa fa-save"></i></button>
                 </div>
                 <div class="pull-right" style="margin-right: 1%;">
                     <a class="btn btn-default" data-toggle="tooltip"  title="Voltar" onclick="window.history.go(-1);"> 

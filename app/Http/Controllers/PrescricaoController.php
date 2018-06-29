@@ -214,7 +214,8 @@ class PrescricaoController extends Controller {
                 'administracao' => $medicamentosubstancia->substanciaativa->administracao,
                 'estabilidade' => $medicamentosubstancia->substanciaativa->estabilidade,
                 'id' => $medicamento->id,
-                'value' => $substancias, 'classificacao' => $class
+                'value' => $substancias, 'classificacao' => $class,
+                'simpas' => $medicamento->codigosimpas
             ];
         }
 
@@ -393,7 +394,8 @@ class PrescricaoController extends Controller {
                 'administracao' => $medicamentosubstancia->substanciaativa->administracao,
                 'estabilidade' => $medicamentosubstancia->substanciaativa->estabilidade,
                 'id' => $medicamento->id,
-                'value' => $substancias, 'classificacao' => $class
+                'value' => $substancias, 'classificacao' => $class,
+                'simpas' => $medicamento->codigosimpas
             ];
         }
 

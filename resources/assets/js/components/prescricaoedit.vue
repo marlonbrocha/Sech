@@ -70,160 +70,170 @@
         },
         methods: {
 	            	addMed(){
-                        if(classific == 2 && this.iniTrata == '' || classific == 2 && this.diagInfe == '' 
-                    || classific ==  2 && this.duracao == '' || classific == 2 && this.quantidade == ''
-                    ){
-                        swal({
-                            title: "Campos vazios",
-                            text: 'Preencha todos os campos do relatório antimicrobiano', 
-                            type: "warning",
-                            html: true,
-                        });
-                    }else{
-	                var cod = $("#codigo").val();
-                    var i;
-                    var j;
-                    var verifica = false;
-                    codigos.push(cod);
+                        var med = $("#med").val();
 
-                    if(direita.length > 0){ //vefifica se ja tem interacaoes inseridas
-                        for (i = 0; i < direita.length ; i++){ 
-                            if(cod == direita[i]){  //comparação do codigo inserido com o vetor existente 
-                                for(j = 0; j < codigos.length ; j++){  
-                                    if(direita[i] == codigos[j]){ //verifica se o codigo comparado ainda existe na lista de medicamentos prescritos                                  
-                                        verifica = true;
+                        if(med == ''){
+                          swal({
+                                title: "Campos vazios",
+                                text: 'O campo medicamento é obrigatório', 
+                                type: "warning",
+                                html: true,
+                            });  
+                        }else{
+
+                            if(classific == 2 && this.iniTrata == '' || classific == 2 && this.diagInfe == '' 
+                            || classific ==  2 && this.duracao == '' || classific == 2 && this.quantidade == ''
+                            ){
+                                swal({
+                                    title: "Campos vazios",
+                                    text: 'Preencha todos os campos do relatório antimicrobiano', 
+                                    type: "warning",
+                                    html: true,
+                                });
+
+                                $("#relatorio").modal('show');
+
+                            }else{
+        	                var cod = $("#codigo").val();
+                            var i;
+                            var j;
+                            var verifica = false;
+                            codigos.push(cod);
+
+                            if(direita.length > 0){ //vefifica se ja tem interacaoes inseridas
+                                for (i = 0; i < direita.length ; i++){ 
+                                    if(cod == direita[i].sub){  //comparação do codigo inserido com o vetor existente 
+                                        for(j = 0; j < codigos.length ; j++){  
+                                            if(direita[i].sub == codigos[j]){ //verifica se o codigo comparado ainda existe na lista de medicamentos prescritos                                  
+                                                verifica = true;
+                                            }
+                                        }
+                                        if(verifica == true && codigos.length > 1){
+                                            let pos = posicoes[i].pos;
+                                            swal({
+                                                title: "Interação Medicamentosa",
+                                                text: consequencia[pos], 
+                                                type: "warning",
+                                                html: true,
+                                            });    
+                                        }    
                                     }
                                 }
-                                if(verifica == true && codigos.length > 1){
-                                    let pos = posicoes[i];
-                                    swal({
-                                        title: "Interação Medicamentosa",
-                                        text: consequencia[pos], 
-                                        type: "warning",
-                                        html: true,
-                                    });    
-                                }    
+                            }                    
+
+                            for (i = 0; i < sub1.length ; i++){
+                                if(cod == sub1[i]){
+                                    direita.push({sub: sub2[i], id: cod});
+                                    posicoes.push({pos: i, id: cod});
+                                }
                             }
+
+                            for (i = 0; i < sub2.length ; i++){
+                                if(cod == sub2[i]){
+                                    direita.push({sub: sub1[i], id: cod});
+                                    posicoes.push({pos: i, id: cod});
+                                }
+                            }
+
+    	                    var id = $("#idmed").val();
+    	                    var codigo = $("#codigo").val();
+                            var simpas = $("#simpas").val();
+                            var codigo = $("#codigo").val();
+    	                    var dose = $("#dose").val();
+    	                    var administracao = $("#administracao").val();
+    	                    var estabilidade = $("#estabilidade").val();
+    	                    var diluicao = $("#diluicao").val();
+
+    	                    this.prescricao.relatorioAntimicro.push({
+    	                        idmedicamento: id,
+    	                        medInfe: med,
+                                quantidade: this.quantidade,
+    	                        duracao: this.duracao,
+    	                        leito: this.leito,
+    	                        paciente: this.paciente,
+    	                        dataadmissao: this.admissao,
+    	                        iniTrata: this.iniTrata,
+    	                        clinica: this.clinica,
+    	                        diagInfe: this.diagInfe
+    	                    });
+
+                            this.quantidade = '';
+                            this.duracao = '';
+                            this.iniTrata = '';
+                            this.diagInfe = '';
+                            document.getElementById("medInfe").value = '';
+
+
+    	                    this.prescricao.prescricaomedicamento.push({
+    	                        codigo: codigo,
+    	                        simpas: simpas,
+    	                        idmedicamento: id,
+    	                        qtd: this.qtd,
+    	                        med: med,
+    	                        obs: this.obs,
+    	                        posologia: this.posologia,
+    	                        administracao: administracao,
+    	                        dose: dose,
+    	                        diluicao: diluicao,
+    	                        estabilidade: estabilidade,
+    	                        classificacao: classific
+    	                    });
+
+    	                    this.simpas = '-';
+    	                    
+                            $("#med").val("");
+                            $("#dose").val("");
+                            $("#diluicao").val("");
+                            $("#estabilidade").val("");
+                            $("#administracao").val("");
+                            $("#qtd").val("");
+                            $("#simpas").val("");
+                            $("#codigo").val("");
+                            
+                            this.posologia = '';
+                            this.obs = '';	                  
+        	                
                         }
-                    }                    
-
-                    for (i = 0; i < sub1.length ; i++){
-                        if(cod == sub1[i]){
-                            direita.push(sub2[i]);
-                            posicoes.push(i);
-                        }
-                    }
-
-                    for (i = 0; i < sub2.length ; i++){
-                        if(cod == sub2[i]){
-                            direita.push(sub1[i]);
-                            posicoes.push(i);
-                        }
-                    }           
-
-	                var id = $("#idmed").val();
-	                this.$http.post('../../../simpas', {id: id}).then(response => {
-	                    var codigo = $("#codigo").val();
-	                    var med = $("#med").val();
-	                    var dose = $("#dose").val();
-	                    var administracao = $("#administracao").val();
-	                    var estabilidade = $("#estabilidade").val();
-	                    var diluicao = $("#diluicao").val();
-
-	                    this.prescricao.relatorioAntimicro.push({
-	                        idmedicamento: id,
-	                        medInfe: med,
-                            quantidade: this.quantidade,
-	                        duracao: this.duracao,
-	                        leito: this.leito,
-	                        paciente: this.paciente,
-	                        dataadmissao: this.admissao,
-	                        iniTrata: this.iniTrata,
-	                        clinica: this.clinica,
-	                        diagInfe: this.diagInfe
-	                    });
-
-                        this.quantidade = '';
-                        this.duracao = '';
-                        this.iniTrata = '';
-                        this.diagInfe = '';
-                        document.getElementById("medInfe").value = '';
-
-
-	                    this.prescricao.prescricaomedicamento.push({
-	                        codigo: codigo,
-	                        simpas: response.data,
-	                        idmedicamento: id,
-	                        qtd: this.qtd,
-	                        med: med,
-	                        obs: this.obs,
-	                        posologia: this.posologia,
-	                        administracao: administracao,
-	                        dose: dose,
-	                        diluicao: diluicao,
-	                        estabilidade: estabilidade,
-	                        classificacao: classific
-	                    });
-
-	                    this.simpas = '-';
-	                    $("#med").val("");
-                        $("#dose").val("");
-                        $("#diluicao").val("");
-                        $("#estabilidade").val("");
-                        $("#administracao").val("");
-                        $("#qtd").val("");
-                        
-                        this.posologia = '';
-                        this.obs = '';	                  
-
-	                    $('.med').removeClass("col-xs-11 col-sm-11 col-md-11");
-	                    $('.med').addClass("col-xs-12 col-sm-12 col-md-12");
-	                }).catch(response => {
-                        var codigo = $("#codigo").val();
-                        var med = $("#med").val();
-                        var dose = $("#dose").val();
-                        var administracao = $("#administracao").val();
-                        var estabilidade = $("#estabilidade").val();
-                        var diluicao = $("#diluicao").val();
-
-                         this.prescricao.prescricaomedicamento.push({
-                            codigo: cod,
-                            simpas: '',
-                            idmedicamento: '',
-                            qtd: this.qtd,
-                            med: med,
-                            obs: this.obs,
-                            posologia: this.posologia,
-                            administracao: administracao,
-                            dose: dose,
-                            diluicao: diluicao,
-                            estabilidade: estabilidade,
-                            classificacao: classific
-                        });                            
-	                     console.log('erro push medicamento');
-	                });
                     }
 	            },
 	            removeMed(med) {
-	                var index = this.prescricao.prescricaomedicamento.indexOf(med)
+                    console.log(direita);
+	                var index = this.prescricao.prescricaomedicamento.indexOf(med);
+                    var i,j;
 	                if(index > -1){
-	                    this.prescricao.prescricaomedicamento.splice(index, 1);                  
-	                    this.prescricao.relatorioAntimicro.splice(index, 1);              
+                        this.prescricao.prescricaomedicamento.splice(index, 1);                  
+                        this.prescricao.relatorioAntimicro.splice(index, 1);              
+                        
+                        codigos.splice(index, 1);                             
+                        
+                        for (i = 0; i < direita.length ; i++){ 
+                            if(med.codigo == direita[i].id){
+                                direita.splice(i, 1);              
+                            }
+                        }
+
+                        for (j = 0; j < posicoes.length ; j++){ 
+                            if(med.codigo == posicoes[j].id){
+                                posicoes.splice(j, 1);              
+                            }
+                        }
+
 	                }
 	            },
                 disable(){
-                document.getElementById('med').removeAttribute('readonly');
-                document.getElementById("med").value = '';
-                document.getElementById("codigo").value = '';
-                document.getElementById("idmed").value = '';
-                document.getElementById("doseR").value = '';
-                document.getElementById("diluicaoR").value = '';
-                document.getElementById("administracaoR").value = '';
-                document.getElementById("estabilidadeR").value = '';
+                    document.getElementById('med').removeAttribute('readonly');
+                    document.getElementById("med").value = '';
+                    document.getElementById("codigo").value = '';
+                    document.getElementById("idmed").value = '';
+                    document.getElementById("doseR").value = '';
+                    document.getElementById("diluicaoR").value = '';
+                    document.getElementById("administracaoR").value = '';
+                    document.getElementById("estabilidadeR").value = '';
                 },
                 adicionar_medicamento(med){
                 document.getElementById('med').setAttribute('readonly',true);
                 var index = this.meds.indexOf(med);
+                document.getElementById("simpas").value = this.meds[index].simpas;
                 document.getElementById("med").value = this.meds[index].value;
                 document.getElementById("codigo").value = this.meds[index].codigo;
                 document.getElementById("idmed").value = this.meds[index].id;
@@ -560,6 +570,8 @@
                                 classificacao: med_array[i]['classificacao']
                             });    
                         }else{
+                            codigos.push(med_array[i]['codigo']);
+
                             this.prescricao.prescricaomedicamento.push({
                                 codigo: med_array[i]['codigo'],
                                 simpas: med_array[i]['codigosimpas'],
@@ -574,6 +586,24 @@
                                 estabilidade: med_array[i]['estabilidade'],
                                 classificacao: med_array[i]['classificacao']
                             });
+                        }
+
+                        var cod,f,z,y;
+
+                        cod = med_array[i]['codigo']; 
+
+                        for (f = 0; f < sub1.length ; f++){
+                            if(cod == sub1[f]){
+                                direita.push({sub: sub2[f], id: cod});
+                                posicoes.push({pos: f, id: cod});
+                            }
+                        }                        
+
+                        for (z = 0; z < sub2.length ; z++){
+                            if(cod == sub2[z]){
+                                direita.push({sub: sub1[z], id: cod});
+                                posicoes.push({pos: z, id: cod});
+                            }
                         }
 
                         
@@ -764,7 +794,8 @@
 
                     <input id="idmed" type="hidden">
                     <input id="codigo" type="hidden">
-                    
+                    <input id="simpas" type="hidden">
+
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <div class="form-group">
                             <label for="administracao">Administração:
@@ -1001,7 +1032,7 @@
                                  <div class="col-xs-3 col-sm-3 col-md-3">
                                     <div class="form-group">
                                         <label for="duracao">QUANTIDADE:</label>
-                                        <input id="quantidade" type="number" name="quantidade" class="form-control" v-model="quantidade">
+                                        <input id="quantidade"  min="1"  type="number" name="quantidade" class="form-control" v-model="quantidade">
                                      </div>
                                  </div>
 

@@ -33,8 +33,14 @@ class InternacaoController extends Controller {
     public function store(Request $request) {
         $inter = DB::table('internacaos')->where('idpaciente', '=',$request->get('idpaciente'))->get();
         
+
         if($inter != []){
-            if($inter[0]->saida == ''){
+        
+            $tam = count($inter);
+            
+            //return response()->json($inter[0]->saida);
+            
+            if($inter[$tam-1]->saida == ''){
                 return response()->json('error');
             }    
         }

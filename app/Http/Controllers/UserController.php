@@ -18,7 +18,7 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        $data = User::orderBy('id', 'DESC')->paginate(15);
+        $data = User::orderBy('id', 'DESC')->paginate(500);
         return view('users.index', compact('data'))
                         ->with('i', ($request->input('page', 1) - 1) * 15);
     }
@@ -75,7 +75,7 @@ class UserController extends Controller {
             $this->validate($request, [
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
-                
+                'password' => 'required|same:confirm-password',                
                 'fk_role' => 'required',
                 'cpf' => 'required',
                 'rg' => 'required',

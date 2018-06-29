@@ -96,12 +96,29 @@
     </div>
 </div>
 @endsection
-
+<script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}" type = "text/javascript"></script>
+<script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 
 <script>
-//jQuery(function ($) {
-//    $("#rg").mask("99.999.999-99");
-//});
+$(function ($) {
+    $('#table').DataTable({
+        "paging": false,
+
+        "search": true,
+        "ordering": true,
+        "info": false,
+        "autoWidth": true,
+        "iDisplayLength": 10,
+        "scrollY": "100px",
+        "bInfo" : false,
+        "bSort" : false,
+        "columnDefs": [{
+                "targets": 'no-sort',
+                "orderable": false,
+            }]
+    });
+});
+
 
 jQuery(function ($) {
     $("#cpf").mask("999.999.999-99");
