@@ -10,7 +10,7 @@
     var idinter = '';
     export default{
 
-        props: ['data', 'medico','medicamentosss','paciente_all','di'],
+        props: ['data', 'medico','medicamentosss','paciente_all','di','interacao_all'],
 
         data(){
             return { 
@@ -364,34 +364,19 @@
                 }
 
 	            var aux = new Array();
-
-                this.$http.get('/prescricao/interacoesmedicamentosas').then(response => {
 	                  
-                	aux = response.data;
+            	var aux = jQuery.parseJSON(this.interacao_all);
 
-                	var i;
+            	var i;
 	            
 	            for (i = 0; i < aux.length ; i++){
 	            	sub1.push(aux[i].idsubstanciaativa1);
+                    sub2.push(aux[i].idsubstanciaativa2);
+                    consequencia.push(aux[i].consequencia);
 	            }
 
-	            for (i = 0; i < aux.length ; i++){
-	            	sub2.push(aux[i].idsubstanciaativa2);
-	            }
 
-	            for (i = 0; i < aux.length ; i++){
-	            	consequencia.push(aux[i].consequencia);
-	            }
-
-	      		}).catch(response => {
-	                   console.log(response);
-	                    swal({
-	                        title: "Erro!",
-	                        text: "Não existem interações na base de dados",
-	                        type: "error"
-	                   });
-	            });
-
+	      
 	   }
     }
     

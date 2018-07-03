@@ -20229,7 +20229,7 @@ var posicoes = new Array();
 var idinter = '';
 exports.default = {
 
-    props: ['data', 'medico', 'medicamentosss', 'paciente_all', 'di'],
+    props: ['data', 'medico', 'medicamentosss', 'paciente_all', 'di', 'interacao_all'],
 
     data: function data() {
         var _prescricao;
@@ -20577,31 +20577,15 @@ exports.default = {
 
         var aux = new Array();
 
-        this.$http.get('/prescricao/interacoesmedicamentosas').then(function (response) {
+        var aux = jQuery.parseJSON(this.interacao_all);
 
-            aux = response.data;
+        var i;
 
-            var i;
-
-            for (i = 0; i < aux.length; i++) {
-                sub1.push(aux[i].idsubstanciaativa1);
-            }
-
-            for (i = 0; i < aux.length; i++) {
-                sub2.push(aux[i].idsubstanciaativa2);
-            }
-
-            for (i = 0; i < aux.length; i++) {
-                consequencia.push(aux[i].consequencia);
-            }
-        }).catch(function (response) {
-            console.log(response);
-            swal({
-                title: "Erro!",
-                text: "Não existem interações na base de dados",
-                type: "error"
-            });
-        });
+        for (i = 0; i < aux.length; i++) {
+            sub1.push(aux[i].idsubstanciaativa1);
+            sub2.push(aux[i].idsubstanciaativa2);
+            consequencia.push(aux[i].consequencia);
+        }
     }
 };
 
@@ -20678,7 +20662,7 @@ var idinter = '';
 
 exports.default = {
 
-    props: ['data', 'medico', 'medicamentos', 'pacient', 'admissa', 'prontua', 'leit', 'clinic', 'evolu', 'idinter', 'idprescricao', 'medicamentosss', 'di', 'ale'],
+    props: ['data', 'medico', 'medicamentos', 'pacient', 'admissa', 'prontua', 'leit', 'clinic', 'evolu', 'idinter', 'idprescricao', 'medicamentosss', 'di', 'ale', 'interacao_all'],
     data: function data() {
         var _prescricao;
 
@@ -21042,31 +21026,15 @@ exports.default = {
 
         var aux = new Array();
 
-        this.$http.get('/prescricao/interacoesmedicamentosas').then(function (response) {
+        var aux = jQuery.parseJSON(this.interacao_all);
 
-            aux = response.data;
+        var i;
 
-            var i;
-
-            for (i = 0; i < aux.length; i++) {
-                sub1.push(aux[i].idsubstanciaativa1);
-            }
-
-            for (i = 0; i < aux.length; i++) {
-                sub2.push(aux[i].idsubstanciaativa2);
-            }
-
-            for (i = 0; i < aux.length; i++) {
-                consequencia.push(aux[i].consequencia);
-            }
-        }).catch(function (response) {
-            console.log(response);
-            swal({
-                title: "Erro!",
-                text: "Não existem interações na base de dados",
-                type: "error"
-            });
-        });
+        for (i = 0; i < aux.length; i++) {
+            sub1.push(aux[i].idsubstanciaativa1);
+            sub2.push(aux[i].idsubstanciaativa2);
+            consequencia.push(aux[i].consequencia);
+        }
 
         this.evol = this.evolu;
         this.prescricao.evolucao = this.evolu;

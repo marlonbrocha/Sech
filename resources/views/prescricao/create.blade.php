@@ -36,7 +36,7 @@ function data_format($format_ini, $value, $format_end)
 <br>
 <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
     <div class="row">
-     <vc-prescricao data="{{$dataprescricao}}" medico="{{$medico}}"  medicamentosss="{{ json_encode($results)}}" paciente_all="{{ json_encode($paciente)}}" di="{{json_encode($diagnosticos)}}"></vc-prescricao>
+     <vc-prescricao data="{{$dataprescricao}}" medico="{{$medico}}"  medicamentosss="{{ json_encode($results)}}" paciente_all="{{ json_encode($paciente)}}" di="{{json_encode($diagnosticos)}}" interacao_all="{{ json_encode($interacoes) }}"></vc-prescricao>
     </div>
 </div>
 @endsection

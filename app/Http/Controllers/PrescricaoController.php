@@ -234,10 +234,14 @@ class PrescricaoController extends Controller {
                 ->select('pacientes.nomecompleto','pacientes.numeroprontuario', 'internacaos.id', 'clinicas.nome','leitos.leito', 'internacaos.dataadmissao', 'pacientes.alergia')
                 ->get();
 
+            $interacoes = DB::table('interacaomedicamentosas')->get();    
+
+                
+
         $dataprescricao = date("d/m/Y H:i:s");
         $id = Auth::user()->id;
         $medico = User::find($id)->name;
-        return view('prescricao.create', compact('dataprescricao', 'medico', 'results', 'paciente','diagnosticos'));
+        return view('prescricao.create', compact('dataprescricao', 'medico', 'results', 'paciente','diagnosticos', 'interacoes'));
 
 
     }
@@ -424,8 +428,10 @@ class PrescricaoController extends Controller {
             ->select('internacaos.id','cid10s.descricao')
             ->get();
 
+            $interacoes = DB::table('interacaomedicamentosas')->get();    
+
          
-        return view('prescricao.editar', compact('prescricao.create','prescricao', 'medicamentos','dataprescricao', 'medico','idprescricao', 'results', 'diagnosticos'));
+        return view('prescricao.editar', compact('prescricao.create','prescricao', 'medicamentos','dataprescricao', 'medico','idprescricao', 'results', 'diagnosticos', 'interacoes'));
 
     }
 
