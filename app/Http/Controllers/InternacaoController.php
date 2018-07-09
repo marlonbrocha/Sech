@@ -107,42 +107,20 @@ class InternacaoController extends Controller {
     }
 
     public function buscarPaciente(Request $req) {
-        $nome = $req->get('term');
+        
+        $nome = $req->get('prontuario');
 
         $results = array();
 
-        if($nome != ''){
         
-        $paciente = DB::table('internacaos')
-                ->where('internacaos.saida', NULL)
-                ->join('pacientes', 'pacientes.id', '=', 'internacaos.idpaciente')
-                ->join('clinicas', 'clinicas.id', '=', 'internacaos.idclinica')
-                ->join('leitos', 'leitos.id', '=', 'internacaos.idleito')
-                ->join('cid10s', 'cid10s.id', '=', 'internacaos.idcid10')
-                ->select('pacientes.nomecompleto','pacientes.numeroprontuario', 'internacaos.id', 'clinicas.nome','leitos.leito', 'cid10s.descricao', 'internacaos.dataadmissao')
-                ->get();
-                foreach ($paciente as $value) {
-                    $results[] = [
-                    'value' => $paciente[0]->nomecompleto,
-                    'clinica'=> $paciente[0]->nome,
-                    'dataadmissao' => $paciente[0]->dataadmissao,
-                    'id' => $paciente[0]->id,
-                    'leito' => $paciente[0]->leito,
-                    'descricao' => $paciente[0]->descricao,
-                    'numeroprontuario' => $paciente[0]->numeroprontuario
-                    ];
-                }
-            
-        }
-
         if($req['prontuario'] != ''){
+            
         $paciente = DB::table('internacaos')
-                ->where('internacaos.saida', NULL)
-                ->join('pacientes', 'pacientes.id', '=', 'internacaos.idpaciente')
-                ->join('clinicas', 'clinicas.id', '=', 'internacaos.idclinica')
-                ->join('leitos', 'leitos.id', '=', 'internacaos.idleito')
-                ->join('cid10s', 'cid10s.id', '=', 'internacaos.idcid10')
-                ->where('pacientes.numeroprontuario',$req['prontuario'])->select('pacientes.nomecompleto','pacientes.numeroprontuario', 'internacaos.id', 'clinicas.nome', 'leitos.leito', 'cid10s.descricao', 'internacaos.dataadmissao')
+            ->where('internacaos.saida', NULL)
+            ->join('pacientes', 'pacientes.id', '=', 'internacaos.idpaciente')
+            ->join('clinicas', 'clinicas.id', '=', 'internacaos.idclinica')
+            ->join('leitos', 'leitos.id', '=', 'internacaos.idleito')
+            ->where('pacientes.numeroprontuario',$req['prontuario'])->select('pacientes.nomecompleto','pacientes.numeroprontuario','pacientes.alergia', 'internacaos.id', 'clinicas.nome', 'leitos.leito','internacaos.dataadmissao')
                 ->get();
 
                 $results[] = [
@@ -151,25 +129,26 @@ class InternacaoController extends Controller {
                 'dataadmissao' => $paciente[0]->dataadmissao,
                 'id' => $paciente[0]->id,
                 'leito' => $paciente[0]->leito,
-                'descricao' => $paciente[0]->descricao,
+                'alergia' => $paciente[0]->alergia,
                 'numeroprontuario' => $paciente[0]->numeroprontuario
             ];
         }
 
         return response()->json($results);
-/*
+    }
 
-$paciente = Internacao::where('internacaos.saida', NULL)
-                ->join('pacientes', 'pacientes.id', '=', 'internacaos.idpaciente')
-                ->join('clinicas', 'clinicas.id', '=', 'internacaos.idclinica')
-                ->join('leitos', 'leitos.id', '=', 'internacaos.idleito')
-                ->join('cid10s', 'cid10s.id', '=', 'internacaos.idcid10')
-                ->where(('LOWER(pacientes.nomecompleto)'), 'LIKE', '%'.strtolower($nome).'%' )->select('pacientes.nomecompleto', 'internacaos.id', 'clinicas.nome', 'leitos.leito', 'cid10s.descricao', 'internacaos.dataadmissao')
-                ->get();
+    public function pacientes() {
+        $results = array();
 
-                */
+        $paciente = DB::table('internacaos')
+            ->where('internacaos.saida', NULL)
+            ->join('pacientes', 'pacientes.id', '=', 'internacaos.idpaciente')
+            ->join('clinicas', 'clinicas.id', '=', 'internacaos.idclinica')
+            ->join('leitos', 'leitos.id', '=', 'internacaos.idleito')
+            ->select('pacientes.nomecompleto','pacientes.numeroprontuario', 'internacaos.id', 'clinicas.nome','leitos.leito', 'internacaos.dataadmissao', 'pacientes.alergia')
+            ->get();
 
-        //dd($paciente);
+        return response()->json(["data"=>$paciente]);       
     }
 
 }

@@ -42,7 +42,6 @@ class SubstanciaativaController extends Controller
         $this->validate($request, [
             'nome' => 'required',
             'classificacao' => 'required',
-            'contraindicacao' => 'required',
         
         ]);
 
@@ -88,7 +87,6 @@ class SubstanciaativaController extends Controller
         $this->validate($request, [
             'nome' => 'required',
             'classificacao' => 'required',
-            'contraindicacao' => 'required',
         
         ]);
 

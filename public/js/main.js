@@ -20034,7 +20034,7 @@ exports.default = {
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div _v-d0c0d790=\"\">\n        <div class=\"row\" _v-d0c0d790=\"\">\n            <div class=\"box-body\" _v-d0c0d790=\"\">   \n                <div class=\"col-xs-11 col-sm-11 col-md-11\" _v-d0c0d790=\"\">\n                <div class=\"form-group\" _v-d0c0d790=\"\">\n                    <strong _v-d0c0d790=\"\">Paciente:</strong>\n                    <div class=\"input-group\" _v-d0c0d790=\"\">\n                        <span class=\"input-group-addon\" _v-d0c0d790=\"\">\n                            <i class=\"glyphicon glyphicon-user\" _v-d0c0d790=\"\"></i>\n                        </span>\n                        <input name=\"paciente\" class=\"form-control\" id=\"paciente\" readonly=\"\" _v-d0c0d790=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-xs-1 col-sm-1 col-md-1\" _v-d0c0d790=\"\">\n                <div class=\"form-group\" _v-d0c0d790=\"\">\n                    <br _v-d0c0d790=\"\">\n                    <a class=\"add btn btn-primary\" data-toggle=\"tooltip\" title=\"Adicionar paciente\" _v-d0c0d790=\"\"><i class=\"fa fa-plus\" style=\"color: #fff;\" _v-d0c0d790=\"\"></i></a>\n                </div>\n            </div>\n\n            <div class=\"col-md-12 \" _v-d0c0d790=\"\">\n                        <div class=\"form-group\" _v-d0c0d790=\"\">\n                            <div class=\"table-responsive col-md-12\" style=\"margin-bottom: 20px;border-style: solid;border-color: #d2d6de;border-width: 1px;padding: 2;overflow-x: hidden;\" _v-d0c0d790=\"\">\n                                        <table id=\"table\" class=\"table table-bordered table-hover dataTable\" role=\"grid\" _v-d0c0d790=\"\">\n                                            <thead _v-d0c0d790=\"\">\n                                                <tr _v-d0c0d790=\"\">\n                                                    <th _v-d0c0d790=\"\">Pacientes</th>\n                                                </tr>\n                                            </thead>\n                                            <tbody _v-d0c0d790=\"\">\n                            <tr v-for=\"paci in pacientes\" _v-d0c0d790=\"\">\n                                <td _v-d0c0d790=\"\"><a href=\"#!\" @click=\"escolher_paciente(paci)\" _v-d0c0d790=\"\">{{ paci.nomecompleto }}</a></td>\n                            </tr>\n                        </tbody>\n                        </table>\n                        </div>\n                    </div>\n                </div>\n\n            <div class=\"col-xs-9 col-sm-9 col-md-9\" _v-d0c0d790=\"\">\n                <div class=\"form-group\" _v-d0c0d790=\"\">\n                    <strong _v-d0c0d790=\"\">Clínica:</strong>\n                    <div class=\"input-group\" _v-d0c0d790=\"\">\n                        <span class=\"input-group-addon\" _v-d0c0d790=\"\">\n                            <i class=\"fa fa-hospital-o\" _v-d0c0d790=\"\"></i>\n                        </span>\n                        <select v-on:input=\"clinica($event.target.value)\" id=\"idclinica\" name=\"idclinica\" class=\"form-control\" v-model=\"paciente.idclinica\" _v-d0c0d790=\"\">\n                            <option v-for=\"clinica in clinicas\" v-bind:value=\"clinica.id\" _v-d0c0d790=\"\">{{clinica.nome}}</option>\n                        </select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-d0c0d790=\"\">\n                <div class=\"form-group\" _v-d0c0d790=\"\">\n                    <strong _v-d0c0d790=\"\">Leito:</strong>\n                    <div class=\"input-group\" _v-d0c0d790=\"\">\n                        <span class=\"input-group-addon\" _v-d0c0d790=\"\">\n                            <i class=\"fa fa-hotel\" _v-d0c0d790=\"\"></i>\n                        </span>\n                        <select id=\"idleito\" name=\"idleito\" class=\"form-control\" v-model=\"paciente.idleito\" _v-d0c0d790=\"\">\n                            <option v-for=\"leito in leitos\" v-bind:value=\"leito.id\" _v-d0c0d790=\"\">{{leito.leito}}</option>\n                        </select>\n                    </div>\n                </div>\n            </div>    \n\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-d0c0d790=\"\">\n                    <div class=\"form-group\" _v-d0c0d790=\"\">\n                        <strong _v-d0c0d790=\"\">Total de cids:</strong>\n                        {{paciente.cids.length}}\n                        <a class=\"btn btn-default\" style=\"border-radius: 45%; margin-left: 2%;\" data-toggle=\"modal\" data-target=\"#substancia\" title=\"Adicionar cids\" _v-d0c0d790=\"\"><i class=\"fa fa-plus\" _v-d0c0d790=\"\"></i></a>\n                    </div>\n                </div>\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-d0c0d790=\"\">\n                <br _v-d0c0d790=\"\">\n                <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-d0c0d790=\"\">\n                    <h4 _v-d0c0d790=\"\"><center _v-d0c0d790=\"\"><b _v-d0c0d790=\"\">Diagnóstico</b></center></h4>\n                        <div class=\"box-body\" _v-d0c0d790=\"\">\n                            <div class=\"table-responsive col-lg-12 col-md-12 col-sm-12\" _v-d0c0d790=\"\">\n                                <table id=\"table\" class=\"table table-condensed table-bordered table-hover dataTable\" role=\"grid\" _v-d0c0d790=\"\">\n                                    <thead _v-d0c0d790=\"\">\n                                        <tr _v-d0c0d790=\"\">\n                                            <th class=\"text-center\" _v-d0c0d790=\"\">Cid</th>\n                                            <th width=\"3%\" class=\"text-center\" _v-d0c0d790=\"\">Opções</th>\n                                        </tr>\n                                    </thead>\n                                    <tbody _v-d0c0d790=\"\">\n                                        <tr v-for=\"cid in paciente.cids\" _v-d0c0d790=\"\">\n                                        \n                                            <td _v-d0c0d790=\"\">\n                                                <div v-for=\"ci in cid_all\" v-if=\"(cid.idcid10 === ci.id)\" _v-d0c0d790=\"\">\n                                                    {{ci.descricao}}\n                                                </div>                            \n                                            </td>\n                                            \n                                            <td _v-d0c0d790=\"\">             \n                                                <center _v-d0c0d790=\"\">\n                                                <a class=\"btn btn-default\" @click=\"removeCid(cid)\" _v-d0c0d790=\"\"><i class=\"fa fa-trash\" _v-d0c0d790=\"\"></i></a>\n                                                </center>\n                                            </td>\n                                        </tr>\n                                    </tbody>\n                                </table>\n                            </div>\n                        </div> \n                </div>\n                <div class=\"pull-right\" style=\"margin-right: 1%;\" _v-d0c0d790=\"\">\n                    <button id=\"salvar\" type=\"submit\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Salvar\" @click=\"adicionar\" _v-d0c0d790=\"\"><i class=\"fa fa-save\" _v-d0c0d790=\"\"></i></button>\n                </div>\n                <div class=\"pull-right\" style=\"margin-right: 1%;\" _v-d0c0d790=\"\">\n                    <a class=\"btn btn-default\" data-toggle=\"tooltip\" title=\"Voltar\" onclick=\"window.history.go(-1);\" _v-d0c0d790=\"\"> \n                        <i class=\"fa  fa-mail-reply\" _v-d0c0d790=\"\"></i>\n                    </a>\n                </div>\n            </div>\n        \n        <div class=\"modal fade\" id=\"substancia\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-d0c0d790=\"\">\n            <div class=\"modal-dialog\" role=\"document\" _v-d0c0d790=\"\">\n                <div class=\"modal-content\" _v-d0c0d790=\"\">\n                    <div class=\"modal-header\" _v-d0c0d790=\"\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-d0c0d790=\"\"><span aria-hidden=\"true\" _v-d0c0d790=\"\">×</span></button>\n                        <h4 class=\"modal-title\" id=\"myModalLabel\" _v-d0c0d790=\"\"><strong _v-d0c0d790=\"\">Cadastrar cids</strong></h4>\n                    </div>\n                    <div class=\"modal-body\" _v-d0c0d790=\"\">\n                        <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-d0c0d790=\"\">\n                            <div class=\"row\" _v-d0c0d790=\"\">\n                                <div class=\"box-body\" _v-d0c0d790=\"\">\n                                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-d0c0d790=\"\">\n                                        <div class=\"form-group\" _v-d0c0d790=\"\">\n                                            <strong _v-d0c0d790=\"\">DIAGNÓSTICOS:</strong>\n                                             <select v-model=\"idcid10\" id=\"cid10\" name=\"cid10\" class=\"form-control\" _v-d0c0d790=\"\">\n                                                <option v-for=\"cid in cid_all\" v-bind:value=\"cid.id\" _v-d0c0d790=\"\">{{cid.descricao}}</option>\n                                            </select>\n                                        </div>\n                                    </div>\n                                    \n                                    </div>    \n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"modal-footer\" _v-d0c0d790=\"\">\n                        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-d0c0d790=\"\">Fechar</button>\n                        <button type=\"submit\" class=\"btn btn-primary\" @click=\"addCid\" _v-d0c0d790=\"\">Adicionar</button>\n                    </div>\n                    </div>\n                    \n                </div>\n            </div>\n        </div>\n</div></div>"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div _v-d0c0d790=\"\">\n        <div class=\"row\" _v-d0c0d790=\"\">\n            <div class=\"box-body\" _v-d0c0d790=\"\">   \n                <div class=\"col-xs-11 col-sm-11 col-md-11\" _v-d0c0d790=\"\">\n                <div class=\"form-group\" _v-d0c0d790=\"\">\n                    <strong _v-d0c0d790=\"\">Paciente:</strong>\n                    <div class=\"input-group\" _v-d0c0d790=\"\">\n                        <span class=\"input-group-addon\" _v-d0c0d790=\"\">\n                            <i class=\"glyphicon glyphicon-user\" _v-d0c0d790=\"\"></i>\n                        </span>\n                        <input name=\"paciente\" class=\"form-control\" id=\"paciente\" readonly=\"\" _v-d0c0d790=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-xs-1 col-sm-1 col-md-1\" _v-d0c0d790=\"\">\n                <div class=\"form-group\" _v-d0c0d790=\"\">\n                    <br _v-d0c0d790=\"\">\n                    <a class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#pacientemodal\" title=\"Adicionar paciente\" style=\"color: #fff;\" _v-d0c0d790=\"\"><i class=\"fa fa-plus\" _v-d0c0d790=\"\"></i></a>\n                </div>\n            </div>\n\n            <div class=\"col-md-12 \" _v-d0c0d790=\"\">\n                        <div class=\"form-group\" _v-d0c0d790=\"\">\n                            <div class=\"table-responsive col-md-12\" style=\"margin-bottom: 20px;border-style: solid;border-color: #d2d6de;border-width: 1px;padding: 2;overflow-x: hidden;\" _v-d0c0d790=\"\">\n                                        <table id=\"table\" class=\"table table-bordered table-hover dataTable\" role=\"grid\" _v-d0c0d790=\"\">\n                                            <thead _v-d0c0d790=\"\">\n                                                <tr _v-d0c0d790=\"\">\n                                                    <th _v-d0c0d790=\"\">Pacientes</th>\n                                                </tr>\n                                            </thead>\n                                            <tbody _v-d0c0d790=\"\">\n                            <tr v-for=\"paci in pacientes\" _v-d0c0d790=\"\">\n                                <td _v-d0c0d790=\"\"><a href=\"#!\" @click=\"escolher_paciente(paci)\" _v-d0c0d790=\"\">{{ paci.nomecompleto }}</a></td>\n                            </tr>\n                        </tbody>\n                        </table>\n                        </div>\n                    </div>\n                </div>\n\n            <div class=\"col-xs-9 col-sm-9 col-md-9\" _v-d0c0d790=\"\">\n                <div class=\"form-group\" _v-d0c0d790=\"\">\n                    <strong _v-d0c0d790=\"\">Clínica:</strong>\n                    <div class=\"input-group\" _v-d0c0d790=\"\">\n                        <span class=\"input-group-addon\" _v-d0c0d790=\"\">\n                            <i class=\"fa fa-hospital-o\" _v-d0c0d790=\"\"></i>\n                        </span>\n                        <select v-on:input=\"clinica($event.target.value)\" id=\"idclinica\" name=\"idclinica\" class=\"form-control\" v-model=\"paciente.idclinica\" _v-d0c0d790=\"\">\n                            <option v-for=\"clinica in clinicas\" v-bind:value=\"clinica.id\" _v-d0c0d790=\"\">{{clinica.nome}}</option>\n                        </select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-d0c0d790=\"\">\n                <div class=\"form-group\" _v-d0c0d790=\"\">\n                    <strong _v-d0c0d790=\"\">Leito:</strong>\n                    <div class=\"input-group\" _v-d0c0d790=\"\">\n                        <span class=\"input-group-addon\" _v-d0c0d790=\"\">\n                            <i class=\"fa fa-hotel\" _v-d0c0d790=\"\"></i>\n                        </span>\n                        <select id=\"idleito\" name=\"idleito\" class=\"form-control\" v-model=\"paciente.idleito\" _v-d0c0d790=\"\">\n                            <option v-for=\"leito in leitos\" v-bind:value=\"leito.id\" _v-d0c0d790=\"\">{{leito.leito}}</option>\n                        </select>\n                    </div>\n                </div>\n            </div>    \n\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-d0c0d790=\"\">\n                    <div class=\"form-group\" _v-d0c0d790=\"\">\n                        <strong _v-d0c0d790=\"\">Total de cids:</strong>\n                        {{paciente.cids.length}}\n                        <a class=\"btn btn-default\" style=\"border-radius: 45%; margin-left: 2%;\" data-toggle=\"modal\" data-target=\"#substancia\" title=\"Adicionar cids\" _v-d0c0d790=\"\"><i class=\"fa fa-plus\" _v-d0c0d790=\"\"></i></a>\n                    </div>\n                </div>\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-d0c0d790=\"\">\n                <br _v-d0c0d790=\"\">\n                <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-d0c0d790=\"\">\n                    <h4 _v-d0c0d790=\"\"><center _v-d0c0d790=\"\"><b _v-d0c0d790=\"\">Diagnóstico</b></center></h4>\n                        <div class=\"box-body\" _v-d0c0d790=\"\">\n                            <div class=\"table-responsive col-lg-12 col-md-12 col-sm-12\" _v-d0c0d790=\"\">\n                                <table id=\"table\" class=\"table table-condensed table-bordered table-hover dataTable\" role=\"grid\" _v-d0c0d790=\"\">\n                                    <thead _v-d0c0d790=\"\">\n                                        <tr _v-d0c0d790=\"\">\n                                            <th class=\"text-center\" _v-d0c0d790=\"\">Cid</th>\n                                            <th width=\"3%\" class=\"text-center\" _v-d0c0d790=\"\">Opções</th>\n                                        </tr>\n                                    </thead>\n                                    <tbody _v-d0c0d790=\"\">\n                                        <tr v-for=\"cid in paciente.cids\" _v-d0c0d790=\"\">\n                                        \n                                            <td _v-d0c0d790=\"\">\n                                                <div v-for=\"ci in cid_all\" v-if=\"(cid.idcid10 === ci.id)\" _v-d0c0d790=\"\">\n                                                    {{ci.descricao}}\n                                                </div>                            \n                                            </td>\n                                            \n                                            <td _v-d0c0d790=\"\">             \n                                                <center _v-d0c0d790=\"\">\n                                                <a class=\"btn btn-default\" @click=\"removeCid(cid)\" _v-d0c0d790=\"\"><i class=\"fa fa-trash\" _v-d0c0d790=\"\"></i></a>\n                                                </center>\n                                            </td>\n                                        </tr>\n                                    </tbody>\n                                </table>\n                            </div>\n                        </div> \n                </div>\n                <div class=\"pull-right\" style=\"margin-right: 1%;\" _v-d0c0d790=\"\">\n                    <button id=\"salvar\" type=\"submit\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Salvar\" @click=\"adicionar\" _v-d0c0d790=\"\"><i class=\"fa fa-save\" _v-d0c0d790=\"\"></i></button>\n                </div>\n                <div class=\"pull-right\" style=\"margin-right: 1%;\" _v-d0c0d790=\"\">\n                    <a class=\"btn btn-default\" data-toggle=\"tooltip\" title=\"Voltar\" onclick=\"window.history.go(-1);\" _v-d0c0d790=\"\"> \n                        <i class=\"fa  fa-mail-reply\" _v-d0c0d790=\"\"></i>\n                    </a>\n                </div>\n            </div>\n        \n        \n        <div class=\"modal fade\" id=\"substancia\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-d0c0d790=\"\">\n            <div class=\"modal-dialog modal-lg\" role=\"document\" _v-d0c0d790=\"\">\n                <div class=\"modal-content\" _v-d0c0d790=\"\">\n                    <div class=\"modal-header\" _v-d0c0d790=\"\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-d0c0d790=\"\"><span aria-hidden=\"true\" _v-d0c0d790=\"\">×</span></button>\n                        <h4 class=\"modal-title\" id=\"myModalLabel\" _v-d0c0d790=\"\"><strong _v-d0c0d790=\"\">Cadastrar cids</strong></h4>\n                    </div>\n                    <div class=\"modal-body\" _v-d0c0d790=\"\">\n                        <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-d0c0d790=\"\">\n                            <div class=\"row\" _v-d0c0d790=\"\">\n                                <div class=\"box-body\" _v-d0c0d790=\"\">\n                                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-d0c0d790=\"\">\n                                        <div class=\"form-group\" _v-d0c0d790=\"\">\n                                            <strong _v-d0c0d790=\"\">DIAGNÓSTICOS:</strong>\n                                             <select v-model=\"idcid10\" id=\"cid10\" name=\"cid10\" class=\"form-control\" _v-d0c0d790=\"\">\n                                                <option v-for=\"cid in cid_all\" v-bind:value=\"cid.id\" _v-d0c0d790=\"\">{{cid.descricao}}</option>\n                                            </select>\n                                        </div>\n                                    </div>\n                                    \n                                    </div>    \n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"modal-footer\" _v-d0c0d790=\"\">\n                        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-d0c0d790=\"\">Fechar</button>\n                        <button type=\"submit\" class=\"btn btn-primary\" @click=\"addCid\" _v-d0c0d790=\"\">Adicionar</button>\n                    </div>\n                    </div>\n                    \n                </div>\n            </div>\n\n            \n        </div>\n</div></div>"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -20222,11 +20222,15 @@ var array = new Array();
 var sub1 = new Array();
 var sub2 = new Array();
 var consequencia = new Array();
-var classific;
 var direita = new Array();
 var codigos = new Array();
 var posicoes = new Array();
-var idinter = '';
+var cids = new Array();
+var classific,
+    idinter = '',
+    obj = '',
+    obj_paciente = '',
+    cid_all;
 exports.default = {
 
     props: ['data', 'medico', 'medicamentosss', 'paciente_all', 'di', 'interacao_all'],
@@ -20235,14 +20239,21 @@ exports.default = {
         var _prescricao;
 
         return {
-            cid_all: '',
+            quantidadeEdit: '',
+            posologiaEdit: '',
+            intervalo_posologiaEdit: '',
+            nomeEdit: '',
+            administracaoEdit: '',
+            diluicaoEdit: '',
+            obsEdit: '',
+            doseEdit: '',
             cids: [],
             value: '',
             paciente: '',
-            quantidade: '',
             diagInfe: '',
             prontuario: '',
             posologia: '',
+            intervalo_posologia: 'Selecione...',
             obs: '',
             iniTrata: '',
             medInfe: '',
@@ -20259,11 +20270,64 @@ exports.default = {
     },
     mounted: function mounted() {
         this.prescricao.dataprescricao = this.data;
-        this.cid_all = JSON.parse(this.di);
+        cid_all = JSON.parse(this.di);
+
+        obj = jQuery.parseJSON(this.medicamentosss);
+        obj_paciente = jQuery.parseJSON(this.paciente_all);
+
+        console.log(cid_all);
     },
 
     methods: {
         addMed: function addMed() {
+            var administracao = $("#administracao").val();
+            $('input[type=search]').val('').change();
+            if (classific == 9) {
+                this.intervalo_posologia = '';
+                administracao = '';
+            }
+            if (classific != 9) {
+                if ($("#posologia").val() == '') {
+                    swal({
+                        title: "Campos vazios",
+                        text: 'O campo quantidade é obrigatório',
+                        type: "warning",
+                        html: true
+                    });
+                    return;
+                }
+
+                if ($("#administracao").val() == 'Selecione...') {
+                    swal({
+                        title: "Campos vazios",
+                        text: 'O campo via de administração é obrigatório',
+                        type: "warning",
+                        html: true
+                    });
+                    return;
+                }
+
+                if ($("#intervalo_posologia").val() == 'Selecione...') {
+                    swal({
+                        title: "Campos vazios",
+                        text: 'O campo intervalo é obrigatório',
+                        type: "warning",
+                        html: true
+                    });
+                    return;
+                }
+
+                if ($("#obs").val() == '') {
+                    swal({
+                        title: "Campos vazios",
+                        text: 'O campo tempo de tratamento é obrigatório',
+                        type: "warning",
+                        html: true
+                    });
+                    return;
+                }
+            }
+
             var med = $("#med").val();
             if (med == '') {
                 swal({
@@ -20274,118 +20338,150 @@ exports.default = {
                 });
             } else {
 
-                if (classific == 2 && this.iniTrata == '' || classific == 2 && this.diagInfe == '' || classific == 2 && this.duracao == '' || classific == 2 && this.quantidade == '') {
-                    swal({
-                        title: "Campos vazios",
-                        text: 'Preencha todos os campos do relatório antimicrobiano',
-                        type: "warning",
-                        html: true
-                    });
+                var cod = $("#codigo").val();
+                var i;
+                var j;
+                var verifica = false;
+                codigos.push(cod);
 
-                    $("#relatorio").modal('show');
-                } else {
-
-                    var cod = $("#codigo").val();
-                    var i;
-                    var j;
-                    var verifica = false;
-                    codigos.push(cod);
-
-                    if (direita.length > 0) {
-                        //vefifica se ja tem interacaoes inseridas
-                        for (i = 0; i < direita.length; i++) {
-                            if (cod == direita[i].sub) {
-                                //comparação do codigo inserido com o vetor existente 
-                                for (j = 0; j < codigos.length; j++) {
-                                    if (direita[i].sub == codigos[j]) {
-                                        //verifica se o codigo comparado ainda existe na lista de medicamentos prescritos                                  
-                                        verifica = true;
-                                    }
+                if (direita.length > 0) {
+                    //vefifica se ja tem interacaoes inseridas
+                    for (i = 0; i < direita.length; i++) {
+                        if (cod == direita[i].sub) {
+                            //comparação do codigo inserido com o vetor existente 
+                            for (j = 0; j < codigos.length; j++) {
+                                if (direita[i].sub == codigos[j]) {
+                                    //verifica se o codigo comparado ainda existe na lista de medicamentos prescritos                                  
+                                    verifica = true;
                                 }
-                                if (verifica == true && codigos.length > 1) {
-                                    var pos = posicoes[i].pos;
-                                    swal({
-                                        title: "Interação Medicamentosa",
-                                        text: consequencia[pos],
-                                        type: "warning",
-                                        html: true
-                                    });
-                                }
+                            }
+                            if (verifica == true && codigos.length > 1) {
+                                var pos = posicoes[i].pos;
+                                swal({
+                                    title: "Interação Medicamentosa",
+                                    text: consequencia[pos],
+                                    type: "warning",
+                                    html: true
+                                });
                             }
                         }
                     }
-
-                    for (i = 0; i < sub1.length; i++) {
-                        if (cod == sub1[i]) {
-                            direita.push({ sub: sub2[i], id: cod });
-                            posicoes.push({ pos: i, id: cod });
-                        }
-                    }
-
-                    for (i = 0; i < sub2.length; i++) {
-                        if (cod == sub2[i]) {
-                            direita.push({ sub: sub1[i], id: cod });
-                            posicoes.push({ pos: i, id: cod });
-                        }
-                    }
-
-                    var id = $("#idmed").val();
-
-                    var codigo = $("#codigo").val();
-                    var simpas = $("#simpas").val();
-                    var dose = $("#dose").val();
-                    var administracao = $("#administracao").val();
-                    var estabilidade = $("#estabilidade").val();
-                    var diluicao = $("#diluicao").val();
-                    var qtd = $("#qtd").val();
-
-                    this.prescricao.relatorioAntimicro.push({
-                        idmedicamento: id,
-                        medInfe: med,
-                        duracao: this.duracao,
-                        quantidade: this.quantidade,
-                        leito: document.getElementById("leito_a").value,
-                        paciente: document.getElementById("nome_a").value,
-                        dataadmissao: document.getElementById("admissao_a").value,
-                        iniTrata: this.iniTrata,
-                        clinica: document.getElementById("clinica_a").value,
-                        diagInfe: this.diagInfe
-                    });
-
-                    this.quantidade = '';
-                    this.duracao = '';
-                    this.iniTrata = '';
-                    this.diagInfe = '';
-                    document.getElementById("medInfe").value = '';
-
-                    this.prescricao.prescricaomedicamento.push({
-                        codigo: codigo,
-                        simpas: simpas,
-                        idmedicamento: id,
-                        qtd: qtd,
-                        med: med,
-                        obs: this.obs,
-                        posologia: this.posologia,
-                        administracao: administracao,
-                        dose: dose,
-                        diluicao: diluicao,
-                        estabilidade: estabilidade,
-                        classificacao: classific
-                    });
-
-                    this.simpas = '-';
-                    $("#med").val("");
-                    $("#dose").val("");
-                    $("#diluicao").val("");
-                    $("#estabilidade").val("");
-                    $("#administracao").val("");
-                    $("#qtd").val("");
-                    $("#simpas").val("");
-                    $("#codigo").val("");
-
-                    this.posologia = '';
-                    this.obs = '';
                 }
+
+                for (i = 0; i < sub1.length; i++) {
+                    if (cod == sub1[i]) {
+                        direita.push({ sub: sub2[i], id: cod });
+                        posicoes.push({ pos: i, id: cod });
+                    }
+                }
+
+                for (i = 0; i < sub2.length; i++) {
+                    if (cod == sub2[i]) {
+                        direita.push({ sub: sub1[i], id: cod });
+                        posicoes.push({ pos: i, id: cod });
+                    }
+                }
+
+                var id = $("#idmed").val();
+
+                var codigo = $("#codigo").val();
+                var simpas = $("#simpas").val();
+                var dose = $("#dose").val();
+                var estabilidade = $("#estabilidade").val();
+                var diluicao = $("#diluicao").val();
+                var qtd = $("#qtd").val();
+
+                this.prescricao.relatorioAntimicro.push({
+                    idmedicamento: id,
+                    medInfe: med,
+                    duracao: this.duracao,
+                    leito: document.getElementById("leito_a").value,
+                    paciente: document.getElementById("nome_a").value,
+                    dataadmissao: document.getElementById("admissao_a").value,
+                    iniTrata: this.iniTrata,
+                    clinica: document.getElementById("clinica_a").value,
+                    diagInfe: this.diagInfe
+                });
+
+                this.duracao = '';
+                this.iniTrata = '';
+                this.diagInfe = '';
+                document.getElementById("medInfe").value = '';
+
+                this.prescricao.prescricaomedicamento.push({
+                    codigo: codigo,
+                    simpas: simpas,
+                    idmedicamento: id,
+                    qtd: qtd,
+                    med: med,
+                    obs: this.obs,
+                    posologia: this.posologia,
+                    intervalo_posologia: this.intervalo_posologia,
+                    administracao: administracao,
+                    dose: dose,
+                    diluicao: diluicao,
+                    estabilidade: estabilidade,
+                    classificacao: classific
+                });
+
+                this.simpas = '-';
+                $("#med").val("");
+                $("#dose").val("");
+                $("#diluicao").val("");
+                $("#estabilidade").val("");
+                $("#administracao").val("Selecione...");
+                $("#qtd").val("");
+                $("#simpas").val("");
+                $("#codigo").val("");
+
+                if (classific != 9) {
+                    $.notify("Medicamento adicionado", { globalPosition: "top center",
+                        className: 'success' });
+                } else {
+                    $.notify("Dieta adicionada", { globalPosition: "top center",
+                        className: 'success' });
+                }
+
+                this.posologia = '';
+                this.obs = '';
+                this.intervalo_posologia = 'Selecione...';
+            }
+        },
+        salvarAntimicrobiano: function salvarAntimicrobiano() {
+            if ($("#medInfe").val() == '') {
+                $("#relatorio").modal('hide');
+                return;
+            }
+
+            if (this.diagInfe == '') {
+                swal({
+                    title: "Campos vazios",
+                    text: 'O campo diagnóstico infeccioso é obrigatório',
+                    type: "warning",
+                    html: true
+                });
+            }
+            if (this.duracao == '') {
+                swal({
+                    title: "Campos vazios",
+                    text: 'O campo duração do tratamento é obrigatório',
+                    type: "warning",
+                    html: true
+                });
+            }
+            if (this.iniTrata == '') {
+                swal({
+                    title: "Campos vazios",
+                    text: 'O campo início do tratamento é obrigatório',
+                    type: "warning",
+                    html: true
+                });
+            }
+
+            if (this.iniTrata != '' && this.duracao != '' && this.diagInfe != '') {
+                $("#relatorio").modal('hide');
+                $.notify("Relatório salvo", { globalPosition: "top center",
+                    className: 'success' });
             }
         },
         removeMed: function removeMed(med) {
@@ -20411,49 +20507,48 @@ exports.default = {
                 }
             }
         },
-        adicionar_medicamento: function adicionar_medicamento(med) {
-            document.getElementById('med').setAttribute('readonly', true);
-            var index = this.meds.indexOf(med);
-            document.getElementById("med").value = this.meds[index].value;
-            document.getElementById("codigo").value = this.meds[index].codigo;
-            document.getElementById("simpas").value = this.meds[index].simpas;
-            document.getElementById("idmed").value = this.meds[index].id;
-            document.getElementById("doseR").value = this.meds[index].dose;
-            document.getElementById("diluicaoR").value = this.meds[index].diluicaoR;
-            document.getElementById("administracaoR").value = this.meds[index].administracaoR;
-            document.getElementById("estabilidadeR").value = this.meds[index].estabilidadeR;
+        abreEditMed: function abreEditMed(med) {
+            var b = $("#teste").val();
 
-            var medic = this.meds[index].value;
+            var index = this.prescricao.prescricaomedicamento.indexOf(med);
 
-            if (this.meds[index].classificacao == 2) {
-                classific = this.meds[index].classificacao;
-                $(document).ready(function () {
-                    $("#relatorio").modal('show');
-                    $("#medInfe").val(medic); // pega o nome do medicamento
-                });
-            } else {
-                classific = 7;
+            if (index > -1) {
+                this.ind = index;
+                this.quantidadeEdit = this.prescricao.prescricaomedicamento[index].qtd;
+                this.posologiaEdit = this.prescricao.prescricaomedicamento[index].posologia;
+                this.intervalo_posologiaEdit = this.prescricao.prescricaomedicamento[index].intervalo_posologia;
+                this.nomeEdit = this.prescricao.prescricaomedicamento[index].med;
+                this.administracaoEdit = this.prescricao.prescricaomedicamento[index].administracao;
+                this.diluicaoEdit = this.prescricao.prescricaomedicamento[index].diluicao;
+                this.obsEdit = this.prescricao.prescricaomedicamento[index].obs;
+                this.doseEdit = this.prescricao.prescricaomedicamento[index].dose;
+
+                $("#editmed").modal('show');
             }
+        },
+        editMed: function editMed() {
+            this.prescricao.prescricaomedicamento[this.ind].posologia = this.posologiaEdit;
+            this.prescricao.prescricaomedicamento[this.ind].intervalo_posologia = this.intervalo_posologiaEdit;
+            this.prescricao.prescricaomedicamento[this.ind].qtd = this.quantidadeEdit;
+            this.nomeEdit = this.prescricao.prescricaomedicamento[this.ind].med;
+            this.prescricao.prescricaomedicamento[this.ind].administracao = this.administracaoEdit;
+            this.prescricao.prescricaomedicamento[this.ind].diluicao = this.diluicaoEdit;
+            this.prescricao.prescricaomedicamento[this.ind].obs = this.obsEdit;
+            this.prescricao.prescricaomedicamento[this.ind].dose = this.doseEdit;
 
-            $.ajax({
-                type: 'get',
-                url: '../../../medicamento/contraindicacao',
-                data: {
-                    'id': this.meds[index].id
-                },
-                success: function success(data) {
-                    if (data != '') {
-                        swal({
-                            title: "Contraindicação",
-                            text: data,
-                            type: "warning",
-                            html: true
-                        });
-                    }
-                }
-            });
+            $.notify("Alteração realizada com sucesso!", { globalPosition: "top center",
+                className: 'success' });
         },
         adicionar: function adicionar() {
+            if ($("#nome").val() == '') {
+                swal({
+                    title: "Campos vazios",
+                    text: 'Selecione um paciente',
+                    type: "warning",
+                    html: true
+                });
+                return;
+            }
             document.getElementById('salvar').setAttribute('disabled', "true");
             this.prescricao.idinternacao = idinter;
             this.$http.post('/prescricao/create', this.prescricao).then(function (response) {
@@ -20477,35 +20572,8 @@ exports.default = {
                 });
             });
         },
-        escolher_paciente: function escolher_paciente(paciente) {
-            document.getElementById("nome_a").value = paciente.nomecompleto;
-            document.getElementById("nome").value = paciente.nomecompleto;
-            document.getElementById("clinica").value = paciente.nome;
-            document.getElementById("numeroprontuario").value = paciente.numeroprontuario;
-            document.getElementById("leito").value = paciente.leito;
-            document.getElementById("clinica_a").value = paciente.nome;
-            document.getElementById("leito_a").value = paciente.leito;
-            document.getElementById("alergia").value = paciente.alergia;
-
-            var data;
-            data = paciente.dataadmissao.replace(/(\d{2})\-(\d{3})\-(\d{2}).*/, '$2-$3-$4');
-            document.getElementById("admissao").value = data;
-
-            var data2;
-            data2 = paciente.dataadmissao.replace(/(\d{4})\-(\d{3})\-(\d{2}).*/, '$3-$2-$4');
-            $("#admissao_a").val(data2);
-
-            idinter = paciente.id;
-
-            var i;
-
-            this.cids = [];
-            for (i = 0; i < this.cid_all.length; i++) {
-                if (this.cid_all[i].id == idinter) {
-                    console.log('entrou');
-                    this.cids.push(this.cid_all[i].descricao);
-                }
-            }
+        add_cids: function add_cids() {
+            this.cids = cids;
         },
         disable: function disable() {
             document.getElementById('med').removeAttribute('readonly');
@@ -20518,12 +20586,9 @@ exports.default = {
             document.getElementById("estabilidadeR").value = '';
         },
         buscarprontuario: function buscarprontuario() {
-            var _this = this;
-
             var prontuario = $("#prontuario").val();
             this.$http.post('../buscapaciente', { prontuario: prontuario }).then(function (response) {
                 $("#buscar").modal('hide');
-
                 document.getElementById("nome").value = response.data[0].value;
                 document.getElementById("clinica").value = response.data[0].clinica;
                 document.getElementById("numeroprontuario").value = response.data[0].numeroprontuario;
@@ -20534,19 +20599,24 @@ exports.default = {
                 document.getElementById("clinica_a").value = response.data[0].clinica;
                 document.getElementById("nome_a").value = response.data[0].value;
                 document.getElementById("leito_a").value = response.data[0].leito;
+                document.getElementById("alergia").value = response.data[0].alergia;
+
                 var data2 = void 0;
                 data2 = response.data[0].dataadmissao.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1');
                 $("#admissao_a").val(data2);
 
                 idinter = response.data[0].id;
                 var i;
-                for (i = 0; i < _this.cid_all.length; i++) {
-                    if (_this.cid_all[i].id = idinter) {
-                        _this.cids.push(_this.cid_all[i].descricao);
+
+                cids = [];
+                for (i = 0; i < cid_all.length; i++) {
+                    if (cid_all[i].id == idinter) {
+                        cids.push(cid_all[i].descricao);
                     }
                 }
 
-                console.log(_this.cids);
+                $.notify("Paciente selecionado", { globalPosition: "top center",
+                    className: 'info' });
             }).catch(function (response) {
                 console.log(response);
                 $("#buscar").modal('hide');
@@ -20559,26 +20629,9 @@ exports.default = {
         }
     },
     beforeMount: function beforeMount() {
-        var all_medicamentos = new Array();
-
-        var i;
-        var obj = jQuery.parseJSON(this.medicamentosss);
-
-        for (i = 0; i < obj.length; i++) {
-            this.meds.push(obj[i]);
-        }
-
-        var i;
-        var obj_paciente = jQuery.parseJSON(this.paciente_all);
-
-        for (i = 0; i < obj_paciente.length; i++) {
-            this.pacientes.push(obj_paciente[i]);
-        }
 
         var aux = new Array();
-
         var aux = jQuery.parseJSON(this.interacao_all);
-
         var i;
 
         for (i = 0; i < aux.length; i++) {
@@ -20589,6 +20642,112 @@ exports.default = {
     }
 };
 
+
+$(function ($) {
+    $("#table").on("click", "td", function () {
+        var p = $(this).text();
+        var i;
+
+        for (i = 0; i < obj_paciente.length; i++) {
+            if (p == obj_paciente[i].nomecompleto) {
+
+                $.notify("Paciente selecionado", { globalPosition: "top center",
+                    className: 'info' });
+
+                document.getElementById("nome_a").value = obj_paciente[i].nomecompleto;
+                document.getElementById("nome").value = obj_paciente[i].nomecompleto;
+                document.getElementById("clinica").value = obj_paciente[i].nome;
+                document.getElementById("numeroprontuario").value = obj_paciente[i].numeroprontuario;
+                document.getElementById("leito").value = obj_paciente[i].leito;
+                document.getElementById("clinica_a").value = obj_paciente[i].nome;
+                document.getElementById("leito_a").value = obj_paciente[i].leito;
+                document.getElementById("alergia").value = obj_paciente[i].alergia;
+
+                var data;
+                data = obj_paciente[i].dataadmissao.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1');
+                document.getElementById("admissao").value = data;
+
+                var data2;
+                data2 = obj_paciente[i].dataadmissao.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1');
+                $("#admissao_a").val(data2);
+                console.log(obj_paciente[i].id);
+                idinter = obj_paciente[i].id;
+
+                var i;
+
+                cids = [];
+                for (i = 0; i < cid_all.length; i++) {
+                    if (cid_all[i].id == idinter) {
+                        cids.push(cid_all[i].descricao);
+                    }
+                }
+            }
+        }
+    });
+});
+
+$(function ($) {
+    $("#table2").on("click", "td", function () {
+        var m = $(this).text();
+
+        var i;
+        for (i = 0; i < obj.length; i++) {
+            if (m == obj[i].value) {
+
+                if (obj[i].classificacao != 9) {
+                    $.notify("Medicamento selecionado", { globalPosition: "top center",
+                        className: 'info' });
+                } else {
+                    $.notify("Dieta selecionado", { globalPosition: "top center",
+                        className: 'info' });
+                }
+
+                document.getElementById('med').setAttribute('readonly', true);
+                document.getElementById("med").value = obj[i].value;
+                document.getElementById("codigo").value = obj[i].codigo;
+                document.getElementById("simpas").value = obj[i].simpas;
+                document.getElementById("idmed").value = obj[i].id;
+                document.getElementById("doseR").value = obj[i].dose;
+                document.getElementById("diluicaoR").value = diluicao;
+                document.getElementById("administracaoR").value = obj[i].administracao;
+                document.getElementById("estabilidadeR").value = obj[i].estabilidade;
+
+                var medic = obj[i].value;
+
+                if (obj[i].classificacao == 2) {
+                    classific = obj[i].classificacao;
+                    $(document).ready(function () {
+                        $("#relatorio").modal('show');
+                        $("#medInfe").val(medic); // pega o nome do medicamento
+                    });
+                } else {
+                    $("#medInfe").val('');
+                    classific = obj[i].classificacao;
+                }
+
+                if (obj[i].classificacao != 9) {
+                    $.ajax({
+                        type: 'get',
+                        url: '../../../medicamento/contraindicacao',
+                        data: {
+                            'id': obj[i].id
+                        },
+                        success: function success(data) {
+                            if (data != '') {
+                                swal({
+                                    title: "Contraindicação",
+                                    text: data,
+                                    type: "warning",
+                                    html: true
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    });
+});
 
 jQuery(function ($) {
     $("#rg").mask("99.999.999-99");
@@ -20624,8 +20783,12 @@ $(document).on('click', '.estabilidadeM', function () {
 $(document).on('click', '.diagnostico', function () {
     $("#diagnostico").modal('show');
 });
+
+$(document).on('click', '.editmed', function () {
+    $("#editmed").modal('show');
+});
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div _v-6fa2c9bd=\"\">\n    <div class=\"row\" _v-6fa2c9bd=\"\">         \n        <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6fa2c9bd=\"\">\n            <div class=\"box-body pad table-responsive\" _v-6fa2c9bd=\"\">\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6fa2c9bd=\"\">\n                    <div class=\"pull-left\" _v-6fa2c9bd=\"\"><small _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Médico: </strong>{{this.medico}}</small></div> \n                    <div class=\"pull-right\" _v-6fa2c9bd=\"\"><small _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Data da prescrição: </strong>{{this.data}}</small></div>\n                    <br _v-6fa2c9bd=\"\"><br _v-6fa2c9bd=\"\">\n                </div>\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"paciente\" _v-6fa2c9bd=\"\">Paciente:</label>\n                        <div class=\"input-group input-group-sm\" _v-6fa2c9bd=\"\">\n                            <input readonly=\"\" id=\"nome\" type=\"text\" name=\"nome\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                            \n                            <span class=\"input-group-btn\" _v-6fa2c9bd=\"\">\n                              <button type=\"button\" data-toggle=\"tooltip\" title=\"Buscar paciente por prontuário\" class=\"btn btn-primary btn-flat buscar\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-md-12 \" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <div class=\"table-responsive col-md-12\" style=\"margin-bottom: 20px;border-style: solid;border-color: #d2d6de;border-width: 1px;padding: 2;overflow-x: hidden;\" _v-6fa2c9bd=\"\">\n                                    <table id=\"table\" class=\"table table-bordered table-hover dataTable\" role=\"grid\" _v-6fa2c9bd=\"\">\n                                        <thead _v-6fa2c9bd=\"\">\n                                            <tr _v-6fa2c9bd=\"\">\n                                                <th _v-6fa2c9bd=\"\">Pacientes internados</th>\n                                            </tr>\n                                        </thead>\n                                        <tbody _v-6fa2c9bd=\"\">\n                        <tr v-for=\"paci in pacientes\" _v-6fa2c9bd=\"\">\n                            <td _v-6fa2c9bd=\"\"><a href=\"#!\" @click=\"escolher_paciente(paci)\" _v-6fa2c9bd=\"\">{{ paci.nomecompleto }}</a></td>\n                        </tr>\n                    </tbody>\n                    </table>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"numeroprontuario\" _v-6fa2c9bd=\"\">Nº Prontuário:</label>\n                        <input id=\"numeroprontuario\" type=\"text\" name=\"numeroprontuario\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"clinica\" _v-6fa2c9bd=\"\">Clínica:</label>\n                        <input id=\"clinica\" type=\"text\" name=\"clinica\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-1 col-sm-1 col-md-1\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"leito\" _v-6fa2c9bd=\"\">Leito:</label>\n                        <input id=\"leito\" type=\"text\" name=\"leito\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-1 col-sm-1 col-md-1\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"diag\" _v-6fa2c9bd=\"\">Diagnóstico:</label>\n                        <br _v-6fa2c9bd=\"\">\n                        <button style=\"font-size: 20px\" type=\"button\" data-toggle=\"tooltip\" title=\"Diagnóstico\" class=\"btn btn-primary diagnostico\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button>\n                    </div>\n                </div>\n                <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"admissao\" _v-6fa2c9bd=\"\">Data de admissão:</label>\n                        <input id=\"admissao\" type=\"text\" name=\"admissao\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n                \n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"evol\" _v-6fa2c9bd=\"\">Alergia(s):</label>\n                        <textarea readonly=\"\" id=\"alergia\" type=\"text\" name=\"alergia\" class=\"form-control\" rows=\"1\" _v-6fa2c9bd=\"\"></textarea>\n                    </div>\n                </div>\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"evol\" _v-6fa2c9bd=\"\">Evolução:</label>\n                        <input id=\"evol\" type=\"text\" name=\"evol\" class=\"form-control\" v-model=\"prescricao.evolucao\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>                    \n\n                <div class=\"col-xs-10 col-sm-10 col-md-10 \" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"med\" _v-6fa2c9bd=\"\">Medicamento/Outros:</label>\n                        <div class=\"input-group input-group-sm\" _v-6fa2c9bd=\"\">\n                        <input id=\"med\" readonly=\"\" type=\"text\" name=\"med\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                        <span class=\"input-group-btn\" _v-6fa2c9bd=\"\">\n                              <button title=\"Prescrever um medicamento\" @click=\"disable()\" type=\"button\" class=\"btn btn-primary btn-flat\" _v-6fa2c9bd=\"\"><i class=\"fa fa-pencil\" _v-6fa2c9bd=\"\"></i></button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n\n                <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"qtd\" _v-6fa2c9bd=\"\">Quantidade:</label>\n                        <input id=\"qtd\" type=\"text\" name=\"qtd\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-md-12 \" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <div class=\"table-responsive col-md-12\" style=\"margin-bottom: 20px;border-style: solid;border-color: #d2d6de;border-width: 1px;padding: 2;overflow-x: hidden;\" _v-6fa2c9bd=\"\">\n                                    <table id=\"table2\" class=\"table table-bordered table-hover dataTable\" role=\"grid\" _v-6fa2c9bd=\"\">\n                                        <thead _v-6fa2c9bd=\"\">\n                                            <tr _v-6fa2c9bd=\"\">\n                                                <th _v-6fa2c9bd=\"\">Medicamentos</th>\n                                            </tr>\n                                        </thead>\n                                        <tbody _v-6fa2c9bd=\"\">\n                        <tr v-for=\"med in meds\" _v-6fa2c9bd=\"\">\n                            <td _v-6fa2c9bd=\"\"><a href=\"#!\" @click=\"adicionar_medicamento(med)\" _v-6fa2c9bd=\"\">{{ med.value }}</a></td>\n                        </tr>\n                    </tbody>\n                    </table>\n                    </div>\n                </div>\n            </div>\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"dose\" _v-6fa2c9bd=\"\">Dose por administração: \n                        \t<button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Dose\" class=\"btn btn-primary doseM\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button></label>\n                        <input id=\"dose\" type=\"text\" name=\"dose\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n                \n                <input id=\"idmed\" type=\"hidden\" _v-6fa2c9bd=\"\">\n                <input id=\"codigo\" type=\"hidden\" _v-6fa2c9bd=\"\">\n                <input id=\"simpas\" type=\"hidden\" _v-6fa2c9bd=\"\">\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12 \" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"administracao\" _v-6fa2c9bd=\"\">Administração:\n                        \t<button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Administração\" class=\"btn btn-primary administracaoM\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button></label>\n                        <input id=\"administracao\" type=\"text\" name=\"administracao\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n\n                \n                <div class=\"col-xs-12 col-sm-12 col-md-12 \" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"diluicao\" _v-6fa2c9bd=\"\">Diluição:\n                        \t<button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Diluição\" class=\"btn btn-primary diluicaoM\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button></label>\n                        <input id=\"diluicao\" type=\"text\" name=\"diluicao\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12 \" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"estabilidade\" _v-6fa2c9bd=\"\">Estabilidade:\n                        \t<button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Estabilidade\" class=\"btn btn-primary estabilidadeM\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button></label>\n                        <input id=\"estabilidade\" type=\"text\" name=\"estabilidade\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"posologia\" _v-6fa2c9bd=\"\">Posologia:</label>\n                        <input id=\"posologia\" type=\"text\" name=\"posologia\" class=\"form-control\" v-model=\"posologia\" placeholder=\"\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"obs\" _v-6fa2c9bd=\"\">Tempo de Tratamento:</label>\n                        <input id=\"obs\" type=\"text\" name=\"obs\" class=\"form-control\" v-model=\"obs\" placeholder=\"\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n\n                <div class=\"row\" style=\"margin-left: 65%;\" _v-6fa2c9bd=\"\">\n                    <div class=\"col-sm-12 text-center\" _v-6fa2c9bd=\"\"> \n                        <button data-toggle=\"tooltip\" style=\"display: inline-block; vertical-align: top;\" type=\"button\" class=\"btn btn-primary btn-md center-block relatorio\" _v-6fa2c9bd=\"\">Relatório Antibioticoterapia</button>\n                        <button style=\"display: inline-block; vertical-align: top;\" type=\"button\" class=\"btn btn-primary btn-md center-block\" @click=\"addMed\" _v-6fa2c9bd=\"\">Adicionar</button>\n                    </div>\n                </div>\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6fa2c9bd=\"\">\n                    <br _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <h4 _v-6fa2c9bd=\"\"><center _v-6fa2c9bd=\"\"><b _v-6fa2c9bd=\"\">Descrição da prescrição</b></center></h4>\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                                <div class=\"table-responsive col-lg-12 col-md-12 col-sm-12\" _v-6fa2c9bd=\"\">\n                                    <table class=\"table table-condensed table-bordered table-hover dataTable\" role=\"grid\" _v-6fa2c9bd=\"\">\n                                        <thead _v-6fa2c9bd=\"\">\n                                            <tr _v-6fa2c9bd=\"\">\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">SIMPAS</th>\n                                                <th width=\"2%\" class=\"text-center\" _v-6fa2c9bd=\"\">Quantidade</th>\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">Medicamento</th>\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">Posologia</th>\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">Tempo de Tratamento</th>\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">Dose</th>\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">Administração</th>\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">Diluição</th>\n                                                \n\n                                                <th width=\"3%\" class=\"text-center\" _v-6fa2c9bd=\"\">Opções</th>\n                                            </tr>\n                                        </thead>\n                                        <tbody _v-6fa2c9bd=\"\">\n                                            <tr v-for=\"medicamento in prescricao.prescricaomedicamento\" _v-6fa2c9bd=\"\">\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.simpas}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.qtd}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.med}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.posologia}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.obs}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.dose}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.administracao}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.diluicao}}</td>\n                                                \n                                                <td _v-6fa2c9bd=\"\">             \n                                                    <center _v-6fa2c9bd=\"\">\n                                                    <a class=\"btn btn-default\" @click=\"removeMed(medicamento)\" _v-6fa2c9bd=\"\"><i class=\"fa fa-trash\" _v-6fa2c9bd=\"\"></i></a>\n                                                    </center>\n                                                </td>\n                                            </tr>\n                                        </tbody>\n                                    </table>\n                                </div>\n                            </div> \n                    </div>\n                </div>\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"obsmed\" _v-6fa2c9bd=\"\">Observações médicas:</label>\n                        <textarea id=\"obsmed\" type=\"text\" name=\"obsmed\" class=\"form-control\" rows=\"5\" v-model=\"prescricao.observacoesmedicas\" _v-6fa2c9bd=\"\"></textarea>\n                    </div>\n                </div>\n                <div class=\"pull-right\" style=\"margin-right: 1%;\" _v-6fa2c9bd=\"\">\n                    <button id=\"salvar\" type=\"submit\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Salvar\" @click=\"adicionar\" _v-6fa2c9bd=\"\"><i class=\"fa fa-save\" _v-6fa2c9bd=\"\"></i></button>\n                </div>\n            </div>\n        </div>\n    </div>\n    \n    <div class=\"modal fade\" id=\"buscar\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Buscar paciente</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                                <div class=\"col-xs-10 col-sm-10 col-md-10\" _v-6fa2c9bd=\"\">\n                                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                        <label for=\"paciente\" _v-6fa2c9bd=\"\">Prontuário:</label>\n                                        <div class=\"input-group input-group-sm\" _v-6fa2c9bd=\"\">\n                                            <input type=\"text\" name=\"prontuario\" id=\"prontuario\" class=\"form-control\" v-model=\"prontuario\" _v-6fa2c9bd=\"\">\n                                            \n                                            <span class=\"input-group-btn\" _v-6fa2c9bd=\"\">\n                                              <button type=\"submit\" class=\"btn btn-primary\" @click=\"buscarprontuario\" data-toggle=\"tooltip\" title=\"Digite o prontuário do paciente\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button>\n                                            </span>\n                                        </div>\n                                    </div>\n                                </div>\n\n\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"modal fade\" id=\"relatorio\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Relatório</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"paciente\" _v-6fa2c9bd=\"\">NOME:</label>\n                                    <input id=\"nome_a\" type=\"text\" name=\"nome_a\" class=\"form-control\" readonly=\"\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n\n                             <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"leito\" _v-6fa2c9bd=\"\">LEITO:</label>\n                                    <input id=\"leito_a\" type=\"text\" name=\"leito_a\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-4 col-sm-4 col-md-4\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"admissao\" _v-6fa2c9bd=\"\">DATA DE ADMISSÃO:</label>\n                                    <input id=\"admissao_a\" type=\"text\" name=\"admissao_a\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-4 col-sm-4 col-md-4\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"iniTrata\" _v-6fa2c9bd=\"\">INÍCIO DO TRATAMENTO:</label>\n                                    <input id=\"iniTrata\" type=\"date\" name=\"iniTrata\" class=\"form-control\" v-model=\"iniTrata\" _v-6fa2c9bd=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-5 col-sm-5 col-md-5\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"clinica\" _v-6fa2c9bd=\"\">CLÍNICA:</label>\n                                    <input id=\"clinica_a\" type=\"text\" name=\"clinica_a\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                                </div>  \n                            </div>\n\n                            <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"diagInfe\" _v-6fa2c9bd=\"\">DIAGNÓSTICO INFECCIOSO:</label>\n                                    <input id=\"diagInfe\" type=\"text\" name=\"diagInfe\" class=\"form-control\" v-model=\"diagInfe\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n\n                            <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"duracao\" _v-6fa2c9bd=\"\">QUANTIDADE:</label>\n                                    <input id=\"quantidade\" type=\"number\" min=\"1\" name=\"quantidade\" class=\"form-control\" v-model=\"quantidade\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n\n                            <div class=\"col-xs-5 col-sm-5 col-md-5\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"duracao\" _v-6fa2c9bd=\"\">DURAÇÃO DO TRATAMENTO:</label>\n                                    <select id=\"duracao\" type=\"text\" name=\"duracao\" class=\"form-control\" v-model=\"duracao\" _v-6fa2c9bd=\"\">\n                                        <option _v-6fa2c9bd=\"\">Dia(s)</option>\n                                        <option _v-6fa2c9bd=\"\">Semana(s)</option>\n                                        <option _v-6fa2c9bd=\"\">Mês(es)</option>\n                                    </select>        \n                                 </div>\n                            </div> \n\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 med\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"medInfe\" _v-6fa2c9bd=\"\">IDENTIFICAÇÃO DO ANTIMICROBIANO:</label>\n                                    <input id=\"medInfe\" type=\"text\" name=\"medInfe\" class=\"form-control\" readonly=\"\" _v-6fa2c9bd=\"\">\n                                </div>\n                            </div>\n\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"modal fade\" id=\"diagnostico\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Diagnóstico</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <p v-for=\"cid in cids\" _v-6fa2c9bd=\"\">\n                                        {{cid}}\n                                    </p>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"modal fade\" id=\"doseM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Dose</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <textarea id=\"doseR\" name=\"doseR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6fa2c9bd=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n     <div class=\"modal fade\" id=\"administracaoM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Administração</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <textarea id=\"administracaoR\" name=\"administracaoR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6fa2c9bd=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"modal fade\" id=\"estabilidadeM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Estabilidade</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <textarea id=\"estabilidadeR\" name=\"estabilidadeR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6fa2c9bd=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"modal fade\" id=\"diluicaoM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Diluição</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <textarea id=\"diluicaoR\" name=\"diluicaoR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6fa2c9bd=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div _v-6fa2c9bd=\"\">\n    <div class=\"row\" _v-6fa2c9bd=\"\">         \n        <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6fa2c9bd=\"\">\n            <div class=\"box-body pad table-responsive\" _v-6fa2c9bd=\"\">\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6fa2c9bd=\"\">\n                    <div class=\"pull-left\" _v-6fa2c9bd=\"\"><small _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Médico: </strong>{{this.medico}}</small></div> \n                    <div class=\"pull-right\" _v-6fa2c9bd=\"\"><small _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Data da prescrição: </strong>{{this.data}}</small></div>\n                    <br _v-6fa2c9bd=\"\"><br _v-6fa2c9bd=\"\">\n                </div>\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"paciente\" _v-6fa2c9bd=\"\">Paciente:</label>\n                        <div class=\"input-group input-group-sm\" _v-6fa2c9bd=\"\">\n                            <input readonly=\"\" id=\"nome\" type=\"text\" name=\"nome\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                            \n                            <span class=\"input-group-btn\" _v-6fa2c9bd=\"\">\n                              <button type=\"button\" data-toggle=\"tooltip\" title=\"Buscar paciente por prontuário\" class=\"btn btn-primary btn-flat buscar\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-md-12 \" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <div class=\"table-responsive col-md-12\" style=\"margin-bottom: 20px;border-style: solid;border-color: #d2d6de;border-width: 1px;padding: 2;overflow-x: hidden;\" _v-6fa2c9bd=\"\">\n                                    <table id=\"table\" class=\"table table-bordered table-hover dataTable\" role=\"grid\" _v-6fa2c9bd=\"\">\n                                        <thead _v-6fa2c9bd=\"\">\n                                            <tr _v-6fa2c9bd=\"\">\n                                                <th _v-6fa2c9bd=\"\">Pacientes internados</th>\n                                            </tr>\n                                        </thead>\n                                        <tbody _v-6fa2c9bd=\"\">\n                        <tr _v-6fa2c9bd=\"\">\n                            <td _v-6fa2c9bd=\"\"></td>\n                        </tr>\n                    </tbody>\n                    </table>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"numeroprontuario\" _v-6fa2c9bd=\"\">Nº Prontuário:</label>\n                        <input id=\"numeroprontuario\" type=\"text\" name=\"numeroprontuario\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"clinica\" _v-6fa2c9bd=\"\">Clínica:</label>\n                        <input id=\"clinica\" type=\"text\" name=\"clinica\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-1 col-sm-1 col-md-1\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"leito\" _v-6fa2c9bd=\"\">Leito:</label>\n                        <input id=\"leito\" type=\"text\" name=\"leito\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-1 col-sm-1 col-md-1\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"diag\" _v-6fa2c9bd=\"\">Diagnóstico:</label>\n                        <br _v-6fa2c9bd=\"\">\n                        <button style=\"font-size: 20px\" type=\"button\" data-toggle=\"tooltip\" title=\"Diagnóstico\" class=\"btn btn-primary diagnostico\" @click=\"add_cids()\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button>\n                    </div>\n                </div>\n                <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"admissao\" _v-6fa2c9bd=\"\">Data de admissão:</label>\n                        <input id=\"admissao\" type=\"text\" name=\"admissao\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n                \n                <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"evol\" _v-6fa2c9bd=\"\">Alergia(s):</label>\n                        <textarea readonly=\"\" id=\"alergia\" type=\"text\" name=\"alergia\" class=\"form-control\" rows=\"1\" _v-6fa2c9bd=\"\"></textarea>\n                    </div>\n                </div>\n\n                <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"evol\" _v-6fa2c9bd=\"\">Evolução:</label>\n                        <input id=\"evol\" type=\"text\" name=\"evol\" class=\"form-control\" v-model=\"prescricao.evolucao\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>                    \n\n                <div class=\"col-xs-10 col-sm-10 col-md-10 \" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"med\" _v-6fa2c9bd=\"\">Medicamento/Outros:</label>\n                        <div class=\"input-group input-group-sm\" _v-6fa2c9bd=\"\">\n                        <input id=\"med\" readonly=\"\" type=\"text\" name=\"med\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                        <span class=\"input-group-btn\" _v-6fa2c9bd=\"\">\n                              <button title=\"Prescrever um medicamento\" @click=\"disable()\" type=\"button\" class=\"btn btn-primary btn-flat\" _v-6fa2c9bd=\"\"><i class=\"fa fa-pencil\" _v-6fa2c9bd=\"\"></i></button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n\n                <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"qtd\" _v-6fa2c9bd=\"\">Quantidade/dia:</label>\n                        <input id=\"qtd\" type=\"text\" name=\"qtd\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-md-12 \" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <div class=\"table-responsive col-md-12\" style=\"margin-bottom: 20px;border-style: solid;border-color: #d2d6de;border-width: 1px;padding: 2;overflow-x: hidden;\" _v-6fa2c9bd=\"\">\n                                    <table id=\"table2\" class=\"table table-bordered table-hover dataTable\" role=\"grid\" _v-6fa2c9bd=\"\">\n                                        <thead _v-6fa2c9bd=\"\">\n                                            <tr _v-6fa2c9bd=\"\">\n                                                <th _v-6fa2c9bd=\"\">Medicamentos/dietas</th>\n                                            </tr>\n                                        </thead>\n                                        <tbody _v-6fa2c9bd=\"\">\n                        <tr _v-6fa2c9bd=\"\">\n                            <td _v-6fa2c9bd=\"\"></td>\n                        </tr>\n                    </tbody>\n                    </table>\n                    </div>\n                </div>\n            </div>\n\n                <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"dose\" _v-6fa2c9bd=\"\">Dose por administração: \n                        \t<button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Dose\" class=\"btn btn-primary doseM\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button></label>\n                        <input id=\"dose\" type=\"text\" name=\"dose\" class=\"form-control form-control-danger\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n                \n                <input id=\"idmed\" type=\"hidden\" _v-6fa2c9bd=\"\">\n                <input id=\"codigo\" type=\"hidden\" _v-6fa2c9bd=\"\">\n                <input id=\"simpas\" type=\"hidden\" _v-6fa2c9bd=\"\">\n\n                <div class=\"col-xs-3 col-sm-3 col-md-3 \" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"administracao\" _v-6fa2c9bd=\"\">Via de Administração:\n                        \t<button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Administração\" class=\"btn btn-primary administracaoM\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button></label>\n                        <select id=\"administracao\" name=\"administracao\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                            <option _v-6fa2c9bd=\"\">Selecione...</option>\n                            <option _v-6fa2c9bd=\"\">Endovenosa</option>\n                            <option _v-6fa2c9bd=\"\">Intramuscular</option>\n                            <option _v-6fa2c9bd=\"\">Oral</option>\n                            <option _v-6fa2c9bd=\"\">Tópico</option>\n                            <option _v-6fa2c9bd=\"\">Ocular</option>\n                            <option _v-6fa2c9bd=\"\">Nasal</option>\n                            <option _v-6fa2c9bd=\"\">Retal</option>\n                            <option _v-6fa2c9bd=\"\">Intravaginal</option>\n                            <option _v-6fa2c9bd=\"\">Sublingual</option>\n                            <option _v-6fa2c9bd=\"\">Otológica</option>\n                        </select>                            \n                    </div>\n                </div>\n\n                <div class=\"col-xs-3 col-sm-3 col-md-3 \" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"estabilidade\" _v-6fa2c9bd=\"\">Estabilidade:\n                            <button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Estabilidade\" class=\"btn btn-primary estabilidadeM\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button></label>\n                        <input id=\"estabilidade\" type=\"text\" name=\"estabilidade\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"obs\" _v-6fa2c9bd=\"\">Tempo de Tratamento:</label>\n                        <input id=\"obs\" type=\"text\" name=\"obs\" class=\"form-control\" v-model=\"obs\" placeholder=\"\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n\n                \n\n                \n\n                <div class=\"col-xs-6 col-sm-6 col-md-6 \" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"diluicao\" _v-6fa2c9bd=\"\">Diluição/Obervação:\n                            <button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Diluição\" class=\"btn btn-primary diluicaoM\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button></label>\n                        <input id=\"diluicao\" type=\"text\" name=\"diluicao\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-md-2\" style=\"margin-top: 18px; margin-right: -70px;  \" _v-6fa2c9bd=\"\">\n                    <label _v-6fa2c9bd=\"\">Intervalo de administração:</label>\n                </div>\n                    <div class=\"col-xs-2 col-sm-2 col-md-2\" style=\"\" _v-6fa2c9bd=\"\">\n                        <label for=\"posologia\" _v-6fa2c9bd=\"\">Quantidade:</label>\n                        <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                            <input id=\"posologia\" type=\"text\" name=\"posologia\" class=\"form-control\" v-model=\"posologia\" placeholder=\"\" style=\"width:128px;\" _v-6fa2c9bd=\"\">\n                        </div>\n                    </div>\n                    <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6fa2c9bd=\"\">\n                        <label for=\"posologia\" style=\"margin-left: -15px\" _v-6fa2c9bd=\"\">Intervalo:</label>\n                        <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <select id=\"intervalo_posologia\" name=\"intervalo_posologia\" v-model=\"intervalo_posologia\" class=\"form-control\" style=\"width:230px; margin-left: -15px\" _v-6fa2c9bd=\"\">\n                            <option _v-6fa2c9bd=\"\">Selecione...</option>\n                            <option _v-6fa2c9bd=\"\">Minutos</option>\n                            <option _v-6fa2c9bd=\"\">Horas</option>\n                            <option _v-6fa2c9bd=\"\">Dias</option>\n                            <option _v-6fa2c9bd=\"\">Semanas</option>\n                        </select>                            \n                        </div>\n                    </div>\n                \n\n                <div class=\"row\" style=\"margin-left: 65%;\" _v-6fa2c9bd=\"\">\n                    <div class=\"col-sm-12 text-center\" _v-6fa2c9bd=\"\"> \n                        <button data-toggle=\"tooltip\" style=\"display: inline-block; vertical-align: top;\" type=\"button\" class=\"btn btn-primary btn-md center-block relatorio\" _v-6fa2c9bd=\"\">Relatório Antibioticoterapia</button>\n                        <button id=\"adicionar\" style=\"display: inline-block; vertical-align: top;\" type=\"button\" class=\"btn btn-primary btn-md center-block\" @click=\"addMed\" _v-6fa2c9bd=\"\">Adicionar</button>\n                    </div>\n                </div>\n\n                <div class=\"col-md-12\" _v-6fa2c9bd=\"\">\n                    <br _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <h4 _v-6fa2c9bd=\"\"><center _v-6fa2c9bd=\"\"><b _v-6fa2c9bd=\"\">Descrição da prescrição</b></center></h4>\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                                <div class=\"table-responsive col-md-12\" _v-6fa2c9bd=\"\">\n                                    <table class=\"table table-condensed table-bordered table-hover dataTable\" role=\"grid\" _v-6fa2c9bd=\"\">\n                                        <thead _v-6fa2c9bd=\"\">\n                                            <tr _v-6fa2c9bd=\"\">\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">SIMPAS</th>\n                                                <th width=\"2%\" class=\"text-center\" _v-6fa2c9bd=\"\">Qtd/dia</th>\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">Medicamento</th>\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">Qtd</th>\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">Intervalo</th>\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">Tempo de Tratamento</th>\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">Dose</th>\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">Via de Administração</th>\n                                                <th class=\"text-center\" _v-6fa2c9bd=\"\">Diluição/obs</th>\n                                                <th width=\"3%\" class=\"text-center\" _v-6fa2c9bd=\"\">Opções</th>\n                                            </tr>\n                                        </thead>\n                                        <tbody _v-6fa2c9bd=\"\">\n                                            <tr v-for=\"medicamento in prescricao.prescricaomedicamento\" _v-6fa2c9bd=\"\">\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.simpas}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.qtd}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.med}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.posologia}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.intervalo_posologia}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.obs}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.dose}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.administracao}}</td>\n                                                <td _v-6fa2c9bd=\"\">{{medicamento.diluicao}}</td>\n                                                \n                                                <td width=\"14.5%\" _v-6fa2c9bd=\"\">             \n                                                    <a class=\"btn btn-default\" @click=\"removeMed(medicamento)\" _v-6fa2c9bd=\"\"><i class=\"fa fa-trash\" _v-6fa2c9bd=\"\"></i></a>\n                                                    <a class=\"btn btn-default\" @click=\"abreEditMed(medicamento)\" _v-6fa2c9bd=\"\"><i class=\"fa fa-pencil\" _v-6fa2c9bd=\"\"></i></a>\n                                                </td>\n                                            </tr>\n                                        </tbody>\n                                    </table>\n                                </div>\n                            </div> \n                    </div>\n                </div>\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6fa2c9bd=\"\">\n                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                        <label for=\"obsmed\" _v-6fa2c9bd=\"\">Observações médicas:</label>\n                        <textarea id=\"obsmed\" type=\"text\" name=\"obsmed\" class=\"form-control\" rows=\"5\" v-model=\"prescricao.observacoesmedicas\" _v-6fa2c9bd=\"\"></textarea>\n                    </div>\n                </div>\n                <div class=\"pull-right\" style=\"margin-right: 1%;\" _v-6fa2c9bd=\"\">\n                    <button id=\"salvar\" type=\"submit\" class=\"btn btn-success\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Salvar\" @click=\"adicionar\" _v-6fa2c9bd=\"\">Salvar prescrição</button>\n                </div>\n            </div>\n        </div>\n    </div>\n    \n    <div class=\"modal fade\" id=\"buscar\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Buscar paciente</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                                <div class=\"col-xs-10 col-sm-10 col-md-10\" _v-6fa2c9bd=\"\">\n                                    <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                        <label for=\"paciente\" _v-6fa2c9bd=\"\">Prontuário:</label>\n                                        <div class=\"input-group input-group-sm\" _v-6fa2c9bd=\"\">\n                                            <input type=\"text\" name=\"prontuario\" id=\"prontuario\" class=\"form-control\" v-model=\"prontuario\" _v-6fa2c9bd=\"\">\n                                            \n                                            <span class=\"input-group-btn\" _v-6fa2c9bd=\"\">\n                                              <button type=\"submit\" class=\"btn btn-primary\" @click=\"buscarprontuario\" data-toggle=\"tooltip\" title=\"Digite o prontuário do paciente\" _v-6fa2c9bd=\"\"><i class=\"fa fa-search\" _v-6fa2c9bd=\"\"></i></button>\n                                            </span>\n                                        </div>\n                                    </div>\n                                </div>\n\n\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"modal fade\" id=\"editmed\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog modal-lg\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Editar Medicamento</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n\n                             <div class=\"col-xs-10 col-sm-10 col-md-10\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"medicamento\" _v-6fa2c9bd=\"\">Medicamento:</label>\n                                    <input id=\"nomeEdit\" v-model=\"nomeEdit\" type=\"text\" name=\"nomeEdit\" class=\"form-control\" readonly=\"\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n\n                             <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label _v-6fa2c9bd=\"\">Qtd/dia:</label>\n                                    <input id=\"quantidadeEdit\" v-model=\"quantidadeEdit\" type=\"text\" name=\"quantidadeEdit\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label _v-6fa2c9bd=\"\">Quantidade:</label>\n                                    <input id=\"posologiaEdit\" v-model=\"posologiaEdit\" type=\"text\" name=\"posologiaEdit\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"medicamento\" _v-6fa2c9bd=\"\">Intervalo:</label>\n                                    <input id=\"intervalo_posologiaEdit\" v-model=\"intervalo_posologiaEdit\" type=\"text\" name=\"intervalo_posologiaEdit\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"medicamento\" _v-6fa2c9bd=\"\">Tempo de Tratamento:</label>\n                                    <input id=\"obsEdit\" v-model=\"obsEdit\" type=\"text\" name=\"obsEdit\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"medicamento\" _v-6fa2c9bd=\"\">Dose:</label>\n                                    <input id=\"doseEdit\" v-model=\"doseEdit\" type=\"text\" name=\"doseEdit\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-3 col-sm-3 col-md-3 3\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"medicamento\" _v-6fa2c9bd=\"\">Via de administração:</label>\n                                    <input id=\"administracaoEdit\" v-model=\"administracaoEdit\" type=\"text\" name=\"administracaoEdit\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"medicamento\" _v-6fa2c9bd=\"\">Diluição/observação:</label>\n                                    <input id=\"diluicaoEdit\" v-model=\"diluicaoEdit\" type=\"text\" name=\"diluicaoEdit\" class=\"form-control\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                    <button type=\"button\" @click=\"editMed()\" class=\"btn btn-primary\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Salvar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"modal fade\" id=\"relatorio\" tabindex=\"-1\" role=\"dialog\" data-keyboard=\"false\" data-backdrop=\"static\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Relatório</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"paciente\" _v-6fa2c9bd=\"\">PACIENTE:</label>\n                                    <input id=\"nome_a\" type=\"text\" name=\"nome_a\" class=\"form-control\" readonly=\"\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n\n                             <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"leito\" _v-6fa2c9bd=\"\">LEITO:</label>\n                                    <input id=\"leito_a\" type=\"text\" name=\"leito_a\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-4 col-sm-4 col-md-4\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"admissao\" _v-6fa2c9bd=\"\">DATA DE ADMISSÃO:</label>\n                                    <input id=\"admissao_a\" type=\"text\" name=\"admissao_a\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-4 col-sm-4 col-md-4\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"iniTrata\" _v-6fa2c9bd=\"\">INÍCIO DO TRATAMENTO:</label>\n                                    <input id=\"iniTrata\" type=\"date\" name=\"iniTrata\" class=\"form-control\" v-model=\"iniTrata\" _v-6fa2c9bd=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"clinica\" _v-6fa2c9bd=\"\">CLÍNICA:</label>\n                                    <input id=\"clinica_a\" type=\"text\" name=\"clinica_a\" class=\"form-control\" readonly=\"readonly\" _v-6fa2c9bd=\"\">\n                                </div>  \n                            </div>\n\n                            <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"duracao\" _v-6fa2c9bd=\"\">DURAÇÃO DO TRATAMENTO - DIA(S):</label>\n                                    <input id=\"duracao\" type=\"number\" min=\"1\" name=\"duracao\" class=\"form-control\" v-model=\"duracao\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n\n                            <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"diagInfe\" _v-6fa2c9bd=\"\">DIAGNÓSTICO INFECCIOSO:</label>\n                                    <input id=\"diagInfe\" type=\"text\" name=\"diagInfe\" class=\"form-control\" v-model=\"diagInfe\" _v-6fa2c9bd=\"\">\n                                 </div>\n                             </div>\n\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 med\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <label for=\"medInfe\" _v-6fa2c9bd=\"\">IDENTIFICAÇÃO DO ANTIMICROBIANO:</label>\n                                    <input id=\"medInfe\" type=\"text\" name=\"medInfe\" class=\"form-control\" readonly=\"\" _v-6fa2c9bd=\"\">\n                                </div>\n                            </div>\n\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" @click=\"salvarAntimicrobiano()\" _v-6fa2c9bd=\"\">Guardar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"modal fade\" id=\"diagnostico\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Diagnóstico</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <p v-for=\"cid in cids\" _v-6fa2c9bd=\"\">\n                                        {{cid}}\n                                    </p>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"modal fade\" id=\"doseM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Dose</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <textarea id=\"doseR\" name=\"doseR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6fa2c9bd=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n     <div class=\"modal fade\" id=\"administracaoM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Administração</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <textarea id=\"administracaoR\" name=\"administracaoR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6fa2c9bd=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"modal fade\" id=\"estabilidadeM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Estabilidade</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <textarea id=\"estabilidadeR\" name=\"estabilidadeR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6fa2c9bd=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"modal fade\" id=\"diluicaoM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6fa2c9bd=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6fa2c9bd=\"\">\n            <div class=\"modal-content\" _v-6fa2c9bd=\"\">\n                <div class=\"modal-header\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6fa2c9bd=\"\"><span aria-hidden=\"true\" _v-6fa2c9bd=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6fa2c9bd=\"\"><strong _v-6fa2c9bd=\"\">Diluição</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6fa2c9bd=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6fa2c9bd=\"\">\n                        <div class=\"row\" _v-6fa2c9bd=\"\">\n                            <div class=\"box-body\" _v-6fa2c9bd=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6fa2c9bd=\"\">\n                                <div class=\"form-group\" _v-6fa2c9bd=\"\">\n                                    <textarea id=\"diluicaoR\" name=\"diluicaoR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6fa2c9bd=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6fa2c9bd=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6fa2c9bd=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -20658,7 +20821,8 @@ var classific;
 var direita = new Array();
 var codigos = new Array();
 var posicoes = new Array();
-var idinter = '';
+var idinter = '',
+    obj = '';
 
 exports.default = {
 
@@ -20676,6 +20840,7 @@ exports.default = {
             nomeEdit: '',
             quantidadeEdit: '',
             posologiaEdit: '',
+            intervalo_posologiaEdit: '',
             doseEdit: '',
             administracaoEdit: '',
             diluicaoEdit: '',
@@ -20691,12 +20856,12 @@ exports.default = {
             qtd: '',
             nome: '',
             posologia: '',
+            intervalo_posologia: 'Selecione...',
             meds: [],
             obs: '',
             iniTrata: '',
             medInfe: '',
             duracao: '',
-            quantidade: '',
             prescricao: (_prescricao = {
                 idinternacao: '',
                 dataprescricao: '',
@@ -20708,17 +20873,63 @@ exports.default = {
     mounted: function mounted() {
         this.prescricao.dataprescricao = this.data;
         this.cid_all = JSON.parse(this.di);
-        console.log(this.di);
+        obj = jQuery.parseJSON(this.medicamentosss);
+
         var i;
         for (i = 0; i < this.cid_all.length; i++) {
             this.cids.push(this.cid_all[i].descricao);
         }
-
-        console.log(this.cids);
     },
 
     methods: {
         addMed: function addMed() {
+            $('input[type=search]').val('').change();
+            var administracao = $("#administracao").val();
+            if (classific == 9) {
+                this.intervalo_posologia = '';
+                administracao = '';
+            }
+            if (classific != 9) {
+                if ($("#posologia").val() == '') {
+                    swal({
+                        title: "Campos vazios",
+                        text: 'O campo quantidade é obrigatório',
+                        type: "warning",
+                        html: true
+                    });
+                    return;
+                }
+
+                if ($("#administracao").val() == 'Selecione...') {
+                    swal({
+                        title: "Campos vazios",
+                        text: 'O campo via de administração é obrigatório',
+                        type: "warning",
+                        html: true
+                    });
+                    return;
+                }
+
+                if ($("#intervalo_posologia").val() == 'Selecione...') {
+                    swal({
+                        title: "Campos vazios",
+                        text: 'O campo intervalo é obrigatório',
+                        type: "warning",
+                        html: true
+                    });
+                    return;
+                }
+
+                if ($("#obs").val() == '') {
+                    swal({
+                        title: "Campos vazios",
+                        text: 'O campo tempo de tratamento é obrigatório',
+                        type: "warning",
+                        html: true
+                    });
+                    return;
+                }
+            }
             var med = $("#med").val();
 
             if (med == '') {
@@ -20730,116 +20941,112 @@ exports.default = {
                 });
             } else {
 
-                if (classific == 2 && this.iniTrata == '' || classific == 2 && this.diagInfe == '' || classific == 2 && this.duracao == '' || classific == 2 && this.quantidade == '') {
-                    swal({
-                        title: "Campos vazios",
-                        text: 'Preencha todos os campos do relatório antimicrobiano',
-                        type: "warning",
-                        html: true
-                    });
+                var cod = $("#codigo").val();
+                var i;
+                var j;
+                var verifica = false;
+                codigos.push(cod);
 
-                    $("#relatorio").modal('show');
-                } else {
-                    var cod = $("#codigo").val();
-                    var i;
-                    var j;
-                    var verifica = false;
-                    codigos.push(cod);
-
-                    if (direita.length > 0) {
-                        //vefifica se ja tem interacaoes inseridas
-                        for (i = 0; i < direita.length; i++) {
-                            if (cod == direita[i].sub) {
-                                //comparação do codigo inserido com o vetor existente 
-                                for (j = 0; j < codigos.length; j++) {
-                                    if (direita[i].sub == codigos[j]) {
-                                        //verifica se o codigo comparado ainda existe na lista de medicamentos prescritos                                  
-                                        verifica = true;
-                                    }
+                if (direita.length > 0) {
+                    //vefifica se ja tem interacaoes inseridas
+                    for (i = 0; i < direita.length; i++) {
+                        if (cod == direita[i].sub) {
+                            //comparação do codigo inserido com o vetor existente 
+                            for (j = 0; j < codigos.length; j++) {
+                                if (direita[i].sub == codigos[j]) {
+                                    //verifica se o codigo comparado ainda existe na lista de medicamentos prescritos                                  
+                                    verifica = true;
                                 }
-                                if (verifica == true && codigos.length > 1) {
-                                    var pos = posicoes[i].pos;
-                                    swal({
-                                        title: "Interação Medicamentosa",
-                                        text: consequencia[pos],
-                                        type: "warning",
-                                        html: true
-                                    });
-                                }
+                            }
+                            if (verifica == true && codigos.length > 1) {
+                                var pos = posicoes[i].pos;
+                                swal({
+                                    title: "Interação Medicamentosa",
+                                    text: consequencia[pos],
+                                    type: "warning",
+                                    html: true
+                                });
                             }
                         }
                     }
+                }
 
-                    for (i = 0; i < sub1.length; i++) {
-                        if (cod == sub1[i]) {
-                            direita.push({ sub: sub2[i], id: cod });
-                            posicoes.push({ pos: i, id: cod });
-                        }
+                for (i = 0; i < sub1.length; i++) {
+                    if (cod == sub1[i]) {
+                        direita.push({ sub: sub2[i], id: cod });
+                        posicoes.push({ pos: i, id: cod });
                     }
+                }
 
-                    for (i = 0; i < sub2.length; i++) {
-                        if (cod == sub2[i]) {
-                            direita.push({ sub: sub1[i], id: cod });
-                            posicoes.push({ pos: i, id: cod });
-                        }
+                for (i = 0; i < sub2.length; i++) {
+                    if (cod == sub2[i]) {
+                        direita.push({ sub: sub1[i], id: cod });
+                        posicoes.push({ pos: i, id: cod });
                     }
+                }
 
-                    var id = $("#idmed").val();
-                    var codigo = $("#codigo").val();
-                    var simpas = $("#simpas").val();
-                    var codigo = $("#codigo").val();
-                    var dose = $("#dose").val();
-                    var administracao = $("#administracao").val();
-                    var estabilidade = $("#estabilidade").val();
-                    var diluicao = $("#diluicao").val();
+                var id = $("#idmed").val();
+                var codigo = $("#codigo").val();
+                var simpas = $("#simpas").val();
+                var codigo = $("#codigo").val();
+                var dose = $("#dose").val();
+                var estabilidade = $("#estabilidade").val();
+                var diluicao = $("#diluicao").val();
 
-                    this.prescricao.relatorioAntimicro.push({
-                        idmedicamento: id,
-                        medInfe: med,
-                        quantidade: this.quantidade,
-                        duracao: this.duracao,
-                        leito: this.leito,
-                        paciente: this.paciente,
-                        dataadmissao: this.admissao,
-                        iniTrata: this.iniTrata,
-                        clinica: this.clinica,
-                        diagInfe: this.diagInfe
-                    });
+                this.prescricao.relatorioAntimicro.push({
+                    idmedicamento: id,
+                    medInfe: med,
+                    duracao: this.duracao,
+                    leito: this.leito,
+                    paciente: this.paciente,
+                    dataadmissao: this.admissao,
+                    iniTrata: this.iniTrata,
+                    clinica: this.clinica,
+                    diagInfe: this.diagInfe
+                });
 
-                    this.quantidade = '';
-                    this.duracao = '';
-                    this.iniTrata = '';
-                    this.diagInfe = '';
-                    document.getElementById("medInfe").value = '';
+                this.duracao = '';
+                this.iniTrata = '';
+                this.diagInfe = '';
+                document.getElementById("medInfe").value = '';
 
-                    this.prescricao.prescricaomedicamento.push({
-                        codigo: codigo,
-                        simpas: simpas,
-                        idmedicamento: id,
-                        qtd: this.qtd,
-                        med: med,
-                        obs: this.obs,
-                        posologia: this.posologia,
-                        administracao: administracao,
-                        dose: dose,
-                        diluicao: diluicao,
-                        estabilidade: estabilidade,
-                        classificacao: classific
-                    });
+                this.prescricao.prescricaomedicamento.push({
+                    codigo: codigo,
+                    simpas: simpas,
+                    idmedicamento: id,
+                    qtd: this.qtd,
+                    med: med,
+                    obs: this.obs,
+                    posologia: this.posologia,
+                    intervalo_posologia: this.intervalo_posologia,
+                    administracao: administracao,
+                    dose: dose,
+                    diluicao: diluicao,
+                    estabilidade: estabilidade,
+                    classificacao: classific
+                });
 
-                    this.simpas = '-';
+                this.simpas = '-';
 
-                    $("#med").val("");
-                    $("#dose").val("");
-                    $("#diluicao").val("");
-                    $("#estabilidade").val("");
-                    $("#administracao").val("");
-                    $("#qtd").val("");
-                    $("#simpas").val("");
-                    $("#codigo").val("");
+                $("#med").val("");
+                $("#dose").val("");
+                $("#diluicao").val("");
+                $("#estabilidade").val("");
+                $("#administracao").val("Selecione...");
+                $("#qtd").val("");
+                $("#simpas").val("");
+                $("#codigo").val("");
 
-                    this.posologia = '';
-                    this.obs = '';
+                this.posologia = '';
+                this.obs = '';
+                this.intervalo_posologia = 'Selecione...';
+
+                if (classific != 9) {
+                    $.notify("Medicamento adicionado", { globalPosition: "top center",
+                        className: 'success' });
+                } else {
+                    $.notify("Dieta adicionada", { globalPosition: "top center",
+                        className: 'success' });
                 }
             }
         },
@@ -20866,6 +21073,42 @@ exports.default = {
                 }
             }
         },
+        salvarAntimicrobiano: function salvarAntimicrobiano() {
+            if ($("#medInfe").val() == '') {
+                $("#relatorio").modal('hide');
+                return;
+            }
+            if (this.diagInfe == '') {
+                swal({
+                    title: "Campos vazios",
+                    text: 'O campo diagnóstico infeccioso é obrigatório',
+                    type: "warning",
+                    html: true
+                });
+            }
+            if (this.duracao == '') {
+                swal({
+                    title: "Campos vazios",
+                    text: 'O campo duração do tratamento é obrigatório',
+                    type: "warning",
+                    html: true
+                });
+            }
+            if (this.iniTrata == '') {
+                swal({
+                    title: "Campos vazios",
+                    text: 'O campo início do tratamento é obrigatório',
+                    type: "warning",
+                    html: true
+                });
+            }
+
+            if (this.iniTrata != '' && this.duracao != '' && this.diagInfe != '') {
+                $("#relatorio").modal('hide');
+                $.notify("Relatório salvo", { globalPosition: "top center",
+                    className: 'success' });
+            }
+        },
         disable: function disable() {
             document.getElementById('med').removeAttribute('readonly');
             document.getElementById("med").value = '';
@@ -20875,49 +21118,6 @@ exports.default = {
             document.getElementById("diluicaoR").value = '';
             document.getElementById("administracaoR").value = '';
             document.getElementById("estabilidadeR").value = '';
-        },
-        adicionar_medicamento: function adicionar_medicamento(med) {
-            document.getElementById('med').setAttribute('readonly', true);
-            var index = this.meds.indexOf(med);
-            document.getElementById("simpas").value = this.meds[index].simpas;
-            document.getElementById("med").value = this.meds[index].value;
-            document.getElementById("codigo").value = this.meds[index].codigo;
-            document.getElementById("idmed").value = this.meds[index].id;
-            document.getElementById("doseR").value = this.meds[index].dose;
-            document.getElementById("diluicaoR").value = this.meds[index].diluicaoR;
-            document.getElementById("administracaoR").value = this.meds[index].administracaoR;
-            document.getElementById("estabilidadeR").value = this.meds[index].estabilidadeR;
-            document.getElementById("med").value = this.meds[index].value;
-
-            var medic = this.meds[index].value;
-
-            if (this.meds[index].classificacao == 2) {
-                classific = this.meds[index].classificacao;
-                $(document).ready(function () {
-                    $("#relatorio").modal('show');
-                    $("#medInfe").val(medic); // pega o nome do medicamento
-                });
-            } else {
-                classific = 7;
-            }
-
-            $.ajax({
-                type: 'get',
-                url: '../../../medicamento/contraindicacao',
-                data: {
-                    'id': this.meds[index].id
-                },
-                success: function success(data) {
-                    if (data != '') {
-                        swal({
-                            title: "Contraindicação",
-                            text: data,
-                            type: "warning",
-                            html: true
-                        });
-                    }
-                }
-            });
         },
         adicionarRelatorio: function adicionarRelatorio(med) {
             var index = this.prescricao.prescricaomedicamento.indexOf(med);
@@ -20944,6 +21144,9 @@ exports.default = {
             this.prescricao.relatorioAntimicro[this.ind_rela].iniTrata = this.iniTrata;
             this.prescricao.relatorioAntimicro[this.ind_rela].clinica = this.clinica;
             this.prescricao.relatorioAntimicro[this.ind_rela].diagInfe = this.diagInfe;
+            $.notify("Relatório salvo", { globalPosition: "top center",
+                className: 'success' });
+            $("#relatorio").modal('hide');
         },
         abreEditMed: function abreEditMed(med) {
             var b = $("#teste").val();
@@ -20954,21 +21157,28 @@ exports.default = {
                 this.ind = index;
                 this.quantidadeEdit = this.prescricao.prescricaomedicamento[index].qtd;
                 this.posologiaEdit = this.prescricao.prescricaomedicamento[index].posologia;
+                this.intervalo_posologiaEdit = this.prescricao.prescricaomedicamento[index].intervalo_posologia;
                 this.nomeEdit = this.prescricao.prescricaomedicamento[index].med;
                 this.administracaoEdit = this.prescricao.prescricaomedicamento[index].administracao;
                 this.diluicaoEdit = this.prescricao.prescricaomedicamento[index].diluicao;
                 this.obsEdit = this.prescricao.prescricaomedicamento[index].obs;
                 this.doseEdit = this.prescricao.prescricaomedicamento[index].dose;
+
+                $("#editmed").modal('show');
             }
         },
         editMed: function editMed() {
             this.prescricao.prescricaomedicamento[this.ind].posologia = this.posologiaEdit;
+            this.prescricao.prescricaomedicamento[this.ind].intervalo_posologia = this.intervalo_posologiaEdit;
             this.prescricao.prescricaomedicamento[this.ind].qtd = this.quantidadeEdit;
             this.nomeEdit = this.prescricao.prescricaomedicamento[this.ind].med;
             this.prescricao.prescricaomedicamento[this.ind].administracao = this.administracaoEdit;
             this.prescricao.prescricaomedicamento[this.ind].diluicao = this.diluicaoEdit;
             this.prescricao.prescricaomedicamento[this.ind].obs = this.obsEdit;
             this.prescricao.prescricaomedicamento[this.ind].dose = this.doseEdit;
+
+            $.notify("Alteração realizada com sucesso!", { globalPosition: "top center",
+                className: 'success' });
         },
         adicionar: function adicionar() {
             var _this = this;
@@ -21015,17 +21225,7 @@ exports.default = {
     beforeMount: function beforeMount() {
         var _this2 = this;
 
-        var all_medicamentos = new Array();
-
-        var i;
-        var obj = jQuery.parseJSON(this.medicamentosss);
-
-        for (i = 0; i < obj.length; i++) {
-            this.meds.push(obj[i]);
-        }
-
         var aux = new Array();
-
         var aux = jQuery.parseJSON(this.interacao_all);
 
         var i;
@@ -21189,6 +21389,7 @@ exports.default = {
                         med: med_array[i]['outros'],
                         obs: med_array[i]['obs'],
                         posologia: med_array[i]['posologia'],
+                        intervalo_posologia: med_array[i]['intervalo_posologia'],
                         administracao: med_array[i]['administracao'],
                         dose: med_array[i]['dosemed'],
                         diluicao: med_array[i]['diluicao'],
@@ -21206,6 +21407,7 @@ exports.default = {
                         med: med_array[i]['nomesubstancia'] + med_array[i]['quantidadedose'] + ' ' + nomeunidade + ', ' + med_array[i]['nomeforma'] + ' ' + conteudo + 'com ' + med_array[i]['quantidadeconteudo'] + uc,
                         obs: med_array[i]['obs'],
                         posologia: med_array[i]['posologia'],
+                        intervalo_posologia: med_array[i]['intervalo_posologia'],
                         administracao: med_array[i]['administracao'],
                         dose: med_array[i]['dosemed'],
                         diluicao: med_array[i]['diluicao'],
@@ -21235,7 +21437,6 @@ exports.default = {
                 _this2.prescricao.relatorioAntimicro.push({
                     idmedicamento: '',
                     medInfe: '',
-                    quantidade: '',
                     duracao: '',
                     leito: '',
                     paciente: '',
@@ -21258,6 +21459,69 @@ exports.default = {
 };
 
 
+$(function ($) {
+    $("#table").on("click", "td", function () {
+        var m = $(this).text();
+
+        var i;
+        for (i = 0; i < obj.length; i++) {
+            if (m == obj[i].value) {
+
+                if (obj[i].classificacao != 9) {
+                    $.notify("Medicamento selecionado", { globalPosition: "top center",
+                        className: 'info' });
+                } else {
+                    $.notify("Dieta selecionada", { globalPosition: "top center",
+                        className: 'info' });
+                }
+
+                document.getElementById('med').setAttribute('readonly', true);
+                document.getElementById("med").value = obj[i].value;
+                document.getElementById("codigo").value = obj[i].codigo;
+                document.getElementById("simpas").value = obj[i].simpas;
+                document.getElementById("idmed").value = obj[i].id;
+                document.getElementById("doseR").value = obj[i].dose;
+                document.getElementById("diluicaoR").value = diluicao;
+                document.getElementById("administracaoR").value = obj[i].administracao;
+                document.getElementById("estabilidadeR").value = obj[i].estabilidade;
+
+                var medic = obj[i].value;
+
+                if (obj[i].classificacao == 2) {
+                    classific = obj[i].classificacao;
+                    $(document).ready(function () {
+                        $("#relatorio").modal('show');
+                        $("#medInfe").val(medic); // pega o nome do medicamento
+                    });
+                } else {
+                    $("#medInfe").val('');
+                    classific = obj[i].classificacao;
+                }
+
+                if (obj[i].classificacao != 9) {
+                    $.ajax({
+                        type: 'get',
+                        url: '../../../medicamento/contraindicacao',
+                        data: {
+                            'id': obj[i].id
+                        },
+                        success: function success(data) {
+                            if (data != '') {
+                                swal({
+                                    title: "Contraindicação",
+                                    text: data,
+                                    type: "warning",
+                                    html: true
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    });
+});
+
 jQuery(function ($) {
     $("#rg").mask("99.999.999-99");
 });
@@ -21272,10 +21536,6 @@ $(document).on('click', '.buscar', function () {
 
 $(document).on('click', '.relatorio', function () {
     $("#relatorio").modal('show');
-});
-
-$(document).on('click', '.editmed', function () {
-    $("#editmed").modal('show');
 });
 
 $(document).on('click', '.diluicaoM', function () {
@@ -21297,7 +21557,7 @@ $(document).on('click', '.diagnostico', function () {
     $("#diagnostico").modal('show');
 });
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div _v-6f1e0847=\"\">\n    <div class=\"row\" _v-6f1e0847=\"\">         \n        <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n            <div class=\"box-body pad table-responsive\" _v-6f1e0847=\"\">\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n                    <div class=\"pull-left\" _v-6f1e0847=\"\"><small _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Médico: </strong>{{this.medico}}</small></div> \n                    <div class=\"pull-right\" _v-6f1e0847=\"\"><small _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Data da prescrição:</strong>{{this.data}}</small></div>\n                    <br _v-6f1e0847=\"\"><br _v-6f1e0847=\"\">\n                </div>\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"paciente\" _v-6f1e0847=\"\">Paciente:</label>\n                        \n                            <input id=\"paciente\" type=\"text\" name=\"paciente\" class=\"form-control\" readonly=\"readonly\" v-model=\"paciente\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"numeroprontuario\" _v-6f1e0847=\"\">Nº Prontuário:</label>\n                        <input id=\"numeroprontuario\" type=\"text\" name=\"numeroprontuario\" class=\"form-control\" readonly=\"readonly\" v-model=\"numeroprontuario\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"clinica\" _v-6f1e0847=\"\">Clínica:</label>\n                        <input id=\"clinica\" type=\"text\" name=\"clinica\" class=\"form-control\" readonly=\"readonly\" v-model=\"clinica\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-1 col-sm-1 col-md-1\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"leito\" _v-6f1e0847=\"\">Leito:</label>\n                        <input id=\"leito\" type=\"text\" name=\"leito\" class=\"form-control\" readonly=\"readonly\" v-model=\"leito\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-1 col-sm-1 col-md-1\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"diag\" _v-6f1e0847=\"\">Diagnóstico:</label>\n                        <br _v-6f1e0847=\"\">\n                        <button style=\"font-size: 20px\" type=\"button\" data-toggle=\"tooltip\" title=\"Diagnóstico\" class=\"btn btn-primary diagnostico\" _v-6f1e0847=\"\"><i class=\"fa fa-search\" _v-6f1e0847=\"\"></i></button>\n                    </div>\n                </div>\n                <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"admissao\" _v-6f1e0847=\"\">Data de admissão:</label>\n                        <input id=\"admissao\" type=\"text\" name=\"admissao\" class=\"form-control\" readonly=\"readonly\" v-model=\"admissao\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"evol\" _v-6f1e0847=\"\">Alergia(s):</label>\n                        <textarea readonly=\"\" id=\"alergia\" type=\"text\" name=\"alergia\" class=\"form-control\" rows=\"1\" v-model=\"alergia\" _v-6f1e0847=\"\"></textarea>\n                    </div>\n                </div>\n                \n\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"evol\" _v-6f1e0847=\"\">Evolução:</label>\n                        <input id=\"evol\" type=\"text\" name=\"evol\" class=\"form-control\" v-model=\"prescricao.evolucao\" _v-6f1e0847=\"\">\n                        \n                    </div>\n                </div>\n\n                <div class=\"col-xs-10 col-sm-10 col-md-10 \" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"med\" _v-6f1e0847=\"\">Medicamento/Outros:</label>\n                        <div class=\"input-group input-group-sm\" _v-6f1e0847=\"\">\n                        <input id=\"med\" readonly=\"\" type=\"text\" name=\"med\" class=\"form-control\" _v-6f1e0847=\"\">\n                        <span class=\"input-group-btn\" _v-6f1e0847=\"\">\n                              <button title=\"Prescrever um medicamento\" @click=\"disable()\" type=\"button\" class=\"btn btn-primary btn-flat\" _v-6f1e0847=\"\"><i class=\"fa fa-pencil\" _v-6f1e0847=\"\"></i></button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n\n                <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"qtd\" _v-6f1e0847=\"\">Quantidade:</label>\n                        <input id=\"qtd\" type=\"text\" name=\"qtd\" class=\"form-control\" v-model=\"qtd\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-md-12 \" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                            <div class=\"table-responsive col-md-12\" style=\"margin-bottom: 20px;border-style: solid;border-color: #d2d6de;border-width: 1px;padding: 2;overflow-x: hidden;\" _v-6f1e0847=\"\">\n                                        <table id=\"table\" class=\"table table-bordered table-hover dataTable\" role=\"grid\" _v-6f1e0847=\"\">\n                                            <thead _v-6f1e0847=\"\">\n                                                <tr _v-6f1e0847=\"\">\n                                                    <th _v-6f1e0847=\"\">Medicamentos</th>\n                                                </tr>\n                                            </thead>\n                                            <tbody _v-6f1e0847=\"\">\n                            <tr v-for=\"med in meds\" _v-6f1e0847=\"\">\n                                <td _v-6f1e0847=\"\"><a href=\"#!\" @click=\"adicionar_medicamento(med)\" _v-6f1e0847=\"\">{{ med.value }}</a></td>\n                            </tr>\n                        </tbody>\n                        </table>\n                        </div>\n                    </div>\n                </div>\n\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"dose\" _v-6f1e0847=\"\">Dose: \n                        \t<button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Dose\" class=\"btn btn-primary doseM\" _v-6f1e0847=\"\"><i class=\"fa fa-search\" _v-6f1e0847=\"\"></i></button></label>\n                            <input id=\"dose\" type=\"text\" name=\"dose\" class=\"form-control\" _v-6f1e0847=\"\">\n                    </div>\n                </div>    \n\n                <input id=\"idmed\" type=\"hidden\" _v-6f1e0847=\"\">\n                <input id=\"codigo\" type=\"hidden\" _v-6f1e0847=\"\">\n                <input id=\"simpas\" type=\"hidden\" _v-6f1e0847=\"\">\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12 \" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"administracao\" _v-6f1e0847=\"\">Administração:\n                        \t<button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Administração\" class=\"btn btn-primary administracaoM\" _v-6f1e0847=\"\"><i class=\"fa fa-search\" _v-6f1e0847=\"\"></i></button></label>\n                        <input id=\"administracao\" type=\"text\" name=\"administracao\" class=\"form-control\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n\n                \n                <div class=\"col-xs-12 col-sm-12 col-md-12 \" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"diluicao\" _v-6f1e0847=\"\">Diluição:\n                        \t<button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Diluição\" class=\"btn btn-primary diluicaoM\" _v-6f1e0847=\"\"><i class=\"fa fa-search\" _v-6f1e0847=\"\"></i></button></label>\n                        <input id=\"diluicao\" type=\"text\" name=\"diluicao\" class=\"form-control\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12 \" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"estabilidade\" _v-6f1e0847=\"\">Estabilidade:\n                        \t<button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Estabilidade\" class=\"btn btn-primary estabilidadeM\" _v-6f1e0847=\"\"><i class=\"fa fa-search\" _v-6f1e0847=\"\"></i></button></label>\n                        <input id=\"estabilidade\" type=\"text\" name=\"estabilidade\" class=\"form-control\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"posologia\" _v-6f1e0847=\"\">Posologia:</label>\n                        <input id=\"posologia\" type=\"text\" name=\"posologia\" class=\"form-control\" v-model=\"posologia\" placeholder=\"\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"obs\" _v-6f1e0847=\"\">Tempo de Tratamento:</label>\n                        <input id=\"obs\" type=\"text\" name=\"obs\" class=\"form-control\" v-model=\"obs\" placeholder=\"\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n\n                <div class=\"row\" style=\"margin-left: 65%;\" _v-6f1e0847=\"\">\n                    <div class=\"col-sm-12 text-center\" _v-6f1e0847=\"\"> \n                        <button data-toggle=\"tooltip\" style=\"display: inline-block; vertical-align: top;\" type=\"button\" class=\"btn btn-primary btn-md center-block relatorio\" _v-6f1e0847=\"\">Relatório Antibioticoterapia</button>\n                        <button style=\"display: inline-block; vertical-align: top;\" type=\"button\" class=\"btn btn-primary btn-md center-block\" @click=\"addMed\" _v-6f1e0847=\"\">Adicionar</button>\n                    </div>\n                </div>\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n                    <br _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <h4 _v-6f1e0847=\"\"><center _v-6f1e0847=\"\"><b _v-6f1e0847=\"\">Descrição da prescrição</b></center></h4>\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                                <div class=\"table-responsive col-lg-12 col-md-12 col-sm-12\" _v-6f1e0847=\"\">\n                                    <table class=\"table table-condensed table-bordered table-hover dataTable\" role=\"grid\" _v-6f1e0847=\"\">\n                                        <thead _v-6f1e0847=\"\">\n                                            <tr _v-6f1e0847=\"\">\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">SIMPAS</th>\n                                                <th width=\"2%\" class=\"text-center\" _v-6f1e0847=\"\">Quantidade</th>\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">Medicamento</th>\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">Posologia</th>\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">Tempo de Tratamento</th>\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">Dose</th>\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">Administração</th>\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">Diluição</th>\n                                                \n\n                                                <th width=\"3%\" class=\"text-center\" _v-6f1e0847=\"\">Opções</th>\n                                            </tr>\n                                        </thead>\n                                        <tbody _v-6f1e0847=\"\">\n                                            <tr v-for=\"medicamento in prescricao.prescricaomedicamento\" _v-6f1e0847=\"\">\n                                                <td _v-6f1e0847=\"\">{{medicamento.simpas}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.qtd}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.med}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.posologia}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.obs}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.dose}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.administracao}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.diluicao}}</td>\n                                                <td width=\"15%\" _v-6f1e0847=\"\">             \n                                                    <center _v-6f1e0847=\"\">\n                                                    <a class=\"btn btn-default\" @click=\"removeMed(medicamento)\" _v-6f1e0847=\"\"><i class=\"fa fa-trash\" _v-6f1e0847=\"\"></i></a>\n\n                                                    <a data-toggle=\"tooltip\" @click=\"abreEditMed(medicamento)\" class=\"btn btn-default editmed\" _v-6f1e0847=\"\"><i class=\"fa fa-pencil\" _v-6f1e0847=\"\"></i></a>\n                                                    <a data-toggle=\"tooltip\" v-if=\"verifica_relatorio == true &amp;&amp; medicamento.simpas != '-'\" @click=\"adicionarRelatorio(medicamento)\" class=\"btn btn-default editme\" _v-6f1e0847=\"\"><i class=\"fa fa-file-text-o\" _v-6f1e0847=\"\"></i></a>\n                                                    </center>\n                                                    \n                                                </td>\n                                            </tr>\n                                        </tbody>\n                                    </table>\n                                </div>\n                            </div> \n                    </div>\n                </div>\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"obsmed\" _v-6f1e0847=\"\">Observações médicas:</label>\n                        <textarea id=\"obsmed\" type=\"text\" name=\"obsmed\" class=\"form-control\" rows=\"5\" v-model=\"prescricao.observacoesmedicas\" _v-6f1e0847=\"\"></textarea>\n                    </div>\n                </div>\n                <div class=\"pull-right\" style=\"margin-right: 1%;\" _v-6f1e0847=\"\">\n                    <button id=\"salvar\" type=\"submit\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Salvar\" @click=\"adicionar\" _v-6f1e0847=\"\"><i class=\"fa fa-save\" _v-6f1e0847=\"\"></i></button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"modal fade\" id=\"diagnostico\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Diagnóstico</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <p v-for=\"cid in cids\" _v-6f1e0847=\"\">\n                                        {{cid}}\n                                    </p>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n    \n    <div class=\"modal fade\" id=\"buscar\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Buscar paciente</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                                <div class=\"col-xs-10 col-sm-10 col-md-10\" _v-6f1e0847=\"\">\n                                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                                          <label for=\"paciente\" _v-6f1e0847=\"\">Nome:</label>\n                                        <div class=\"input-group input-group-sm\" _v-6f1e0847=\"\">\n                                            <input type=\"text\" name=\"nome\" id=\"nome\" class=\"form-control\" v-model=\"nome\" _v-6f1e0847=\"\">\n                                        </div>\n                                    </div>\n                                </div>\n\n                                <div class=\"col-xs-10 col-sm-10 col-md-10\" _v-6f1e0847=\"\">\n                                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                                        <label for=\"paciente\" _v-6f1e0847=\"\">Prontuário:</label>\n                                        <div class=\"input-group input-group-sm\" _v-6f1e0847=\"\">\n                                            <input type=\"text\" name=\"prontuario\" id=\"prontuario\" class=\"form-control\" v-model=\"prontuario\" _v-6f1e0847=\"\">\n                                        </div>\n                                    </div>\n                                </div>\n\n\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"modal fade\" id=\"relatorio\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Relatório</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"paciente\" _v-6f1e0847=\"\">NOME:</label>\n                                    <input id=\"posologia\" v-model=\"paciente\" type=\"text\" name=\"posologia\" class=\"form-control\" readonly=\"\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n\n                             <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"leito\" _v-6f1e0847=\"\">LEITO:</label>\n                                    <input id=\"leito\" type=\"text\" name=\"leito\" class=\"form-control\" readonly=\"readonly\" v-model=\"leito\" _v-6f1e0847=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-4 col-sm-4 col-md-4\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"admissao\" _v-6f1e0847=\"\">DATA DE ADMISSÃO:</label>\n                                    <input id=\"admissao\" type=\"text\" name=\"admissao\" class=\"form-control\" readonly=\"readonly\" v-model=\"admissao\" _v-6f1e0847=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-4 col-sm-4 col-md-4\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"iniTrata\" _v-6f1e0847=\"\">INÍCIO DO TRATAMENTO:</label>\n                                    <input id=\"iniTrata\" type=\"date\" name=\"iniTrata\" class=\"form-control\" v-model=\"iniTrata\" _v-6f1e0847=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-5 col-sm-5 col-md-5\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"clinica\" _v-6f1e0847=\"\">CLÍNICA:</label>\n                                    <input id=\"clinica\" type=\"text\" name=\"clinica\" class=\"form-control\" readonly=\"readonly\" v-model=\"clinica\" _v-6f1e0847=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"diagInfe\" _v-6f1e0847=\"\">DIAGNÓSTICO INFECCIOSO:</label>\n                                    <input id=\"diagInfe\" type=\"text\" name=\"diagInfe\" class=\"form-control\" v-model=\"diagInfe\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n\n                             <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"duracao\" _v-6f1e0847=\"\">QUANTIDADE:</label>\n                                    <input id=\"quantidade\" min=\"1\" type=\"number\" name=\"quantidade\" class=\"form-control\" v-model=\"quantidade\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n\n                             <div class=\"col-xs-5 col-sm-5 col-md-5\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"duracao\" _v-6f1e0847=\"\">DURAÇÃO DO TRATAMENTO:</label>\n                                    <select id=\"duracao\" type=\"text\" name=\"duracao\" class=\"form-control\" v-model=\"duracao\" _v-6f1e0847=\"\">\n                                        <option _v-6f1e0847=\"\">Dia(s)</option>\n                                        <option _v-6f1e0847=\"\">Semana(s)</option>\n                                        <option _v-6f1e0847=\"\">Mês(es)</option>\n                                    </select>\n                                    \n                                 </div>\n                             </div>\n\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 med\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medInfe\" _v-6f1e0847=\"\">IDENTIFICAÇÃO DO ANTIMICROBIANO:</label>\n                                    <input id=\"medInfe\" type=\"text\" name=\"medInfe\" class=\"form-control\" readonly=\"\" _v-6f1e0847=\"\">\n                                </div>\n                            </div>\n\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button v-if=\"verifica_relatorio\" @click=\"salveRelatorio()\" type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Salvar</button>                                                    \n                    <button v-if=\"!verifica_relatorio\" type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n\n\n    <div class=\"modal fade\" id=\"doseM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Dose</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <textarea id=\"doseR\" name=\"doseR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6f1e0847=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"modal fade\" id=\"editmed\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Editar Medicamento</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medicamento\" _v-6f1e0847=\"\">Medicamento:</label>\n                                    <input id=\"nomeEdit\" v-model=\"nomeEdit\" type=\"text\" name=\"nomeEdit\" class=\"form-control\" readonly=\"\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medicamento\" _v-6f1e0847=\"\">Quantidade:</label>\n                                    <input id=\"quantidadeEdit\" v-model=\"quantidadeEdit\" type=\"text\" name=\"quantidadeEdit\" class=\"form-control\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medicamento\" _v-6f1e0847=\"\">Posologia:</label>\n                                    <input id=\"posologiaEdit\" v-model=\"posologiaEdit\" type=\"text\" name=\"posologiaEdit\" class=\"form-control\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medicamento\" _v-6f1e0847=\"\">Tempo de Tratamento:</label>\n                                    <input id=\"obsEdit\" v-model=\"obsEdit\" type=\"text\" name=\"obsEdit\" class=\"form-control\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medicamento\" _v-6f1e0847=\"\">Dose:</label>\n                                    <input id=\"doseEdit\" v-model=\"doseEdit\" type=\"text\" name=\"doseEdit\" class=\"form-control\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medicamento\" _v-6f1e0847=\"\">Administração:</label>\n                                    <input id=\"administracaoEdit\" v-model=\"administracaoEdit\" type=\"text\" name=\"administracaoEdit\" class=\"form-control\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medicamento\" _v-6f1e0847=\"\">Diluição:</label>\n                                    <input id=\"diluicaoEdit\" v-model=\"diluicaoEdit\" type=\"text\" name=\"diluicaoEdit\" class=\"form-control\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                    <button type=\"button\" @click=\"editMed()\" class=\"btn btn-primary\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Salvar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n\n     <div class=\"modal fade\" id=\"administracaoM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Administração</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <textarea id=\"administracaoR\" name=\"administracaoR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6f1e0847=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"modal fade\" id=\"estabilidadeM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Estabilidade</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <textarea id=\"estabilidadeR\" name=\"estabilidadeR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6f1e0847=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"modal fade\" id=\"diluicaoM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Diluição</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <textarea id=\"diluicaoR\" name=\"diluicaoR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6f1e0847=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div _v-6f1e0847=\"\">\n    <div class=\"row\" _v-6f1e0847=\"\">         \n        <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n            <div class=\"box-body pad table-responsive\" _v-6f1e0847=\"\">\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n                    <div class=\"pull-left\" _v-6f1e0847=\"\"><small _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Médico: </strong>{{this.medico}}</small></div> \n                    <div class=\"pull-right\" _v-6f1e0847=\"\"><small _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Data da prescrição:</strong>{{this.data}}</small></div>\n                    <br _v-6f1e0847=\"\"><br _v-6f1e0847=\"\">\n                </div>\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"paciente\" _v-6f1e0847=\"\">Paciente:</label>\n                        \n                            <input id=\"paciente\" type=\"text\" name=\"paciente\" class=\"form-control\" readonly=\"readonly\" v-model=\"paciente\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"numeroprontuario\" _v-6f1e0847=\"\">Nº Prontuário:</label>\n                        <input id=\"numeroprontuario\" type=\"text\" name=\"numeroprontuario\" class=\"form-control\" readonly=\"readonly\" v-model=\"numeroprontuario\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"clinica\" _v-6f1e0847=\"\">Clínica:</label>\n                        <input id=\"clinica\" type=\"text\" name=\"clinica\" class=\"form-control\" readonly=\"readonly\" v-model=\"clinica\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-1 col-sm-1 col-md-1\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"leito\" _v-6f1e0847=\"\">Leito:</label>\n                        <input id=\"leito\" type=\"text\" name=\"leito\" class=\"form-control\" readonly=\"readonly\" v-model=\"leito\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-1 col-sm-1 col-md-1\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"diag\" _v-6f1e0847=\"\">Diagnóstico:</label>\n                        <br _v-6f1e0847=\"\">\n                        <button style=\"font-size: 20px\" type=\"button\" data-toggle=\"tooltip\" title=\"Diagnóstico\" class=\"btn btn-primary diagnostico\" _v-6f1e0847=\"\"><i class=\"fa fa-search\" _v-6f1e0847=\"\"></i></button>\n                    </div>\n                </div>\n                <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"admissao\" _v-6f1e0847=\"\">Data de admissão:</label>\n                        <input id=\"admissao\" type=\"text\" name=\"admissao\" class=\"form-control\" readonly=\"readonly\" v-model=\"admissao\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"evol\" _v-6f1e0847=\"\">Alergia(s):</label>\n                        <textarea readonly=\"\" id=\"alergia\" type=\"text\" name=\"alergia\" class=\"form-control\" rows=\"1\" v-model=\"alergia\" _v-6f1e0847=\"\"></textarea>\n                    </div>\n                </div>\n                \n\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"evol\" _v-6f1e0847=\"\">Evolução:</label>\n                        <input id=\"evol\" type=\"text\" name=\"evol\" class=\"form-control\" v-model=\"prescricao.evolucao\" _v-6f1e0847=\"\">\n                        \n                    </div>\n                </div>\n\n                <div class=\"col-xs-10 col-sm-10 col-md-10 \" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"med\" _v-6f1e0847=\"\">Medicamento/Outros:</label>\n                        <div class=\"input-group input-group-sm\" _v-6f1e0847=\"\">\n                        <input id=\"med\" readonly=\"\" type=\"text\" name=\"med\" class=\"form-control\" _v-6f1e0847=\"\">\n                        <span class=\"input-group-btn\" _v-6f1e0847=\"\">\n                              <button title=\"Prescrever um medicamento\" @click=\"disable()\" type=\"button\" class=\"btn btn-primary btn-flat\" _v-6f1e0847=\"\"><i class=\"fa fa-pencil\" _v-6f1e0847=\"\"></i></button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n\n                <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"qtd\" _v-6f1e0847=\"\">Quantidade/dia:</label>\n                        <input id=\"qtd\" type=\"text\" name=\"qtd\" class=\"form-control\" v-model=\"qtd\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-md-12 \" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                            <div class=\"table-responsive col-md-12\" style=\"margin-bottom: 20px;border-style: solid;border-color: #d2d6de;border-width: 1px;padding: 2;overflow-x: hidden;\" _v-6f1e0847=\"\">\n                                        <table id=\"table\" class=\"table table-bordered table-hover dataTable\" role=\"grid\" _v-6f1e0847=\"\">\n                                            <thead _v-6f1e0847=\"\">\n                                                <tr _v-6f1e0847=\"\">\n                                                    <th _v-6f1e0847=\"\">Medicamentos/dietas</th>\n                                                </tr>\n                                            </thead>\n                                            <tbody _v-6f1e0847=\"\">\n                            <tr _v-6f1e0847=\"\">\n                                <td _v-6f1e0847=\"\"></td>\n                            </tr>\n                        </tbody>\n                        </table>\n                        </div>\n                    </div>\n                </div>\n\n\n                <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"dose\" _v-6f1e0847=\"\">Dose por administração: \n                            <button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Dose\" class=\"btn btn-primary doseM\" _v-6f1e0847=\"\"><i class=\"fa fa-search\" _v-6f1e0847=\"\"></i></button></label>\n                        <input id=\"dose\" type=\"text\" name=\"dose\" class=\"form-control\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n                \n                <input id=\"idmed\" type=\"hidden\" _v-6f1e0847=\"\">\n                <input id=\"codigo\" type=\"hidden\" _v-6f1e0847=\"\">\n                <input id=\"simpas\" type=\"hidden\" _v-6f1e0847=\"\">\n\n                <div class=\"col-xs-3 col-sm-3 col-md-3 \" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"administracao\" _v-6f1e0847=\"\">Via de Administração:\n                            <button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Administração\" class=\"btn btn-primary administracaoM\" _v-6f1e0847=\"\"><i class=\"fa fa-search\" _v-6f1e0847=\"\"></i></button></label>\n                        <select id=\"administracao\" name=\"administracao\" class=\"form-control\" _v-6f1e0847=\"\">\n                            <option _v-6f1e0847=\"\">Selecione...</option>\n                            <option _v-6f1e0847=\"\">Endovenosa</option>\n                            <option _v-6f1e0847=\"\">Intramuscular</option>\n                            <option _v-6f1e0847=\"\">Oral</option>\n                            <option _v-6f1e0847=\"\">Tópico</option>\n                            <option _v-6f1e0847=\"\">Ocular</option>\n                            <option _v-6f1e0847=\"\">Nasal</option>\n                            <option _v-6f1e0847=\"\">Retal</option>\n                            <option _v-6f1e0847=\"\">Intravaginal</option>\n                            <option _v-6f1e0847=\"\">Sublingual</option>\n                            <option _v-6f1e0847=\"\">Otológica</option>\n                        </select>                            \n                    </div>\n                </div>\n\n                <div class=\"col-xs-3 col-sm-3 col-md-3 \" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"estabilidade\" _v-6f1e0847=\"\">Estabilidade:\n                            <button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Estabilidade\" class=\"btn btn-primary estabilidadeM\" _v-6f1e0847=\"\"><i class=\"fa fa-search\" _v-6f1e0847=\"\"></i></button></label>\n                        <input id=\"estabilidade\" type=\"text\" name=\"estabilidade\" class=\"form-control\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"obs\" _v-6f1e0847=\"\">Tempo de Tratamento:</label>\n                        <input id=\"obs\" type=\"text\" name=\"obs\" class=\"form-control\" v-model=\"obs\" placeholder=\"\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n\n                \n\n                \n\n                <div class=\"col-xs-6 col-sm-6 col-md-6 \" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"diluicao\" _v-6f1e0847=\"\">Diluição/Obervação:\n                            <button style=\"font-size: 6px\" type=\"button\" data-toggle=\"tooltip\" title=\"Diluição\" class=\"btn btn-primary diluicaoM\" _v-6f1e0847=\"\"><i class=\"fa fa-search\" _v-6f1e0847=\"\"></i></button></label>\n                        <input id=\"diluicao\" type=\"text\" name=\"diluicao\" class=\"form-control\" _v-6f1e0847=\"\">\n                    </div>\n                </div>\n\n                <div class=\"col-md-2\" style=\"margin-top: 18px; margin-right: -70px;  \" _v-6f1e0847=\"\">\n                    <label _v-6f1e0847=\"\">Intervalo de administração:</label>\n                </div>\n                    <div class=\"col-xs-2 col-sm-2 col-md-2\" style=\"\" _v-6f1e0847=\"\">\n                        <label for=\"posologia\" _v-6f1e0847=\"\">Quantidade:</label>\n                        <div class=\"form-group\" _v-6f1e0847=\"\">\n                            <input id=\"posologia\" type=\"text\" name=\"posologia\" class=\"form-control\" v-model=\"posologia\" placeholder=\"\" style=\"width:128px;\" _v-6f1e0847=\"\">\n                        </div>\n                    </div>\n                    <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6f1e0847=\"\">\n                        <label for=\"posologia\" style=\"margin-left: -15px\" _v-6f1e0847=\"\">Intervalo:</label>\n                        <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <select id=\"intervalo_posologia\" name=\"intervalo_posologia\" v-model=\"intervalo_posologia\" class=\"form-control\" style=\"width:230px; margin-left: -15px\" _v-6f1e0847=\"\">\n                            <option _v-6f1e0847=\"\">Selecione...</option>\n                            <option _v-6f1e0847=\"\">Minutos</option>\n                            <option _v-6f1e0847=\"\">Horas</option>\n                            <option _v-6f1e0847=\"\">Dias</option>\n                            <option _v-6f1e0847=\"\">Semanas</option>\n                        </select>                            \n                        </div>\n                    </div>\n                \n\n                <div class=\"row\" style=\"margin-left: 65%;\" _v-6f1e0847=\"\">\n                    <div class=\"col-sm-12 text-center\" _v-6f1e0847=\"\"> \n                        <button data-toggle=\"tooltip\" style=\"display: inline-block; vertical-align: top;\" type=\"button\" class=\"btn btn-primary btn-md center-block relatorio\" _v-6f1e0847=\"\">Relatório Antibioticoterapia</button>\n                        <button id=\"adicionar\" style=\"display: inline-block; vertical-align: top;\" type=\"button\" class=\"btn btn-primary btn-md center-block\" @click=\"addMed\" _v-6f1e0847=\"\">Adicionar</button>\n                    </div>\n                </div>\n\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n                    <br _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <h4 _v-6f1e0847=\"\"><center _v-6f1e0847=\"\"><b _v-6f1e0847=\"\">Descrição da prescrição</b></center></h4>\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                                <div class=\"table-responsive col-lg-12 col-md-12 col-sm-12\" _v-6f1e0847=\"\">\n                                    <table class=\"table table-condensed table-bordered table-hover dataTable\" role=\"grid\" _v-6f1e0847=\"\">\n                                        <thead _v-6f1e0847=\"\">\n                                            <tr _v-6f1e0847=\"\">\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">SIMPAS</th>\n                                                <th width=\"2%\" class=\"text-center\" _v-6f1e0847=\"\">Qtd/dia</th>\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">Medicamento</th>\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">Qtd</th>\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">Intervalo</th>\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">Tempo de Tratamento</th>\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">Dose</th>\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">Via de Administração</th>\n                                                <th class=\"text-center\" _v-6f1e0847=\"\">Diluição/obs</th>\n                                                <th width=\"3%\" class=\"text-center\" _v-6f1e0847=\"\">Opções</th>\n                                            </tr>\n                                        </thead>\n                                        <tbody _v-6f1e0847=\"\">\n                                            <tr v-for=\"medicamento in prescricao.prescricaomedicamento\" _v-6f1e0847=\"\">\n                                                <td _v-6f1e0847=\"\">{{medicamento.simpas}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.qtd}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.med}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.posologia}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.intervalo_posologia}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.obs}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.dose}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.administracao}}</td>\n                                                <td _v-6f1e0847=\"\">{{medicamento.diluicao}}</td>\n                                                \n                                                <td width=\"14.5%\" _v-6f1e0847=\"\">             \n                                                    <a class=\"btn btn-default\" @click=\"removeMed(medicamento)\" _v-6f1e0847=\"\"><i class=\"fa fa-trash\" _v-6f1e0847=\"\"></i></a>\n                                                    <a class=\"btn btn-default\" @click=\"abreEditMed(medicamento)\" _v-6f1e0847=\"\"><i class=\"fa fa-pencil\" _v-6f1e0847=\"\"></i></a>\n                                                </td>\n                                            </tr>\n                                        </tbody>\n                                    </table>\n                                </div>\n                            </div> \n                    </div>\n                </div>\n                <div class=\"col-xs-12 col-sm-12 col-md-12\" _v-6f1e0847=\"\">\n                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                        <label for=\"obsmed\" _v-6f1e0847=\"\">Observações médicas:</label>\n                        <textarea id=\"obsmed\" type=\"text\" name=\"obsmed\" class=\"form-control\" rows=\"5\" v-model=\"prescricao.observacoesmedicas\" _v-6f1e0847=\"\"></textarea>\n                    </div>\n                </div>\n                <div class=\"pull-right\" style=\"margin-right: 1%;\" _v-6f1e0847=\"\">\n                    <button id=\"salvar\" type=\"submit\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Salvar\" @click=\"adicionar\" _v-6f1e0847=\"\"><i class=\"fa fa-save\" _v-6f1e0847=\"\"></i></button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"modal fade\" id=\"diagnostico\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Diagnóstico</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <p v-for=\"cid in cids\" _v-6f1e0847=\"\">\n                                        {{cid}}\n                                    </p>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n    \n    <div class=\"modal fade\" id=\"buscar\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Buscar paciente</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                                <div class=\"col-xs-10 col-sm-10 col-md-10\" _v-6f1e0847=\"\">\n                                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                                          <label for=\"paciente\" _v-6f1e0847=\"\">Nome:</label>\n                                        <div class=\"input-group input-group-sm\" _v-6f1e0847=\"\">\n                                            <input type=\"text\" name=\"nome\" id=\"nome\" class=\"form-control\" v-model=\"nome\" _v-6f1e0847=\"\">\n                                        </div>\n                                    </div>\n                                </div>\n\n                                <div class=\"col-xs-10 col-sm-10 col-md-10\" _v-6f1e0847=\"\">\n                                    <div class=\"form-group\" _v-6f1e0847=\"\">\n                                        <label for=\"paciente\" _v-6f1e0847=\"\">Prontuário:</label>\n                                        <div class=\"input-group input-group-sm\" _v-6f1e0847=\"\">\n                                            <input type=\"text\" name=\"prontuario\" id=\"prontuario\" class=\"form-control\" v-model=\"prontuario\" _v-6f1e0847=\"\">\n                                        </div>\n                                    </div>\n                                </div>\n\n\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"modal fade\" id=\"relatorio\" data-keyboard=\"false\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Relatório</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"paciente\" _v-6f1e0847=\"\">PACIENTE:</label>\n                                    <input id=\"posologia\" v-model=\"paciente\" type=\"text\" name=\"posologia\" class=\"form-control\" readonly=\"\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n\n                             <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"leito\" _v-6f1e0847=\"\">LEITO:</label>\n                                    <input id=\"leito\" type=\"text\" name=\"leito\" class=\"form-control\" readonly=\"readonly\" v-model=\"leito\" _v-6f1e0847=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-4 col-sm-4 col-md-4\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"admissao\" _v-6f1e0847=\"\">DATA DE ADMISSÃO:</label>\n                                    <input id=\"admissao\" type=\"text\" name=\"admissao\" class=\"form-control\" readonly=\"readonly\" v-model=\"admissao\" _v-6f1e0847=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-4 col-sm-4 col-md-4\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"iniTrata\" _v-6f1e0847=\"\">INÍCIO DO TRATAMENTO:</label>\n                                    <input id=\"iniTrata\" type=\"date\" name=\"iniTrata\" class=\"form-control\" v-model=\"iniTrata\" _v-6f1e0847=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"clinica\" _v-6f1e0847=\"\">CLÍNICA:</label>\n                                    <input id=\"clinica\" type=\"text\" name=\"clinica\" class=\"form-control\" readonly=\"readonly\" v-model=\"clinica\" _v-6f1e0847=\"\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"duracao\" _v-6f1e0847=\"\">DURAÇÃO DO TRATAMENTO - DIA(S):</label>\n                                    <input id=\"duracao\" min=\"1\" type=\"number\" name=\"duracao\" class=\"form-control\" v-model=\"duracao\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n\n                            <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"diagInfe\" _v-6f1e0847=\"\">DIAGNÓSTICO INFECCIOSO:</label>\n                                    <input id=\"diagInfe\" type=\"text\" name=\"diagInfe\" class=\"form-control\" v-model=\"diagInfe\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n\n\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 med\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medInfe\" _v-6f1e0847=\"\">IDENTIFICAÇÃO DO ANTIMICROBIANO:</label>\n                                    <input id=\"medInfe\" type=\"text\" name=\"medInfe\" class=\"form-control\" readonly=\"\" _v-6f1e0847=\"\">\n                                </div>\n                            </div>\n\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button v-if=\"verifica_relatorio\" @click=\"salveRelatorio()\" type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Salvar</button>                                                    \n                    <button v-if=\"!verifica_relatorio\" type=\"button\" class=\"btn btn-default\" @click=\"salvarAntimicrobiano()\" _v-6f1e0847=\"\">Guardar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n\n\n    <div class=\"modal fade\" id=\"doseM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Dose</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <textarea id=\"doseR\" name=\"doseR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6f1e0847=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"modal fade\" id=\"editmed\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog modal-lg\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Editar Medicamento</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n\n                             <div class=\"col-xs-10 col-sm-10 col-md-10\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medicamento\" _v-6f1e0847=\"\">Medicamento:</label>\n                                    <input id=\"nomeEdit\" v-model=\"nomeEdit\" type=\"text\" name=\"nomeEdit\" class=\"form-control\" readonly=\"\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n\n                             <div class=\"col-xs-2 col-sm-2 col-md-2\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label _v-6f1e0847=\"\">Qtd/dia:</label>\n                                    <input id=\"quantidadeEdit\" v-model=\"quantidadeEdit\" type=\"text\" name=\"quantidadeEdit\" class=\"form-control\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label _v-6f1e0847=\"\">Quantidade:</label>\n                                    <input id=\"posologiaEdit\" v-model=\"posologiaEdit\" type=\"text\" name=\"posologiaEdit\" class=\"form-control\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-6 col-sm-6 col-md-6\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medicamento\" _v-6f1e0847=\"\">Intervalo:</label>\n                                    <input id=\"intervalo_posologiaEdit\" v-model=\"intervalo_posologiaEdit\" type=\"text\" name=\"intervalo_posologiaEdit\" class=\"form-control\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medicamento\" _v-6f1e0847=\"\">Tempo de Tratamento:</label>\n                                    <input id=\"obsEdit\" v-model=\"obsEdit\" type=\"text\" name=\"obsEdit\" class=\"form-control\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medicamento\" _v-6f1e0847=\"\">Dose:</label>\n                                    <input id=\"doseEdit\" v-model=\"doseEdit\" type=\"text\" name=\"doseEdit\" class=\"form-control\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-3 col-sm-3 col-md-3 3\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medicamento\" _v-6f1e0847=\"\">Via de administração:</label>\n                                    <input id=\"administracaoEdit\" v-model=\"administracaoEdit\" type=\"text\" name=\"administracaoEdit\" class=\"form-control\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n                             <div class=\"col-xs-3 col-sm-3 col-md-3\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <label for=\"medicamento\" _v-6f1e0847=\"\">Diluição/observação:</label>\n                                    <input id=\"diluicaoEdit\" v-model=\"diluicaoEdit\" type=\"text\" name=\"diluicaoEdit\" class=\"form-control\" _v-6f1e0847=\"\">\n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                    <button type=\"button\" @click=\"editMed()\" class=\"btn btn-primary\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Salvar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n\n     <div class=\"modal fade\" id=\"administracaoM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Administração</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <textarea id=\"administracaoR\" name=\"administracaoR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6f1e0847=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"modal fade\" id=\"estabilidadeM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Estabilidade</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <textarea id=\"estabilidadeR\" name=\"estabilidadeR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6f1e0847=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"modal fade\" id=\"diluicaoM\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-6f1e0847=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-6f1e0847=\"\">\n            <div class=\"modal-content\" _v-6f1e0847=\"\">\n                <div class=\"modal-header\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-6f1e0847=\"\"><span aria-hidden=\"true\" _v-6f1e0847=\"\">×</span></button>\n                    <h4 class=\"modal-title\" id=\"myModalLabel\" _v-6f1e0847=\"\"><strong _v-6f1e0847=\"\">Diluição</strong></h4>\n                </div>\n                <div class=\"modal-body\" _v-6f1e0847=\"\">\n                    <div class=\"box box-primary\" style=\"margin-left: 2%; margin-right: 2%; width: 96%;\" _v-6f1e0847=\"\">\n                        <div class=\"row\" _v-6f1e0847=\"\">\n                            <div class=\"box-body\" _v-6f1e0847=\"\">\n                             <div class=\"col-xs-12 col-sm-12 col-md-12 obs\" _v-6f1e0847=\"\">\n                                <div class=\"form-group\" _v-6f1e0847=\"\">\n                                    <textarea id=\"diluicaoR\" name=\"diluicaoR\" type=\"text\" class=\"form-control\" rows=\"8\" _v-6f1e0847=\"\"></textarea>\n                                    \n                                 </div>\n                             </div>\n                            </div>\n                     </div>\n                    </div>  \n                </div>\n                <div class=\"modal-footer\" _v-6f1e0847=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-6f1e0847=\"\">Fechar</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

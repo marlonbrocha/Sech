@@ -17,12 +17,13 @@ class CreateMedicamentosTable extends Migration
             $table->increments('id');
             $table->integer('idformafarmaceutica');
             $table->integer('nomeconteudo');
-            $table->string('quantidadeconteudo');
             $table->integer('unidadeconteudo');
             $table->string('codigosimpas')->unique();            
             $table->string('nomecomercial');              
             $table->foreign('idformafarmaceutica')->references('id')-> on('formafarmaceuticas'); 
             $table->timestamps();
+            $table->string('quantidadeconteudo');
+
         });
 
         // Create table for associating medicamentos e substanciaativas (Many-to-Many)
@@ -30,12 +31,11 @@ class CreateMedicamentosTable extends Migration
             $table->increments('id');
             $table->integer('idmedicamento')->unsigned();
             $table->integer('idsubstanciaativa')->unsigned();
-            $table->string('quantidadedose');
             $table->integer('unidadedose');              
             $table->timestamps();
+            $table->string('quantidadedose');
             
             $table->unique(['idsubstanciaativa', 'idmedicamento']);
-
             $table->foreign('idsubstanciaativa')->references('id')->on('substanciaativas');
             $table->foreign('idmedicamento')->references('id')->on('medicamentos');
 

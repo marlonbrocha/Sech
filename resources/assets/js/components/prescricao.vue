@@ -3,25 +3,32 @@
     var sub1 = new Array();
     var sub2 = new Array();
     var consequencia = new Array();
-    var classific;
     var direita = new Array();
     var codigos = new Array();
     var posicoes = new Array();   
-    var idinter = '';
+    var cids = new Array();   
+    var classific, idinter = '', obj='', obj_paciente='', cid_all;
     export default{
 
         props: ['data', 'medico','medicamentosss','paciente_all','di','interacao_all'],
 
         data(){
-            return { 
-                cid_all: '',
+            return {
+                quantidadeEdit: '', 
+                posologiaEdit: '', 
+                intervalo_posologiaEdit: '', 
+                nomeEdit: '',
+                administracaoEdit: '', 
+                diluicaoEdit: '', 
+                obsEdit: '', 
+                doseEdit: '', 
                 cids: [],
                 value: '', 
                 paciente: '',
-                quantidade:'',
                 diagInfe: '',
                 prontuario: '',
                 posologia:'',
+                intervalo_posologia: 'Selecione...',
                 obs:'',
                 iniTrata:'',
                 medInfe:'',
@@ -41,12 +48,65 @@
                 },
             }
         },
-        mounted(){
+        mounted(){            
             this.prescricao.dataprescricao = this.data;
-            this.cid_all = JSON.parse(this.di);
+            cid_all = JSON.parse(this.di);
+
+            obj = jQuery.parseJSON(this.medicamentosss);
+            obj_paciente = jQuery.parseJSON(this.paciente_all);
+
+            console.log(cid_all);
         },
         methods: {
             addMed(){
+                var administracao = $("#administracao").val();
+                $('input[type=search]').val('').change();                
+                if(classific == 9){
+                    this.intervalo_posologia = '';
+                    administracao = '';
+                }    
+                if(classific != 9){               
+                    if($("#posologia").val() == ''){
+                        swal({
+                                title: "Campos vazios",
+                                text: 'O campo quantidade é obrigatório', 
+                                type: "warning",
+                                html: true,
+                            });  
+                        return;
+                    }
+
+                    if($("#administracao").val() == 'Selecione...'){
+                        swal({
+                                title: "Campos vazios",
+                                text: 'O campo via de administração é obrigatório', 
+                                type: "warning",
+                                html: true,
+                            });  
+                        return;
+                    }
+
+                    if($("#intervalo_posologia").val() == 'Selecione...'){
+                        swal({
+                                title: "Campos vazios",
+                                text: 'O campo intervalo é obrigatório', 
+                                type: "warning",
+                                html: true,
+                            });  
+                        return;
+                    }
+
+                    if($("#obs").val() == ''){
+                        swal({
+                                title: "Campos vazios",
+                                text: 'O campo tempo de tratamento é obrigatório', 
+                                type: "warning",
+                                html: true,
+                            });  
+                        return;
+                    }
+                }
+
                 var med = $("#med").val();
                     if(med == ''){
                       swal({
@@ -56,20 +116,6 @@
                             html: true,
                         });  
                     }else{
-
-                    if(classific == 2 && this.iniTrata == '' || classific == 2 && this.diagInfe == '' 
-                        || classific ==  2 && this.duracao == '' || classific == 2 && this.quantidade == ''
-                        ){
-                            swal({
-                                title: "Campos vazios",
-                                text: 'Preencha todos os campos do relatório antimicrobiano', 
-                                type: "warning",
-                                html: true,
-                            });
-
-                            $("#relatorio").modal('show');
-
-                        }else{
                         
                         var cod = $("#codigo").val();
                         var i;
@@ -117,7 +163,6 @@
                         var codigo = $("#codigo").val();
                         var simpas = $("#simpas").val();
                         var dose = $("#dose").val();
-                        var administracao = $("#administracao").val();
                         var estabilidade = $("#estabilidade").val();
                         var diluicao = $("#diluicao").val();
                         var qtd = $("#qtd").val();
@@ -127,7 +172,6 @@
                             idmedicamento: id,
                             medInfe: med,
                             duracao: this.duracao,
-                            quantidade: this.quantidade,
                             leito: document.getElementById("leito_a").value,
                             paciente: document.getElementById("nome_a").value,
                             dataadmissao: document.getElementById("admissao_a").value,
@@ -136,7 +180,6 @@
                             diagInfe: this.diagInfe
                         });
 
-                        this.quantidade = '';
                         this.duracao = '';
                         this.iniTrata = '';
                         this.diagInfe = '';
@@ -150,6 +193,7 @@
                             med: med,
                             obs: this.obs,
                             posologia: this.posologia,
+                            intervalo_posologia: this.intervalo_posologia,
                             administracao: administracao,
                             dose: dose,
                             diluicao: diluicao,
@@ -162,16 +206,70 @@
                         $("#dose").val("");
                         $("#diluicao").val("");
                         $("#estabilidade").val("");
-                        $("#administracao").val("");
+                        $("#administracao").val("Selecione...");
                         $("#qtd").val("");
                         $("#simpas").val("");
                         $("#codigo").val("");
+
+                        if(classific != 9){
+                           $.notify(
+                              "Medicamento adicionado", 
+                              { globalPosition:"top center",
+                                className: 'success'}
+                            );  
+                        }else{
+                            $.notify(
+                              "Dieta adicionada", 
+                              { globalPosition:"top center",
+                                className: 'success'}
+                            );  
+                        }
                         
                         this.posologia = '';
                         this.obs = '';
-
-                    }
+                        this.intervalo_posologia = 'Selecione...';
                 }
+            },
+            salvarAntimicrobiano(){
+                if($("#medInfe").val() == ''){
+                    $("#relatorio").modal('hide');
+                    return;
+                }
+
+                if(this.diagInfe == '' ){
+                    swal({
+                        title: "Campos vazios",
+                        text: 'O campo diagnóstico infeccioso é obrigatório', 
+                        type: "warning",
+                        html: true,
+                    });
+                }
+                if(this.duracao == ''){
+                    swal({
+                        title: "Campos vazios",
+                        text: 'O campo duração do tratamento é obrigatório', 
+                        type: "warning",
+                        html: true,
+                    });
+                }
+                if(this.iniTrata == '' ){
+                    swal({
+                        title: "Campos vazios",
+                        text: 'O campo início do tratamento é obrigatório', 
+                        type: "warning",
+                        html: true,
+                    });
+                }
+
+                if(this.iniTrata != '' && this.duracao != '' && this.diagInfe != ''){
+                    $("#relatorio").modal('hide');
+                    $.notify(
+                      "Relatório salvo", 
+                      { globalPosition:"top center",
+                        className: 'success'}
+                    );
+                }
+
             },
             removeMed(med) {
                     console.log(direita);
@@ -194,53 +292,53 @@
                                 posicoes.splice(j, 1);              
                             }
                         }
-
                     }
             },
-            adicionar_medicamento(med){
-                document.getElementById('med').setAttribute('readonly',true);
-                var index = this.meds.indexOf(med);
-                document.getElementById("med").value = this.meds[index].value;
-                document.getElementById("codigo").value = this.meds[index].codigo;
-                document.getElementById("simpas").value = this.meds[index].simpas;
-                document.getElementById("idmed").value = this.meds[index].id;
-                document.getElementById("doseR").value = this.meds[index].dose;
-                document.getElementById("diluicaoR").value = this.meds[index].diluicaoR;
-                document.getElementById("administracaoR").value = this.meds[index].administracaoR;
-                document.getElementById("estabilidadeR").value = this.meds[index].estabilidadeR;
-                
-                var medic = this.meds[index].value;
-                
-                if(this.meds[index].classificacao == 2){
-                    classific = this.meds[index].classificacao;
-                    $(document).ready(function() {
-                        $("#relatorio").modal('show');
-                        $("#medInfe").val(medic); // pega o nome do medicamento
-                    });
-                }else{
-                    classific = 7;
-                }
+            abreEditMed(med) {
+                    var b = $("#teste").val();
+        
+                    var index = this.prescricao.prescricaomedicamento.indexOf(med)
+          
+                    if(index > -1){ 
+                        this.ind = index;
+                        this.quantidadeEdit = this.prescricao.prescricaomedicamento[index].qtd;    
+                        this.posologiaEdit = this.prescricao.prescricaomedicamento[index].posologia;    
+                        this.intervalo_posologiaEdit = this.prescricao.prescricaomedicamento[index].intervalo_posologia;    
+                        this.nomeEdit = this.prescricao.prescricaomedicamento[index].med;    
+                        this.administracaoEdit = this.prescricao.prescricaomedicamento[index].administracao;    
+                        this.diluicaoEdit = this.prescricao.prescricaomedicamento[index].diluicao;    
+                        this.obsEdit = this.prescricao.prescricaomedicamento[index].obs;    
+                        this.doseEdit = this.prescricao.prescricaomedicamento[index].dose;    
 
-                $.ajax({
-                    type: 'get',
-                    url: '../../../medicamento/contraindicacao',
-                    data: {
-                        'id': this.meds[index].id,
-                    },
-                    success: function (data){
-                        if(data != ''){
-                        swal({ 
-                            title: "Contraindicação",
-                            text: data, 
+                        $("#editmed").modal('show');
+                    }
+                },
+                editMed() {
+                    this.prescricao.prescricaomedicamento[this.ind].posologia = this.posologiaEdit;    
+                    this.prescricao.prescricaomedicamento[this.ind].intervalo_posologia = this.intervalo_posologiaEdit;    
+                    this.prescricao.prescricaomedicamento[this.ind].qtd = this.quantidadeEdit;    
+                    this.nomeEdit = this.prescricao.prescricaomedicamento[this.ind].med;    
+                    this.prescricao.prescricaomedicamento[this.ind].administracao = this.administracaoEdit;
+                    this.prescricao.prescricaomedicamento[this.ind].diluicao = this.diluicaoEdit;    
+                    this.prescricao.prescricaomedicamento[this.ind].obs = this.obsEdit;    
+                    this.prescricao.prescricaomedicamento[this.ind].dose = this.doseEdit;
+
+                    $.notify(
+                      "Alteração realizada com sucesso!", 
+                      { globalPosition:"top center",
+                        className: 'success'}
+                    );     
+                },
+            adicionar(){
+                if($("#nome").val() == ''){
+                    swal({
+                            title: "Campos vazios",
+                            text: 'Selecione um paciente', 
                             type: "warning",
                             html: true,
-                        });
-                    }
-                    },
-                });             
-                
-            },
-            adicionar(){
+                        });  
+                    return;
+                }
                 document.getElementById('salvar').setAttribute('disabled',"true");
                 this.prescricao.idinternacao = idinter;
                 this.$http.post('/prescricao/create', this.prescricao).then(response => {
@@ -265,35 +363,9 @@
                    });
                 });
             },
-            escolher_paciente(paciente){
-                document.getElementById("nome_a").value =  paciente.nomecompleto;
-                document.getElementById("nome").value =  paciente.nomecompleto;
-                document.getElementById("clinica").value =  paciente.nome;
-                document.getElementById("numeroprontuario").value =  paciente.numeroprontuario;
-                document.getElementById("leito").value =  paciente.leito;
-                document.getElementById("clinica_a").value =  paciente.nome;
-                document.getElementById("leito_a").value =  paciente.leito;
-                document.getElementById("alergia").value =  paciente.alergia;
-                  
-                var data;
-                data = paciente.dataadmissao.replace(/(\d{2})\-(\d{3})\-(\d{2}).*/, '$2-$3-$4');
-                document.getElementById("admissao").value =  data;
+            add_cids(){
+                this.cids = cids;
                 
-                var data2;
-                data2 = paciente.dataadmissao.replace(/(\d{4})\-(\d{3})\-(\d{2}).*/, '$3-$2-$4');
-                $("#admissao_a").val(data2);
-
-                idinter = paciente.id; 
-
-                var i;
-
-                this.cids = [];
-                for (i = 0; i < this.cid_all.length ; i++){
-                    if(this.cid_all[i].id == idinter){
-                        console.log('entrou');
-                        this.cids.push(this.cid_all[i].descricao);
-                    }    
-                }
             },
             disable(){
                 document.getElementById('med').removeAttribute('readonly');
@@ -309,7 +381,6 @@
                 var prontuario = $("#prontuario").val();
                 this.$http.post('../buscapaciente', {prontuario: prontuario}).then(response => {
                     $("#buscar").modal('hide')
-
                   document.getElementById("nome").value =  response.data[0].value;
                   document.getElementById("clinica").value =  response.data[0].clinica;
                   document.getElementById("numeroprontuario").value =  response.data[0].numeroprontuario;
@@ -320,19 +391,27 @@
                   document.getElementById("clinica_a").value =  response.data[0].clinica;
                   document.getElementById("nome_a").value =  response.data[0].value;
                   document.getElementById("leito_a").value =  response.data[0].leito;
+                  document.getElementById("alergia").value =  response.data[0].alergia;
+
                   let data2;
                   data2 = response.data[0].dataadmissao.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1');
                   $("#admissao_a").val(data2);
 
                     idinter = response.data[0].id; 
                     var i;
-                    for (i = 0; i < this.cid_all.length ; i++){
-                        if(this.cid_all[i].id = idinter){
-                            this.cids.push(this.cid_all[i].descricao);
-                        }    
-                    }
 
-                    console.log(this.cids);
+                    cids = [];
+                    for (i = 0; i < cid_all.length ; i++){
+                        if(cid_all[i].id == idinter){
+                            cids.push(cid_all[i].descricao);
+                        }    
+                    } 
+
+                    $.notify(
+                      "Paciente selecionado", 
+                      { globalPosition:"top center",
+                        className: 'info'}
+                    );  
           
                 }).catch(response => {
                    console.log(response);
@@ -347,38 +426,136 @@
 
         },
         beforeMount(){
-                var all_medicamentos = new Array();
-
-                var i;
-                var obj = jQuery.parseJSON(this.medicamentosss);
-                
-                for (i = 0; i < obj.length ; i++){
-                    this.meds.push(obj[i]);
-                }
-
-                var i;
-                var obj_paciente = jQuery.parseJSON(this.paciente_all);
-                
-                for (i = 0; i < obj_paciente.length ; i++){
-                    this.pacientes.push(obj_paciente[i]);
-                }
 
 	            var aux = new Array();
-	                  
             	var aux = jQuery.parseJSON(this.interacao_all);
-
             	var i;
 	            
 	            for (i = 0; i < aux.length ; i++){
 	            	sub1.push(aux[i].idsubstanciaativa1);
                     sub2.push(aux[i].idsubstanciaativa2);
                     consequencia.push(aux[i].consequencia);
-	            }
-
-
-	      
+	            }	      
 	   }
     }
+
+    $(function ($) {
+        $("#table").on("click", "td", function() {
+            var p =  $( this ).text();
+            var i;
+            
+            for (i = 0; i < obj_paciente.length ; i++){
+                if(p == obj_paciente[i].nomecompleto){
+
+                    $.notify(
+                      "Paciente selecionado", 
+                      { globalPosition:"top center",
+                        className: 'info'}
+                    );
+
+                    document.getElementById("nome_a").value =  obj_paciente[i].nomecompleto;
+                    document.getElementById("nome").value =  obj_paciente[i].nomecompleto;
+                    document.getElementById("clinica").value =  obj_paciente[i].nome;
+                    document.getElementById("numeroprontuario").value =  obj_paciente[i].numeroprontuario;
+                    document.getElementById("leito").value =  obj_paciente[i].leito;
+                    document.getElementById("clinica_a").value =  obj_paciente[i].nome;
+                    document.getElementById("leito_a").value =  obj_paciente[i].leito;
+                    document.getElementById("alergia").value =  obj_paciente[i].alergia;
+                      
+                    var data;
+                    data = obj_paciente[i].dataadmissao.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1');
+                    document.getElementById("admissao").value =  data;
+                    
+                    var data2;
+                    data2 = obj_paciente[i].dataadmissao.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3-$2-$1');
+                    $("#admissao_a").val(data2);
+                    console.log(obj_paciente[i].id);
+                    idinter = obj_paciente[i].id; 
+
+                    var i;
+
+                    cids = [];
+                    for (i = 0; i < cid_all.length ; i++){
+                        if(cid_all[i].id == idinter){
+                            cids.push(cid_all[i].descricao);
+                        }    
+                    }    
+                }
+            }
+        });
+    });
+
+    $(function ($) {
+        $("#table2").on("click", "td", function() {
+            var m =  $( this ).text();
+            
+            var i;
+            for (i = 0; i < obj.length ; i++){
+                if(m == obj[i].value){
+
+               if(obj[i].classificacao != 9){
+                   $.notify(
+                      "Medicamento selecionado", 
+                      { globalPosition:"top center",
+                        className: 'info'}
+                    );  
+               }else{
+                    $.notify(
+                      "Dieta selecionado", 
+                      { globalPosition:"top center",
+                        className: 'info'}
+                    );  
+                }
+
+
+                document.getElementById('med').setAttribute('readonly',true);
+                document.getElementById("med").value = obj[i].value;
+                document.getElementById("codigo").value = obj[i].codigo;
+                document.getElementById("simpas").value = obj[i].simpas;
+                document.getElementById("idmed").value = obj[i].id;
+                document.getElementById("doseR").value = obj[i].dose;
+                document.getElementById("diluicaoR").value = diluicao;
+                document.getElementById("administracaoR").value = obj[i].administracao;
+                document.getElementById("estabilidadeR").value = obj[i].estabilidade;
+
+                var medic = obj[i].value;
+                
+                if(obj[i].classificacao == 2){
+                    classific = obj[i].classificacao;
+                    $(document).ready(function() {
+                        $("#relatorio").modal('show');
+                        $("#medInfe").val(medic); // pega o nome do medicamento
+                    });
+                }else{
+                    $("#medInfe").val('');
+                    classific = obj[i].classificacao;
+                }
+
+                if(obj[i].classificacao != 9){
+                    $.ajax({
+                        type: 'get',
+                        url: '../../../medicamento/contraindicacao',
+                        data: {
+                            'id': obj[i].id,
+                        },
+                        success: function (data){
+                            if(data != ''){
+                            swal({ 
+                                title: "Contraindicação",
+                                text: data, 
+                                type: "warning",
+                                html: true,
+                            });
+                        }
+                        },
+                    });
+                }
+
+                }
+            }
+
+        });
+    });
     
     jQuery(function ($) {
         $("#rg").mask("99.999.999-99");
@@ -415,6 +592,10 @@
         $("#diagnostico").modal('show');
     });
 
+    $(document).on('click', '.editmed', function (){
+        $("#editmed").modal('show');
+    });
+
 </script>
 
 <template>
@@ -449,8 +630,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                            <tr v-for="paci in pacientes">
-                                <td><a href="#!" @click="escolher_paciente(paci)">{{ paci.nomecompleto }}</a></td>
+                            <tr>
+                                <td></td>
                             </tr>
                         </tbody>
                         </table>
@@ -480,7 +661,7 @@
                         <div class="form-group">
                             <label for="diag">Diagnóstico:</label>
                             <br>
-                            <button style="font-size: 20px" type="button" data-toggle="tooltip" title="Diagnóstico" class="btn btn-primary diagnostico"><i class="fa fa-search"></i></button>
+                            <button style="font-size: 20px" type="button" data-toggle="tooltip" title="Diagnóstico" class="btn btn-primary diagnostico" @click="add_cids()"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2">
@@ -490,14 +671,14 @@
                         </div>
                     </div>
                     
-                    <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
                             <label for="evol">Alergia(s):</label>
                             <textarea readonly="" id="alergia" type="text" name="alergia" class="form-control" rows="1" ></textarea>
                         </div>
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
                             <label for="evol">Evolução:</label>
                             <input id="evol" type="text" name="evol" class="form-control" v-model="prescricao.evolucao">
@@ -518,7 +699,7 @@
 
                     <div class="col-xs-2 col-sm-2 col-md-2" >
                         <div class="form-group">
-                            <label for="qtd">Quantidade:</label>
+                            <label for="qtd">Quantidade/dia:</label>
                             <input id="qtd" type="text" name="qtd" class="form-control">
                         </div>
                     </div>
@@ -529,12 +710,12 @@
                                         <table id="table2" class="table table-bordered table-hover dataTable" role="grid">
                                             <thead>
                                                 <tr>
-                                                    <th>Medicamentos</th>
+                                                    <th>Medicamentos/dietas</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                            <tr v-for="med in meds">
-                                <td><a href="#!" @click="adicionar_medicamento(med)">{{ med.value }}</a></td>
+                            <tr>
+                                <td></td>
                             </tr>
                         </tbody>
                         </table>
@@ -542,11 +723,11 @@
                     </div>
                 </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="col-xs-3 col-sm-3 col-md-3">
                         <div class="form-group">
                             <label for="dose">Dose por administração: 
                             	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Dose" class="btn btn-primary doseM"><i class="fa fa-search"></i></button></label>
-                            <input id="dose" type="text" name="dose" class="form-control">
+                            <input id="dose" type="text" name="dose" class="form-control form-control-danger">
                         </div>
                     </div>
                     
@@ -554,71 +735,101 @@
                     <input id="codigo" type="hidden">
                     <input id="simpas" type="hidden">
 
-                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                    <div class="col-xs-3 col-sm-3 col-md-3 ">
                         <div class="form-group">
-                            <label for="administracao">Administração:
+                            <label for="administracao">Via de Administração:
                             	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Administração" class="btn btn-primary administracaoM"><i class="fa fa-search"></i></button></label>
-                            <input id="administracao" type="text" name="administracao" class="form-control">
+                            <select id="administracao" name="administracao" class="form-control">
+                                <option>Selecione...</option>
+                                <option>Endovenosa</option>
+                                <option>Intramuscular</option>
+                                <option>Oral</option>
+                                <option>Tópico</option>
+                                <option>Ocular</option>
+                                <option>Nasal</option>
+                                <option>Retal</option>
+                                <option>Intravaginal</option>
+                                <option>Sublingual</option>
+                                <option>Otológica</option>
+                            </select>                            
                         </div>
                     </div>
 
-                    
-                    <div class="col-xs-12 col-sm-12 col-md-12 ">
-                        <div class="form-group">
-                            <label for="diluicao">Diluição:
-                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Diluição" class="btn btn-primary diluicaoM"><i class="fa fa-search"></i></button></label>
-                            <input id="diluicao" type="text" name="diluicao" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                    <div class="col-xs-3 col-sm-3 col-md-3 ">
                         <div class="form-group">
                             <label for="estabilidade">Estabilidade:
-                            	<button style="font-size: 6px" type="button" data-toggle="tooltip" title="Estabilidade" class="btn btn-primary estabilidadeM"><i class="fa fa-search"></i></button></label>
+                                <button style="font-size: 6px" type="button" data-toggle="tooltip" title="Estabilidade" class="btn btn-primary estabilidadeM"><i class="fa fa-search"></i></button></label>
                             <input id="estabilidade" type="text" name="estabilidade" class="form-control">
                         </div>
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12 obs">
-                        <div class="form-group">
-                            <label for="posologia">Posologia:</label>
-                            <input id="posologia" type="text" name="posologia" class="form-control" v-model="posologia" placeholder="">
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-12 col-md-12 obs">
+                    <div class="col-xs-3 col-sm-3 col-md-3">
                         <div class="form-group">
                             <label for="obs">Tempo de Tratamento:</label>
                             <input id="obs" type="text" name="obs" class="form-control" v-model="obs" placeholder="">
                         </div>
                     </div>
 
-                    <div class="row" style="margin-left: 65%;">
-                        <div class="col-sm-12 text-center"> 
-                            <button data-toggle="tooltip" style="display: inline-block; vertical-align: top;" type="button" class="btn btn-primary btn-md center-block relatorio">Relatório Antibioticoterapia</button>
-                            <button style="display: inline-block; vertical-align: top;" type="button" class="btn btn-primary btn-md center-block" @click="addMed">Adicionar</button>
+                    
+
+                    
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 ">
+                        <div class="form-group">
+                            <label for="diluicao">Diluição/Obervação:
+                                <button style="font-size: 6px" type="button" data-toggle="tooltip" title="Diluição" class="btn btn-primary diluicaoM"><i class="fa fa-search"></i></button></label>
+                            <input id="diluicao" type="text" name="diluicao" class="form-control">
                         </div>
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="col-md-2" style="margin-top: 18px; margin-right: -70px;  ">
+                        <label>Intervalo de administração:</label>
+                    </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2" style="">
+                            <label for="posologia">Quantidade:</label>
+                            <div class="form-group">
+                                <input id="posologia" type="text" name="posologia" class="form-control" v-model ="posologia" placeholder="" style="width:128px;">
+                            </div>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2">
+                            <label for="posologia" style="margin-left: -15px">Intervalo:</label>
+                            <div class="form-group">
+                            <select id="intervalo_posologia" name="intervalo_posologia" v-model="intervalo_posologia" class="form-control" style="width:230px; margin-left: -15px">
+                                <option>Selecione...</option>
+                                <option>Minutos</option>
+                                <option>Horas</option>
+                                <option>Dias</option>
+                                <option>Semanas</option>
+                            </select>                            
+                            </div>
+                        </div>
+                    
+
+                    <div class="row" style="margin-left: 65%;">
+                        <div class="col-sm-12 text-center"> 
+                            <button data-toggle="tooltip" style="display: inline-block; vertical-align: top;" type="button" class="btn btn-primary btn-md center-block relatorio">Relatório Antibioticoterapia</button>
+                            <button id="adicionar" style="display: inline-block; vertical-align: top;" type="button" class="btn btn-primary btn-md center-block" @click="addMed">Adicionar</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
                         <br>
                         <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
                             <h4><center><b>Descrição da prescrição</b></center></h4>
                                 <div class="box-body">
-                                    <div class="table-responsive col-lg-12 col-md-12 col-sm-12">
+                                    <div class="table-responsive col-md-12">
                                         <table class="table table-condensed table-bordered table-hover dataTable" role="grid">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">SIMPAS</th>
-                                                    <th width="2%" class="text-center">Quantidade</th>
+                                                    <th width="2%" class="text-center">Qtd/dia</th>
                                                     <th class="text-center">Medicamento</th>
-                                                    <th class="text-center">Posologia</th>
+                                                    <th class="text-center">Qtd</th>
+                                                    <th class="text-center">Intervalo</th>
                                                     <th class="text-center">Tempo de Tratamento</th>
                                                     <th class="text-center">Dose</th>
-                                                    <th class="text-center">Administração</th>
-                                                    <th class="text-center">Diluição</th>
-                                                    
-
+                                                    <th class="text-center">Via de Administração</th>
+                                                    <th class="text-center">Diluição/obs</th>
                                                     <th width="3%" class="text-center">Opções</th>
                                                 </tr>
                                             </thead>
@@ -628,15 +839,15 @@
                                                     <td>{{medicamento.qtd}}</td>
                                                     <td>{{medicamento.med}}</td>
                                                     <td>{{medicamento.posologia}}</td>
+                                                    <td>{{medicamento.intervalo_posologia}}</td>
                                                     <td>{{medicamento.obs}}</td>
                                                     <td>{{medicamento.dose}}</td>
                                                     <td>{{medicamento.administracao}}</td>
                                                     <td>{{medicamento.diluicao}}</td>
                                                     
-                                                    <td>             
-                                                        <center>
+                                                    <td width="14.5%">             
                                                         <a class="btn btn-default"  @click="removeMed(medicamento)"><i class="fa fa-trash"></i></a>
-                                                        </center>
+                                                        <a class="btn btn-default"  @click="abreEditMed(medicamento)"><i class="fa fa-pencil"></i></a>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -652,7 +863,7 @@
                         </div>
                     </div>
                     <div class="pull-right" style="margin-right: 1%;">
-                        <button id="salvar" type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Salvar" @click="adicionar"><i class="fa fa-save"></i></button>
+                        <button id="salvar" type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Salvar" @click="adicionar">Salvar prescrição</i></button>
                     </div>
                 </div>
             </div>
@@ -695,7 +906,80 @@
         </div>
 
 
-        <div class="modal fade" id="relatorio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="editmed" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><strong>Editar Medicamento</strong></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
+                            <div class="row">
+                                <div class="box-body">
+
+                                 <div class="col-xs-10 col-sm-10 col-md-10">
+                                    <div class="form-group">
+                                        <label for="medicamento">Medicamento:</label>
+                                        <input id="nomeEdit" v-model="nomeEdit" type="text" name="nomeEdit" class="form-control" readonly="" >
+                                     </div>
+                                 </div>
+
+                                 <div class="col-xs-2 col-sm-2 col-md-2">
+                                    <div class="form-group">
+                                        <label>Qtd/dia:</label>
+                                        <input id="quantidadeEdit" v-model="quantidadeEdit" type="text" name="quantidadeEdit" class="form-control" >
+                                     </div>
+                                 </div>
+                                 <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Quantidade:</label>
+                                        <input id="posologiaEdit" v-model="posologiaEdit" type="text" name="posologiaEdit" class="form-control" >
+                                     </div>
+                                 </div>
+                                 <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <label for="medicamento">Intervalo:</label>
+                                        <input id="intervalo_posologiaEdit" v-model="intervalo_posologiaEdit" type="text" name="intervalo_posologiaEdit" class="form-control" >
+                                     </div>
+                                 </div>
+                                 <div class="col-xs-3 col-sm-3 col-md-3">
+                                    <div class="form-group">
+                                        <label for="medicamento">Tempo de Tratamento:</label>
+                                        <input id="obsEdit" v-model="obsEdit" type="text" name="obsEdit" class="form-control" >
+                                     </div>
+                                 </div>
+                                 <div class="col-xs-3 col-sm-3 col-md-3">
+                                    <div class="form-group">
+                                        <label for="medicamento">Dose:</label>
+                                        <input id="doseEdit" v-model="doseEdit" type="text" name="doseEdit" class="form-control" >
+                                     </div>
+                                 </div>
+                                 <div class="col-xs-3 col-sm-3 col-md-3 3">
+                                    <div class="form-group">
+                                        <label for="medicamento">Via de administração:</label>
+                                        <input id="administracaoEdit" v-model="administracaoEdit" type="text" name="administracaoEdit" class="form-control" >
+                                     </div>
+                                 </div>
+                                 <div class="col-xs-3 col-sm-3 col-md-3">
+                                    <div class="form-group">
+                                        <label for="medicamento">Diluição/observação:</label>
+                                        <input id="diluicaoEdit" v-model="diluicaoEdit" type="text" name="diluicaoEdit" class="form-control" >
+                                     </div>
+                                 </div>
+                                </div>
+                         </div>
+                        </div>  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" @click="editMed()"  class="btn btn-primary" data-dismiss="modal">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="relatorio" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -709,7 +993,7 @@
 
                                  <div class="col-xs-12 col-sm-12 col-md-12 obs">
                                     <div class="form-group">
-                                        <label for="paciente">NOME:</label>
+                                        <label for="paciente">PACIENTE:</label>
                                         <input id="nome_a"  type="text" name="nome_a" class="form-control"  readonly="">
                                      </div>
                                  </div>
@@ -735,12 +1019,19 @@
                                     </div>
                                 </div>
 
-                                <div class="col-xs-5 col-sm-5 col-md-5">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
                                         <label for="clinica">CLÍNICA:</label>
                                         <input id="clinica_a" type="text" name="clinica_a" class="form-control" readonly="readonly">
                                     </div>  
                                 </div>
+
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <label for="duracao">DURAÇÃO DO TRATAMENTO - DIA(S):</label>
+                                        <input id="duracao" type="number" min="1" name="duracao" class="form-control" v-model="duracao">
+                                     </div>
+                                 </div>
 
                                 <div class="col-xs-12 col-sm-12 col-md-12 obs">
                                     <div class="form-group">
@@ -748,24 +1039,6 @@
                                         <input id="diagInfe" type="text" name="diagInfe" class="form-control" v-model="diagInfe">
                                      </div>
                                  </div>
-
-                                <div class="col-xs-3 col-sm-3 col-md-3">
-                                    <div class="form-group">
-                                        <label for="duracao">QUANTIDADE:</label>
-                                        <input id="quantidade" type="number" min="1" name="quantidade" class="form-control" v-model="quantidade">
-                                     </div>
-                                 </div>
-
-                                <div class="col-xs-5 col-sm-5 col-md-5">
-                                    <div class="form-group">
-                                        <label for="duracao">DURAÇÃO DO TRATAMENTO:</label>
-                                        <select id="duracao" type="text" name="duracao" class="form-control" v-model="duracao">
-                                            <option>Dia(s)</option>
-                                            <option>Semana(s)</option>
-                                            <option>Mês(es)</option>
-                                        </select>        
-                                     </div>
-                                </div> 
 
                                  <div class="col-xs-12 col-sm-12 col-md-12 med">
                                     <div class="form-group">
@@ -779,7 +1052,7 @@
                         </div>  
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-default" @click="salvarAntimicrobiano()" >Guardar</button>
                     </div>
                 </div>
             </div>

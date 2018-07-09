@@ -12,20 +12,15 @@ use Illuminate\Support\Facades\Input;
  */
 
 Route::get('/', 'HomeController@index');
-
-
-Route::get('/med', 'MedicamentoController@autocomplete');
-
-Route::auth();
+//Route::get('/med', 'MedicamentoController@autocomplete');
 
 Route::group(['middleware' => ['auth']], function() {    
 
     Route::get('/portaria/buscar/{buscar}','RelatorioController@BuscarPortaria');
 
     Route::get('/home', 'HomeController@index');
-    //Route::get('/portaria', 'RelatorioController@portaria344');
     Route::post('/buscapaciente', 'InternacaoController@buscarPaciente');
-    Route::get('/autocomplete2', 'InternacaoController@buscarPaciente');
+    Route::get('/pacientes', 'InternacaoController@pacientes');
     Route::get('/autocomplete', 'MedicamentoController@autocomplete');
     Route::post('/simpas', 'MedicamentoController@getCodigoSimpas');
 
@@ -210,8 +205,10 @@ Route::group(['middleware' => ['auth']], function() {
         
         Route::get('/edit/prescricao/{id}', ['as' => 'prescricao.editar', 'uses' => 'PrescricaoController@editar', 'middleware' => ['permission:prescricao-create']]);
         
+        Route::get('/medicamentos', 'PrescricaoController@medicamentos');
         Route::get('/buscar/medicamentos/{id}', 'PrescricaoController@buscaMedicamentos');
         Route::get('/interacoesmedicamentosas', 'InteracaomedicamentosaController@getInteracoes');
+
         
         Route::post('/create', ['as' => 'prescricao.store', 'uses' => 'PrescricaoController@store', 'middleware' => ['permission:prescricao-create']]);
         Route::get('/{id}', ['as' => 'prescricao.show', 'uses' => 'PrescricaoController@show']);

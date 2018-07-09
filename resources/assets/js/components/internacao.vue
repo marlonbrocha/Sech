@@ -119,7 +119,7 @@
             <div class="col-xs-1 col-sm-1 col-md-1">
                 <div class="form-group">
                     <br>
-                    <a class="add btn btn-primary" data-toggle="tooltip" title="Adicionar paciente"><i class="fa fa-plus" style="color: #fff;"></i></a>
+                    <a class="btn btn-primary"  data-toggle="modal" data-target="#pacientemodal" title="Adicionar paciente" style="color: #fff;"><i class="fa fa-plus"></i></a>
                 </div>
             </div>
 
@@ -219,8 +219,9 @@
                 </div>
             </div>
         
+        
         <div class="modal fade" id="substancia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -251,6 +252,8 @@
                     
                 </div>
             </div>
+
+            
         </div>
 </template>
 

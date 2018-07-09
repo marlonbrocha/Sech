@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 <script src = "{{ asset('js/jquery-3.1.0.js') }}" type = "text/javascript" ></script>
 <script src = "{{ asset('js/jquery.maskedinput.js') }}" type = "text/javascript" ></script>
 <script src = "{{ asset('js/jquery-ui-1.12.0/jquery-ui.js') }}" type = "text/javascript" ></script>
@@ -23,7 +22,6 @@
     </ul>
 </div>
 @endif
-
 <br>
 <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
     <div class="row">
@@ -33,7 +31,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="paciente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="pacientemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             {!! Form::open(array('route' => 'paciente.store','method'=>'POST')) !!}
@@ -95,6 +93,8 @@
         </div>
     </div>
 </div>
+
+
 @endsection
 <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}" type = "text/javascript"></script>
 <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
@@ -103,7 +103,6 @@
 $(function ($) {
     $('#table').DataTable({
         "paging": false,
-
         "search": true,
         "ordering": true,
         "info": false,

@@ -249,6 +249,7 @@ function data_format($format_ini, $value, $format_end)
                 <td class="tg-yw4l" width="3%"></td>
                 <td class="tg-yw4l" width="3%"></td>
             </tr>
+            
             @endforeach
             </table>
        

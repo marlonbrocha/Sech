@@ -294,7 +294,7 @@ function data_format($format_ini, $value, $format_end)
                                                                 {{$medicamento->diagnostico_infeccioso}}
                                                                 <br><br>
                                                                 <strong>Duração do tratamento:</strong>
-                                                                {{$medicamento->quantidade}} {{$medicamento->duracao_tratamento}}
+                                                                 {{$medicamento->duracao_tratamento}}
                                                                 <br><br>
                                                                 <strong>Antimicrobiano:</strong>
                                                                 {{$medicamento->antimicrobiano}}

@@ -2,6 +2,8 @@
 
 <!-- jQuery 2.1.4 -->
 <script src="{{ asset('/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+<script src = "{{ asset('js/notify.min.js') }}" type = "text/javascript" ></script>
+
 <script src = "{{ asset('js/jquery-ui-1.12.0/jquery-ui.js') }}" type = "text/javascript" ></script>
 <script src = "{{ asset('js/jquery.maskedinput.js') }}" type = "text/javascript" ></script>
 <!-- Bootstrap 3.3.2 JS -->
@@ -12,6 +14,7 @@
 
 <script src="{{ asset('/js/main.js') }}"  type="text/javascript"></script>
 <script src="{{ asset('/js/validacao.js') }}"  type="text/javascript"></script>
+
 <script src="{{ asset('js/sweetalert.min.js')}}" type="text/javascript"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

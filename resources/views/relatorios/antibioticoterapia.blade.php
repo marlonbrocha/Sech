@@ -88,7 +88,7 @@ function data_format($format_ini, $value, $format_end)
 
       <table class="tg" style="margin-top: 30px">
         <tr><td><h5>DURAÇÃO DO TRATAMENTO: </h5></td></tr>
-        <tr><td>{{$medicamento->quantidade}} {{$medicamento->duracao_tratamento}}</td></tr>
+        <tr><td>{{$medicamento->duracao_tratamento}} Dia(s)</td></tr>
       </table>
 
       <table class="tg" style="margin-top: 30px">

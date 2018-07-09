@@ -23,7 +23,6 @@ class CreateSubstanciaativasTable extends Migration
             $table->text('estabilidade');
             $table->text('contraindicacao')->nullable();
             $table->timestamps();
-            $table->string('quantidadedose');
 
         });
     }
