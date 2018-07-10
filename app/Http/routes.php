@@ -138,7 +138,10 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('', ['as' => 'paciente.index', 'uses' => 'PacienteController@index', 'middleware' => ['permission:internacao-list|internacao-create|internacao-edit|internacao-delete']]);
         Route::get('/create', ['as' => 'paciente.create', 'uses' => 'PacienteController@create', 'middleware' => ['permission:internacao-create']]);
         Route::post('/create', ['as' => 'paciente.store', 'uses' => 'PacienteController@store', 'middleware' => ['permission:internacao-create']]);
+        
         Route::get('/{id}', ['as' => 'paciente.show', 'uses' => 'PacienteController@show']);
+        Route::get('/pacientes', ['as' => 'paciente.pacientes', 'uses' => 'PacienteController@pacientes']);
+
         Route::get('/{id}/edit', ['as' => 'paciente.edit', 'uses' => 'PacienteController@edit', 'middleware' => ['permission:internacao-edit']]);
         Route::patch('/{id}', ['as' => 'paciente.update', 'uses' => 'PacienteController@update', 'middleware' => ['permission:internacao-edit']]);
         Route::delete('/{id}', ['as' => 'paciente.destroy', 'uses' => 'PacienteController@destroy', 'middleware' => ['permission:internacao-delete']]);

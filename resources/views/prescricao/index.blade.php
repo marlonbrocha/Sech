@@ -56,7 +56,7 @@ function data_format($format_ini, $value, $format_end)
                             <a class="btn btn-default" title="Abrir" href="{{ route('prescricao.edit',$prescricao->id) }}">
                                 <i class="fa fa-folder-open"> </i>
                             </a>
-                            <a class="btn btn-default" title="Editar" href="{{ route('prescricao.editar',$prescricao->id) }}">
+                            <a class="btn btn-default" title="Fazer nova prescrição" href="{{ route('prescricao.editar',$prescricao->id) }}">
                                 <i class="fa fa-edit"> </i>
                             </a>
                             @endpermission
@@ -66,7 +66,7 @@ function data_format($format_ini, $value, $format_end)
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel"><strong>Dados da prescrição {{$prescricao->id}}  </strong></h4>
+                                            <h4 class="modal-title" id="myModalLabel"><strong>Dados da prescrição</strong></h4>
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">

@@ -1,4 +1,5 @@
 <script language= "text/javascript">
+    var obj =''; 
     export default{
         
         props: ['pa', 'le', 'cli','ci'],
@@ -12,7 +13,6 @@
                     cids: [],        
                 },
                 idcid10:'',
-                pacientes: [],
                 leitos: [],
                 leito_all:[],
                 clinicas: [],
@@ -21,11 +21,9 @@
         },
         
         mounted(){
-            this.pacientes = JSON.parse(this.pa);
+            obj = JSON.parse(this.pa);
             this.leito_all = JSON.parse(this.le);
             this.clinicas = JSON.parse(this.cli);
-
-           // var obj = jQuery.parseJSON(this.ci);
             this.cid_all = JSON.parse(this.ci);;                
         },
         methods: {
@@ -33,6 +31,12 @@
                 this.paciente.cids.push({
                     idcid10: this.idcid10,
                  });
+
+                $.notify(
+                      "Diagnóstico adicionado", 
+                      { globalPosition:"top center",
+                        className: 'success'}
+                    );  
             },
             removeCid(cid) {
                var index = this.paciente.cids.indexOf(cid);
@@ -49,13 +53,16 @@
                     }
                 }
             },
-            escolher_paciente(paciente){
-                document.getElementById("paciente").value =  paciente.nomecompleto;
-                
-                this.paciente.idpaciente = paciente.id;
-                console.log(this.paciente.idpaciente);
-            },
             adicionar(){
+                if($("#idPaciente").val() == ''){
+                    swal({
+                            title: "Erro!",
+                            text: "Selecione um paciente!",
+                            confirmButtonColor: "#66BB6A",
+                            type: "warning"
+                        }); 
+                        return;   
+                }
                 if(this.paciente.cids == ''){
                     swal({
                             title: "Erro!",
@@ -64,6 +71,7 @@
                             type: "warning"
                         });    
                 }else{
+                    this.paciente.idpaciente = $("#idPaciente").val();
                     document.getElementById('salvar').setAttribute('disabled',"true");
                     this.$http.post('/internacao/create', this.paciente).then(response => {
                         if(response.body == 'error'){
@@ -99,6 +107,28 @@
             }
         }
     }
+
+    $(function ($) {
+        $("#table").on("click", "td", function() {
+            var m =  $( this ).text();
+            
+            var i;
+            for (i = 0; i < obj.length ; i++){
+                if(m == obj[i].nomecompleto){
+
+                    $.notify(
+                      "paciente selecionado", 
+                      { globalPosition:"top center",
+                        className: 'info'}
+                    );  
+
+                    document.getElementById("paciente").value = obj[i].nomecompleto;
+                    document.getElementById("idPaciente").value = obj[i].id;
+                }
+            }
+        });
+    });
+
 </script>
 
 <template>
@@ -133,15 +163,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                            <tr v-for="paci in pacientes">
-                                <td><a href="#!" @click="escolher_paciente(paci)">{{ paci.nomecompleto }}</a></td>
+                            <tr>
+                                <td></td>
                             </tr>
                         </tbody>
                         </table>
                         </div>
                     </div>
                 </div>
-
+            <input id="idPaciente" type="hidden">
             <div class="col-xs-9 col-sm-9 col-md-9">
                 <div class="form-group">
                     <strong>Clínica:</strong>
@@ -150,6 +180,7 @@
                             <i class="fa fa-hospital-o"></i>
                         </span>
                         <select v-on:input="clinica($event.target.value)" id="idclinica" name="idclinica" class="form-control" v-model="paciente.idclinica">
+                            <option>Selecione...</option> 
                             <option  v-for = "clinica in clinicas"  v-bind:value=clinica.id>{{clinica.nome}}</option>
                         </select>
                     </div>
@@ -163,6 +194,7 @@
                             <i class="fa fa-hotel"></i>
                         </span>
                         <select id="idleito" name="idleito" class="form-control" v-model="paciente.idleito">
+                            <option>Selecione...</option> 
                             <option v-for = "leito in leitos" v-bind:value=leito.id>{{leito.leito}}</option>
                         </select>
                     </div>
@@ -171,7 +203,7 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Total de cids:</strong>
+                        <strong>Total de diagnóstico:</strong>
                         {{paciente.cids.length}}
                         <a class="btn btn-default" style="border-radius: 45%; margin-left: 2%;" data-toggle="modal" data-target="#substancia" title="Adicionar cids"><i class="fa fa-plus"></i></a>
                     </div>
@@ -179,13 +211,13 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                 <br>
                 <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
-                    <h4><center><b>Diagnóstico</b></center></h4>
+                    <h4><center><b>Diagnóstico(s)</b></center></h4>
                         <div class="box-body">
                             <div class="table-responsive col-lg-12 col-md-12 col-sm-12">
                                 <table id="table" class="table table-condensed table-bordered table-hover dataTable" role="grid">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Cid</th>
+                                            <th class="text-center">Diagnóstico</th>
                                             <th width="3%" class="text-center">Opções</th>
                                         </tr>
                                     </thead>
@@ -210,11 +242,11 @@
                         </div> 
                 </div>
                 <div class="pull-right" style="margin-right: 1%;">
-                    <button id="salvar" type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Salvar" @click="adicionar"><i class="fa fa-save"></i></button>
+                    <button id="salvar" type="submit" class="btn btn-success"  data-toggle="tooltip" data-placement="top" @click="adicionar">Salvar</button>
                 </div>
                 <div class="pull-right" style="margin-right: 1%;">
-                    <a class="btn btn-default" data-toggle="tooltip"  title="Voltar" onclick="window.history.go(-1);"> 
-                        <i class="fa  fa-mail-reply"></i>
+                    <a class="btn btn-default" data-toggle="tooltip"  onclick="window.history.go(-1);"> 
+                        Voltar
                     </a>
                 </div>
             </div>
@@ -225,7 +257,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><strong>Cadastrar cids</strong></h4>
+                        <h4 class="modal-title" id="myModalLabel"><strong>Adicionar diagnóstico</strong></h4>
                     </div>
                     <div class="modal-body">
                         <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">

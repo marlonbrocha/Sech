@@ -3,6 +3,11 @@
 <script src = "{{ asset('js/jquery.maskedinput.js') }}" type = "text/javascript" ></script>
 <script src = "{{ asset('js/jquery-ui-1.12.0/jquery-ui.js') }}" type = "text/javascript" ></script>
 <link href="{{ asset('js/jquery-ui-themes-1.12.0/themes/base/jquery-ui.css') }}" rel="stylesheet">
+<style type="text/css">
+    tr{
+        cursor: pointer;
+    }
+</style>
 @section('main-content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -102,6 +107,13 @@
 <script>
 $(function ($) {
     $('#table').DataTable({
+        ajax: {
+            url: '/paciente/pacientes',
+            dataSrc: 'data'        
+            },
+            columns: [ { data: 'nomecompleto' } 
+        ],    
+
         "paging": false,
         "search": true,
         "ordering": true,

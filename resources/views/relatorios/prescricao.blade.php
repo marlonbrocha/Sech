@@ -70,7 +70,9 @@ function data_format($format_ini, $value, $format_end)
                     @endforeach
                 </th>
                 <th class="tg-031e" rowspan="2" width="8%" colspan="4">Evolução</th>
-                <th class="tg-031e" colspan="11" rowspan="2">{{$prescricao->evolucao}}</th>
+                <th class="tg-031e" colspan="4" rowspan="2">{{$prescricao->evolucao}}</th>
+                <th class="tg-031e" rowspan="2" width="3%" colspan="4">Obs</th>
+                <th class="tg-031e" rowspan="2" colspan="3">{{$prescricao->observacoesmedicas}}</th>
             </tr>
             <tr>
                 
@@ -84,25 +86,29 @@ function data_format($format_ini, $value, $format_end)
                 <td class="tg-031e" colspan="2"><?php 
                                 echo data_format("Y-m-d",$prescricao->internacao->dataadmissao, "d/m/Y");
                             ?></td>
-                <td class="tg-031e" colspan="2">Prontuário</td>
-                <td class="tg-031e" colspan="6">{{$prescricao->internacao->paciente->numeroprontuario}}</td>                                                        
+                <td class="tg-031e" colspan="3">Prontuário</td>
+                <td class="tg-031e" colspan="5">{{$prescricao->internacao->paciente->numeroprontuario}}</td>                                                        
             </tr>
             <tr>
                 <td class="tg-031e">Nome do paciente: </td>
                 <td class="tg-yw4l" colspan="6">{{$prescricao->internacao->paciente->nomecompleto}}</td>
-                <td class="tg-s6z2" colspan="2">idade</td>
+                <td class="tg-s6z2" colspan="2">Idade</td>
                 <td class="tg-031e">{{$prescricao->internacao->paciente->idade}}</td>
-                <td class="tg-031e" colspan="2">Peso</td>
-                <td class="tg-031e">{{$prescricao->internacao->paciente->peso}}</td>
-                <td class="tg-031e">data</td>
-                <td class="tg-031e" colspan="6"><?php echo date("d-m-Y ") ?></td>
+                <td class="tg-031e" colspan="1">Peso</td>
+                <td class="tg-031e" colspan="2">{{$prescricao->internacao->paciente->peso}}</td>
+                <td class="tg-031e" colspan="6">Data da prescrição</td>
+                <td class="tg-031e" colspan="1"><?php echo date("d/m/Y ") ?></td>
+            </tr>
+            <tr>
+                <td>Alergia(s)</td>
+                <td colspan="19">{{$prescricao->internacao->paciente->alergia}}</td>
             </tr>
         </table>
             <table class="tg" style="table-layout: fixed; width: 100%; margin-top: -1px">
                 <tr>
                     <td class="tg-s6z2" width="10%">SIMPAS</td>
-                    <td width="3.5%">ped</td>
-                    <td class="tg-yw4l" width="3.5%">at.</td>
+                    <td width="3.5%">Ped</td>
+                    <td class="tg-yw4l" width="3.5%">At.</td>
                     <td class="tg-s6z2"  colspan="2" width="25%">Descrição do medicamento</td>
                     <td class="tg-baqh"  colspan="10" width="40.35%" >Posologia</td>
                     <td class="tg-baqh" colspan="6">Aprazamento</td>

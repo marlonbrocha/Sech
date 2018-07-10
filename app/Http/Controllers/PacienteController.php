@@ -14,6 +14,12 @@ class PacienteController extends Controller {
                         ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
+    public function pacientes(Request $request) {
+        $pacientes = Paciente::orderBy('id', 'DESC')->get();
+        
+        return response()->json(['data'=>$pacientes]);
+    }
+
     public function store(Request $request) {
         $this->validate($request, [
             'nomecompleto' => 'required',

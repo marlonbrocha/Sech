@@ -855,7 +855,7 @@
                     <div class="col-xs-2 col-sm-2 col-md-2" >
                         <div class="form-group">
                             <label for="qtd">Quantidade/dia:</label>
-                            <input id="qtd" type="text" name="qtd" class="form-control" v-model="qtd">
+                            <input id="qtd" type="number" min="1" name="qtd" class="form-control" v-model="qtd">
                         </div>
                     </div>
 
@@ -944,7 +944,7 @@
                         <div class="col-xs-2 col-sm-2 col-md-2" style="">
                             <label for="posologia">Quantidade:</label>
                             <div class="form-group">
-                                <input id="posologia" type="text" name="posologia" class="form-control" v-model ="posologia" placeholder="" style="width:128px;">
+                                <input id="posologia" type="number" min="1" name="posologia" class="form-control" v-model ="posologia" placeholder="" style="width:128px;">
                             </div>
                         </div>
                         <div class="col-xs-2 col-sm-2 col-md-2">
@@ -1019,7 +1019,7 @@
                         </div>
                     </div>
                     <div class="pull-right" style="margin-right: 1%;">
-                        <button id="salvar" type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Salvar" @click="adicionar"><i class="fa fa-save"></i></button>
+                        <button id="salvar" type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Salvar" @click="adicionar">Salvar prescrição</button>
                     </div>
                 </div>
             </div>
