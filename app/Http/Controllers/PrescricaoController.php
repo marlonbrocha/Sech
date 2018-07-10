@@ -770,10 +770,8 @@ class PrescricaoController extends Controller {
                     $RelatorioAntimicrobiano = new RelatorioAntimicrobiano();
                     $RelatorioAntimicrobiano->idprescricao_medicamento = $prescricaomedicamento->id;
                     $RelatorioAntimicrobiano->nome = $relatorio[$i]['paciente'];
-                    $RelatorioAntimicrobiano->leito = $relatorio[$i]['leito'];
-                    $data = PrescricaoController::data_format("d-m-Y",$relatorio[$i]['dataadmissao'], "Y-m-d");
-                    
-                    $RelatorioAntimicrobiano->data_admissao = $this->data_format("d\/m\/Y",$relatorio[$i]['dataadmissao'], "Y-m-d");
+                    $RelatorioAntimicrobiano->leito = $relatorio[$i]['leito'];                    
+                    $RelatorioAntimicrobiano->data_admissao = $this->data_format("d-m-Y",$relatorio[$i]['dataadmissao'], "Y-m-d");
                     $RelatorioAntimicrobiano->inicio_tratamento = $relatorio[$i]['iniTrata'];
                     $RelatorioAntimicrobiano->clinica = $relatorio[$i]['clinica'];
                     $RelatorioAntimicrobiano->diagnostico_infeccioso = $relatorio[$i]['diagInfe'];
