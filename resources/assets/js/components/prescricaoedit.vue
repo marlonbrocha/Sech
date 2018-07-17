@@ -35,6 +35,7 @@
                 clinica: '',   
                 leito: '',
                 diagInfe: '',
+                cultura: '',
                 admissao: '',
                 prontuario: '',
                 qtd:'',
@@ -186,13 +187,17 @@
     	                        dataadmissao: this.admissao,
     	                        iniTrata: this.iniTrata,
     	                        clinica: this.clinica,
-    	                        diagInfe: this.diagInfe
+    	                        diagInfe: this.diagInfe,
+                                cultura: this.cultura
     	                    });
 
                             this.duracao = '';
                             this.iniTrata = '';
                             this.diagInfe = '';
+                            this.cultura = '';
+                            document.getElementById('div_cultura').style.display = 'none';
                             document.getElementById("medInfe").value = '';
+                            $("#solicitado").val("Não");
 
 
     	                    this.prescricao.prescricaomedicamento.push({
@@ -234,7 +239,7 @@
                                 );  
                             }else{
                                 $.notify(
-                                  "Dieta adicionada", 
+                                  "Campo adicionado", 
                                   { globalPosition:"top center",
                                     className: 'success'}
                                 );  
@@ -306,6 +311,7 @@
                 }
             },
                 disable(){
+                    classific = 9;
                     document.getElementById('med').removeAttribute('readonly');
                     document.getElementById("med").value = '';
                     document.getElementById("codigo").value = '';
@@ -774,6 +780,18 @@
         $("#diagnostico").modal('show');
     });
 
+    window.onload=function(){
+        document.getElementById('solicitado').addEventListener('change', function () {
+            var style = this.value == 'Sim' ? 'block' : 'none';           
+            if(style == 'block'){
+                document.getElementById('div_cultura').style.display = style;    
+            }else{
+                document.getElementById('div_cultura').style.display = style;    
+            }
+
+        });
+    }
+
 </script>
 
 <template>
@@ -842,7 +860,7 @@
 
                     <div class="col-xs-10 col-sm-10 col-md-10 ">
                         <div class="form-group">
-                            <label for="med">Medicamento/Outros:</label>
+                            <label for="med">MEDICAMENTOS NÃO PADRONIZADOS/PROCEDIMENTOS/EXAMES E OUTROS:</label>
                             <div class="input-group input-group-sm">
                             <input id="med" readonly="" type="text" name="med" class="form-control">
                             <span class="input-group-btn">
@@ -907,6 +925,7 @@
                                 <option>Intravaginal</option>
                                 <option>Sublingual</option>
                                 <option>Otológica</option>
+                                <option>Subcutânea</option>
                             </select>                            
                         </div>
                     </div>
@@ -1163,6 +1182,19 @@
                                     <div class="form-group">
                                         <label for="medInfe">IDENTIFICAÇÃO DO ANTIMICROBIANO:</label>
                                         <input id="medInfe" type="text" name="medInfe" class="form-control" readonly="" >
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-12 med">
+                                    <div class="form-group">
+                                        <label>SOLICITADO CULTURA:</label>
+                                        <select id="solicitado"  class="form-control">
+                                            <option>Não</option>
+                                            <option>Sim</option>
+                                        </select>
+                                        <div id="div_cultura" style="display: none; margin-top: 10px">
+                                        <input v-model="cultura" id="cultura" name="cultura" class="form-control">
+                                        </div>
                                     </div>
                                 </div>
 

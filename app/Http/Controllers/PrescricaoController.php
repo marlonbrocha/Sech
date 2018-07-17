@@ -777,6 +777,7 @@ class PrescricaoController extends Controller {
                     $RelatorioAntimicrobiano->diagnostico_infeccioso = $relatorio[$i]['diagInfe'];
                     $RelatorioAntimicrobiano->duracao_tratamento = $relatorio[$i]['duracao'];
                     $RelatorioAntimicrobiano->antimicrobiano = $relatorio[$i]['medInfe'];
+                    $RelatorioAntimicrobiano->cultura = (!isset($relatorio[$i]['cultura'])) ? 'Não' : $relatorio[$i]['cultura'];
                     
                     $RelatorioAntimicrobiano->save();
                 }

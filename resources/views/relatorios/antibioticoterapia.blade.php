@@ -94,6 +94,11 @@ function data_format($format_ini, $value, $format_end)
       <table class="tg" style="margin-top: 30px">
         <tr><td><h5>ANTIMICROBIANO:</h5></td></tr>            
         <tr><td>{{$medicamento->antimicrobiano}}</td></tr>
+      </table>
+
+      <table class="tg" style="margin-top: 30px">
+        <tr><td><h5>SOLICITADO CULTURA:</h5></td></tr>            
+        <tr><td>{{$medicamento->cultura}}</td></tr>
       </table>            
     		@endforeach	
 

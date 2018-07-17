@@ -25,6 +25,8 @@ class CreateRelatorioAntimicrobianosTable extends Migration
             $table->integer('duracao_tratamento');
             $table->string('antimicrobiano');
             $table->timestamps();
+            $table->string('cultura');
+
         });
     }
 
