@@ -53,6 +53,13 @@ function data_format($format_ini, $value, $format_end)
 
 
 <script>
+$(document).ready(function() {
+    $('.js-example-basic-single').select2({
+         tags: true, 
+         
+    });
+});
+    
 $(function ($) {
     $('#table').DataTable({
          ajax: {

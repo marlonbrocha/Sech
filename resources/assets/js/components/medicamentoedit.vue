@@ -3,6 +3,10 @@
         props: ['med', 'sm', 'ff', 'sa'],
         data(){
             return {
+                substancia:'',
+                quantidadedose: '',
+                unidadedose:'',
+                ind:'',
                 medicamento: {
                     id: '',
                     simpas: '',
@@ -41,6 +45,25 @@
                 this.unidadedose = '';
                 $("#substancia").modal('hide');
             },
+            abreEditSub(sub) {
+                    var index = this.medicamento.substancias.indexOf(sub)
+
+                    if(index > -1){ 
+                        this.ind = index;
+                        $("#editSub").modal('show');
+                    }
+            },
+            editSub() {
+                    
+                this.medicamento.substancias[this.ind].quantidadedose = this.quantidadedose;    
+                this.medicamento.substancias[this.ind].unidadedose = this.unidadedose;    
+                $("#editSub").modal('hide');
+                $.notify(
+                  "Alteração realizada com sucesso!", 
+                  { globalPosition:"top center",
+                    className: 'success'}
+                );     
+            },
             removeSubstancia(substancia) {
                 var index = this.medicamento.substancias.indexOf(substancia)
                 if(index > -1){
@@ -48,6 +71,7 @@
                 }
             },
             atualizar(){
+                console.log(this.medicamento.substancias);
                 this.$http.patch('/medicamento/' + this.medicamento.id, this.medicamento).then(response => {
                     swal({
                         title: "Salvo!",
@@ -157,17 +181,21 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for = "substancia in medicamento.substancias">                                         
-                                            <td >
+                                            <td> 
+                                                <div v-for="substancia2 in substanciasativas" v-if="(substancia.idsubstanciaativa === substancia2.id)">
+                                                {{substancia2.nome}}    
+                                                </div>
                                                 <div v-for="substancia2 in substanciasativas" v-if="(substancia.substancia === substancia2.id)">
-                                                    {{substancia2.nome}}
-                                                </div>                            
+                                                {{substancia2.nome}}    
+                                                </div>                                                        
                                             </td>
-                                            <td>{{substancia.quantidadedose}}</td>                                            
+                                            <td>{{substancia.quantidadedose}}</td>
                                             <td>{{substancia.unidadedose}}</td>
-                                            <td>             
-                                                <center>
+                                            <td width="14.5%">             
+                                                
                                                 <a class="btn btn-default"  @click="removeSubstancia(substancia)"><i class="fa fa-trash"></i></a>
-                                                </center>
+                                                <a class="btn btn-default"  @click="abreEditSub(substancia)"><i class="fa fa-pencil"></i></a>
+                                                
                                             </td>
                                         </tr>
                                     </tbody>
@@ -185,6 +213,11 @@
                 </div>
             </div>
         </div>
+
+
+
+
+
         <div class="modal fade" id="substancia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -240,6 +273,59 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                         <button type="submit" class="btn btn-primary" @click="addSubstancia">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="editSub" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><strong>Editar substâncias ativas</strong></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box box-primary" style="margin-left: 2%; margin-right: 2%; width: 96%;">
+                            <div class="row">
+                                <div class="box-body">
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <strong>Quantidade:</strong>
+                                            <input id="quantidadedose" type="text" name="quantidadedose" class="form-control" v-model="quantidadedose">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <strong>Unidade de medida:</strong>
+                                            <select id="unidadedose" name="unidadedose" class="form-control" placeholder = "--Selecione--" v-model="unidadedose">
+                                                <option value="0">mcg</option>
+                                                <option value="1">mg</option>
+                                                <option value="2">g</option>
+                                                <option value="3">UI</option>
+                                                <option value="4">unidades</option>
+                                                <option value="5">mg/g</option>
+                                                <option value="6">UI/g</option>
+                                                <option value="7">mEq/mL</option>
+                                                <option value="8">mg/gota</option>
+                                                <option value="9">mcg/mL</option>
+                                                <option value="10">UI/mL</option>
+                                                <option value="11">mEq</option>
+                                                <option value="12">mg/mL</option>
+                                                <option value="13">mL</option>
+                                                <option value="14">Seringa Pré-enchida</option>
+                                                <option value="15">Kcal/L</option>
+                                            </select>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary" @click="editSub">Editar</button>
                     </div>
                 </div>
             </div>

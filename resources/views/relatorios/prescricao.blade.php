@@ -8,6 +8,19 @@ function data_format($format_ini, $value, $format_end)
     }
     return null;
 }
+
+$codigos = array();
+$direita = array();
+$posicoes = array();
+$sub1 = array();
+$sub2 = array();
+$interacaoes_all = array();
+
+foreach ($interacoes as $value) {
+    $sub1[] = $value->idsubstanciaativa1;
+    $sub2[] = $value->idsubstanciaativa2;
+}
+
 ?>
 <html>
     <head>
@@ -110,8 +123,9 @@ function data_format($format_ini, $value, $format_end)
                     <td width="3.5%">Ped</td>
                     <td class="tg-yw4l" width="3.5%">At.</td>
                     <td class="tg-s6z2"  colspan="2" width="25%">Descrição do medicamento</td>
-                    <td class="tg-baqh"  colspan="10" width="40.35%" >Posologia</td>
-                    <td class="tg-baqh" colspan="6">Aprazamento</td>
+                    <td class="tg-baqh"  colspan="2" width="35.3%" >Posologia</td>
+                    <td class="tg-baqh" width="6.9%" colspan="2" >Tempo de tratamento</td>
+                    <td class="tg-baqh" colspan="5">Aprazamento</td>
                 </tr>
             </table>
             <table class="tg" style="table-layout: fixed; width: 100%; margin-top: -1px">
@@ -126,7 +140,8 @@ function data_format($format_ini, $value, $format_end)
                     @foreach ($medicamento->medicamento->medicamentosubstancias as $key => $medicamentosubstancia)
                                                     {{$medicamentosubstancia->substanciaativa->nome}}
                                                     {{$medicamentosubstancia->quantidadedose}}
-                                                    <?php
+<?php  
+                                                   
                                                     $nomeunidade = '';
                                                     switch ($medicamentosubstancia->unidadedose) {
                                                         case 0:
@@ -245,18 +260,78 @@ function data_format($format_ini, $value, $format_end)
 
                     {{$medicamento->outros}}
 
-                @endif                                                    
+                @endif                                                                   
                 </td>
-                <td class="tg-yw4l" colspan="9">{{$medicamento->dose}}. {{$medicamento->administracao}}. {{$medicamento->posologia}}. {{ $medicamento->obs}}. {{$medicamento->diluicao}} </td>
-                <td class="tg-yw4l" width="3%"></td>
-                <td class="tg-yw4l" width="3%"></td>
-                <td class="tg-yw4l" width="3%"></td>
-                <td class="tg-yw4l" width="3%"></td>
-                <td class="tg-yw4l" width="3%"></td>
-                <td class="tg-yw4l" width="3%"></td>
+                <td class="tg-yw4l" colspan="9">{{$medicamento->dose}}. {{$medicamento->administracao}}.{{ $medicamento->obs}}. {{$medicamento->diluicao}} </td>
+                <td class="tg-yw4l" width="7%">{{$medicamento->posologia}}{{$medicamento->intervalo_posologia   }}</td>
+                <td class="tg-yw4l" width="2.7%"></td>
+                <td class="tg-yw4l" width="2.7%"></td>
+                <td class="tg-yw4l" width="2.7%"></td>
+                <td class="tg-yw4l" width="2.7%"></td>
+                <td class="tg-yw4l" width="2.7%"></td>
+                <td class="tg-yw4l" width="2.7%"></td>
             </tr>
-            
             @endforeach
+                        
+                    @foreach ($medicamentos  as $key => $medicamento)
+                    @if($medicamento->idmedicamento != null)
+                    @foreach ($medicamento->medicamento->medicamentosubstancias as $key => $medicamentosubstancia)
+                        <?php 
+                    $cod = $medicamentosubstancia->substanciaativa->codigo;
+                            $verifica = false;
+                            $codigos[] = ['cod' => $cod, 'med' => $medicamentosubstancia->substanciaativa->nome];
+
+                            if(count($direita) > 0){ //vefifica se ja tem interacaoes inseridas
+                                for ($i = 0; $i < count($direita) ; $i++){ 
+                                    if($cod == $direita[$i]['sub']){  //comparação do codigo inserido com o vetor existente 
+                                        for($j = 0; $j < count($codigos) ; $j++){  
+                                            if($direita[$i]['sub'] == $codigos[$j]['cod']){          
+                                                $med = $direita[$i]['med'];
+                                                $verifica = true;
+                                            }
+                                        }
+                                        if($verifica == true && count($codigos) > 1){
+                                            $interacaoes_all[] = $med;
+                                            $interacaoes_all[] = $medicamentosubstancia->substanciaativa->nome;                                              
+                                        }    
+                                    }
+                                }
+                            }                    
+
+                            for ($i = 0; $i < count($sub1) ; $i++){
+                                if($cod == $sub1[$i]){
+                                    $direita[] = ['med' =>  $medicamentosubstancia->substanciaativa->nome,'sub' => $sub2[$i], 'id' => $cod];
+                                    $posicoes[] = ['pos' => $i, 'id:' => $cod];
+                                }
+                            }
+
+                            for ($i = 0; $i < count($sub2) ; $i++){
+                                if($cod == $sub2[$i]){
+                                    $direita[] = ['med' =>  $medicamentosubstancia->substanciaativa->nome,'sub' => $sub1[$i], 'id'=> $cod];
+                                    $posicoes[] = ['pos' => $i, 'id:' => $cod];
+                                }
+                            }
+                     ?>
+                     @endforeach
+                     @endif
+                     @endforeach
+                     
+               <?php if(count($interacaoes_all) > 0){ ?>        
+            <tr>
+                    <td>Interacões medicamentosas</td>
+                    <td colspan="20">
+                    <?php $cont = 1; for ($i=0; $i < count($interacaoes_all); $i++) { 
+                        
+                        if($cont == 2){
+                            echo '('.$interacaoes_all[$i-1].' + '.$interacaoes_all[$i].') ';    
+                        }
+                        $cont++;
+                    } ?>  
+                     </td>
+            </tr>
+        <?php } ?>
+            
+            
             </table>
        
 <div class="footer">Rua São Cristóvão, S/n - Centro, Jequié - BA, 45203-110</div>

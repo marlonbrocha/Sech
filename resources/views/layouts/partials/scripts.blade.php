@@ -16,6 +16,8 @@
 <script src="{{ asset('/js/validacao.js') }}"  type="text/javascript"></script>
 
 <script src="{{ asset('js/sweetalert.min.js')}}" type="text/javascript"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the

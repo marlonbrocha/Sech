@@ -122,7 +122,7 @@ function data_format($format_ini, $value, $format_end)
                                                                     <tr>
                                                                         <th>Quantidade</th>
                                                                         <th>Nome comercial</th>
-                                                                        <th>Posologia</th>
+                                                                        <th>Intervalo de tratamento</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -136,7 +136,7 @@ function data_format($format_ini, $value, $format_end)
                                                                             {{$prescmed->outros}}
                                                                             @endif
                                                                         </td>
-                                                                        <td>{{$prescmed->posologia}}</td>
+                                                                        <td>{{$prescmed->posologia}} {{$prescmed->intervalo_posologia}}</td>
                                                                     </tr>
                                                                     @endforeach  
                                                                 </tbody>

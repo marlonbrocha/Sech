@@ -125,17 +125,34 @@ class MedicamentoController extends Controller {
         $medicamento->save();
         $fk_medicamento = $medicamento->id;
         
-        //substancias
-       /* $substancias = $request->get('substancias');
-        for ($i = 0; $i < sizeof($substancias); $i++) {
-            $medicamentoSubstancia = new Medicamentosubstancia();
-            $medicamentoSubstancia->idsubstanciaativa = $substancias[$i]['substancia'];
-            $medicamentoSubstancia->quantidadedose = $substancias[$i]['quantidadedose'];
+        
+
+        $substancias = $request->get('substancias');
+
+        $medicamentoSubstancia = DB::table('medicamentosubstancias')
+        ->where('idmedicamento',$id)
+        ->where('idsubstanciaativa',$substancias[0]['idsubstanciaativa'])
+        ->get();
+
+        $ms = Medicamentosubstancia::find($medicamentoSubstancia[0]->id);
+
+
+        $ms->quantidadedose = $substancias[0]['quantidadedose'];
+        $ms->unidadedose = $substancias[0]['unidadedose'];
+        $ms->save();
+
+
+    /*for ($i = 0; $i < sizeof($substancias); $i++) {*/
+    /*[],
+    ['idsubstanciaativa', '=', $substancias[$i]['idsubstanciaativa'] ]*/
+
+            //$medicamentoSubstancia->idsubstanciaativa = $substancias[$i]['substancia'];
+            /*$medicamentoSubstancia->quantidadedose = $substancias[$i]['quantidadedose'];
             $medicamentoSubstancia->unidadedose = $substancias[$i]['unidadedose'];
-            $medicamentoSubstancia->idmedicamento = $id;
-            $medicamentoSubstancia->save();
-        }
-        */
+            //$medicamentoSubstancia->idmedicamento = $id;
+            $medicamentoSubstancia->save();*/
+        /*}*/
+        
     }
 
     /**

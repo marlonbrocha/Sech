@@ -391,7 +391,18 @@
 	            
 	            },
 	            adicionar(){
+                    if(this.prescricao.prescricaomedicamento.length <= 0)
+                    {
+                        swal({
+                                title: "Aviso!",
+                                text: 'Selecione pelo menos um medicamento', 
+                                type: "warning",
+                                html: true,
+                            });  
+                        return;
+                    }
                     document.getElementById('salvar').setAttribute('disabled',"true");
+
 	                this.$http.post('/prescricao/create', this.prescricao).then(response => {
                         if(response.status == 202){
                             this.verifica_relatorio = true;
@@ -913,8 +924,8 @@
                         <div class="form-group">
                             <label for="administracao">Via de Administração:
                                 <button style="font-size: 6px" type="button" data-toggle="tooltip" title="Administração" class="btn btn-primary administracaoM"><i class="fa fa-search"></i></button></label>
-                            <select id="administracao" name="administracao" class="form-control">
-                                <option>Selecione...</option>
+                            <select class="js-example-basic-single js-states form-control"  id="administracao" name="administracao">
+                                <option selected="">Selecione...</option>
                                 <option>Endovenosa</option>
                                 <option>Intramuscular</option>
                                 <option>Oral</option>

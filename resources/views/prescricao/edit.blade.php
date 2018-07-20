@@ -109,7 +109,7 @@ function data_format($format_ini, $value, $format_end)
                                             <tr>
                                                 <th class="text-center">Medicamento</th>
                                                 <th class="text-center">Quantidade pedida</th>
-                                                <th class="text-center">Posologia</th>
+                                                <th class="text-center">Intervalo de tratamento</th>
                                                 <th class="text-center">Opções</th>
                                             </tr>
                                         </thead>
@@ -246,7 +246,7 @@ function data_format($format_ini, $value, $format_end)
 
                                                 </td>
                                                 <td>{{ $medicamento->qtdpedida }}</td>
-                                                <td>{{ $medicamento->posologia}}</td>
+                                                <td>{{ $medicamento->posologia}} {{ $medicamento->intervalo_posologia}}</td>
                                                 <td>
                                                                             
                                         @if($medicamento->idrelatorio != '')

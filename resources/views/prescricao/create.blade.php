@@ -15,9 +15,9 @@
             @section('contentheader_title')
             Prescrever medicamento
             @endsection 
-            
         </div>
-    </div>
+
+    </div>       
 </div>
 
 @if (count($errors) > 0)
@@ -46,6 +46,13 @@
 
 
 <script>
+$(document).ready(function() {
+    $('.js-example-basic-single').select2({
+         tags: true, 
+         
+    });
+});
+
 $(function ($) {
     $('#table2').DataTable({
          ajax: {
@@ -55,8 +62,6 @@ $(function ($) {
     columns: [ { data: 'value' } 
 
     ],
-        
-
         "paging": false,
         "search": true,
         "ordering": true,
